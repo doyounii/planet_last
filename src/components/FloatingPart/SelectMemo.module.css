@@ -1,0 +1,93 @@
+@charset 'utf-8';
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+.type {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: absolute;
+  width: 93.52px;
+  height: 93.52px;
+  left: 141px;
+  top: 287px;
+}
+.type_box_clicked {
+  position: absolute;
+  width: 93.52px;
+  height: 93.52px;
+  left: 0px;
+  top: 0px;
+
+  /* green */
+
+  background: #00c982;
+  mix-blend-mode: normal;
+  box-shadow: 0px 0px 9.61417px rgba(0, 0, 0, 0.1);
+  border-radius: 17.4803px;
+  text-align: center;
+
+  flex: none;
+  margin: 0px 8px;
+}
+.type_box_text {
+  position: absolute;
+  width: 23px;
+  height: 13px;
+  left: 36px;
+  top: 68px;
+
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 13px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+  letter-spacing: 0.02em;
+
+  color: #ffffff;
+}
+.input {
+  position: absolute;
+  width: 258px;
+  height: 36px;
+  left: 59px;
+  top: 430px;
+
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 0.1;
+  border-radius: 8px;
+
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  /* identical to box height, or 114% */
+
+  /* white */
+
+  color: #ffffff;
+}
+.select {
+  position: absolute;
+  width: 28px;
+  height: 16px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  /* identical to box height, or 100% */
+
+  left: 140px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  top: 220px;
+  /* Sky/White */
+
+  color: #ffffff;
+}
