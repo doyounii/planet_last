@@ -77,3 +77,27 @@
   flex: none;
   margin: 0px 15px;
 }
+.type_box_clicked {
+  position: relative;
+  flex-direction: column;
+  background: #00c982;
+  mix-blend-mode: normal;
+  box-shadow: 0px 0px 9.61417px rgba(0, 0, 0, 0.1);
+  border-radius: 17.4803px;
+  text-align: center;
+
+  width: 93.52px;
+  height: 93.52px;
+  left: 0px;
+  top: 0px;
+
+  flex: none;
+  margin: 0px 8px;
+  border: 0;
+}
+.type_box_clicked p {
+  font-size: 30px;
+  position: absolute;
+  left: -13px;
+  bottom: 0px;
+}

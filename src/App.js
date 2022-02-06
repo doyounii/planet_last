@@ -1,3 +1,4 @@
+/* eslint-disable */
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
