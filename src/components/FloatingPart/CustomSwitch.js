@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-// import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { useNavigate } from 'react-router-dom'
 
 //토글 스위치
 const CustomSwitch = ({
@@ -17,15 +18,18 @@ const CustomSwitch = ({
     const updatedSwitchData = val => {
       setSelectionMode(val);
       onSelectSwitch(val);
+      navigate('/FloatingPage' + val);
     };
 
-    const goExpensePage = () => {
-      navigation.navigate('FloatingExpensePage');
-    };
+    //const goExpensePage = () => {
+     // navigation.navigate('FloatingExpensePage');
+   // };
+
+    const navigate = useNavigate();
   
     return (
-      <div>
-        <div
+      <View>
+        <View
           style={{
             height: 42,
             width: 145,
@@ -38,7 +42,7 @@ const CustomSwitch = ({
             padding: 2,
             color: '#B4B6B8',
           }}>
-            <div
+            <TouchableOpacity
               activeOpacity={1}
               onPress={() => updatedSwitchData(1)}
               style={{
@@ -48,14 +52,14 @@ const CustomSwitch = ({
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <div
+              <Text
                 style={{
                   color: getSelectionMode === 1 ? 'white' : selectionColor,
                 }}>
                   {option1}
-                </div>
-                </div>
-                <div
+                </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                   TouchableOpacity 
                   activeOpacity={1}
                   onPress={() => updatedSwitchData(2)}
@@ -66,16 +70,16 @@ const CustomSwitch = ({
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                    <div
+                    <Text
                       style={{
                         fontColor: '#B4B6B8',
                         color: getSelectionMode === 2 ? 'white' : selectionColor,
                       }}>
                         {option2}
-                      </div>
-                  </div>
-          </div>
-      </div>
+                      </Text>
+                  </TouchableOpacity>
+          </View>
+      </View>
     );
   };
 

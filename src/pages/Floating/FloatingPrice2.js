@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import IncomeStyle from './Float.module.css';
 import { Link } from 'react-router-dom';
-import TopNav from '../../components/FloatingPart/TopNav';
-import Dashboard from '../../components/FloatingPart/Dashboard';
+import TopNav2 from '../../components/FloatingPart/TopNav2';
+import Dashboard2 from '../../components/FloatingPart/Dashboard2';
 import IncomeDate from '../../components/FloatingPart/IncomeDate';
 import InputDateStyle from '../../components/FloatingPart/InputDate.module.css';
-import FloatingDate from './FloatingDate';
+import FloatingDate2 from './FloatingDate2';
 
 //Content
 class Content extends Component {
@@ -19,7 +19,7 @@ class Content extends Component {
   }
 }
 
-class FloatingPrice extends Component {
+class FloatingPrice2 extends Component {
   constructor() {
     super();
     this.state = {
@@ -40,16 +40,16 @@ class FloatingPrice extends Component {
   render(){
   return (
     <div className={IncomeStyle.container}>
-      <TopNav></TopNav>
-      <Dashboard></Dashboard>
+      <TopNav2></TopNav2>
+      <Dashboard2></Dashboard2>
 
-      <Content title="언제 받으셨나요?"></Content>
+      <Content title="언제 쓰셨나요?"></Content>
 
-      <Link to="/FloatingDate" style={{ textDecoration: 'none' }}>
+      <Link to="/FloatingDate2" style={{ textDecoration: 'none' }}>
         <h1>{this.props.value}</h1>
       </Link>
 
-      <Content title="얼마 받으셨나요?"></Content>
+      <Content title="얼마 쓰셨나요?"></Content>
       
       <div className={InputDateStyle.inputPrice}>
       <input
@@ -62,7 +62,7 @@ class FloatingPrice extends Component {
 
       <div className={IncomeStyle.bottomBtn2}>
         <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
-        <Link to="/FloatingType">
+        <Link to="/ExpendType">
         <button className={IncomeStyle.bottomBtnActive}
           disabled={this.state.price.length !== 0 ? false : true}>다음</button>
         </Link>
@@ -73,4 +73,4 @@ class FloatingPrice extends Component {
 }
 }
 
-export default FloatingPrice;
+export default FloatingPrice2;

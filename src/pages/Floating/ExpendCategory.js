@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeStyle from './Float.module.css';
-import TopNav from '../../components/FloatingPart/TopNav';
-import Dashboard from '../../components/FloatingPart/Dashboard';
+import TopNav2 from '../../components/FloatingPart/TopNav2';
+import Dashboard2 from '../../components/FloatingPart/Dashboard2';
 import SelectExpendCategory from '../../components/FloatingPart/SelectExpendCategory';
 
 
@@ -20,9 +20,9 @@ class Content extends Component {
 function ExpendCategory() {
   return (
     <div className={IncomeStyle.container}>
-      <TopNav></TopNav>
+      <TopNav2></TopNav2>
 
-      <Dashboard></Dashboard>
+      <Dashboard2></Dashboard2>
 
       <SelectExpendCategory></SelectExpendCategory>
 

@@ -1,8 +1,8 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeStyle from './Float.module.css';
-import TopNav from '../../components/FloatingPart/TopNav';
-import Dashboard from '../../components/FloatingPart/Dashboard';
+import TopNav2 from '../../components/FloatingPart/TopNav2';
+import Dashboard2 from '../../components/FloatingPart/Dashboard2';
 import InputDateStyle from '../../components/FloatingPart/InputDate.module.css';
 
 //Content
@@ -17,7 +17,7 @@ class Content extends Component {
   }
 }
 
-function FloatingDate() {
+function FloatingDate2() {
   const todayTime = () => {
     let now = new Date(); //현재 날짜 및 시간
     let todayYear = now.getFullYear();
@@ -43,13 +43,13 @@ function FloatingDate() {
 
   return (
     <div className={IncomeStyle.container_date}>
-      <TopNav></TopNav>
+      <TopNav2></TopNav2>
 
-      <Dashboard></Dashboard>
+      <Dashboard2></Dashboard2>
 
-      <Content title="언제 받으셨나요?"></Content>
+      <Content title="언제 쓰셨나요?"></Content>
 
-      <form action="/FloatingPrice" method="post" onSubmit={handleSubmit} className={IncomeStyle.container_date}>
+      <form action="/FloatingPrice2" method="post" onSubmit={handleSubmit} className={IncomeStyle.container_date}>
       <div className={InputDateStyle.inputData}>
             <input 
               type="text"
@@ -61,7 +61,7 @@ function FloatingDate() {
 
         <div className={IncomeStyle.bottomBtn}>
           <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
-          <Link to="/FloatingPrice">
+          <Link to="/FloatingPrice2">
             <button type="submit" disabled={disabled} className={IncomeStyle.bottomBtnActive}>다음</button>
           </Link>
         </div>
@@ -72,4 +72,4 @@ function FloatingDate() {
   );
 }
 
-export default FloatingDate;
+export default FloatingDate2;

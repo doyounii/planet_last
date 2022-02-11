@@ -59,17 +59,7 @@ function SelectType() {
                   </button> */}
 
                   
-      <div className={IncomeStyle.bottomBtn3}>
-        <Link to="/FloatingPrice">
-        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
-        </Link>
-        <Link to={{
-          pathname:`/FloatingCategory`,
-          state : {filter},
-        }}>
-          <button className={IncomeStyle.bottomBtnActive}>다음</button>
-        </Link>
-      </div>
+      
             </section>
         );
     

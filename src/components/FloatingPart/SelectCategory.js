@@ -3,17 +3,35 @@ import SelectCategoryStyle from './SelectCategory.module.css';
 
 function SelectCategory() {
 
-      const [value, setValue] = useState(true);
+      const [filter, setFilter] = useState('');
 
-      const handleButton = (e)=> {
-            setValue(e.target.id);
-            value(e.target.id);
+      function handleButton(value) {
+            setFilter(value);
+            console.log(value);
       }
 
+
+      const arr = ["급여", "용돈", "기타"];
+      const arr2 = ["✅", "💕", "👩"];
     
         return(
             <section className={SelectCategoryStyle.type}>
-                  <button id="case1" onClick={handleButton} className={value==='case1' ?SelectCategoryStyle.type_box_clicked:SelectCategoryStyle.type_box}>
+
+                  {arr.map((value,idx)=> {
+                        return (
+                        <button key={idx}  
+                              className={filter===value ?SelectCategoryStyle.type_box_clicked:SelectCategoryStyle.type_box}
+                              onClick={()=>handleButton(value)}>
+                              <p>{arr2[idx]}</p>
+                              <div className={SelectCategoryStyle.type_box_text}>
+                              {value}
+                              </div> 
+                        </button>
+                        )
+                  })}
+
+
+                  {/* <button id="case1" onClick={handleButton} className={value==='case1' ?SelectCategoryStyle.type_box_clicked:SelectCategoryStyle.type_box}>
                         <p>&#128176;</p>
                         <div className={SelectCategoryStyle.type_box_text}>
                         급여
@@ -30,7 +48,7 @@ function SelectCategory() {
                         <div className={SelectCategoryStyle.type_box_text}>
                         기타
                         </div>
-                  </button>
+                  </button> */}
 
             </section>
         );

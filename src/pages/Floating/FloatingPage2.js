@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import IncomeStyle from './Float.module.css';
 import { Link } from 'react-router-dom';
-import TopNav from '../../components/FloatingPart/TopNav';
-import Dashboard from '../../components/FloatingPart/Dashboard';
+import TopNav2 from '../../components/FloatingPart/TopNav2';
+import Dashboard2 from '../../components/FloatingPart/Dashboard2';
 import IncomeDate from '../../components/FloatingPart/IncomeDate';
 import InputPrice from '../../components/FloatingPart/InputPrice';
 
@@ -12,29 +12,29 @@ class Content extends Component {
     return(
       <article>
         <p>{this.props.title}</p>
-        <h2>{this.props.desc}</h2>
+        <h1>{this.props.desc}</h1>
       </article>
     );
   }
 }
 
-function FloatingPage() {
+function FloatingPage2() {
   return (
     <div className={IncomeStyle.container}>
-      <TopNav></TopNav>
-      <Dashboard></Dashboard>
+      <TopNav2></TopNav2>
+      <Dashboard2></Dashboard2>
 
-      <Content title="언제 받으셨나요?"></Content>
+      <Content title="언제 쓰셨나요?"></Content>
 
-      <Link to="/FloatingDate" style={{ textDecoration: 'none' }}>
+      <Link to="/FloatingDate2" style={{ textDecoration: 'none' }}>
         <h1><IncomeDate></IncomeDate></h1>
       </Link>
 
-      <Content title="얼마 받으셨나요?"></Content>
+      <Content title="얼마 쓰셨나요?"></Content>
       <InputPrice></InputPrice>
 
     </div>
   );
 }
 
-export default FloatingPage;
+export default FloatingPage2;

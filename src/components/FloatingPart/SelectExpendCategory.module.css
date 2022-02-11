@@ -1,52 +1,14 @@
 @charset 'utf-8';
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 .type {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
+  align-items: flex-start; */
+  padding: 10px;
 
-  position: absolute;
-  width: 93.52px;
-  height: 93.52px;
+  /* position: absolute; */
   left: 32px;
-  top: 127px;
-}
-.type2 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-
-  position: absolute;
-  width: 93.52px;
-  height: 93.52px;
-  left: 32px;
-  top: 239px;
-}
-.type3 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-
-  position: absolute;
-  width: 93.52px;
-  height: 93.52px;
-  left: 32px;
-  top: 351px;
-}
-.type4 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-
-  position: absolute;
-  width: 93.52px;
-  height: 93.52px;
-  left: 32px;
-  top: 455px;
+  top: 27px;
 }
 .type_box {
   position: relative;
@@ -65,7 +27,7 @@
   top: 0px;
 
   flex: none;
-  margin: 0px 8px;
+  margin: 10px 10px;
 
   border: 0;
 }
@@ -111,5 +73,13 @@
   top: 0px;
 
   flex: none;
-  margin: 0px 15px;
+  margin: 10px 10px;
+
+  border: 0;
+}
+.type_box_clicked p {
+  font-size: 30px;
+  position: absolute;
+  left: -13px;
+  bottom: 0px;
 }
