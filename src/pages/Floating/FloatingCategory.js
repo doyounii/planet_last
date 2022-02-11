@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IncomeStyle from './Float.module.css';
-import TopNav from '../../components/FloatingPart/TopNav';
+import TopNav1_3 from '../../components/FloatingPart/TopNav/TopNAv1_3';
 import Dashboard from '../../components/FloatingPart/Dashboard';
 import SelectCategory from '../../components/FloatingPart/SelectCategory';
 
@@ -25,7 +25,7 @@ function FloatingCategory() {
 
   return (
     <div className={IncomeStyle.container}>
-      <TopNav></TopNav>
+      <TopNav1_3></TopNav1_3>
 
       <Dashboard></Dashboard>
 

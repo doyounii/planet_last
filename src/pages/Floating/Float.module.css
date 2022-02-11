@@ -98,6 +98,11 @@ h3 {
   margin: 0 auto;
   margin-top: 422px;
 }
+.bottomBtn4 {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 45px;
+}
 
 .bottomBtnActive {
   font-family: Pretendard;

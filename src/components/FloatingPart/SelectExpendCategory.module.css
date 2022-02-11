@@ -9,6 +9,7 @@
   /* position: absolute; */
   left: 32px;
   top: 27px;
+  margin-bottom: -375px;
 }
 .type_box {
   position: relative;

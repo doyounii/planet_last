@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeStyle from './Float.module.css';
-import TopNav2 from '../../components/FloatingPart/TopNav2';
+import TopNav2_4 from '../../components/FloatingPart/TopNav/TopNav2_4';
 import SelectMemo from '../../components/FloatingPart/SelectMemo';
 
 class Content extends Component {
@@ -18,7 +18,7 @@ class Content extends Component {
 function ExpendMemo() {
   return (
     <div className={IncomeStyle.container}>
-      <TopNav2></TopNav2>
+      <TopNav2_4></TopNav2_4>
 
       <Content title="남기고 싶은 메모를 작성해주세요"></Content>
 

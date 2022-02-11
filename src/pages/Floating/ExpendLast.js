@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeStyle from './Float.module.css';
-import TopNav2 from '../../components/FloatingPart/TopNav2';
+import TopNav2_5 from '../../components/FloatingPart/TopNav/TopNav2_5';
 import SelectEnvir from '../../components/FloatingPart/SelectEnvir';
 
 class Content extends Component {
@@ -18,7 +18,7 @@ class Content extends Component {
 function ExpendLast() {
   return (
     <div className={IncomeStyle.container}>
-      <TopNav2></TopNav2>
+      <TopNav2_5></TopNav2_5>
 
       <Content title="해당하는 항목이 있나요?"></Content>
 
