@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import IncomeStyle from './Float.module.css';
 import TopNav from '../../components/FloatingPart/TopNav';
 import Dashboard from '../../components/FloatingPart/Dashboard';
@@ -18,6 +18,11 @@ class Content extends Component {
 }
 
 function FloatingCategory() {
+
+  const filter = useLocation();
+
+  console.log(filter);
+
   return (
     <div className={IncomeStyle.container}>
       <TopNav></TopNav>
@@ -27,6 +32,8 @@ function FloatingCategory() {
       <Content title="해당하는 카테고리를 선택해주세요"></Content>
 
       <SelectCategory></SelectCategory>
+
+      {filter.state}
 
       <div className={IncomeStyle.bottomBtn3}>
         <Link to="/FloatingType">

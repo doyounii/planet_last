@@ -5,6 +5,7 @@ import TopNav from '../../components/FloatingPart/TopNav';
 import Dashboard from '../../components/FloatingPart/Dashboard';
 import SelectType from '../../components/FloatingPart/SelectType';
 
+
 //Content
 class Content extends Component {
   render(){
@@ -28,15 +29,9 @@ function FloatingType() {
 
       <SelectType></SelectType>
 
-      <div className={IncomeStyle.bottomBtn3}>
-        <Link to="/FloatingPrice">
-        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
-        </Link>
-        <Link to="/FloatingCategory">
-          <button className={IncomeStyle.bottomBtnActive}>다음</button>
-        </Link>
-      </div>
-
+  
+      
+     
 
     </div>
   );

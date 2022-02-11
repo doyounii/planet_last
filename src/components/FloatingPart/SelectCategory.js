@@ -9,6 +9,7 @@ function SelectCategory() {
             setValue(e.target.id);
             value(e.target.id);
       }
+
     
         return(
             <section className={SelectCategoryStyle.type}>
@@ -30,6 +31,7 @@ function SelectCategory() {
                         기타
                         </div>
                   </button>
+
             </section>
         );
     
