@@ -80,3 +80,15 @@
   left: -13px;
   bottom: 0px;
 }
+.bottomBtn3 {
+  display: flex;
+  margin-top: 222px;
+  left: -200px;
+  margin: 245px -300px;
+}
+.bottomBtn4 {
+  display: flex;
+  margin-top: 222px;
+  left: -200px;
+  margin: 255px 50px;
+}

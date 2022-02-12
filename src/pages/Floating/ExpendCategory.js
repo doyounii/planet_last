@@ -16,14 +16,7 @@ function ExpendCategory() {
 
       <SelectExpendCategory></SelectExpendCategory>
 
-      <div className={IncomeStyle.bottomBtn3}>
-        <Link to="/ExpendType">
-        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
-        </Link>
-        <Link to="/ExpendMemo">
-          <button className={IncomeStyle.bottomBtnActive}>다음</button>
-        </Link>
-      </div>
+      
     </div>
   );
 }

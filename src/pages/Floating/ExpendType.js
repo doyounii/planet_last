@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import IncomeStyle from './Float.module.css';
 import TopNav2_2 from '../../components/FloatingPart/TopNav/TopNav2_2 ';
 import Dashboard2 from '../../components/FloatingPart/Dashboard2';
-import SelectType from '../../components/FloatingPart/SelectType';
+import SelectExpendType from '../../components/FloatingPart/SelectExpendType';
 
 //Content
 class Content extends Component {
@@ -26,16 +26,9 @@ function ExpendType() {
 
       <Content title="자산을 선택해주세요"></Content>
 
-      <SelectType></SelectType>
+      <SelectExpendType></SelectExpendType>
 
-      <div className={IncomeStyle.bottomBtn3}>
-        <Link to="/FloatingPrice2">
-        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
-        </Link>
-        <Link to="/ExpendCategory">
-          <button className={IncomeStyle.bottomBtnActive}>다음</button>
-        </Link>
-      </div>
+      
 
 
     </div>

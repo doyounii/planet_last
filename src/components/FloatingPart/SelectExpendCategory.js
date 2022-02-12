@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import ExpendCategoryStyle from './SelectExpendCategory.module.css';
+import { Link } from 'react-router-dom';
+import IncomeStyle from '../../pages/Floating/Float.module.css';
 
 
 function SelectExpendCategory()  {
       const [filter, setFilter] = useState('');
+
+      const [git, setGit] = useState(false);
+
+      function handleB() {
+            setGit(!git);
+            console.log(git);
+      }
 
       function handleButton(value) {
             setFilter(value);
@@ -16,9 +25,10 @@ function SelectExpendCategory()  {
       const arr2 = ["🌭", "🚗", "🎬","✏️", "🛒", "📚","📱", "🏥", "💵","🛏", "🧾", "💬"];
       
       return(
-            <section className={ExpendCategoryStyle.type}>
+            <section >
 
-            {arr.map((value,idx)=> {
+                  <div className={ExpendCategoryStyle.type}>
+                  {arr.map((value,idx)=> {
                   return (
                   <button key={idx}  
                         className={filter===value ?ExpendCategoryStyle.type_box_clicked:ExpendCategoryStyle.type_box}
@@ -29,7 +39,18 @@ function SelectExpendCategory()  {
                         </div> 
                   </button>
                   )
-            })}
+                  })}
+                  </div>
+            
+
+            <div className={ExpendCategoryStyle.bottomBtn3}>
+                  <Link to="/ExpendType">
+                  <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
+                  </Link>
+                  <Link to="/ExpendMemo">
+                  <button disabled={filter === ''?true:false} className={IncomeStyle.bottomBtnActive}>다음</button>
+                  </Link>
+            </div>
 </section>
 );
 }

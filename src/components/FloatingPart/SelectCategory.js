@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SelectCategoryStyle from './SelectCategory.module.css';
+import IncomeStyle from '../../pages/Floating/Float.module.css';
+
 
 function SelectCategory() {
 
@@ -29,6 +32,16 @@ function SelectCategory() {
                         </button>
                         )
                   })}
+
+
+                  <div className={SelectCategoryStyle.bottomBtn3}>
+                        <Link to="/FloatingType">
+                        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
+                        </Link>
+                        <Link to="/FloatingMemo">
+                        <button disabled={filter === ''?true:false} className={IncomeStyle.bottomBtnActive}>다음</button>
+                        </Link>
+                  </div>
             </section>
         );
     

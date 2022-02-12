@@ -19,9 +19,6 @@ class Content extends Component {
 
 function FloatingCategory() {
 
-  const filter = useLocation();
-
-  console.log(filter);
 
   return (
     <div className={IncomeStyle.container}>
@@ -33,16 +30,8 @@ function FloatingCategory() {
 
       <SelectCategory></SelectCategory>
 
-      {filter.state}
 
-      <div className={IncomeStyle.bottomBtn3}>
-        <Link to="/FloatingType">
-        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
-        </Link>
-        <Link to="/FloatingMemo">
-          <button className={IncomeStyle.bottomBtnActive}>다음</button>
-        </Link>
-      </div>
+      
     </div>
   );
 }

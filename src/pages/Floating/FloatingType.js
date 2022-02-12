@@ -21,6 +21,7 @@ class Content extends Component {
 function FloatingType() {
 
   
+  
   return (
     <div className={IncomeStyle.container}>
       <TopNav1_2></TopNav1_2>
@@ -32,17 +33,7 @@ function FloatingType() {
       <SelectType></SelectType>
 
   
-      <div className={IncomeStyle.bottomBtn3}>
-        <Link to="/FloatingPrice">
-        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
-        </Link>
-        <Link to={{
-          pathname:`/FloatingCategory`,
-        }}>
-          <button className={IncomeStyle.bottomBtnActive}
-          >다음</button>
-        </Link>
-      </div>
+      
      
 
     </div>

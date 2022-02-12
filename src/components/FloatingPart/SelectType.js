@@ -36,30 +36,16 @@ function SelectType() {
                   })}
 
 {a}
-                  {/* <button id="case1" onClick={handleButton} className={value==='case1' ?SelectTypeStyle.type_box_clicked:SelectTypeStyle.type_box}>
-                        <p>&#128179;</p>
-                        <div className={SelectTypeStyle.type_box_text}>
-                        카드
-                        </div> 
-                  </button>
-
-
-
-                  <button id="case2" onClick={handleButton} className={value==='case2' ?SelectTypeStyle.type_box_clicked:SelectTypeStyle.type_box}>
-                        <p>&#127974;</p>
-                        <div className={SelectTypeStyle.type_box_text}>
-                        은행
-                        </div>
-                  </button>
-                  <button id="case3" onClick={handleButton} className={value==='case3' ?SelectTypeStyle.type_box_clicked:SelectTypeStyle.type_box}>
-                        <p>&#128181;</p>
-                        <div className={SelectTypeStyle.type_box_text}>
-                        현금
-                        </div>
-                  </button> */}
-
                   
-      
+                  <div className={SelectTypeStyle.bottomBtn3}>
+                        <Link to="/FloatingPrice">
+                        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
+                        </Link>
+                        <Link to='/FloatingCategory'>
+                        <button disabled={filter === ''?true:false} className={IncomeStyle.bottomBtnActive}
+                        >다음</button>
+                        </Link>
+                  </div>
             </section>
         );
     
