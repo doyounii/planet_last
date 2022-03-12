@@ -1,0 +1,176 @@
+@charset 'utf-8';
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  color: #ffffff;
+  background-color: #141b27;
+  font-family: Pretendard;
+}
+
+/*이전 버튼*/
+.backBtn {
+  position: absolute;
+  top: 65px;
+  left: 22px;
+}
+
+/*제목, 부제목*/
+.title {
+  position: absolute;
+  top: 68px;
+  left: 172px;
+  font-size: 18px;
+  font-family: Pretendard;
+}
+
+.title_icon {
+  position: absolute;
+  top: 64px;
+  left: 328px;
+  font-size: 18px;
+  font-family: Pretendard;
+}
+
+.title_icon svg {
+  width: 24px;
+  height: 25px;
+}
+
+.sub_title {
+  position: absolute;
+  top: 474px;
+  left: 26px;
+  font-family: Pretendard;
+}
+
+.sub_title h1 {
+  font-size: 18px;
+  font-family: Pretendard;
+}
+
+.sub_title p {
+  font-size: 14px;
+  font-family: Pretendard;
+  margin-top: 8px;
+  color: rgba(172, 173, 173, 0.65);
+}
+
+/*mission box*/
+.mission_box {
+  position: relative;
+  top: 144px;
+  left: 16px;
+  width: 343px;
+  height: 286px;
+  border-radius: 20px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  font-family: Pretendard;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.mission_box p {
+  font-family: Pretendard;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(180, 182, 184, 1);
+}
+
+.mission_box h1 {
+  font-family: Pretendard;
+  font-size: 18px;
+  margin-top: 6px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.mission_box h2 {
+  font-family: Pretendard;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 14px;
+  margin-bottom: 30px;
+  color: rgba(0, 201, 130, 1);
+}
+
+.mission_box img {
+  display: block;
+  margin: 0 auto;
+  width: 67px;
+  height: 67px;
+}
+
+.mission_btn {
+  font-family: Pretendard;
+  display: block;
+  margin: 0 auto;
+  width: 62px;
+  height: 37px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: rgba(0, 201, 130, 1);
+  border-radius: 13px;
+  border: 0;
+  margin-top: 32px;
+  cursor: pointer;
+}
+
+.mission_box2 {
+  position: relative;
+  top: 250px;
+  left: 17px;
+  width: 343px;
+  height: 75px;
+  border-radius: 13px;
+  margin-bottom: 12px;
+  padding-top: 18px;
+  font-size: 15px;
+  font-family: Pretendard;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.mission_box2 p {
+  display: inline;
+  font-size: 30px;
+  margin-left: 20px;
+  margin-right: 20.86px;
+}
+
+.mission_icon {
+  position: relative;
+  display: inline;
+  font-size: 30px;
+  margin-left: 20px;
+  margin-right: 20.86px;
+  top: 4px;
+}
+
+.mission_icon img {
+  position: relative;
+  display: inline;
+  width: 30px;
+  height: 30px;
+}
+
+.mission_complete_btn {
+  width: 77px;
+  height: 30.97px;
+  border-radius: 10.88px;
+  border: 0;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  float: right;
+  margin-right: 16px;
+  margin-top: 4px;
+}
