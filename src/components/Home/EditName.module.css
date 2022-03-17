@@ -1,0 +1,165 @@
+@charset 'utf-8';
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.contents {
+  position: absolute;
+  width: 258px;
+  height: 36px;
+  left: 58px;
+  top: 251px;
+}
+.form {
+  position: absolute;
+  display: flex;
+  left: -20px;
+}
+.form input {
+  position: absolute;
+  width: 258px;
+  height: 36px;
+  left: 58px;
+  right: 59px;
+  top: 251px;
+  bottom: 525px;
+  padding-right: 50px;
+
+  box-sizing: border-box;
+  border-radius: 8px;
+
+  /* white-5% */
+
+  background: rgba(255, 255, 255, 0.05);
+  mix-blend-mode: normal;
+  box-shadow: 0px 0px 9.61417px rgba(0, 0, 0, 0.1);
+
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+
+  border: none;
+
+  text-align: left;
+  /* identical to box height, or 114% */
+
+  /* white */
+
+  color: #ffffff;
+}
+
+::-webkit-input-placeholder {
+  /* 크롬 4–56 */
+  color: #ffffff;
+  opacity: 50%;
+}
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 46px;
+
+  position: absolute;
+  width: 117px;
+  height: 43px;
+  left: 188px;
+  top: 459.75px;
+
+  /* white */
+
+  background: #ffffff;
+  box-shadow: 0px 0px 15.5887px rgba(0, 0, 0, 0.09);
+  border-radius: 27.5095px;
+  border: 0px;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  /* dark navy */
+
+  color: #141b27;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 10px;
+}
+.close {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  left: 290px;
+  top: 260px;
+}
+.button1 {
+  /* Frame 236 */
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 46px;
+
+  position: absolute;
+  width: 117px;
+  height: 43px;
+  left: 55px;
+  top: 459.75px;
+
+  background: #424750;
+  box-shadow: 0px 0px 15.5887px rgba(0, 0, 0, 0.09);
+  border-radius: 27.5095px;
+
+  border: 0px;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  /* dark navy */
+
+  color: #141b27;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 10px;
+}
+.count {
+  position: absolute;
+  width: 40px;
+  height: 16px;
+  left: 175px;
+  top: 292px;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  /* identical to box height, or 145% */
+
+  letter-spacing: 0.315em;
+
+  /* gray2 */
+
+  color: #939393;
+}

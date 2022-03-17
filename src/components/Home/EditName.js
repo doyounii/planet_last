@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { Navigate } from 'react-router-dom';
+import Style from './EditName.module.css';
+import { CgClose } from "react-icons/cg";
 
 function EditName() {
 
@@ -32,17 +34,44 @@ function EditName() {
       setText(e.target.value);
       };
   
-  
-  
+    const onReset = () => {
+      setText('');
+    };
+
+    const maxLength = (text)=>{
+      if(text.length > text.maxLength){
+        text = text.slice(0, text.maxLength);
+      }
+  };
+
+  /*
+   function numberMaxLength(e){
+        if(e.value.length > e.maxLength){
+            e.value = e.value.slice(0, e.maxLength);
+
+        }
+
+    }
+  */
+
     return (
         <div>
-          <form onSubmit={fetchFunc}>
-          <input
-                    value={text}
-                    onChange={handleChange}
+          <form onSubmit={fetchFunc} className={Style.form}>
+          <input 
+                  id="inputMemo"
+                  type="text"
+                  value={text}
+                  onChange={handleChange} 
+                  maxLength = "8"
+                  onInput={maxLength(text)}
                 />
+                <CgClose onClick={onReset} className={Style.close}></CgClose>
   
-                <button type='submit'>제출</button>
+                <p className={Style.count}>{text.length}/8</p>
+                <button
+                className={Style.button1}>취소</button>
+                <button type='submit'
+                className={Style.button}>완료</button>
             
           </form>
                 
