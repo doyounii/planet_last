@@ -1,0 +1,117 @@
+@charset 'utf-8';
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 812px;
+  width: 375px;
+  color: #ffffff;
+  background-color: #141b27;
+  font-family: Pretendard;
+}
+
+/*이전 버튼*/
+.backBtn {
+  position: absolute;
+  top: 65px;
+  left: 22px;
+}
+
+/*제목, 부제목*/
+.title {
+  position: absolute;
+  top: 68px;
+  left: 172px;
+  font-size: 18px;
+  font-family: Pretendard;
+}
+
+.title2 {
+  position: absolute;
+  top: 66px;
+  left: 114px;
+  font-size: 18px;
+  font-family: Pretendard;
+}
+
+.sub_title {
+  position: absolute;
+  top: 122px;
+  left: 31px;
+  font-size: 16px;
+  font-family: Pretendard;
+}
+
+.sub_title2 {
+  position: absolute;
+  top: 406px;
+  left: 31px;
+  font-size: 16px;
+  font-family: Pretendard;
+}
+
+/*toggle box*/
+.toggle_box {
+  position: relative;
+  top: 158px;
+  left: 16px;
+  width: 343px;
+  height: 62px;
+  border-radius: 13px;
+  padding-left: 18px;
+  padding-top: 24px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-family: Pretendard;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.toggle_box2 {
+  position: absolute;
+  top: 442px;
+  left: 16px;
+  width: 343px;
+  height: 62px;
+  border-radius: 13px;
+  padding-left: 18px;
+  padding-top: 24px;
+  font-size: 15px;
+  font-family: Pretendard;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.info_icon {
+  position: absolute;
+  left: 305px;
+  width: 24px;
+  color: #676B73;
+  cursor: pointer;
+}
+
+.info_icon2 {
+  position: absolute;
+  left: 334.55px;
+  width: 24px;
+  color: #676B73;
+  cursor: pointer;
+}
+
+.use_box {
+  position: relative;
+  top: 110px;
+  width: 375px;
+  height: 62px;
+  padding-left: 20px;
+  padding-top: 24px;
+  font-size: 15px;
+  font-family: Pretendard;
+  background-color: #141b27;
+  border-bottom: 0.5px solid #000000;
+}

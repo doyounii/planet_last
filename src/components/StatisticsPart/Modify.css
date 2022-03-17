@@ -1,0 +1,103 @@
+/*세부내역 수정 뷰*/
+.modify-container {
+    width: 100vw;
+    height: 100vh;
+    font-family: Pretendard;
+    margin-top: 26px;
+}
+
+.modify-container h1 {
+    display: inline;
+    font-family: Pretendard;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-bottom: 37px;
+}
+
+.modify-container input {
+    display: inline;
+    font-family: Pretendard;
+    font-size: 20px;
+    margin-left: 20px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 0;
+    outline: 0;
+    width: 130px;
+    height: 20px;
+}
+
+.modify-container p {
+    display: inline;
+    position: relative;
+    font-family: Pretendard;
+    font-size: 22px;
+    margin-left: 7px;
+    top: 3.5px;
+    color: rgb(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.modify-container .modify-detail {
+    width: 100%;
+    margin-bottom: 33px;
+    margin-top: 38px;
+}
+
+.modify-container .modify-detail p {
+    font-family: Pretendard;
+    font-size: 14px;
+    display: inline;
+    color: #939393;
+    margin-left: 20px;
+    margin-right: 33px;
+}
+
+.modify-container .modify-detail input {
+    font-family: Pretendard;
+    font-size: 15px;
+    position: relative;
+    top: 3.5px;
+    display: inline;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.modify-container .modify-detail .modify-tag {
+    font-family: Pretendard;
+    font-size: 15px;
+    position: relative;
+    top: 3.5px;
+    display: inline;
+    margin-right: 10px;
+    border-radius: 43px;
+    padding: 8px 18px 8px 18px;
+    background-color: rgba(0, 201, 130, 0.1);
+}
+
+.modify-container .modify-btn {
+    width: 100%;
+    margin-top: 253px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.modify-container .modify-btn button{
+    font-family: Pretendard;
+    font-size: 15px;
+    width: 342px;
+    height: 52px;
+    border-radius: 30px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    border: 0;
+    color: #141B27;
+    background-color: rgb(255, 255, 255, 0.2);
+    cursor: pointer;
+}
