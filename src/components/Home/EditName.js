@@ -55,7 +55,7 @@ function EditName() {
   */
 
     return (
-        <div>
+        <div >
           <form onSubmit={fetchFunc} className={Style.form}>
           <input 
                   id="inputMemo"

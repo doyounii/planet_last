@@ -2,17 +2,14 @@ import React, {useState, useEffect} from 'react';
 import Footer from '../../components/Footer/Footer';
 import { Link, Navigate } from 'react-router-dom';
 import homeStyle from './Home.module.css';
-import { FiSettings } from 'react-icons/fi';
-import { FiUser } from 'react-icons/fi';
-import { RiPencilLine } from 'react-icons/ri';
-import logo from './img/PLANet.png';
-import profile_img from './img/Profiles.png';
+import { FiSettings, FiUser, FiCheckCircle, FiEdit3, FiShoppingBag } from 'react-icons/fi';
 import { IoIosArrowForward } from "react-icons/io";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
 import planet from '../../planet/high.json';
 import Lottie from 'react-lottie'; 
 import {format} from 'date-fns';
 import EditName from '../../components/Home/EditName';
+import logo from './img/PLANet.png'
 
 
 
@@ -65,23 +62,12 @@ function Home({ activeHome }) {
 
   const lottieOptions = {
     animationData: planet,   
-    loop: false,        
-    autoplay: false,   
+    loop: true,        
+    autoplay: true,   
     rendererSettings: {
     className: 'add-class', // svg에 적용
     preserveAspectRatio: 'xMidYMid slice'
     }
-};
-
-const [isStopped, SetIsStopped] = useState(false);
-const [isPaused, SetIsPaused] = useState(true);
-
-const onStop = () => {
-SetIsStopped(!isStopped)
-};
-
-const onPause = () => {
-SetIsPaused(!isPaused)
 };
 
 const editName = (e) => {
@@ -99,7 +85,7 @@ const editName = (e) => {
         </a>
         <Link to='/Login' className={activeHome}>
         <div className={homeStyle.logo}>
-          <img src={logo} alt="로고" />
+          <img src={logo}/>
         </div>
         </Link>
       </nav>
@@ -107,18 +93,15 @@ const editName = (e) => {
         <div className={homeStyle.main}>
           <div className={homeStyle.nickname}>
             {message.userName}
-              <RiPencilLine onClick={editName}
+              <FiEdit3 onClick={editName}
                 className={homeStyle.icon}
                 alt="닉네임 변경"
-              ></RiPencilLine>
+              ></FiEdit3>
               {edit ? <EditName></EditName> : <div></div>}
           </div>
           <div className={homeStyle.profile}>
           <Lottie 
 				options={lottieOptions}
-				isStopped={isStopped}
-				isPaused={isPaused}
-				isClickToPauseDisabled={false}
 				eventListeners={[
 					{
 						eventName: 'complete',
@@ -126,8 +109,7 @@ const editName = (e) => {
 					},
 				]}
 		/>
-        
-        {/* <button onClick={onPause}>Play/Pause</button>           */}
+         <AiOutlineQuestionCircle className={homeStyle.question}></AiOutlineQuestionCircle>
           </div>
         </div>
       </section>
@@ -135,7 +117,11 @@ const editName = (e) => {
         <div className={homeStyle.month}>
         {renderHeader()}
         </div>
-        <button className={homeStyle.history}>내역</button>
+    
+
+        <Link to="/#" className={activeHome}>
+              <IoIosArrowForward className={homeStyle.history}></IoIosArrowForward>
+        </Link>
         <div className={homeStyle.income}>
                       수입 {message.totalIncomeMonth}원
         </div>
@@ -143,28 +129,35 @@ const editName = (e) => {
       </section>
       <section className={homeStyle.etc}>
         <div className={homeStyle.box}>
-          <nav className={homeStyle.box_text}>
-            데일리 에코 미션
+          <p className={homeStyle.box_text}>
+            데일리<br/> 에코 미션
             <Link to="/EcoMission" className={activeHome}>
               <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
-          </nav>
+          </p>
+          <FiCheckCircle className={homeStyle.check}></FiCheckCircle>
         </div>
         <div className={homeStyle.box}>
-          <nav className={homeStyle.box_text}>
-            친,반환경 소비 횟수
+          <p className={homeStyle.box_text}>
+            친 · 반환경 <br/> 소비 횟수
             <Link to="/#" className={activeHome}>
               <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
-          </nav>
+            <div className={homeStyle.num}>
+              <p>1</p>
+              <p>2</p>
+              <p>3</p>
+            </div>
+          </p>
         </div>
         <div className={homeStyle.box}>
-          <nav className={homeStyle.box_text}>
-            월간 플랜잇
+          <p className={homeStyle.box_text}>
+            월간 <br/>플랜잇
             <Link to="/#" className={activeHome}>
               <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
-          </nav>
+          </p>
+          <FiShoppingBag className={homeStyle.bag}></FiShoppingBag>
         </div>
       </section>
       <section>

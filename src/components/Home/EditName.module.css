@@ -16,6 +16,7 @@
   position: absolute;
   display: flex;
   left: -20px;
+  justify-content: space-around;
 }
 .form input {
   position: absolute;
