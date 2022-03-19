@@ -12,9 +12,9 @@ import StatisticsModify from "./pages/Statistics/StatisticsModify";
 import Diary from "./pages/Diary/Diary";
 import News from "./pages/News/News";
 import Setting from "./pages/Setting/Setting";
-import MyPage from "./pages/Setting/MyPage"
+import MyPage from "./pages/Setting/MyPage";
 import TermsOfUse from "./pages/Setting/TermsOfUse";
-import EcoMission from "./pages/EcoMission/EcoMission"
+import EcoMission from "./pages/EcoMission/EcoMission";
 import FloatingExpensePage from "./pages/Floating/FloatingExpensePage";
 import FloatingType from "./pages/Floating/FloatingType";
 import FloatingCategory from "./pages/Floating/FloatingCategory";
@@ -29,13 +29,15 @@ import FloatingDate from "./pages/Floating/FloatingDate";
 import FloatingDate2 from "./pages/Floating/FloatingDate2";
 import FloatingPrice from "./pages/Floating/FloatingPrice";
 import FloatingPrice2 from "./pages/Floating/FloatingPrice2";
-import Login from './pages/Login/Login';
+import Login from "./pages/Login/Login";
+import DetailCategory from "./components/CalendarPart/DetailCategory";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="/calendar" element={<CalendarPage />}></Route>
+      <Route path="/calendar/:month/:day" element={<DetailCategory />}></Route>
       <Route path="/statistics" element={<Statistics />}></Route>
       <Route path="/statisticsView" element={<StatisticsView />}></Route>
       <Route path="/statisticsIncome" element={<StatisticsIncome />}></Route>
@@ -47,8 +49,11 @@ function App() {
       <Route path="/myPage" element={<MyPage />}></Route>
       <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
       <Route path="/ecoMission" element={<EcoMission />}></Route>
-      <Route path="/floatingExpensePage" element={<FloatingExpensePage />}></Route>
-    
+      <Route
+        path="/floatingExpensePage"
+        element={<FloatingExpensePage />}
+      ></Route>
+
       <Route path="/floatingpage1" element={<FloatingPage1 />}></Route>
       <Route path="/floatingPage2" element={<FloatingPage2 />}></Route>
       <Route path="/floatingDate" element={<FloatingDate />}></Route>
