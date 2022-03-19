@@ -267,6 +267,14 @@ const data = {
     "자연과 가까울수록 병은 멀어지고, 자연과 멀수록 병은 가까워진다. - 요한 볼프강 폰 괴테",
 };
 
+const form = {
+  date: "2022-02-29",
+  incomeDays: 0,
+  ecoCount: 0,
+  noneEcoCount: 0,
+  expenditureDays: 0,
+};
+
 function CalendarBody() {
   const [loading, setloading] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -299,7 +307,7 @@ function CalendarBody() {
       }
     );
     const data = await response.json();
-    setMessage(data.calendarDto);
+    setMessage([...data.calendarDto, form, form, form]);
     setquote(data.content);
     setAnniversary(data.anniversaryList);
   };
