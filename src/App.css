@@ -173,3 +173,12 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.eco {
+  color: #00c982;
+}
+.neco {
+  color: #566479;
+}
+.etc {
+  color: #b4b6b8;
+}
