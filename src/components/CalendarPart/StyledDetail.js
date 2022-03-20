@@ -77,8 +77,110 @@ const StyledDetail = styled.div`
   }
 `;
 
-function StyledDetailBlock({ children }) {
+export function StyledDetailBlock({ children }) {
   return <StyledDetail>{children}</StyledDetail>;
 }
 
-export default StyledDetailBlock;
+const StyledDetailPage = styled.div`
+  .detail-page {
+    font-family: Pretendard;
+  }
+  .detail-info-block {
+    font-family: Pretendard;
+    width: 88%;
+    margin-left: 6%;
+    margin-right: 6%;
+    color: white;
+    margin-bottom: 60px;
+  }
+
+  .selected-date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 30px 0;
+  }
+  .forward-arrow {
+    color: white;
+    transform: rotate(180deg);
+    width: 18px;
+    height: 18px;
+  }
+  .detail-info {
+    display: flex;
+    flex-direction: row;
+    line-height: 16px;
+    margin-bottom: 20px;
+  }
+  .detail-cost {
+    top: 15px;
+  }
+
+  .detail-info .detail-cost-label {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+    color: #ffffff;
+    opacity: 0.5;
+  }
+
+  .detail-info .detail-cost-value {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: white;
+    margin-left: auto;
+  }
+
+  .detail-div-list {
+    color: white;
+    width: 100%;
+  }
+  .detail-history {
+    font-size: 12px;
+    color: #ffffff;
+    opacity: 0.5;
+    margin-left: 4%;
+    margin-bottom: 20px;
+  }
+  .details {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 13px;
+    margin-bottom: 13px;
+  }
+  .details-circle {
+    margin-top: 3px;
+    font-size: 8px;
+  }
+
+  .details-memo {
+    font-size: 15px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+  .details-detail {
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 7px;
+    font-weight: 400;
+  }
+  .details .details-cost {
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: auto;
+  }
+`;
+
+export function StyledDetailPageBlock({ children }) {
+  return <StyledDetailPage>{children}</StyledDetailPage>;
+}

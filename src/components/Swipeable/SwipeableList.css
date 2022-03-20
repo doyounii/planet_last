@@ -16,7 +16,6 @@
   align-items: center;
   box-sizing: border-box;
   background-color: #0c121e;
-  color: white;
   height: 100%;
   display: flex;
 }
@@ -53,12 +52,6 @@
   align-items: center;
   box-sizing: border-box;
   background-color: #141b27;
-  color: white;
   height: 100%;
   display: flex;
-}
-
-.animal {
-  color: yellow;
-  font-size: 13px;
 }

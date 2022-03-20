@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 import ko from "date-fns/locale/ko";
-import StyledDetailBlock from "./StyledDetail";
+import { StyledDetailBlock } from "./StyledDetail";
 
 const tempData = {
   totalMoney: {
