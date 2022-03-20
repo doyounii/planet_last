@@ -6,7 +6,9 @@ import { IoIosArrowForward } from "react-icons/io";
 import DonutChart from "./DonutChart";
 import HorizonChart from "./HorizonChart";
 import LineGraph from "./LineGraph";
-import Chart from 'chart.js/auto'
+import Chart from 'chart.js/auto';
+import Eco from './Part2/EcoExpend';
+import Pollution from './Part2/PollutionExpend';
 
 function StatisticsMain() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -109,6 +111,7 @@ function StatisticsMain() {
               <IoIosArrowForward className="box-icon" />
           </div>
           </Link>
+          <Eco></Eco>
 
           <div className="line-box"></div>
 
@@ -118,6 +121,7 @@ function StatisticsMain() {
               <IoIosArrowForward className="box-icon" />
           </div>
           </Link>
+          <Pollution></Pollution>
           </>
         )}
       </div>

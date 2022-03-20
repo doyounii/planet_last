@@ -10,8 +10,7 @@ import Lottie from 'react-lottie';
 import {format} from 'date-fns';
 import EditName from '../../components/Home/EditName';
 import logo from './img/PLANet.png'
-
-
+import { Modal } from "../../components/Home/QuestionModal";
 
 function Home({ activeHome }) {
 
@@ -21,8 +20,10 @@ function Home({ activeHome }) {
   const [edit, setEdit] = useState(false);
   const [expenditure, setExpenditure] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [loading, setloading] = useState(true);
+  const [position, setposition] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -74,19 +75,26 @@ const editName = (e) => {
   setEdit(edit => !edit);
 }
 
+const openModal = (e) => {
+  setposition(e.clientY);
+  setIsModalOpen(true);
+};
+const closeModal = () => {
+  setIsModalOpen(false);
+};
+
+
   return (
     <section className={homeStyle.contents}>
       <nav className={homeStyle.menu}>
-        <a href="/Setting">
+        <Link to="/Setting">
           <FiSettings className={homeStyle.icon}></FiSettings>
-        </a>
-        <a href="/MyPage">
+        </Link>
+        <Link to="/MyPage">
           <FiUser className={homeStyle.icon}></FiUser>
-        </a>
+        </Link>
         <Link to='/Login' className={activeHome}>
-        <div className={homeStyle.logo}>
-          <img src={logo}/>
-        </div>
+          <img src={logo} className={homeStyle.logo}/>
         </Link>
       </nav>
       <section className={homeStyle.profiles}>
@@ -97,7 +105,7 @@ const editName = (e) => {
                 className={homeStyle.icon}
                 alt="닉네임 변경"
               ></FiEdit3>
-              {edit ? <EditName></EditName> : <div></div>}
+              {edit ? <EditName></EditName>: <div></div>}
           </div>
           <div className={homeStyle.profile}>
           <Lottie 
@@ -109,7 +117,18 @@ const editName = (e) => {
 					},
 				]}
 		/>
-         <AiOutlineQuestionCircle className={homeStyle.question}></AiOutlineQuestionCircle>
+        <AiOutlineQuestionCircle className={homeStyle.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+
+        <div>
+        {isModalOpen && (
+              <Modal
+                className={position}
+                onClose={closeModal}
+                maskClosable={true}
+                visible={true}
+              ></Modal>
+        )}
+        </div>
           </div>
         </div>
       </section>
@@ -117,8 +136,6 @@ const editName = (e) => {
         <div className={homeStyle.month}>
         {renderHeader()}
         </div>
-    
-
         <Link to="/#" className={activeHome}>
               <IoIosArrowForward className={homeStyle.history}></IoIosArrowForward>
         </Link>

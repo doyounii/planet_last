@@ -23,6 +23,8 @@
   top: 7.8%;
   bottom: 90.24%;
 
+  width: 90.87px;
+  height: 15.95px;
   z-index: 4;
 }
 .menu {
@@ -58,6 +60,8 @@
   left: calc(40% - 107px);
 
   border: none;
+
+  border-radius: 50%;
   z-index: 0;
 }
 .question {
