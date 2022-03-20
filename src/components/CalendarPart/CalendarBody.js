@@ -293,7 +293,7 @@ function CalendarBody() {
   const [quote, setquote] = useState("");
 
   const ecoColor = (item) =>
-    item >= 5 ? "eco5" : item >= 3 ? "eco3" : item >= 1 ? "eco1" : "eco0";
+    item > 5 ? "eco4" : item >= 4 ? "eco3" : item >= 1 ? "eco2" : "eco1";
 
   const fetchData = async () => {
     const response = await fetch(
@@ -393,8 +393,8 @@ function CalendarBody() {
     let eco = message.sumOfEcoCount;
     return (
       <div className="calendar-info">
-        <div className="non-eco-cnt">● {nEco}</div>
-        <span className="eco-cnt">● {eco}</span>
+        <div className="neco">● {nEco}</div>
+        <span className="eco">● {eco}</span>
         <span className="eco-day-circle">●</span>
         <span className="eco-day">환경 기념일</span>
         <AiOutlineQuestionCircle
@@ -535,6 +535,7 @@ function CalendarBody() {
                 onClose={closeModal}
                 maskClosable={true}
                 visible={true}
+                children={isMonthView}
               ></InfoModal>
             )}
 

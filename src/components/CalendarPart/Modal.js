@@ -3,8 +3,9 @@ import Portal from "./Portal";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
-import { AiOutlineLoading } from "react-icons/ai";
-import { IoIosArrowForward } from "react-icons/io";
+
+import { ReactComponent as RoundArrow } from "./roundArrow.svg";
+import "./Calendar.css";
 
 export function Modal({
   className,
@@ -95,18 +96,80 @@ export function InfoModal({
           <CgClose className="modal-close" onClick={close} />
           <span className="eco-day-circle">● </span>
           <span className="eco-day">는 환경기념일이 있는 날에 표시됩니다</span>
-          <AiOutlineLoading className="top-arrow" />
-          <IoIosArrowForward className="top-arrow-point" />
-          <AiOutlineLoading className="bottom-arrow" />
-          <IoIosArrowForward className="bottom-arrow-point" />
+          <RoundArrow className="top-arrow" />
+          <RoundArrow className="bottom-arrow" />
           <div className="non-eco-cnt">
-            <span className="non-eco-circle">●</span> 는 반환경적인 소비 항목의
-            횟수,
+            <span className="neco">●</span> 는 반환경적인 소비 항목의 횟수,
           </div>
           <span className="eco-cnt">
-            <span className="eco-circle">●</span> 는 친환경적인 소비 항목의
-            횟수를 의미합니다.
+            <span className="eco">●</span> 는 친환경적인 소비 항목의 횟수를
+            의미합니다.
           </span>
+
+          {children && (
+            <>
+              <span className="calendar-desc">
+                친환경 태그가 많을수록 초록빛을 띠어요
+              </span>
+              <RoundArrow className="calendar-arrow" />
+              <div className="calendar">
+                <div className="body">
+                  <div class="row">
+                    <div class="col cell">
+                      <div class="number empty">11</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">12</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">13</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number eco3">14</div>
+                      <div class="detail-cost ex-day">-14,000</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">15</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">16</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number eco2">17</div>
+                      <div class="detail-cost ex-day">-5,230</div>
+                      <div class="detail-cost in-day">+12,120</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col cell">
+                      <div class="number empty">18</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">19</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number eco4">20</div>
+                      <div class="detail-cost in-day">+8,900</div>
+                    </div>
+                    <div class="col cell selected">
+                      <div class="number eco2">21</div>
+                      <div class="detail-cost ex-day">-34,000</div>
+                      <div class="detail-cost in-day">+128,990</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">22</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">23</div>
+                    </div>
+                    <div class="col cell">
+                      <div class="number empty">24</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </ModalWrapper>
     </Portal>
@@ -188,38 +251,36 @@ const ModalWrapper = styled.div`
   .top-arrow {
     position: fixed;
     color: #f5f5f5;
-    transform: rotate(-100deg);
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     top: ${(props) => props.className - 33}px;
     left: 35%;
   }
-  .top-arrow-point {
-    position: fixed;
-    color: #f5f5f5;
-    transform: rotate(90deg);
-    width: 20px;
-    height: 20px;
-    top: ${(props) => props.className - 25}px;
-    left: calc(35% - 10px);
-  }
+
   .bottom-arrow {
     position: fixed;
     color: #f5f5f5;
-    transform: rotate(70deg);
-    width: 30px;
-    height: 30px;
-    top: ${(props) => props.className + 8}px;
-    left: 8%;
-  }
-  .bottom-arrow-point {
-    position: fixed;
-    color: #f5f5f5;
-    transform: rotate(-90deg);
+    transform: rotate(180deg);
     width: 20px;
     height: 20px;
-    top: ${(props) => props.className + 8}px;
+    top: ${(props) => props.className + 10}px;
     left: 13%;
+  }
+
+  .calendar-desc {
+    position: fixed;
+    top: ${(props) => props.className + 150}px;
+    left: 45%;
+  }
+  .calendar-arrow {
+    position: fixed;
+    top: ${(props) => props.className + 170}px;
+    left: 50%;
+  }
+
+  .calendar {
+    position: fixed;
+    top: ${(props) => props.className + 120}px;
   }
 `;
 
