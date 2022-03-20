@@ -105,7 +105,7 @@ function SwipeableList(props) {
     <>
       <div className="Wrapper" ref={wrapperRef}>
         <div className="Background" ref={backgroundRef}>
-          <span>delete</span>
+          <span>삭제</span>
         </div>
         <div
           className="BouncingListItem"

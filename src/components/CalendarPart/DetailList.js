@@ -220,7 +220,7 @@ const tempData = {
 const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
 const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
 
-function DetailItem({ item, ecoCnt }) {
+export function DetailItem({ item, ecoCnt }) {
   return (
     <>
       <div
@@ -327,6 +327,7 @@ function DetailList(props) {
               <DetailItem item={item} ecoCnt={ecoCnt} />
             </div>
           );
+          ecoCnt = 0;
         });
     }
     return detailList;
@@ -340,6 +341,7 @@ function DetailList(props) {
         <Link
           to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
           state={{
+            date: format(props.value, "M. d EEEEE", { locale: ko }),
             typeName: totalList[i].name,
             typeCost: totalList[i].value,
             typeDetail: detailList[i],
