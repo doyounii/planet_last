@@ -32,6 +32,11 @@
   padding-right: 16px;
   color: white;
   background-color: #ff5f58;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
   box-sizing: border-box;
   padding-right: 30px;
 }

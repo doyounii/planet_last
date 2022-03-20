@@ -95,9 +95,8 @@ function SwipeableList(props) {
   }
 
   function onSwiped() {
-    console.log("deleted! ", props.children.key);
     if (props.onSwipe) {
-      props.onSwipe();
+      props.onSwipe(props.children.key);
     }
   }
 

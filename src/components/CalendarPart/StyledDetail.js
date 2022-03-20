@@ -84,12 +84,12 @@ export function StyledDetailBlock({ children }) {
 const StyledDetailPage = styled.div`
   .detail-page {
     font-family: Pretendard;
+    margin-bottom: 70px;
   }
   .detail-info-block {
-    font-family: Pretendard;
-    width: 88%;
-    margin-left: 6%;
-    margin-right: 6%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     color: white;
     margin-bottom: 60px;
   }
@@ -99,7 +99,6 @@ const StyledDetailPage = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
     color: white;
     font-size: 18px;
     font-weight: 600;
@@ -110,12 +109,18 @@ const StyledDetailPage = styled.div`
     transform: rotate(180deg);
     width: 18px;
     height: 18px;
+    margin-right: 10px;
   }
   .detail-info {
     display: flex;
     flex-direction: row;
     line-height: 16px;
     margin-bottom: 20px;
+  }
+
+  .detail-type {
+    font-weight: 500;
+    font-size: 18px;
   }
   .detail-cost {
     top: 15px;
@@ -127,6 +132,7 @@ const StyledDetailPage = styled.div`
     line-height: 16px;
     color: #ffffff;
     opacity: 0.5;
+    margin-left: 1%;
   }
 
   .detail-info .detail-cost-value {
@@ -145,7 +151,7 @@ const StyledDetailPage = styled.div`
     font-size: 12px;
     color: #ffffff;
     opacity: 0.5;
-    margin-left: 4%;
+    margin-left: 5%;
     margin-bottom: 20px;
   }
   .details {
