@@ -16,7 +16,6 @@
   align-items: center;
   box-sizing: border-box;
   background-color: #0c121e;
-  color: white;
   height: 100%;
   display: flex;
 }
@@ -33,6 +32,11 @@
   padding-right: 16px;
   color: white;
   background-color: #ff5f58;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
   box-sizing: border-box;
   padding-right: 30px;
 }
@@ -53,12 +57,6 @@
   align-items: center;
   box-sizing: border-box;
   background-color: #141b27;
-  color: white;
   height: 100%;
   display: flex;
-}
-
-.animal {
-  color: yellow;
-  font-size: 13px;
 }

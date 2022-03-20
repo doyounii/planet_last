@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 import ko from "date-fns/locale/ko";
-import StyledDetailBlock from "./StyledDetail";
+import { StyledDetailBlock } from "./StyledDetail";
 
 const tempData = {
   totalMoney: {
@@ -13,6 +13,171 @@ const tempData = {
     통신: -4200,
   },
   totalDetails: {
+    통신: [
+      {
+        id: 13,
+        type: "통신",
+        cost: 1401,
+        memo: "new memo1",
+        ecoList: [
+          {
+            eco: "R",
+            ecoDetail: "기타",
+            etcMemo: "라벨이 붙은 음료수 구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "중고거래/나눔/기부",
+            etcMemo: null,
+          },
+          {
+            eco: "R",
+            ecoDetail: "비닐봉투 소비",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 12,
+        type: "통신",
+        cost: 1402,
+        memo: "new memo2",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "기타",
+            etcMemo: "환경 관련 봉사활동 신청",
+          },
+          {
+            eco: "R",
+            ecoDetail: "식자재 낭비",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 11,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 21,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 22,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 23,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 24,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+    ],
     가전: [
       {
         id: 19,
@@ -135,75 +300,6 @@ const tempData = {
             eco: "G",
             ecoDetail: "중고거래/나눔/기부",
             etcMemo: null,
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-    ],
-    통신: [
-      {
-        id: 13,
-        type: "통신",
-        cost: 1401,
-        memo: "new memo1",
-        ecoList: [
-          {
-            eco: "R",
-            ecoDetail: "기타",
-            etcMemo: "라벨이 붙은 음료수 구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-          {
-            eco: "R",
-            ecoDetail: "비닐봉투 소비",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 12,
-        type: "통신",
-        cost: 1402,
-        memo: "new memo2",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "기타",
-            etcMemo: "환경 관련 봉사활동 신청",
-          },
-          {
-            eco: "R",
-            ecoDetail: "식자재 낭비",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 11,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo3",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
           },
           {
             eco: "G",
