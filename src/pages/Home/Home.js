@@ -1,72 +1,115 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Footer from '../../components/Footer/Footer';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import homeStyle from './Home.module.css';
-import { FiSettings } from 'react-icons/fi';
-import { FiUser } from 'react-icons/fi';
-import { RiPencilLine } from 'react-icons/ri';
-import logo from './img/PLANet.png';
-import profile_img from './img/Profiles.png';
+import { FiSettings, FiUser, FiCheckCircle, FiEdit3, FiShoppingBag } from 'react-icons/fi';
 import { IoIosArrowForward } from "react-icons/io";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
 import planet from '../../planet/high.json';
-import Lottie from 'react-lottie';
-
+import Lottie from 'react-lottie'; 
+import {format} from 'date-fns';
+import EditName from '../../components/Home/EditName';
+import logo from './img/PLANet.png'
+import { Modal } from "../../components/Home/QuestionModal";
 
 function Home({ activeHome }) {
+
+
+  const [income, setIncome] = useState(0);
+  const [message, setMessage] = useState(0);
+  const [edit, setEdit] = useState(false);
+  const [expenditure, setExpenditure] = useState(0);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [loading, setloading] = useState(true);
+  const [position, setposition] = useState(0);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
+  const fetchData = async () => {
+    const response = await fetch(
+      `/main/yui12@gmail.com/2022/${format(new Date(), "M")}`,
+      //${format(new Date(), "M")}
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setMessage(data);
+    setloading(false);
+  };
+
+  console.log(income);
+  const renderHeader = () => {
+    const yNmFormat = "M월";
+
+    return (
+      <div className="header row flex-middle">
+        
+        <div className="col col-center">
+          <span>{format(currentDate, yNmFormat)}</span>
+        </div>
+        
+      </div>
+    );
+  };
+
   const lottieOptions = {
     animationData: planet,   
-    loop: false,        
-    autoplay: false,   
+    loop: true,        
+    autoplay: true,   
     rendererSettings: {
     className: 'add-class', // svg에 적용
     preserveAspectRatio: 'xMidYMid slice'
     }
 };
 
-const [isStopped, SetIsStopped] = useState(false);
-const [isPaused, SetIsPaused] = useState(true);
+const editName = (e) => {
+  setEdit(edit => !edit);
+}
 
-const onStop = () => {
-SetIsStopped(!isStopped)
+const openModal = (e) => {
+  setposition(e.clientY);
+  setIsModalOpen(true);
+};
+const closeModal = () => {
+  setIsModalOpen(false);
 };
 
-const onPause = () => {
-SetIsPaused(!isPaused)
-};
 
   return (
     <section className={homeStyle.contents}>
       <nav className={homeStyle.menu}>
-        <a href="/Setting">
+        <Link to="/Setting">
           <FiSettings className={homeStyle.icon}></FiSettings>
-        </a>
-        <a href="/MyPage">
+        </Link>
+        <Link to="/MyPage">
           <FiUser className={homeStyle.icon}></FiUser>
-        </a>
+        </Link>
         <Link to='/Login' className={activeHome}>
-        <div className={homeStyle.logo}>
-          <img src={logo} alt="로고" />
-        </div>
+          <img src={logo} className={homeStyle.logo}/>
         </Link>
       </nav>
       <section className={homeStyle.profiles}>
         <div className={homeStyle.main}>
           <div className={homeStyle.nickname}>
-            행성 19238호
-            <a href="#">
-              <RiPencilLine
+            {message.userName}
+              <FiEdit3 onClick={editName}
                 className={homeStyle.icon}
                 alt="닉네임 변경"
-              ></RiPencilLine>
-            </a>
+              ></FiEdit3>
+              {edit ? <EditName></EditName>: <div></div>}
           </div>
           <div className={homeStyle.profile}>
           <Lottie 
 				options={lottieOptions}
-				isStopped={isStopped}
-				isPaused={isPaused}
-				isClickToPauseDisabled={false}
 				eventListeners={[
 					{
 						eventName: 'complete',
@@ -74,41 +117,64 @@ SetIsPaused(!isPaused)
 					},
 				]}
 		/>
-        
-        {/* <button onClick={onPause}>Play/Pause</button>           */}
+        <AiOutlineQuestionCircle className={homeStyle.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+
+        <div>
+        {isModalOpen && (
+              <Modal
+                className={position}
+                onClose={closeModal}
+                maskClosable={true}
+                visible={true}
+              ></Modal>
+        )}
+        </div>
           </div>
         </div>
       </section>
       <section className={homeStyle.monthly}>
-        <div className={homeStyle.month}>10월</div>
-        <button className={homeStyle.history}>내역</button>
-        <div className={homeStyle.income}>수입 870,000원</div>
-        <div className={homeStyle.expend}>지출 594,300원</div>
+        <div className={homeStyle.month}>
+        {renderHeader()}
+        </div>
+        <Link to="/#" className={activeHome}>
+              <IoIosArrowForward className={homeStyle.history}></IoIosArrowForward>
+        </Link>
+        <div className={homeStyle.income}>
+                      수입 {message.totalIncomeMonth}원
+        </div>
+        <div className={homeStyle.expend}>지출 {message.totalExpenditureMonth}원</div>
       </section>
       <section className={homeStyle.etc}>
         <div className={homeStyle.box}>
-          <nav className={homeStyle.box_text}>
-            데일리 에코 미션
+          <p className={homeStyle.box_text}>
+            데일리<br/> 에코 미션
             <Link to="/EcoMission" className={activeHome}>
               <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
-          </nav>
+          </p>
+          <FiCheckCircle className={homeStyle.check}></FiCheckCircle>
         </div>
         <div className={homeStyle.box}>
-          <nav className={homeStyle.box_text}>
-            친,반환경 소비 횟수
+          <p className={homeStyle.box_text}>
+            친 · 반환경 <br/> 소비 횟수
             <Link to="/#" className={activeHome}>
               <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
-          </nav>
+            <div className={homeStyle.num}>
+              <p>1</p>
+              <p>2</p>
+              <p>3</p>
+            </div>
+          </p>
         </div>
         <div className={homeStyle.box}>
-          <nav className={homeStyle.box_text}>
-            월간 플랜잇
+          <p className={homeStyle.box_text}>
+            월간 <br/>플랜잇
             <Link to="/#" className={activeHome}>
               <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
-          </nav>
+          </p>
+          <FiShoppingBag className={homeStyle.bag}></FiShoppingBag>
         </div>
       </section>
       <section>

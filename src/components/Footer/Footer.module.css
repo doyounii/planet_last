@@ -17,9 +17,11 @@
 
 .link {
   color: #939393;
+  text-decoration: none;
 }
 .link:hover {
   background-color: rgba(0, 0, 0, 0.05);
+  text-decoration: none;
 }
 .icon {
   width: 34px;
@@ -27,7 +29,44 @@
 }
 .focused {
   color: white;
+  text-decoration: none;
 }
 .focused:hover {
   background-color: rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+.text {
+  position: relative;
+  top: 5.4px;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 10px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  /* white */
+
+  color: #ffffff;
+}
+.text2 {
+  position: relative;
+  top: 5.4px;
+  bottom: 47.19%;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400px;
+  font-size: 13px;
+  line-height: 10px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  /* white */
+
+  color: #939393;
 }

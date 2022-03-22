@@ -19,8 +19,12 @@
 .logo {
   position: absolute;
   left: 6.99%;
-  top: 52px;
+  right: 68.78%;
+  top: 7.8%;
+  bottom: 90.24%;
 
+  width: 90.87px;
+  height: 15.95px;
   z-index: 4;
 }
 .menu {
@@ -56,7 +60,21 @@
   left: calc(40% - 107px);
 
   border: none;
+
+  border-radius: 50%;
   z-index: 0;
+}
+.question {
+  position: absolute;
+  display: flex;
+  width: 80%;
+  height: 18px;
+  left: 128px;
+  margin-left: 5%;
+  margin-right: 5%;
+  opacity: 0.4;
+  color: #ffffff;
+  cursor: pointer;
 }
 .nickname {
   color: white;
@@ -65,7 +83,7 @@
   height: 24px;
   left: 6.99%;
   top: 93px;
-
+  cursor: pointer;
   z-index: 4;
   font-family: Pretendard;
 }
@@ -99,24 +117,14 @@
 }
 .history {
   position: absolute;
-  width: 51px;
-  height: 30px;
-  right: 20px;
-  top: 20px;
-
-  background: #555b68;
-  border-radius: 9px;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 0px;
-  /* identical to box height, or 0% */
+  width: 24px;
+  height: 24px;
+  right: 22px;
+  top: 19px;
 
   display: flex;
-  align-items: center;
-  text-align: center;
 
+  opacity: 0.4;
   color: #ffffff;
 }
 .income {
@@ -196,9 +204,9 @@ div.box {
   box-shadow: 0px 0px 19px rgba(0, 0, 0, 0.08);
   border-radius: 13px;
 }
-nav.box_text {
+p.box_text {
   position: absolute;
-  width: 59px;
+  width: 65px;
   height: 42px;
   left: 15px;
   top: 13px;
@@ -216,9 +224,12 @@ nav.box_text {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 105px;
-  top: 0px;
+  left: 110px;
+  top: -3px;
+  opacity: 0.4;
+  color: #ffffff;
 }
+
 .floating {
   position: fixed;
   width: 55px;
@@ -226,4 +237,87 @@ nav.box_text {
   right: 18px;
   bottom: 70px;
   color: #566479;
+}
+.check > path {
+  stroke: #00c982;
+}
+.check {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  left: 111px;
+  top: 56px;
+}
+.check > polyline {
+  stroke: white;
+}
+.bag {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  left: 111px;
+  top: 56px;
+
+  color: white;
+}
+.bag > line {
+  stroke: #00c982;
+}
+.bag > path:nth-child(1) {
+  stroke: #00c982;
+}
+.bag > path:nth-child(2) {
+  stroke: #ffffff;
+}
+.num {
+  position: relative;
+  width: 31px;
+  height: 35px;
+  left: 100px;
+  right: 18px;
+}
+.num > p:nth-child(1) {
+  position: absolute;
+  left: 0%;
+  right: 73.97%;
+  top: 18.46%;
+  bottom: 35.68%;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14.3077px;
+  line-height: 17px;
+
+  color: #00c982;
+}
+.num > p:nth-child(2) {
+  position: absolute;
+  left: 37.54%;
+  right: 32.09%;
+  top: 46.49%;
+  bottom: 0%;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16.3333px;
+  line-height: 20px;
+
+  color: rgba(0, 201, 130, 0.5);
+}
+.num > p:nth-child(3) {
+  position: absolute;
+  left: 64.63%;
+  right: 6.45%;
+  top: 0%;
+  bottom: 49.03%;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15.5555px;
+  line-height: 19px;
+
+  color: rgba(0, 201, 131, 0.3);
 }
