@@ -54,36 +54,6 @@ export function Modal({
     className: 'add-class', // svg에 적용
     preserveAspectRatio: 'xMidYMid slice'
     }
-  }
-  const lottieOptions1 = {
-    animationData: high,  
-  };
-  const lottieOptions2 = {
-    animationData: highmid,  
-    loop: true,        
-    autoplay: true,   
-    rendererSettings: {
-    className: 'add-class', // svg에 적용
-    preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
-  const lottieOptions3 = {
-    animationData: mid,  
-    loop: true,        
-    autoplay: true,   
-    rendererSettings: {
-    className: 'add-class', // svg에 적용
-    preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
-  const lottieOptions4 = {
-    animationData: low,  
-    loop: true,        
-    autoplay: true,   
-    rendererSettings: {
-    className: 'add-class', // svg에 적용
-    preserveAspectRatio: 'xMidYMid slice'
-    }
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -150,7 +120,7 @@ export function Modal({
         </p>
           <div className='lottie'>
           <Lottie 
-            options={lottieOptions2}
+            options={{...lottieDefault, animationData:highmid}}
             eventListeners={[
               {
                 eventName: 'complete',
@@ -167,7 +137,7 @@ export function Modal({
         <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
         </p>          <div className='lottie'>
           <Lottie 
-            options={lottieOptions3}
+            options={{...lottieDefault, animationData:mid}}
             eventListeners={[
               {
                 eventName: 'complete',
@@ -184,7 +154,7 @@ export function Modal({
         <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
         </p>          <div className='lottie'>
           <Lottie 
-            options={lottieOptions4}
+            options={{...lottieDefault, animationData:low}}
             eventListeners={[
               {
                 eventName: 'complete',
