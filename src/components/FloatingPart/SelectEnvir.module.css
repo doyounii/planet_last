@@ -1,214 +1,94 @@
 @charset 'utf-8';
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-
-.type_box {
-  display: flex;
-  align-items: center;
-  padding: 6px 18px;
-
-  position: relative;
-  height: 37px;
-  left: 195.77px;
-  top: 315px;
-
-  background: rgba(0, 201, 130, 0.1);
-  border-radius: 43px;
-  display: inline-block;
-  border: 0;
-  margin-left: 10px;
+* {
+  font-family: "Pretendard";
+  color: white;
 }
-.type_box2 {
-  display: flex;
-  align-items: center;
-  padding: 6px 18px;
-
-  position: relative;
-  height: 37px;
-  left: 195.77px;
-  top: 315px;
-
-  background: rgba(196, 196, 196, 0.1);
-  border-radius: 43px;
-  display: inline-block;
-  border: 0;
-  margin-left: 10px;
-}
-.type {
+.selectContainer {
+  top: 25%;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-
-  position: absolute;
-  height: 37px;
-  left: -170px;
-  top: -150px;
+  flex-wrap: wrap;
+  width: 84%;
+  margin-left: 7%;
 }
-.type2 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
 
-  position: absolute;
-  height: 37px;
-  left: -190px;
-  top: -100px;
+.sbutton {
+  border-radius: 43px;
+  padding: 8px 18px;
+  margin: 5px;
+  border: none;
 }
-.type3 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-
-  position: absolute;
-  height: 37px;
-  left: -180px;
-  top: -50px;
+.nchecked {
+  color: rgba(255, 255, 255, 0.5);
 }
-.type4 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
 
-  position: absolute;
-  height: 37px;
-  left: -150px;
-  top: 0px;
+.eco.nchecked {
+  background-color: rgba(0, 201, 130, 0.1);
 }
-.type5 {
-  display: flex;
 
+.eco.checked {
+  background-color: rgba(0, 201, 130);
+  color: black;
+}
+
+.neco.nchecked {
+  background-color: rgb(86, 100, 121, 0.1);
+}
+.neco.checked {
+  background-color: #b4b6b8;
+  color: black;
+}
+
+.etc.checked {
+  background-color: white;
+  color: black;
+}
+
+.etc.nchecked {
+  background-color: rgb(255, 255, 255, 0.1);
+}
+
+.plusCircle {
+  width: 28px;
+  height: 28px;
+}
+
+.plusCircle.pluswhite {
+  color: #d3d3d3;
+}
+
+.plusCircle.plusgrey {
+  color: #d3d3d3;
+  opacity: 0.5;
+}
+
+.newTag {
   position: relative;
-  width: 90px;
-  height: 37px;
-  left: 150px;
-  top: 200px;
-
+  top: 50px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
-.etc {
-  top: -45px;
-  position: absolute;
-  left: 65px;
-  font-size: 30px;
-}
 
-.type_box_clicked {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 18px;
-
-  position: relative;
-  height: 37px;
-  left: 195.77px;
-  top: 315px;
-
-  background: #00c982;
-  border-radius: 43px;
-  display: inline-block;
-  border: 0;
-  margin-left: 10px;
-}
-.type_box_clicked2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 18px;
-
-  position: relative;
-  height: 37px;
-  left: 195.77px;
-  top: 315px;
-
-  background: #b4b6b8;
-  border-radius: 43px;
-  display: inline-block;
-  border: 0;
-  margin-left: 10px;
-}
-.type_box_text {
-  position: static;
-  width: auto;
-  height: 16px;
-  left: 18px;
-  top: 10.5px;
-
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 16px;
-  /* identical to box height, or 107% */
-
-  text-align: center;
-
-  /* white */
-
-  color: #ffffff;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 10px;
-}
-
-.type_box_text2 {
-  position: static;
-  width: auto;
-  height: 16px;
-  left: 18px;
-  top: 10.5px;
-
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 16px;
-  /* identical to box height, or 107% */
-
-  text-align: center;
-
-  /* white */
-
-  color: #000000;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 10px;
-}
 .tag {
-  position: absolute;
-  top: -320px;
-  text-align: left;
-  left: -215px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .inputMemo {
   display: flex;
-  margin: 0 auto;
+  margin: 20px auto;
   position: relative;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  width: 260px;
+  height: 36px;
 }
 .inputMemo input {
   position: relative;
-  width: 258px;
-  height: 36px;
-  left: 59px;
-  top: 390px;
-
-  padding-right: 50px;
-
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
 
   font-family: Pretendard;
   font-style: normal;
@@ -221,11 +101,14 @@
   border: none;
 
   text-align: left;
-  /* identical to box height, or 114% */
-
-  /* white */
+  padding-left: 15px;
 
   color: #ffffff;
+}
+
+.selectTag {
+  position: relative;
+  top: 10px;
 }
 ::-webkit-input-placeholder {
   /* 크롬 4–56 */
@@ -235,121 +118,14 @@
 
 .close {
   position: relative;
-  left: 35px;
-  right: 18.67%;
-  top: 400px;
+  top: 11px;
+  left: 30px;
   font-size: 15px;
 
-  /* Ink/Base */
-
-  /* border: 2px solid #0e0f0f; */
-
-  color: #000000;
-}
-.coment1 {
-  position: relative;
-  width: 240px;
-  height: 16px;
-  left: 75px;
-  top: 370px;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 400px;
-  font-size: 14px;
-  line-height: 16px;
-  /* identical to box height, or 114% */
-
-  text-align: center;
-  letter-spacing: 0.01em;
-
-  /* white */
-
-  color: #ffffff;
-}
-.coment2 {
-  position: relative;
-  width: 240px;
-  height: 16px;
-  left: 78px;
-  top: 410px;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 400px;
-  font-size: 14px;
-  line-height: 16px;
-  /* identical to box height, or 114% */
-
-  text-align: center;
-  letter-spacing: 0.01em;
-
-  /* white */
-
-  color: #ffffff;
+  color: black;
+  background-color: transparent;
 }
 .coment3 {
-  position: absolute;
-  width: 240px;
-  height: 16px;
-  left: 72px;
-  top: 555px;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 16px;
-  /* identical to box height, or 107% */
-
-  text-align: center;
-  letter-spacing: 0.01em;
-
-  /* green */
-
-  color: #00c982;
-}
-.type_box3 {
-  display: flex;
-  align-items: center;
-  padding: 6px 18px;
-
-  position: relative;
-  height: 37px;
-  left: 195.77px;
-  top: 315px;
-
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 43px;
-  display: inline-block;
-  border: 0;
-  margin-left: 10px;
-}
-.type_box_clicked3 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 18px;
-
-  position: relative;
-  height: 37px;
-  left: 195.77px;
-  top: 315px;
-  background: #ffffff;
-  border-radius: 43px;
-  display: inline-block;
-  border: 0;
-  margin-left: 10px;
-}
-.selecttag {
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-
-  position: absolute;
-  width: 550px;
-  height: 37px;
-  left: -160px;
-  top: 180px;
+  margin-top: 25px;
+  color: rgba(0, 201, 130);
 }

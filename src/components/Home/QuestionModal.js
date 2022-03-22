@@ -47,14 +47,16 @@ export function Modal({
     };
   }, []);
 
-  const lottieOptions1 = {
-    animationData: high,  
+  const lottieDefault = {
     loop: true,        
     autoplay: true,   
     rendererSettings: {
     className: 'add-class', // svg에 적용
     preserveAspectRatio: 'xMidYMid slice'
     }
+  }
+  const lottieOptions1 = {
+    animationData: high,  
   };
   const lottieOptions2 = {
     animationData: highmid,  
@@ -120,7 +122,7 @@ export function Modal({
         </p>
           <div className='lottie'>
           <Lottie 
-            options={lottieOptions1}
+            options={{...lottieDefault, animationData:high}}
             eventListeners={[
               {
                 eventName: 'complete',
