@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import IncomeStyle from './Float.module.css';
-import { Link } from 'react-router-dom';
-import TopNav2 from '../../components/FloatingPart/TopNav2';
-import Dashboard2 from '../../components/FloatingPart/Dashboard2';
-import IncomeDate from '../../components/FloatingPart/IncomeDate';
-import InputPrice from '../../components/FloatingPart/InputPrice';
+import React, { Component } from "react";
+import IncomeStyle from "./Float.module.css";
+import { Link } from "react-router-dom";
+import HistorySample from "../../components/History/History";
+import TopNav from "../../components/FloatingPart/TopNav";
+import Dashboard from "../../components/FloatingPart/Dashboard";
+import IncomeDate from "../../components/FloatingPart/IncomeDate";
+import InputPrice from "../../components/FloatingPart/InputPrice";
 
 //Content
 class Content extends Component {
-  render(){
-    return(
+  render() {
+    return (
       <article>
         <p>{this.props.title}</p>
         <h1>{this.props.desc}</h1>
@@ -21,18 +22,24 @@ class Content extends Component {
 function FloatingPage2() {
   return (
     <div className={IncomeStyle.container}>
-      <TopNav2></TopNav2>
-      <Dashboard2></Dashboard2>
+      <div className={IncomeStyle.closeBtn}>
+        <HistorySample />
+      </div>
 
-      <Content title="언제 쓰셨나요?"></Content>
+      <TopNav process={1} total={5} className={IncomeStyle.navigation} />
 
-      <Link to="/FloatingDate2" style={{ textDecoration: 'none' }}>
-        <h1><IncomeDate></IncomeDate></h1>
+      <Dashboard value={2} />
+
+      <Content title="언제 쓰셨나요?" />
+
+      <Link to="/FloatingDate2" style={{ textDecoration: "none" }}>
+        <h1>
+          <IncomeDate />
+        </h1>
       </Link>
 
-      <Content title="얼마 쓰셨나요?"></Content>
-      <InputPrice></InputPrice>
-
+      <Content title="얼마 쓰셨나요?" />
+      <InputPrice />
     </div>
   );
 }

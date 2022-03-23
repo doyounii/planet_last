@@ -1,14 +1,14 @@
-import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom';
-import IncomeStyle from './Float.module.css';
-import TopNav2 from '../../components/FloatingPart/TopNav2';
-import Dashboard2 from '../../components/FloatingPart/Dashboard2';
-import InputDateStyle from '../../components/FloatingPart/InputDate.module.css';
+import React, { Component, useState } from "react";
+import { Link } from "react-router-dom";
+import IncomeStyle from "./Float.module.css";
+import TopNav from "../../components/FloatingPart/TopNav";
+import Dashboard from "../../components/FloatingPart/Dashboard";
+import InputDateStyle from "../../components/FloatingPart/InputDate.module.css";
 
 //Content
 class Content extends Component {
-  render(){
-    return(
+  render() {
+    return (
       <article>
         <p>{this.props.title}</p>
         <h2>{this.props.desc}</h2>
@@ -24,19 +24,19 @@ function FloatingDate2() {
     let todayMonth = ("0" + (now.getMonth() + 1)).slice(-2);
     let todayDate = ("0" + now.getDate()).slice(-2);
 
-    return todayYear + '.' + todayMonth + '.' + todayDate;
-  }
+    return todayYear + "." + todayMonth + "." + todayDate;
+  };
 
   const [date, setDate] = useState(todayTime().slice(2, 10));
   const [disabled, setDisabled] = useState(false);
 
-  const handleChange = ({ target : { value } }) => setDate(value);
+  const handleChange = ({ target: { value } }) => setDate(value);
 
   return (
     <div className={IncomeStyle.container_date}>
-      <TopNav2></TopNav2>
+      <TopNav process={1} total={5} />
 
-      <Dashboard2></Dashboard2>
+      <Dashboard value={2} />
 
       <Content title="언제 쓰셨나요?"></Content>
 
@@ -46,12 +46,12 @@ function FloatingDate2() {
         className={IncomeStyle.container_date}
       >
         <div className={InputDateStyle.inputData}>
-            <input 
-              type="text"
-              name="inputD"
-              value={date}
-              onChange={handleChange}
-            />
+          <input
+            type="text"
+            name="inputD"
+            value={date}
+            onChange={handleChange}
+          />
         </div>
 
         <div className={IncomeStyle.bottomBtn}>

@@ -31,6 +31,8 @@ import FloatingPrice from "./pages/Floating/FloatingPrice";
 import FloatingPrice2 from "./pages/Floating/FloatingPrice2";
 import Login from "./pages/Login/Login";
 import DetailCategory from "./components/CalendarPart/DetailCategory";
+import ExpendLanding from "./pages/Floating/ExpendLanding";
+import IncomeLanding from "./pages/Floating/IncomeLanding";
 
 function App() {
   return (
@@ -54,8 +56,8 @@ function App() {
         element={<FloatingExpensePage />}
       ></Route>
 
-      <Route path="/floatingpage1" element={<FloatingPage1 />}></Route>
-      <Route path="/floatingPage2" element={<FloatingPage2 />}></Route>
+      <Route path="/floatingpage1" element={<ExpendLanding />}></Route>
+      <Route path="/floatingPage2" element={<IncomeLanding />}></Route>
       <Route path="/floatingDate" element={<FloatingDate />}></Route>
       <Route path="/floatingDate2" element={<FloatingDate2 />}></Route>
       <Route path="/floatingPrice" element={<FloatingPrice />}></Route>

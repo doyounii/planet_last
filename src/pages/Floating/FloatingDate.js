@@ -34,9 +34,9 @@ function FloatingDate() {
 
   return (
     <div className={IncomeStyle.container_date}>
-      <TopNav></TopNav>
+      <TopNav process={1} total={4} />
 
-      <Dashboard></Dashboard>
+      <Dashboard value={1} />
 
       <Content title="언제 받으셨나요?"></Content>
 

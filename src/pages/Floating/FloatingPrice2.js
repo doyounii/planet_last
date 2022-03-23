@@ -1,8 +1,8 @@
 import React, { Component, useState } from "react";
 import IncomeStyle from "./Float.module.css";
 import { Link, useLocation } from "react-router-dom";
-import TopNav2 from "../../components/FloatingPart/TopNav2";
-import Dashboard2 from "../../components/FloatingPart/Dashboard2";
+import TopNav from "../../components/FloatingPart/TopNav";
+import Dashboard from "../../components/FloatingPart/Dashboard";
 import InputDateStyle from "../../components/FloatingPart/InputDate.module.css";
 
 //Content
@@ -57,8 +57,8 @@ function FloatingPrice2() {
 
   return (
     <div className={IncomeStyle.container}>
-      <TopNav2></TopNav2>
-      <Dashboard2></Dashboard2>
+      <TopNav process={1} total={5} />
+      <Dashboard value={2} />
 
       <Content title="언제 쓰셨나요?"></Content>
 

@@ -1,4 +1,5 @@
 import React, { Component, useState } from "react";
+import { format } from "date-fns";
 import IncomeStyle from "./Float.module.css";
 import { Link, useLocation } from "react-router-dom";
 import TopNav from "../../components/FloatingPart/TopNav";
@@ -18,7 +19,6 @@ class Content extends Component {
 }
 
 function FloatingPrice() {
-  
   const [price, setprice] = useState("");
   const [disabled, setdisabled] = useState(true);
   const date = useLocation().state.date;
@@ -31,29 +31,35 @@ function FloatingPrice() {
 
   const fetchFunc = () => {
     //백엔드로 데이터 보내기
-    fetch('/api/income/yui12@gmail.com/new', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-    },
-    body: JSON.stringify({
-      'in_cost': price,
-      'date': '20' + date.slice(0, 2) + '-' + date.slice(3, 5) + '-' + date.slice(6, 8)
+    fetch("/api/income/yui12@gmail.com/new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        in_cost: price,
+        date:
+          "20" +
+          date.slice(0, 2) +
+          "-" +
+          date.slice(3, 5) +
+          "-" +
+          date.slice(6, 8),
+      }),
     })
-    })
-    .then(response => response.json())
-    .then(response => {
-      if (response.token) {
-        localStorage.setItem('wtw-token', response.token);
-      }
-    })
-    }
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      });
+  };
 
   return (
     <div className={IncomeStyle.container}>
-      <TopNav></TopNav>
-      <Dashboard></Dashboard>
+      <TopNav process={1} total={4} />
+      <Dashboard value={1} />
 
       <Content title="언제 받으셨나요?"></Content>
 
@@ -75,8 +81,12 @@ function FloatingPrice() {
       <div className={IncomeStyle.bottomBtn2}>
         <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
         <Link to={"/FloatingType"} state={{ date, price }}>
-          <button className={IncomeStyle.bottomBtnActive}
-          disabled={price.length !== 0 ? false : true}>다음</button>
+          <button
+            className={IncomeStyle.bottomBtnActive}
+            disabled={price.length !== 0 ? false : true}
+          >
+            다음
+          </button>
         </Link>
       </div>
     </div>
