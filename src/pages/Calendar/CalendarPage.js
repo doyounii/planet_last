@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Calendar from "../../components/CalendarPart/CalendarBody";
+import DetailList from "../../components/CalendarPart/DetailList";
 
 function CalendarPage() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const changeDate = (date) => {
+    setSelectedDate(date);
+  };
   // let emoji = "💳";
   // useEffect(() => {
   //   fetch(`/mission/yui12@gmail.com/${emoji}/절약`, {
@@ -22,7 +27,8 @@ function CalendarPage() {
 
   return (
     <div className="calendarPage">
-      <Calendar />
+      <Calendar onChange={changeDate} />
+      <DetailList value={selectedDate} />
       <Footer activeMenu="calendar">
         <div>달력</div>
       </Footer>

@@ -275,7 +275,7 @@ const form = {
   expenditureDays: 0,
 };
 
-function CalendarBody() {
+function CalendarBody({ onChange }) {
   const [loading, setloading] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -361,6 +361,7 @@ function CalendarBody() {
     if (!isSameMonth(day, currentDate)) {
       setCurrentDate(day);
     }
+    onChange(day);
     setSelectedDate(day);
   };
 
@@ -546,8 +547,6 @@ function CalendarBody() {
             {anniversary.find(
               (x) => x === format(selectedDate, dateFormat)
             ) && <EcoDay />}
-
-            <DetailList value={selectedDate} />
           </div>
         </div>
       )}

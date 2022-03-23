@@ -85,7 +85,7 @@ const tempData = {
         id: 21,
         type: "통신",
         cost: 1403,
-        memo: "new memo3",
+        memo: "new memo4",
         ecoList: [
           {
             eco: "G",
@@ -109,7 +109,7 @@ const tempData = {
         id: 22,
         type: "통신",
         cost: 1403,
-        memo: "new memo3",
+        memo: "new memo5",
         ecoList: [
           {
             eco: "G",
@@ -133,7 +133,7 @@ const tempData = {
         id: 23,
         type: "통신",
         cost: 1403,
-        memo: "new memo3",
+        memo: "new memo6",
         ecoList: [
           {
             eco: "G",
@@ -157,7 +157,7 @@ const tempData = {
         id: 24,
         type: "통신",
         cost: 1403,
-        memo: "new memo3",
+        memo: "new memo7",
         ecoList: [
           {
             eco: "G",
@@ -183,7 +183,7 @@ const tempData = {
         id: 19,
         type: "가전",
         cost: 20432,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음8",
         ecoList: [
           {
             eco: "G",
@@ -209,7 +209,7 @@ const tempData = {
         id: 18,
         type: "교통",
         cost: 46486,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음9",
         ecoList: [
           {
             eco: "G",
@@ -235,7 +235,7 @@ const tempData = {
         id: 17,
         type: "생필품",
         cost: 3690,
-        memo: "엽떡 사먹음",
+        memo: "엽떡 사먹음10",
         ecoList: [
           {
             eco: "G",
@@ -254,7 +254,7 @@ const tempData = {
         id: 16,
         type: "생필품",
         cost: 70573,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음11",
         ecoList: [
           {
             eco: "G",
@@ -275,7 +275,7 @@ const tempData = {
         id: 15,
         type: "식비",
         cost: 83504,
-        memo: "엽떡 사먹음",
+        memo: "엽떡 사먹음12",
         ecoList: [
           {
             eco: "G",
@@ -294,7 +294,7 @@ const tempData = {
         id: 14,
         type: "식비",
         cost: 17192,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음13",
         ecoList: [
           {
             eco: "G",
@@ -326,15 +326,18 @@ export function DetailItem({ item, ecoCnt }) {
         {item.memo !== null ? item.memo : item.type}
         {item.ecoList.map((data) => {
           return (
-            <div className={`details-detail ${isEcoT(data.eco)}`}>
-              {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
+            <div
+              key={item.memo + item.id}
+              className={`details-detail ${isEcoT(data.eco)}`}
+            >
+              {data.ecoDetail === "기타" ? data.etcMemo : data.ecoDetail}
             </div>
           );
         })}
       </div>
 
       <div className={`details-cost ${isEco(ecoCnt)}`}>
-        {item.income == true ? "+" : "-"}
+        {item.income ? "+" : "-"}
         {item.cost.toLocaleString("ko-KR")}원
       </div>
     </>
@@ -348,8 +351,6 @@ function DetailList(props) {
   const [detailList, setDetailList] = useState([]);
   const [totalMoney, setTotalMoney] = useState(0);
   const [loading, setloading] = useState(true);
-  const [isModalOpen, setisModalOpen] = useState(false);
-  const [modalData, setmodalData] = useState({ type: {}, detail: {} });
 
   // useEffect(() => {
   //   let isSubscribed = true;
@@ -406,26 +407,25 @@ function DetailList(props) {
     let detailList = [];
     let ecoCnt = 0;
 
-    {
-      filterType !== undefined &&
-        filterType.forEach((item) => {
-          item.ecoList.forEach((item) => {
-            if (item.eco === "G") {
-              ecoCnt += 1;
-            } else if (item.eco === "R") {
-              ecoCnt -= 1;
-            }
-          });
-
-          detailList.push(
-            <div className="details" key={item.id}>
-              <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
-              <DetailItem item={item} ecoCnt={ecoCnt} />
-            </div>
-          );
-          ecoCnt = 0;
+    filterType !== undefined &&
+      filterType.forEach((item) => {
+        item.ecoList.forEach((item) => {
+          if (item.eco === "G") {
+            ecoCnt += 1;
+          } else if (item.eco === "R") {
+            ecoCnt -= 1;
+          }
         });
-    }
+
+        detailList.push(
+          <div className="details" key={item.id}>
+            <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
+            <DetailItem item={item} ecoCnt={ecoCnt} />
+          </div>
+        );
+        ecoCnt = 0;
+      });
+
     return detailList;
   };
 
@@ -435,6 +435,7 @@ function DetailList(props) {
     for (let i = 0; i < totalList.length; i++) {
       renderList.push(
         <Link
+          className="detail-link"
           to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
           state={{
             date: format(props.value, "M. d EEEEE", { locale: ko }),
@@ -462,8 +463,8 @@ function DetailList(props) {
   return (
     <>
       {!loading && (
-        <div className="detail-list">
-          <StyledDetailBlock>
+        <StyledDetailBlock>
+          <div className="detail-list">
             <div className="selected-detail">
               <div className="selected-date">
                 {format(props.value, "M. d EEEEE", { locale: ko })}
@@ -473,8 +474,8 @@ function DetailList(props) {
               </div>
             </div>
             {renderList()}
-          </StyledDetailBlock>
-        </div>
+          </div>
+        </StyledDetailBlock>
       )}
     </>
   );
