@@ -10,12 +10,7 @@ const nActiveLine = (
 //수입 상단바
 //함수형 컴포넌트
 function TopNav({ process, total }) {
-  const [navigation, setNavigation] = useState([
-    nActiveLine,
-    nActiveLine,
-    nActiveLine,
-    nActiveLine,
-  ]); //깜빡이는 문제 있어서 추가함.
+  const [navigation, setNavigation] = useState([]); //깜빡이는 문제 있어서 추가함.
 
   useEffect(() => {
     setNavigation(setNav());
