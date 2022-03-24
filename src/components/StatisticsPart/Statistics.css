@@ -462,30 +462,3 @@
   margin-left: 21px;
   color: #141b27;
 }
-<<<<<<< HEAD
-
-/*Part 2*/
-#circle {
-  display: inline;
-  border-radius: 50px;
-  margin-left: 30px;
-  font-size: 14px;
-}
-
-.more {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.1);
-  width: 95%;
-  height: 49px;
-  border-radius: 13px;
-
-  margin-left: 20px;
-  margin-right: 20px;
-
-  padding-top: 16px;
-  font-family: Pretendard;
-  margin-bottom: 12px;
-  cursor: pointer;
-}
-=======
->>>>>>> c7e50d2805b925cd6662f02b873304b27dce1503

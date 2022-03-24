@@ -129,8 +129,4 @@ function StatisticsMain() {
   );
 }
 
-<<<<<<< HEAD
 export default StatisticsMain;
-=======
-export default StatisticsMain;
->>>>>>> c7e50d2805b925cd6662f02b873304b27dce1503
