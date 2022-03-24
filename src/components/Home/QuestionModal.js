@@ -14,9 +14,9 @@ import highmid from '../../planet/highmid.json';
 import low from '../../planet/low.json';
 import mid from '../../planet/mid.json';
 import Stlye from './QuestionModal.module.css';
+import OpenQuestion from './OpenQuestion'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
-
 
 export function Modal({
   className,
@@ -56,16 +56,11 @@ export function Modal({
     }
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [position, setposition] = useState(0);
+  const [open, setOpen] = useState(false);
 
-  const openModal = (e) => {
-    setposition(e.clientY);
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openQuestion = (e) => {
+    setOpen(open => !open);
+  }
 
   return (
     <Portal elementId="modal-root">
@@ -88,7 +83,8 @@ export function Modal({
 
       >
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={openQuestion}></AiOutlineQuestionCircle>
+        {open ? <OpenQuestion></OpenQuestion>: <div></div>}
         </p>
           <div className='lottie'>
           <Lottie 
@@ -103,20 +99,9 @@ export function Modal({
           </div>
         <p className='ment'>당신은 행성 히어로! <br/> 지금처럼 착한 소비 이어가주세요😇
         </p>
-
-        <div>
-        {isModalOpen && (
-              <Modal
-                className={position}
-                onClose={closeModal}
-                maskClosable={true}
-                visible={true}
-              ></Modal>
-        )}
-        </div>
         </SwiperSlide>
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={openQuestion}></AiOutlineQuestionCircle>{open ? <OpenQuestion></OpenQuestion>: <div></div>}
         </p>
           <div className='lottie'>
           <Lottie 
@@ -134,7 +119,7 @@ export function Modal({
         </p>
         </SwiperSlide>
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={openQuestion}></AiOutlineQuestionCircle>{open ? <OpenQuestion></OpenQuestion>: <div></div>}
         </p>          <div className='lottie'>
           <Lottie 
             options={{...lottieDefault, animationData:mid}}
@@ -151,7 +136,7 @@ export function Modal({
         </p>
         </SwiperSlide>
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={openQuestion}></AiOutlineQuestionCircle>{open ? <OpenQuestion></OpenQuestion>: <div></div>}
         </p>          <div className='lottie'>
           <Lottie 
             options={{...lottieDefault, animationData:low}}
