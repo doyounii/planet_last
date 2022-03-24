@@ -1,161 +1,119 @@
-import React, { useState, useRef } from 'react';
-import SelectEnvirStyle from './SelectEnvir.module.css';
-import { CgClose } from "react-icons/cg";
+import React, { useState, useEffect, useRef } from "react";
+import SelectEnvirStyle from "./SelectEnvir.module.css";
+import { IoClose } from "react-icons/io5";
 
+function SelectTag({ submitFunc }) {
+  const outSideRef = useRef(null);
+  const array = [
+    { id: 101, tag: "친환경", isEco: true },
+    { id: 102, tag: "반환경", isEco: false },
+    { id: 103, tag: "일반", isEco: "etc" }
+  ];
+  //선택한 태그(0 또는 환경 태그 이름(친환경/반환경/일반))
+  const [selectedTag, setSelectedTag] = useState(0);
+  // 태그 이름
+  const [text, setText] = useState("");
+  //태그 미입력 시 문구 띄우기
+  const [request, setRequest] = useState(false);
 
-
-
-function SelectTag() {
-
-      const [filter9, setFilter9] = useState('');
-      const [filter10, setFilter10] = useState('');
-      const [filter11, setFilter11] = useState('');
-
-      const [text, setText] = useState('');
-      const [disabled, setdisabled] = useState(true);
-
-      const [show, setShow] = useState(false);
-      const [show2, setShow2] = useState(false);
-      const [show3, setShow3] = useState(false);
-
-      const [current, setCurrent] = useState({}) //수정 선택된 사용자
-      const no = useRef(3) //id
-      const userData = [
-            {id : 1, name : '박서준', job : '배우'},
-            {id : 2, name : '이무진', job : '가수'}
-      ]
-      const [users, setUsers] = useState(userData);
-
-      const [form, setForm] = useState({
-            text: ''
-      })
-
-      function handleButton9(value9) {
-            setFilter9(value9);
-            console.log(value9);
-            setShow(show =>! show) ;
-            console.log(show);
+  //여백 클릭 시 저장 진행
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (outSideRef.current && !outSideRef.current.contains(event.target)) {
+        console.log("click");
+        addTag(event);
       }
-      function handleButton10(value10) {
-            setFilter10(value10);
-            console.log(value10);
-            setShow2(show2 =>! show2) ;
-            console.log(show2);
-      }
-      function handleButton11(value11) {
-            setFilter11(value11);
-            console.log(value11);
-            setShow3(show3 =>! show3) ;
-            console.log(show3);
-      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  });
 
-      const onAdd = (form) => {
-            form.id = no.current++;
-            setUsers(users.concat(form))
-      }
-      const addTag =(e) =>{
-            e.preventDefault();
-            console.log(text);
+  //저장하는 함수
+  const addTag = (e) => {
+    e.preventDefault();
+    console.log(text);
+    if (text.length !== 0 && selectedTag !== 0) {
+      //텍스트/태그 둘 다 있으면 저장
+      submitFunc(text, selectedTag);
+    } else {
+      //아니면 뭐 달라고 띄우기
+      setRequest(true);
+    }
+  };
 
-            onAdd(form)
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
 
-            setForm('');
-      }
+  const onReset = () => {
+    setText("");
+  };
 
-      const handleChange = (e) => {
-            setText(e.target.value);
-            setdisabled(text.length === 0 ? true : false);
+  const checkHandler = ({ target }) => {
+    console.log(target);
+    if (target.value === selectedTag) {
+      setSelectedTag(0);
+    } else {
+      setSelectedTag(target.value);
+    }
+  };
 
-            const {value, text} = e.target;
-            setForm({
-                  ...form,
-                  [text] : value
-              })
-          };
-        
-        const onReset = () => {
-            setText('');
-        };
+  return (
+    <section>
+      <div ref={outSideRef} className={SelectEnvirStyle.tag}>
+        <div className={SelectEnvirStyle.coment1}>태그 직접 추가</div>
+        <form className={SelectEnvirStyle.inputMemo} onSubmit={addTag}>
+          <input
+            id="inputMemo"
+            name="tagName"
+            type="text"
+            placeholder="내용을 입력하세요"
+            onChange={handleChange}
+            value={text}
+          />
+          <IoClose
+            onClick={onReset}
+            className={SelectEnvirStyle.close}
+          ></IoClose>
+        </form>
 
+        <div className={SelectEnvirStyle.coment2}>어떤 지출인가요?</div>
 
-      const arr9 = ["친환경"] ;
-      const arr10 = ["반환경"] ;
-      const arr11 = ["일반"] ;
-
-            return(
-            <section >
-                 
-                  <div className={SelectEnvirStyle.tag}>
-
-                  <div className={SelectEnvirStyle.coment1}>
-                        태그 직접 추가
-                  </div>
-                  <form className={SelectEnvirStyle.inputMemo} onSubmit={addTag}>
-                        <input 
-                        id="inputMemo"
-                        name="tagName"
-                        type="text"
-                        placeholder='내용을 입력하세요'
-                        onChange={handleChange}
-                        value={text}
-                        />
-                  <CgClose onClick={onReset} className={SelectEnvirStyle.close}></CgClose>
-                  </form>
-
-                  <div className={SelectEnvirStyle.coment2}>
-                  어떤 지출인가요?
-                  </div>
-                  
-                  <div className={SelectEnvirStyle.selecttag}>
-                  {arr9.map((value9,idx9)=> {
-                        return (
-                        <button type="submit" key={idx9}  
-                              className={filter9===value9 && show ?SelectEnvirStyle.type_box_clicked:SelectEnvirStyle.type_box}
-                              onClick={()=> {handleButton9(value9)}}
-                              disabled={text.length !== 0 ? false : true}>
-                              <div className={filter9===value9 && show ?SelectEnvirStyle.type_box_text2:SelectEnvirStyle.type_box_text}>
-                              {value9}
-                              </div> 
-                        </button>
-                        )
-                  })}
-                  {arr10.map((value10,idx10)=> {
-                        return (
-                        <button key={idx10}  
-                              className={filter10===value10 && show2?SelectEnvirStyle.type_box_clicked2:SelectEnvirStyle.type_box2}
-                              onClick={()=>handleButton10(value10)} disabled={text.length !== 0 ? false : true}>
-                              <div className={filter10===value10 && show2?SelectEnvirStyle.type_box_text2:SelectEnvirStyle.type_box_text}>
-                              {value10}
-                              </div> 
-                        </button>
-                        )
-                  })}
-                  {arr11.map((value11,idx11)=> {
-                        return (
-                        <button key={idx11}  
-                              className={filter11===value11 && show3?SelectEnvirStyle.type_box_clicked3:SelectEnvirStyle.type_box3}
-                              onClick={()=>handleButton11(value11)}>
-                              <div className={filter11===value11 && show3?SelectEnvirStyle.type_box_text2:SelectEnvirStyle.type_box_text} disabled={text.length !== 0 ? false : true}>
-                              {value11}
-                              </div> 
-                        </button>
-                        )
-                  })}
-                  </div>
-                  <div className={SelectEnvirStyle.coment3}>
-                        환경 태그를 선택해주세요
-                  </div>
-
-                  {text}
-                  </div>
-                  
-
-
-                  
-
-</section>
-        );
-    
+        <div className={SelectEnvirStyle.selectTag}>
+          {array.map((item) => {
+            return (
+              <button
+                className={`${SelectEnvirStyle.sbutton} ${
+                  item.isEco !== "etc"
+                    ? item.isEco
+                      ? SelectEnvirStyle.eco
+                      : SelectEnvirStyle.neco
+                    : SelectEnvirStyle.etc
+                } ${
+                  selectedTag === item.tag
+                    ? SelectEnvirStyle.checked
+                    : SelectEnvirStyle.nchecked
+                }`}
+                key={item.id}
+                value={item.tag}
+                onClick={(e) => checkHandler(e)}
+              >
+                {item.tag}
+              </button>
+            );
+          })}
+        </div>
+        {request && (
+          <div className={SelectEnvirStyle.coment3}>
+            환경 태그를 선택해주세요
+          </div>
+        )}
+        {text}
+      </div>
+    </section>
+  );
 }
 
 export default SelectTag;

@@ -267,6 +267,14 @@ const data = {
     "자연과 가까울수록 병은 멀어지고, 자연과 멀수록 병은 가까워진다. - 요한 볼프강 폰 괴테",
 };
 
+const form = {
+  date: "2022-02-29",
+  incomeDays: 0,
+  ecoCount: 0,
+  noneEcoCount: 0,
+  expenditureDays: 0,
+};
+
 function CalendarBody() {
   const [loading, setloading] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -285,7 +293,7 @@ function CalendarBody() {
   const [quote, setquote] = useState("");
 
   const ecoColor = (item) =>
-    item >= 5 ? "eco5" : item >= 3 ? "eco3" : item >= 1 ? "eco1" : "eco0";
+    item > 5 ? "eco4" : item >= 4 ? "eco3" : item >= 1 ? "eco2" : "eco1";
 
   const fetchData = async () => {
     const response = await fetch(
@@ -299,7 +307,7 @@ function CalendarBody() {
       }
     );
     const data = await response.json();
-    setMessage(data.calendarDto);
+    setMessage([...data.calendarDto, form, form, form]);
     setquote(data.content);
     setAnniversary(data.anniversaryList);
   };
@@ -385,8 +393,8 @@ function CalendarBody() {
     let eco = message.sumOfEcoCount;
     return (
       <div className="calendar-info">
-        <div className="non-eco-cnt">● {nEco}</div>
-        <span className="eco-cnt">● {eco}</span>
+        <div className="neco">● {nEco}</div>
+        <span className="eco">● {eco}</span>
         <span className="eco-day-circle">●</span>
         <span className="eco-day">환경 기념일</span>
         <AiOutlineQuestionCircle
@@ -527,6 +535,7 @@ function CalendarBody() {
                 onClose={closeModal}
                 maskClosable={true}
                 visible={true}
+                children={isMonthView}
               ></InfoModal>
             )}
 

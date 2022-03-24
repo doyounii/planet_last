@@ -1,4 +1,5 @@
 import React from 'react';
+import React, { useState, useEffect } from "react";
 import EcoStyle from './Eco.module.css';
 import HistorySample from '../../components/History/HistoryBackHome';
 import { FiShare } from 'react-icons/fi'
@@ -22,6 +23,10 @@ function EcoMission() {
             <h2>청구서 및 영수증을 온라인 발급받기</h2>
             <img src="img/recipt.png" alt="recipt"></img>
             <button className={EcoStyle.mission_btn}>달성</button>
+            <h2>{todayMission.name}</h2>
+            {/*<p>{String.fromCodePoint(todayMission.emoji)}</p>*/}
+            <img src="img/recipt.png" alt="recipt"></img>
+            <button type="submit" className={EcoStyle.mission_btn}>달성</button>
         </div>
         <div className={EcoStyle.sub_title}>
             <h1>10월 내가 달성한 미션</h1>

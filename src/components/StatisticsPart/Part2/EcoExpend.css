@@ -348,7 +348,7 @@
   font-family: Pretendard;
   position: relative;
   display: inline;
-  font-size: 14px;
+  font-size: 15px;
   color: #b4b6b8;
   padding-top: 15px;
   margin-left: 12.6px;
@@ -358,7 +358,7 @@
   font-family: Pretendard;
   position: relative;
   display: inline;
-  font-size: 14px;
+  font-size: 15px;
   color: #b4b6b8;
   padding-top: 13px;
   margin-right: 29.12px;
@@ -376,9 +376,10 @@
 .statistics-box .day-box .day-breakdown-box .day-breakdown-box-icon {
   position: relative;
   display: inline;
-  font-size: 30px;
+  font-size: 15px;
   color: #434952;
-  margin-left: 21px;
+  margin-left: 20px;
+  line-height: 52px;
 }
 
 /*StatisticsIncomeView.css*/
@@ -462,30 +463,22 @@
   margin-left: 21px;
   color: #141b27;
 }
-<<<<<<< HEAD
 
 /*Part 2*/
-#circle {
-  display: inline;
-  border-radius: 50px;
-  margin-left: 30px;
-  font-size: 14px;
-}
 
 .more {
   position: relative;
   background-color: rgba(255, 255, 255, 0.1);
   width: 95%;
-  height: 49px;
+  height: 52px;
   border-radius: 13px;
 
   margin-left: 20px;
   margin-right: 20px;
-
   padding-top: 16px;
   font-family: Pretendard;
   margin-bottom: 12px;
   cursor: pointer;
+
+  font-size: 20px;
 }
-=======
->>>>>>> c7e50d2805b925cd6662f02b873304b27dce1503

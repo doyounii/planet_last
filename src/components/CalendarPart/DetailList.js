@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import format from "date-fns/format";
 import ko from "date-fns/locale/ko";
-import StyledDetailBlock from "./StyledDetail";
-import StyledModalBlock from "./StyledModalBlock";
-import { Modal } from "./Modal";
-import { DetailSliders } from "./Sliders";
+import { StyledDetailBlock } from "./StyledDetail";
 
 const tempData = {
   totalMoney: {
@@ -15,6 +13,171 @@ const tempData = {
     통신: -4200,
   },
   totalDetails: {
+    통신: [
+      {
+        id: 13,
+        type: "통신",
+        cost: 1401,
+        memo: "new memo1",
+        ecoList: [
+          {
+            eco: "R",
+            ecoDetail: "기타",
+            etcMemo: "라벨이 붙은 음료수 구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "중고거래/나눔/기부",
+            etcMemo: null,
+          },
+          {
+            eco: "R",
+            ecoDetail: "비닐봉투 소비",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 12,
+        type: "통신",
+        cost: 1402,
+        memo: "new memo2",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "기타",
+            etcMemo: "환경 관련 봉사활동 신청",
+          },
+          {
+            eco: "R",
+            ecoDetail: "식자재 낭비",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 11,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 21,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 22,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 23,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 24,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "친환경 제품 구매",
+            etcMemo: null,
+          },
+          {
+            eco: "N",
+            ecoDetail: "기타",
+            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+          },
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+    ],
     가전: [
       {
         id: 19,
@@ -147,77 +310,36 @@ const tempData = {
         income: false,
       },
     ],
-    통신: [
-      {
-        id: 13,
-        type: "통신",
-        cost: 1401,
-        memo: "new memo1",
-        ecoList: [
-          {
-            eco: "R",
-            ecoDetail: "기타",
-            etcMemo: "라벨이 붙은 음료수 구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-          {
-            eco: "R",
-            ecoDetail: "비닐봉투 소비",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 12,
-        type: "통신",
-        cost: 1402,
-        memo: "new memo2",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "기타",
-            etcMemo: "환경 관련 봉사활동 신청",
-          },
-          {
-            eco: "R",
-            ecoDetail: "식자재 낭비",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 11,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo3",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-    ],
   },
 };
+
+const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
+const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
+
+export function DetailItem({ item, ecoCnt }) {
+  return (
+    <>
+      <div
+        className="details-memo"
+        onClick={(e) => console.log(e.target.value)}
+      >
+        {item.memo !== null ? item.memo : item.type}
+        {item.ecoList.map((data) => {
+          return (
+            <div className={`details-detail ${isEcoT(data.eco)}`}>
+              {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className={`details-cost ${isEco(ecoCnt)}`}>
+        {item.income == true ? "+" : "-"}
+        {item.cost.toLocaleString("ko-KR")}원
+      </div>
+    </>
+  );
+}
 
 function DetailList(props) {
   let date = props.value;
@@ -228,9 +350,6 @@ function DetailList(props) {
   const [loading, setloading] = useState(true);
   const [isModalOpen, setisModalOpen] = useState(false);
   const [modalData, setmodalData] = useState({ type: {}, detail: {} });
-  const isEco = (ecoCnt, necoCnt) =>
-    ecoCnt > necoCnt ? "eco" : ecoCnt < necoCnt ? "neco" : "etc";
-  const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
 
   // useEffect(() => {
   //   let isSubscribed = true;
@@ -282,82 +401,31 @@ function DetailList(props) {
 
     setDetailList(Object.values(getList[1].value));
   };
-  console.log(detailList);
-
-  const openModal = () => {
-    setisModalOpen(true);
-  };
-  const closeModal = () => {
-    setisModalOpen(false);
-  };
-  console.log(detailList);
-
-  const onDetailClick = () => {
-    let article = null;
-    article = (
-      <Modal visible={true} maskClosable={true} onClose={closeModal}>
-        <StyledModalBlock>
-          <div className="selected-date">
-            {format(date, "M. d EEEEE", { locale: ko })}
-          </div>
-          <div className="type">
-            <div className="type-name">{modalData.type.name}</div>
-            <div className="type-cost">
-              {modalData.type.value.toLocaleString()}원
-            </div>
-          </div>
-          {renderDetailList(modalData.detail)}
-        </StyledModalBlock>
-      </Modal>
-    );
-    return article;
-  };
-
-  const onRemove = (id) => {
-    console.log(id);
-  };
 
   const renderDetailList = (filterType) => {
     let detailList = [];
     let ecoCnt = 0;
-    let necoCnt = 0;
 
-    filterType.forEach((item) => {
-      item.ecoList.forEach((item) => {
-        if (item.eco === "G") {
-          ecoCnt += 1;
-        } else if (item.eco === "R") {
-          necoCnt += 1;
-        }
-      });
+    {
+      filterType !== undefined &&
+        filterType.forEach((item) => {
+          item.ecoList.forEach((item) => {
+            if (item.eco === "G") {
+              ecoCnt += 1;
+            } else if (item.eco === "R") {
+              ecoCnt -= 1;
+            }
+          });
 
-      detailList.push(
-        <div className="details" key={item.id}>
-          <div className={`details-circle ${isEco(ecoCnt, necoCnt)}`}>
-            ● &nbsp;
-          </div>
-          <div
-            className="details-memo"
-            onClick={(e) => console.log(e.target.value)}
-          >
-            {item.memo !== null ? item.memo : item.type}
-            {item.ecoList.map((data) => {
-              return (
-                <div className={`details-detail ${isEcoT(data.eco)}`}>
-                  {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
-                </div>
-              );
-            })}
-          </div>
-
-          <div className={`details-cost ${isEco(ecoCnt, necoCnt)}`}>
-            {item.income == true ? "+" : "-"}
-            {item.cost.toLocaleString("ko-KR")}원
-          </div>
-          <button onClick={() => onRemove(item.id)}>삭제</button>
-        </div>
-      );
-    });
+          detailList.push(
+            <div className="details" key={item.id}>
+              <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
+              <DetailItem item={item} ecoCnt={ecoCnt} />
+            </div>
+          );
+          ecoCnt = 0;
+        });
+    }
     return detailList;
   };
 
@@ -366,22 +434,25 @@ function DetailList(props) {
 
     for (let i = 0; i < totalList.length; i++) {
       renderList.push(
-        <div
-          className="detail-box"
-          key={totalList[i].name + i}
-          onClick={() => {
-            setmodalData({ type: totalList[i], detail: detailList[i] });
-            setisModalOpen(true);
+        <Link
+          to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
+          state={{
+            date: format(props.value, "M. d EEEEE", { locale: ko }),
+            typeName: totalList[i].name,
+            typeCost: totalList[i].value,
+            typeDetail: detailList[i],
           }}
         >
-          <div className="type">
-            <div className="type-name">{totalList[i].name}</div>
-            <div className="type-cost">
-              {totalList[i].value.toLocaleString()}원
+          <div className="detail-box" key={totalList[i].name + i}>
+            <div className="type">
+              <div className="type-name">{totalList[i].name}</div>
+              <div className="type-cost">
+                {totalList[i].value.toLocaleString()}원
+              </div>
             </div>
+            {renderDetailList(detailList[i])}
           </div>
-          {renderDetailList(detailList[i])}
-        </div>
+        </Link>
       );
     }
 
@@ -402,8 +473,6 @@ function DetailList(props) {
               </div>
             </div>
             {renderList()}
-            {/* detail에서 사용할 것 */}
-            {isModalOpen && onDetailClick()}
           </StyledDetailBlock>
         </div>
       )}

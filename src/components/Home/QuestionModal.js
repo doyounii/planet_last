@@ -242,7 +242,7 @@ const ModalWrapper = styled.div`
     background: #ffff;
   }
   .coment {
-    width: 221px;
+    width: 270px;
     height: 23px;
     left: 152px;
     margin-left: 5%;

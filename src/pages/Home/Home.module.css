@@ -66,19 +66,15 @@
 }
 .question {
   position: absolute;
-
   display: flex;
-
   width: 80%;
-
   height: 18px;
   left: 128px;
-
   margin-left: 5%;
   margin-right: 5%;
-
   opacity: 0.4;
   color: #ffffff;
+  cursor: pointer;
 }
 .nickname {
   color: white;
@@ -87,7 +83,7 @@
   height: 24px;
   left: 6.99%;
   top: 93px;
-
+  cursor: pointer;
   z-index: 4;
   font-family: Pretendard;
 }
