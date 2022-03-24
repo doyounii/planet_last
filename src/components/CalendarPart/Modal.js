@@ -252,6 +252,7 @@ const ModalWrapper = styled.div`
     position: fixed;
     color: #f5f5f5;
 <<<<<<< HEAD
+<<<<<<< HEAD
     transform: rotate(-100deg);
     width: 30px;
     height: 30px;
@@ -285,6 +286,8 @@ const ModalWrapper = styled.div`
     top: ${(props) => props.className + 8}px;
     left: 13%;
 =======
+=======
+>>>>>>> 00e099d85f6a0b933c44f65e555bff9e08f7e2c4
     width: 20px;
     height: 20px;
     top: ${(props) => props.className - 33}px;
@@ -315,7 +318,10 @@ const ModalWrapper = styled.div`
   .calendar {
     position: fixed;
     top: ${(props) => props.className + 120}px;
+<<<<<<< HEAD
 >>>>>>> c7e50d2805b925cd6662f02b873304b27dce1503
+=======
+>>>>>>> 00e099d85f6a0b933c44f65e555bff9e08f7e2c4
   }
 `;
 

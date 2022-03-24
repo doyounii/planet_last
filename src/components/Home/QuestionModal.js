@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Portal from "../CalendarPart/Portal";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import 'swiper/css';
 import "swiper/css/pagination";
 import Lottie from 'react-lottie';
@@ -12,6 +13,7 @@ import high from '../../planet/high.json';
 import highmid from '../../planet/highmid.json';
 import low from '../../planet/low.json';
 import mid from '../../planet/mid.json';
+import Stlye from './QuestionModal.module.css';
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -45,8 +47,7 @@ export function Modal({
     };
   }, []);
 
-  const lottieOptions1 = {
-    animationData: high,  
+  const lottieDefault = {
     loop: true,        
     autoplay: true,   
     rendererSettings: {
@@ -54,32 +55,16 @@ export function Modal({
     preserveAspectRatio: 'xMidYMid slice'
     }
   };
-  const lottieOptions2 = {
-    animationData: highmid,  
-    loop: true,        
-    autoplay: true,   
-    rendererSettings: {
-    className: 'add-class', // svg에 적용
-    preserveAspectRatio: 'xMidYMid slice'
-    }
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [position, setposition] = useState(0);
+
+  const openModal = (e) => {
+    setposition(e.clientY);
+    setIsModalOpen(true);
   };
-  const lottieOptions3 = {
-    animationData: mid,  
-    loop: true,        
-    autoplay: true,   
-    rendererSettings: {
-    className: 'add-class', // svg에 적용
-    preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
-  const lottieOptions4 = {
-    animationData: low,  
-    loop: true,        
-    autoplay: true,   
-    rendererSettings: {
-    className: 'add-class', // svg에 적용
-    preserveAspectRatio: 'xMidYMid slice'
-    }
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -103,80 +88,85 @@ export function Modal({
 
       >
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?</p>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        </p>
           <div className='lottie'>
           <Lottie 
-            options={lottieOptions1}
+            options={{...lottieDefault, animationData:high}}
             eventListeners={[
               {
                 eventName: 'complete',
                 callback: () => console.log('the animation completed'),
               },
             ]}
-            //style={{'width': '380px', height: '380px',   'margin-right': '300px'
-          
-          //}}
 		      />
           </div>
-        <p className='ment'>당신은 행성 히어로! <br/> 지금처럼 착한 소비 이어가주세요😇</p>
+        <p className='ment'>당신은 행성 히어로! <br/> 지금처럼 착한 소비 이어가주세요😇
+        </p>
+
+        <div>
+        {isModalOpen && (
+              <Modal
+                className={position}
+                onClose={closeModal}
+                maskClosable={true}
+                visible={true}
+              ></Modal>
+        )}
+        </div>
         </SwiperSlide>
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?</p>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        </p>
           <div className='lottie'>
           <Lottie 
-            options={lottieOptions2}
+            options={{...lottieDefault, animationData:highmid}}
             eventListeners={[
               {
                 eventName: 'complete',
                 callback: () => console.log('the animation completed'),
               },
             ]}
-            //style={{'width': '380px', height: '380px',   'margin-right': '300px'
-          
-          //}}
 		      />
           </div>
         <p className='ment'>잘 하고 있어요! <br/>
-조금 더 노력하면 푸른 행성을 볼 수 있겠어요 🌎</p>
+        조금 더 노력하면 푸른 행성을 볼 수 있겠어요 🌎
+        </p>
         </SwiperSlide>
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?</p>
-          <div className='lottie'>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        </p>          <div className='lottie'>
           <Lottie 
-            options={lottieOptions3}
+            options={{...lottieDefault, animationData:mid}}
             eventListeners={[
               {
                 eventName: 'complete',
                 callback: () => console.log('the animation completed'),
               },
             ]}
-            //style={{'width': '380px', height: '380px',   'margin-right': '300px'
-          
-          //}}
 		      />
           </div>
         <p className='ment'>노력하셔야겠어요 😱 <br/>
-소비를 줄이고 친환경적 소비를 실천해주세요</p>
+        소비를 줄이고 친환경적 소비를 실천해주세요
+        </p>
         </SwiperSlide>
         <SwiperSlide>
-        <p className='coment'>나의 행성은 어떤 상태일까요?</p>
-          <div className='lottie'>
+        <p className='coment'>나의 행성은 어떤 상태일까요?     <AiOutlineQuestionCircle className={Stlye.question} onClick={(e)=>openModal(e)}></AiOutlineQuestionCircle>
+        </p>          <div className='lottie'>
           <Lottie 
-            options={lottieOptions4}
+            options={{...lottieDefault, animationData:low}}
             eventListeners={[
               {
                 eventName: 'complete',
                 callback: () => console.log('the animation completed'),
               },
             ]}
-            //style={{'width': '380px', height: '380px',   'margin-right': '300px'
-          
-          //}}
 		      />
           </div>
         <p className='ment'>반환경 소비는 자제해주세요 ❌ <br/>
-당신의 작은 변화가 행성을 바꿀 수 있어요 <br/>
-플랜잇이 함께 할게요 💪🏻</p>
+        당신의 작은 변화가 행성을 바꿀 수 있어요 <br/>
+        플랜잇이 함께 할게요 💪🏻
+        </p>
         </SwiperSlide>
       </Swiper>
           
