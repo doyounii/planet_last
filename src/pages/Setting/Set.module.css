@@ -10,8 +10,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 812px;
-  width: 375px;
+  height: 100vh;
+  width: 100vw;
   color: #ffffff;
   background-color: #141b27;
   font-family: Pretendard;
@@ -20,31 +20,26 @@
 /*이전 버튼*/
 .backBtn {
   position: absolute;
-  top: 65px;
-  left: 22px;
+  margin-top: 10%;
+  margin-left: 7%;
+  margin-bottom: 0;
 }
 
 /*제목, 부제목*/
 .title {
   position: absolute;
-  top: 68px;
-  left: 172px;
   font-size: 18px;
   font-family: Pretendard;
-}
-
-.title2 {
-  position: absolute;
-  top: 66px;
-  left: 114px;
-  font-size: 18px;
-  font-family: Pretendard;
+  width: 100%;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 0;
 }
 
 .sub_title {
   position: absolute;
   top: 122px;
-  left: 31px;
+  margin-left: 8%;
   font-size: 16px;
   font-family: Pretendard;
 }
@@ -52,7 +47,7 @@
 .sub_title2 {
   position: absolute;
   top: 406px;
-  left: 31px;
+  margin-left: 8%;
   font-size: 16px;
   font-family: Pretendard;
 }
@@ -61,8 +56,8 @@
 .toggle_box {
   position: relative;
   top: 158px;
-  left: 16px;
-  width: 343px;
+  width: 90%;
+  margin: 0 auto;
   height: 62px;
   border-radius: 13px;
   padding-left: 18px;
@@ -74,10 +69,10 @@
 }
 
 .toggle_box2 {
-  position: absolute;
-  top: 442px;
-  left: 16px;
-  width: 343px;
+  position: relative;
+  top: 218px;
+  width: 90%;
+  margin: 0 auto;
   height: 62px;
   border-radius: 13px;
   padding-left: 18px;
@@ -88,25 +83,19 @@
 }
 
 .info_icon {
-  position: absolute;
-  left: 305px;
+  position: relative;
   width: 24px;
   color: #676B73;
   cursor: pointer;
+  float: right;
+  margin-right: 5%;
 }
 
-.info_icon2 {
-  position: absolute;
-  left: 334.55px;
-  width: 24px;
-  color: #676B73;
-  cursor: pointer;
-}
-
+/* 서비스 이용약관 */
 .use_box {
   position: relative;
-  top: 110px;
-  width: 375px;
+  top: 90px;
+  width: 100%;
   height: 62px;
   padding-left: 20px;
   padding-top: 24px;
@@ -114,4 +103,96 @@
   font-family: Pretendard;
   background-color: #141b27;
   border-bottom: 0.5px solid #000000;
+}
+
+.terms_box {
+  position: relative;
+  top: 90px;
+  width: 100%;
+  font-family: Pretendard;
+}
+
+.terms_box p {
+  font-size: 12px;
+  font-family: Pretendard;
+  margin: 0;
+  margin-top: 5px;
+  color: #64686F;
+  line-height: 14.4px;
+  width: 88%;
+  margin: 0 auto;
+}
+
+.terms_box h1 {
+  font-size: 14px;
+  font-family: Pretendard;
+  margin-left: 22px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.terms_box h2 {
+  font-size: 14px;
+  font-family: Pretendard;
+  margin-left: 22px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.terms_detail_box {
+  width: 88%;
+  margin: 0 auto;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  font-size: 12px;
+  font-family: Pretendard;
+  background-color: #141b27;
+  border-bottom: 0.5px solid #000000;
+}
+
+.terms_detail_box h1 {
+  font-size: 12px;
+  font-family: Pretendard;
+  margin: 0;
+  color: #B4B6B8;
+}
+
+.terms_detail_box p {
+  font-size: 12px;
+  font-family: Pretendard;
+  margin: 0;
+  margin-top: 5px;
+  color: #64686F;
+  line-height: 14.4px;
+}
+
+.info_detail_box {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  font-size: 12px;
+  font-family: Pretendard;
+}
+
+.info_detail_box h1 {
+  font-size: 13px;
+  font-family: Pretendard;
+  color: #ffffff;
+  margin-bottom: 7px;
+}
+
+.info_detail_box h2{
+  font-size: 12px;
+  font-family: Pretendard;
+  margin-top: 8px;
+  color: #B4B6B8;
+  line-height: 14.4px;
+}
+
+.info_detail_box p{
+  font-size: 12px;
+  font-family: Pretendard;
+  margin-top: 5px;
+  color: #64686F;
+  line-height: 14.4px;
 }

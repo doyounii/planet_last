@@ -10,10 +10,11 @@ export default function SwitchButton({navigation}){
     return (
       <View 
         style={{
-            alignItems: 'flex-end',
-            position: "absolute",
-            top: "21px",
-            left: "285px",
+            position: "relative",
+            top: "-18px",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            marginRight: "5%",
         }}>
         <View>
           <CustomSwitchButton

@@ -14,6 +14,8 @@ import News from "./pages/News/News";
 import Setting from "./pages/Setting/Setting";
 import MyPage from "./pages/Setting/MyPage";
 import TermsOfUse from "./pages/Setting/TermsOfUse";
+import UsePage from "./pages/Setting/UsePage";
+import InformationPage from "./pages/Setting/InformationPage";
 import EcoMission from "./pages/EcoMission/EcoMission";
 import FloatingExpensePage from "./pages/Floating/FloatingExpensePage";
 import FloatingType from "./pages/Floating/FloatingType";
@@ -46,6 +48,8 @@ function App() {
       <Route path="/setting" element={<Setting />}></Route>
       <Route path="/myPage" element={<MyPage />}></Route>
       <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
+      <Route path="/usePage" element={<UsePage />}></Route>
+      <Route path="/informationPage" element={<InformationPage />}></Route>
       <Route path="/ecoMission" element={<EcoMission />}></Route>
       <Route
         path="/floatingExpensePage"
