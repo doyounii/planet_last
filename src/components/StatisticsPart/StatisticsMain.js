@@ -10,6 +10,7 @@ import Chart from 'chart.js/auto';
 import Eco from './Part2/EcoExpend';
 import Pollution from './Part2/PollutionExpend';
 import { EcoBarChart } from './Part2/EcoBarChart';
+import EcoCategory from '../../pages/Statistics/Part2/EcoCategory';
 
 function StatisticsMain() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -103,10 +104,9 @@ function StatisticsMain() {
               </div>
               <div className="donut-chart"><DonutChart /></div>
           </div>
-
           <div className="line-box"></div>
 
-          <Link to="#">
+          <Link to="/EcoCategory">
           <div className="expend-box">
               <h1>어떤 친환경 지출을 했을까요? 👍</h1>
               <IoIosArrowForward className="box-icon" />

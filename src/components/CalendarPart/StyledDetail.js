@@ -48,8 +48,6 @@ const StyledDetail = styled.div`
   .type {
     margin-bottom: 15px;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
   .eco {
     color: #00c982;
   }
@@ -59,11 +57,6 @@ const StyledDetail = styled.div`
   .etc {
     color: #b4b6b8;
   }
-=======
->>>>>>> c7e50d2805b925cd6662f02b873304b27dce1503
-=======
->>>>>>> 00e099d85f6a0b933c44f65e555bff9e08f7e2c4
-
   .details {
     font-size: 12px;
     margin-top: 10px;

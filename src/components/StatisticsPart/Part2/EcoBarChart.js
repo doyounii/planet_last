@@ -84,11 +84,11 @@ class EcoBarChart extends React.Component{
         <div>
           <Bar data={data}
         options={config}
-        height={150}/>
+        height={'70px'}/>
         </div>
         
       );
-    }
+    } 
   }
 
 export {EcoBarChart}
