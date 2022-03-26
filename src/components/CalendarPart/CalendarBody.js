@@ -291,13 +291,14 @@ function CalendarBody({ onChange }) {
   const [message, setMessage] = useState({});
   const [anniversary, setAnniversary] = useState([]);
   const [quote, setquote] = useState("");
+  const [daysData, setDaysData] = useState([]);
 
   const ecoColor = (item) =>
     item > 5 ? "eco4" : item >= 4 ? "eco3" : item >= 1 ? "eco2" : "eco1";
 
   const fetchData = async () => {
     const response = await fetch(
-      `api/calendar/user1@naver.com/${format(currentDate, "M")}`,
+      `api/calendar/user1@naver.com/2022/${format(currentDate, "M")}`,
       {
         method: "GET",
         headers: {
@@ -307,21 +308,24 @@ function CalendarBody({ onChange }) {
       }
     );
     const data = await response.json();
-    setMessage([...data.calendarDto, form, form, form]);
+    setMessage(data.calendarDto);
     setquote(data.content);
+    setDaysData([...data.calendarDto.calendarDayDtos, form, form, form]);
     setAnniversary(data.anniversaryList);
+    setloading(false);
   };
+  console.log(daysData);
 
   useEffect(() => {
     setCurrentMonth(renderCells());
   }, []);
 
   useEffect(() => {
-    setMessage(data.calendarDto);
-    setquote(data.content);
-    setAnniversary(data.anniversaryList);
-    setloading(false);
-    //fetchData();
+    // setMessage(data.calendarDto);
+    // setquote(data.content);
+    // setAnniversary(data.anniversaryList);
+    // setloading(false);
+    fetchData();
 
     return () => setloading(false);
   }, [currentDate]);
@@ -430,13 +434,13 @@ function CalendarBody({ onChange }) {
       let eco_count = 0;
 
       if (
-        message.calendarDayDtos &&
-        message.calendarDayDtos.length > 0 &&
+        daysData &&
+        daysData.length > 0 &&
         isSameMonth(cloneDay, currentDate)
       ) {
-        ex_cost = message.calendarDayDtos[formattedDate - 1].expenditureDays;
-        in_cost = message.calendarDayDtos[formattedDate - 1].incomeDays;
-        eco_count = message.calendarDayDtos[formattedDate - 1].ecoCount;
+        ex_cost = daysData[formattedDate - 1].expenditureDays;
+        in_cost = daysData[formattedDate - 1].incomeDays;
+        eco_count = daysData[formattedDate - 1].ecoCount;
       }
       const cellStyle =
         isMonthView && !isSameMonth(day, currentDate)
@@ -460,15 +464,11 @@ function CalendarBody({ onChange }) {
           )}
           <div className={`number ${cellStyle}`}>{formattedDate}</div>
           {ex_cost !== 0 && (
-            <div className={`detail-cost ex-day`}>
-              -{ex_cost.toLocaleString("ko-KR")}
-            </div>
+            <div className={`detail-cost ex-day`}>-{ex_cost}</div>
           )}
 
           {in_cost !== 0 && (
-            <div className={`detail-cost in-day`}>
-              +{in_cost.toLocaleString("ko-KR")}
-            </div>
+            <div className={`detail-cost in-day`}>+{in_cost}</div>
           )}
         </div>
       );
@@ -518,13 +518,13 @@ function CalendarBody({ onChange }) {
                   <div className="month-cost">
                     <div className="month-type">수입</div>
                     <div className="month-total">
-                      {message.totalMonthIncome.toLocaleString("ko-KR")}원
+                      {message.totalMonthIncome}원
                     </div>
                   </div>
                   <div className="month-cost">
                     <div className="month-type">지출</div>
                     <div className="month-total">
-                      {message.totalMonthExpenditure.toLocaleString("ko-KR")}원
+                      {message.totalMonthExpenditure}원
                     </div>
                   </div>
                 </div>

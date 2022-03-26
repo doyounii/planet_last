@@ -66,9 +66,9 @@ function ExpendLanding() {
               onChange={(e) => handlePriceValue(e)}
             />
           </div>
-          <div className={IncomeStyle.bottomBtn2}>
+          <div className={IncomeStyle.bottomBtn}>
             <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
-            <Link to={"/FloatingType"} state={{ date, price }}>
+            <Link to={"/expendType"} state={{ date, price }}>
               <button
                 className={IncomeStyle.bottomBtnActive}
                 disabled={disabled}
@@ -79,7 +79,7 @@ function ExpendLanding() {
           </div>
         </>
       ) : (
-        <div className={IncomeStyle.bottomBtn2}>
+        <div className={IncomeStyle.bottomBtn}>
           <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
           <button
             onClick={() => setActiveDate(!activeDate)}

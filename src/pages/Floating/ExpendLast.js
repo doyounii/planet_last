@@ -24,7 +24,7 @@ function ExpendLast() {
 
       <SelectEnvir></SelectEnvir>
 
-      <div className={IncomeStyle.bottomBtn3}>
+      <div className={IncomeStyle.bottomBtn}>
         <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
         <Link to="/">
           <button className={IncomeStyle.bottomBtnActive}>완료</button>

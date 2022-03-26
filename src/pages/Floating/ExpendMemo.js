@@ -26,7 +26,7 @@ function ExpendMemo() {
 
       <SelectExpendMemo></SelectExpendMemo>
 
-      <div className={IncomeStyle.bottomBtn3}>
+      <div className={IncomeStyle.bottomBtn}>
         <Link to="/ExpendCategory">
           <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
         </Link>

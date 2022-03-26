@@ -129,54 +129,6 @@ const tempData = {
         ],
         income: false,
       },
-      {
-        id: 23,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo6",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 24,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo7",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
     ],
     가전: [
       {
@@ -352,6 +304,25 @@ function DetailList(props) {
   const [totalMoney, setTotalMoney] = useState(0);
   const [loading, setloading] = useState(true);
 
+  const fetchData = async () => {
+    const response = await fetch(
+      `api/calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
+        props.value,
+        "d"
+      )}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setList(data);
+
+    setloading(false);
+  };
   // useEffect(() => {
   //   let isSubscribed = true;
   //   fetch(
@@ -382,25 +353,34 @@ function DetailList(props) {
   // }, [date]);
 
   useEffect(() => {
-    setList(tempData);
-    setData(tempData);
-    setloading(false);
+    fetchData();
+    setData(list);
   }, []);
+  console.log(list);
+  console.log(props.value);
 
   const setData = (data) => {
-    const getList = [];
+    let getList = [];
+    let totalTemp = [];
+    let detailTemp = [];
     let moneySum = 0;
+
+    // totalMoney(0)와 totalDetails(1) 나눔
     Object.keys(data).forEach((key) =>
       getList.push({ name: key, value: data[key] })
     );
 
     Object.keys(getList[0].value).forEach((key) => {
-      totalList.push({ name: key, value: getList[0].value[key] });
+      totalTemp.push({ name: key, value: getList[0].value[key] });
       moneySum += getList[0].value[key];
     });
+    // 토탈(하루 총 값): {}일 경우 작동 안함
+    if (totalTemp.length !== 0) {
+      detailTemp = Object.values(getList[1].value);
+    }
+    setTotalList(totalTemp);
+    setDetailList(detailTemp);
     setTotalMoney(moneySum);
-
-    setDetailList(Object.values(getList[1].value));
   };
 
   const renderDetailList = (filterType) => {
@@ -469,9 +449,7 @@ function DetailList(props) {
               <div className="selected-date">
                 {format(props.value, "M. d EEEEE", { locale: ko })}
               </div>
-              <div className="selected-total">
-                {totalMoney.toLocaleString()}원
-              </div>
+              <div className="selected-total">{totalMoney}원</div>
             </div>
             {renderList()}
           </div>
