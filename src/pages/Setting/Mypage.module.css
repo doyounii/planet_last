@@ -10,8 +10,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 812px;
-  width: 375px;
+  height: 100vh;
+  width: 100vw;
   color: #ffffff;
   background-color: #141b27;
   font-family: Pretendard;
@@ -19,24 +19,27 @@
 
 /*이전 버튼*/
 .backBtn {
-  position: absolute;
-  top: 65px;
-  left: 22px;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 7%;
+    margin-bottom: 0;
 }
 
 .title {
-  position: absolute;
-  top: 68px;
-  left: 149px;
-  font-size: 18px;
-  font-family: Pretendard;
-}
+    position: absolute;
+    font-size: 18px;
+    font-family: Pretendard;
+    width: 100%;
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 0;
+  }
 
 /*이름, 계정 정보 박스*/
 .name_box {
     position: relative;
     top: 123px;
-    width: 375px;
+    width: 100%;
     margin-bottom: 34px;
     font-family: Pretendard;
 }

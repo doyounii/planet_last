@@ -10,7 +10,7 @@ function Setting() {
   return (
     <div className={SettingStyle.container}>
         <div className={SettingStyle.backBtn}>
-            <HistorySample></HistorySample>
+          <HistorySample></HistorySample>
         </div>
         <div className={SettingStyle.title}>
             설정

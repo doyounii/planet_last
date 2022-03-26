@@ -4,10 +4,8 @@ import MypageStyle from './Mypage.module.css';
 import Footer from '../../components/Footer/Footer';
 import HistorySample from '../../components/History/History';
 import { FaChevronRight } from 'react-icons/fa';
-import { AiFillGoogleCircle } from 'react-icons/ai';
-import { SiNaver } from 'react-icons/si'
 
-function Setting() {
+function MyPage() {
   return (
     <div className={ MypageStyle.container }>
         <div className={ MypageStyle.backBtn }>
@@ -59,4 +57,4 @@ function Setting() {
   );
 }
 
-export default Setting;
+export default MyPage;
