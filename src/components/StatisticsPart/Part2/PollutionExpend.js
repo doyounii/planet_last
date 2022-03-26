@@ -1,5 +1,5 @@
 import React from "react";
-import "../Statistics.css";
+import "./EcoExpend.css";
 
 function PollutionExpend() {
     return (
@@ -10,8 +10,8 @@ function PollutionExpend() {
 
             <div className="day-box">
                 <div className="day-breakdown-box">
-                    <p>지출 카테고리</p>
-                    <p>태그개수</p>
+                    <p>지출 카테고리 <span>태그개수</span></p>
+                    
 
                     <div className="day-breakdown-box-icon" style={{  color: '#8593B1'}}>● 🛒</div>
                     <h1>마트</h1>

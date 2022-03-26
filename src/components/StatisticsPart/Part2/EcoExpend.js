@@ -4,14 +4,10 @@ import "./EcoExpend.css";
 function EcoExpend() {
     return (
         <div className="statistics-box">
-            <div className="drop-box">
-                
-            </div>
-
             <div className="day-box">
                 <div className="day-breakdown-box">
-                    <p>지출 카테고리</p>
-                    <p>태그개수</p>
+                    <p>지출 카테고리 <span>태그개수</span></p>
+                    
 
                     <div className="day-breakdown-box-icon" style={{  color: '#00c982'}}>● 🛒</div>
                     <h1>마트</h1>

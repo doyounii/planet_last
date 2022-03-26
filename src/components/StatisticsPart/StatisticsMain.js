@@ -9,6 +9,7 @@ import LineGraph from "./LineGraph";
 import Chart from 'chart.js/auto';
 import Eco from './Part2/EcoExpend';
 import Pollution from './Part2/PollutionExpend';
+import { EcoBarChart } from './Part2/EcoBarChart';
 
 function StatisticsMain() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -111,6 +112,9 @@ function StatisticsMain() {
               <IoIosArrowForward className="box-icon" />
           </div>
           </Link>
+          <div className='chart'>
+          <EcoBarChart></EcoBarChart>
+          </div>
           <Eco></Eco>
 
           <div className="line-box"></div>

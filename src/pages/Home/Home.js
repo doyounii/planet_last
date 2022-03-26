@@ -8,7 +8,7 @@ import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
 import planet from '../../planet/high.json';
 import Lottie from 'react-lottie'; 
 import {format} from 'date-fns';
-import EditName from '../../components/Home/EditName';
+import { EditName } from "../../components/Home/EditName";
 import logo from './img/PLANet.png'
 import { Modal } from "../../components/Home/QuestionModal";
 
@@ -17,13 +17,14 @@ function Home({ activeHome }) {
 
   const [income, setIncome] = useState(0);
   const [message, setMessage] = useState(0);
-  const [edit, setEdit] = useState(false);
   const [expenditure, setExpenditure] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
 
   const [loading, setloading] = useState(true);
   const [position, setposition] = useState(0);
+  const [position2, setposition2] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -71,16 +72,19 @@ function Home({ activeHome }) {
     }
 };
 
-const editName = (e) => {
-  setEdit(edit => !edit);
-}
-
 const openModal = (e) => {
   setposition(e.clientY);
   setIsModalOpen(true);
 };
 const closeModal = () => {
   setIsModalOpen(false);
+};
+const openModal2 = (e) => {
+  setposition2(e.clientY);
+  setIsModalOpen2(true);
+};
+const closeModal2 = () => {
+  setIsModalOpen2(false);
 };
 
 
@@ -101,11 +105,18 @@ const closeModal = () => {
         <div className={homeStyle.main}>
           <div className={homeStyle.nickname}>
             {message.userName}
-              <FiEdit3 onClick={editName}
+              <FiEdit3
                 className={homeStyle.icon}
-                alt="닉네임 변경"
+                alt="닉네임 변경" onClick={(e) => openModal2(e)}
               ></FiEdit3>
-              {edit ? <EditName></EditName>: <div></div>}
+              {isModalOpen2 && (
+              <EditName
+                className={position2}
+                onClose={closeModal2}
+                maskClosable={true}
+                visible={true}
+              ></EditName>
+            )}
           </div>
           <div className={homeStyle.profile}>
           <Lottie 
