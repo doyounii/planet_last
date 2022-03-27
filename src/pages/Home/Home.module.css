@@ -1,99 +1,104 @@
 @charset 'utf-8';
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
+/*전체 화면*/
 .contents {
-  width: 100%;
-  height: 100%;
-  margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  height: calc(100vh - 70px);
+  margin: 0 5% 70px 5%;
+  overflow-y: scroll;
 }
 .icon {
   width: 24px;
   height: 24px;
-  margin-left: 10px;
   color: #a1a4a9;
 }
 .logo {
-  position: absolute;
-  left: 6.99%;
-  right: 68.78%;
-  top: 7.8%;
-  bottom: 90.24%;
-
   width: 90.87px;
   height: 15.95px;
-  z-index: 4;
+  margin-bottom: 4px;
 }
+/*상단 로고 세트*/
 .menu {
+  position: relative;
   z-index: 4;
-  width: 100%;
-}
-.menu a:nth-of-type(1) {
-  float: right;
-  position: absolute;
-  width: 24px;
+  width: 94%;
+  margin: 8% 3%;
   height: 24px;
-  right: 16%;
-  top: 49px;
-  z-index: 4;
 }
 .menu a:nth-of-type(2) {
-  float: right;
   position: absolute;
-  width: 24px;
-  height: 27px;
-  right: 7%;
-  top: 49px;
-  z-index: 4;
+  right: 13%;
 }
-.profile {
+.menu a:nth-of-type(3) {
   position: absolute;
-
-  display: flex;
-  width: 300px;
-  height: 300px;
-  top: 145px;
-
-  left: calc(40% - 107px);
-
-  border: none;
-
-  border-radius: 50%;
-  z-index: 0;
+  margin-left: 20px;
+  right: 0;
 }
-.question {
-  position: absolute;
-  display: flex;
-  width: 80%;
-  height: 18px;
-  left: 128px;
-  margin-left: 5%;
-  margin-right: 5%;
-  opacity: 0.4;
-  color: #ffffff;
-  cursor: pointer;
+
+/*닉네임, 행성*/
+.profiles {
+  position: relative;
+  width: 100%;
+  height: 45%;
 }
+
 .nickname {
   color: white;
   position: absolute;
   width: 146px;
   height: 24px;
-  left: 6.99%;
-  top: 93px;
+  left: 3%;
   cursor: pointer;
   z-index: 4;
   font-family: Pretendard;
+  font-size: 19px;
+  font-weight: 600;
 }
-.monthly {
+
+.nickname .icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+  margin-bottom: -3px;
+  opacity: 0.8;
+}
+
+.planet {
   position: absolute;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  height: 144px;
-  top: 439px;
+  top: 30px;
+  width: 250px;
+  height: 250px;
+
+  margin-left: calc(50% - 125px);
+
+  border: none;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.question {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+
+  right: 40px;
+  top: 40px;
+  opacity: 0.4;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/*월간 내역*/
+.monthly {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  top: 25px;
 
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0px 0px 19px rgba(0, 0, 0, 0.08);
@@ -168,14 +173,12 @@
   align-items: flex-start;
   padding: 0px;
 
-  position: absolute;
+  position: relative;
 
   height: 95px;
 
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  top: 605px;
+  width: 100%;
+  top: 40px;
   overflow-x: scroll;
 
   -ms-overflow-style: none; /* IE and Edge */

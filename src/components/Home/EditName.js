@@ -1,54 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Portal from "../CalendarPart/Portal";
 import styled from "styled-components";
-import { Navigate } from 'react-router-dom';
-import Style from './EditName.module.css';
+import { Navigate } from "react-router-dom";
+import Style from "./EditName.module.css";
 import { CgClose } from "react-icons/cg";
 import "../CalendarPart/Calendar.css";
 
-export function EditName({
-  className,
-  onClose,
-  visible,
-}) {
+export function EditName({ className, onClose, visible }) {
+  const [text, setText] = useState("");
 
-    const [text, setText] = useState('');
-  
-    const fetchFunc = (e) => {
-        //백엔드로 데이터 보내기
-        fetch(`/main/update/yui12@gmail.com/${text}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body: JSON.stringify({
-          'useName': text,
-          })
-        })
-        .then(response => response.json())
-        .then(response => {
-          if (response.token) {
-            localStorage.setItem('wtw-token', response.token);
-          }
-        })
-        .then( e => {
-          Navigate('/')
-        })
+  const fetchFunc = (e) => {
+    //백엔드로 데이터 보내기
+    fetch(`/main/update/yui12@gmail.com/${text}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        useName: text,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      })
+      .then((e) => {
+        Navigate("/");
+      });
+  };
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+
+  const onReset = () => {
+    setText("");
+  };
+
+  const maxLength = (text) => {
+    if (text.length > text.maxLength) {
+      text = text.slice(0, text.maxLength);
     }
-  
-    const handleChange = (e) => {
-      setText(e.target.value);
-      };
-  
-    const onReset = () => {
-      setText('');
-    };
-
-    const maxLength = (text)=>{
-      if(text.length > text.maxLength){
-        text = text.slice(0, text.maxLength);
-      }
   };
 
   /*
@@ -60,13 +55,12 @@ export function EditName({
 
     }
   */
-    const close = (e) => {
-      if (onClose) {
-        onClose(e);
-      }
-    };
+  const close = (e) => {
+    if (onClose) {
+      onClose(e);
+    }
+  };
 
-    
   useEffect(() => {
     document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
     return () => {
@@ -76,41 +70,36 @@ export function EditName({
     };
   }, []);
 
-    return (
-      <Portal elementId="modal-root">
-              <InfoModalOverlay visible={visible} className={className} />
-              <ModalWrapper
-        className={className}
-        tabIndex={-1}
-        visible={visible}
-      >
-              
+  return (
+    <Portal elementId="modal-root">
+      <InfoModalOverlay visible={visible} className={className} />
+      <ModalWrapper className={className} tabIndex={-1} visible={visible}>
         <div className={Style.contents}>
           <form onSubmit={fetchFunc} className={Style.form}>
-          <input 
-                  id="inputMemo"
-                  type="text"
-                  value={text}
-                  onChange={handleChange} 
-                  maxLength = "8"
-                  onInput={maxLength(text)}
-                />
-                <CgClose onClick={onReset} className={Style.close}></CgClose>
-  
-                <p className={Style.count}>{text.length}/8</p>
-                
-                <button type='submit'
-                className={Style.button}>완료</button>
-            
-          </form>
-                <button
-                className={Style.button1} onClick={close} >취소</button>
-        </div>
-        </ModalWrapper>
+            <input
+              id="inputMemo"
+              type="text"
+              value={text}
+              onChange={handleChange}
+              maxLength="8"
+              onInput={maxLength(text)}
+            />
+            <CgClose onClick={onReset} className={Style.close}></CgClose>
 
-        </Portal>
-    );
-  }
+            <p className={Style.count}>{text.length}/8</p>
+
+            <button type="submit" className={Style.button}>
+              완료
+            </button>
+          </form>
+          <button className={Style.button1} onClick={close}>
+            취소
+          </button>
+        </div>
+      </ModalWrapper>
+    </Portal>
+  );
+}
 
 EditName.defaultProps = {
   visible: false,
@@ -159,4 +148,3 @@ const InfoModalOverlay = styled.div`
   border-width: ${(props) => props.className - 10}px 20vh
     calc(100vh - ${(props) => props.className + 20}px) 0;
 `;
-

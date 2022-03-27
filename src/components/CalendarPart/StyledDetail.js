@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledDetail = styled.div`
+  .detail-list {
+    margin-bottom: 70px;
+  }
   .selected-detail {
+    color: white;
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
@@ -48,15 +52,7 @@ const StyledDetail = styled.div`
   .type {
     margin-bottom: 15px;
   }
-  .eco {
-    color: #00c982;
-  }
-  .neco {
-    color: #566479;
-  }
-  .etc {
-    color: #b4b6b8;
-  }
+
   .details {
     font-size: 12px;
     margin-top: 10px;
@@ -82,6 +78,9 @@ const StyledDetail = styled.div`
   .type-cost,
   .details-cost {
     margin-left: auto;
+  }
+  .detail-link {
+    text-decoration: none;
   }
 `;
 

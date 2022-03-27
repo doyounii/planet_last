@@ -215,6 +215,7 @@ const ModalWrapper = styled.div`
     width: 20px;
     height: 20px;
     float: right;
+    cursor: pointer;
   }
   .infoModal .modal-close {
     margin-right: 25px;
@@ -232,12 +233,7 @@ const ModalWrapper = styled.div`
     color: #1466fe;
     left: 31%;
   }
-  .non-eco-circle {
-    color: #3a4556;
-  }
-  .eco-circle {
-    color: #07d4a9;
-  }
+
   .non-eco-cnt {
     position: fixed;
     top: ${(props) => props.className + 45}px;
@@ -251,38 +247,6 @@ const ModalWrapper = styled.div`
   .top-arrow {
     position: fixed;
     color: #f5f5f5;
-    transform: rotate(-100deg);
-    width: 30px;
-    height: 30px;
-    top: ${(props) => props.className - 33}px;
-    left: 35%;
-  }
-  .top-arrow-point {
-    position: fixed;
-    color: #f5f5f5;
-    transform: rotate(90deg);
-    width: 20px;
-    height: 20px;
-    top: ${(props) => props.className - 25}px;
-    left: calc(35% - 10px);
-  }
-  .bottom-arrow {
-    position: fixed;
-    color: #f5f5f5;
-    transform: rotate(70deg);
-    width: 30px;
-    height: 30px;
-    top: ${(props) => props.className + 8}px;
-    left: 8%;
-  }
-  .bottom-arrow-point {
-    position: fixed;
-    color: #f5f5f5;
-    transform: rotate(-90deg);
-    width: 20px;
-    height: 20px;
-    top: ${(props) => props.className + 8}px;
-    left: 13%;
     width: 20px;
     height: 20px;
     top: ${(props) => props.className - 33}px;
@@ -353,10 +317,9 @@ const ModalInner = styled.div`
   box-sizing: border-box;
   position: relative;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-  background-color: #202632;
+  background-color: #141b27;
   border-radius: 10px;
   width: 90%;
-  height: 75%;
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
