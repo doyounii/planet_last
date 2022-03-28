@@ -21,7 +21,6 @@ function MyPage() {
         <div className={ MypageStyle.login_box }>
             <h1>소셜로그인 연결</h1>
 
-            {/*임시 icon 사용*/}
             <div className={ MypageStyle.kakao_icon }>
               <img src="img/kakao.png" alt="kakao"></img>
               <h2>연결하기</h2>
@@ -40,7 +39,7 @@ function MyPage() {
         </div>
         <div className={ MypageStyle.coupon_box }>
             MY 쿠폰함
-            <Link to="#">
+            <Link to="/Coupon">
               <FaChevronRight className={MypageStyle.info_icon}/>
             </Link>
         </div>
