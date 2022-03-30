@@ -37,7 +37,7 @@ function Home({ activeHome }) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/main/yui12@gmail.com/2022/${format(new Date(), "M")}`,
+      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
