@@ -43,7 +43,6 @@ class EcoBarChart extends React.Component {
           borderSkipped: "middle",
         },
       ],
-
     };
 
     const config = {
