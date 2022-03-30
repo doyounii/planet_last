@@ -14,7 +14,7 @@ class EcoBarChart extends React.Component {
           data: [1], // 수치
           backgroundColor: ['#00C982'], // 각 막대 색
           borderRadius: 50,
-          borderSkipped: true,
+          borderSkipped: "middle",
         },
         {
           label: 'Dataset 2',
@@ -27,16 +27,12 @@ class EcoBarChart extends React.Component {
           borderWidth: 0, // 테두리 두께
           data: [1], // 수치
           backgroundColor: ['#083FA5'], // 각 막대 색
-          borderRadius: 10,
-          borderSkipped: false,
         },
         {
           label: 'Dataset 4',
           borderWidth: 0, // 테두리 두께
           data: [1], // 수치
           backgroundColor: ['#728EC6'], // 각 막대 색
-          borderRadius: 10,
-          borderSkipped: false,
         },
         {
           label: 'Dataset 5',
@@ -44,6 +40,7 @@ class EcoBarChart extends React.Component {
           data: [1], // 수치
           backgroundColor: ['#C7D2E8'], // 각 막대 색
           borderRadius: 50,
+          borderSkipped: "middle",
         },
       ],
 
