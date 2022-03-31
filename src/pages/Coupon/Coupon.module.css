@@ -148,4 +148,37 @@
     margin-top: 14px;
 }
 
+.coupon_use_box {
+    position: relative;
+    width: 100%;
+    top: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.coupon_available {
+    display: inline-block;
+    width: 44%;
+    height: 190px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 13px;
+    font-family: Pretendard;
+    text-align: center;
+    margin: 1.5%;
+}
+
+.coupon_expiration {
+    display: inline-block;
+    width: 44%;
+    height: 190px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 13px;
+    font-family: Pretendard;
+    text-align: center;
+    margin: 1.5%;
+    opacity : 0.6;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    -khtml-opacity: 0.6;
+}
 

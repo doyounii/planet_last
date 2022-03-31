@@ -9,6 +9,8 @@ import LineGraph from "./LineGraph";
 import Chart from 'chart.js/auto';
 import Eco from './Part2/EcoExpend';
 import Pollution from './Part2/PollutionExpend';
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { InfoModal } from "./QuestionModal";
 
 function StatisticsMain() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -16,6 +18,17 @@ function StatisticsMain() {
   const [isMonthView, setIsMonthView] = useState(true);
   const [monthView, setMonthView] = useState();
   const [animation, setanimation] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [position, setposition] = useState(0);
+
+  const openModal = (e) => {
+    setposition(e.clientY);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     setMonthView();
@@ -62,7 +75,7 @@ function StatisticsMain() {
       <div className={`${animation}`}>
         {isMonthView && (
           <>
-          <Link to="/StatisticsView">
+          <Link to="/StatisticsView" style={{ textDecoration: "none" }}>
           <div className="month-box">
               <div className="month-breakdown">
                   <p>{format(currentMonth, nowMFormat)}월 내역</p>
@@ -82,9 +95,22 @@ function StatisticsMain() {
           </Link>
 
           <div className="line-box"></div>
+          
+          {isModalOpen && (
+              <InfoModal
+                className={position}
+                onClose={closeModal}
+                maskClosable={true}
+                visible={true}
+                children={isMonthView}
+              ></InfoModal>
+            )}
 
           <div className="tag-graph-box">
-              <h1>친환경 별자리 관측소 <img src="img/scope.png" alt="scope"></img></h1>
+              <h1>친환경 별자리 관측소 
+                <img src="img/scope.png" alt="scope"></img>
+                <AiOutlineQuestionCircle className="question-icon" onClick={(e)=>openModal(e)}/>
+              </h1>
 
               <p>지난달 이맘때보다</p>
               <h2>친환경 태그가 <b style={{color:"#00C982"}}>5개</b> 늘었어요</h2>

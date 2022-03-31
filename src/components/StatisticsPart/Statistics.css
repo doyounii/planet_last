@@ -153,6 +153,16 @@
 .tag-graph-box img {
   width: 20px;
   height: 20px;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.tag-graph-box .question-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.4;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .chart-graph-box {
