@@ -23,17 +23,6 @@ function ExpendMemo() {
       <Content title="남기고 싶은 메모를 작성해주세요"></Content>
 
       <SelectExpendMemo></SelectExpendMemo>
-
-      <div className={IncomeStyle.bottomBtn3}>
-      <Link to="/ExpendCategory">
-        <button className={IncomeStyle.bottomBtnActive}>뒤로</button>
-        </Link>
-        <Link to="/ExpendLast">
-          <button className={IncomeStyle.bottomBtnActive}>다음</button>
-        </Link>
-      </div>
-
-
     </div>
   );
 }

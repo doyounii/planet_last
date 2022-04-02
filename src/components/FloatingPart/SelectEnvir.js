@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SelectEnvirStyle from "./SelectEnvir.module.css";
 import SelectTag from "./SelectTag";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { useLocation, Link } from "react-router-dom";
+import IncomeStyle from '../../pages/Floating/Float.module.css';
 
 const array = [
   { id: 1, tag: "친환경 제품 구매", isEco: true },
@@ -23,11 +25,25 @@ function SelectEnvir() {
   const [selectedNeco, setSelectedNeco] = useState(new Set());
   const [selectedEtc, setSelectedEtc] = useState(new Set());
 
+
+  const modifyArr = Array.from(checkedItems);
+
+
+  const date = useLocation().state.date;
+  const price =useLocation().state.price;
+  const filter = useLocation().state.filter;
+  const cate = useLocation().state.cate;
+  const arr2 = useLocation().state.arr2;
+  const emoji = useLocation().state.emoji;
+  const text = useLocation().state.text;
+
+  console.log(date, price, filter,cate, arr2[emoji], text);
+
   function addTag() {
     setShow((show) => !show);
   }
 
-  const checkedItemHandler = (id, isEco, isChecked) => {
+  const checkedItemHandler = (tag, id, isEco, isChecked) => {
     if (isEco === "etc") {
       if (isChecked) {
         selectedEtc.add(id);
@@ -66,6 +82,33 @@ function SelectEnvir() {
     addTag();
   };
 
+  const fetchFunc = () => {
+    //백엔드로 데이터 보내기
+    fetch(`/expenditure/user1@naver.com/new`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      'exWay': filter,
+      'exType': cate,
+      'ex_cost': price,
+      'memo': text,
+      'date': '20' + date.slice(0, 2) + '-' + date.slice(3, 5) + '-' + date.slice(6, 8),
+      'ecoDetail' : ["친환경 제품 구매"],
+      'etcMemo': "텀블러 사용",
+      'eco': "G",    
+    })
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.token) {
+        localStorage.setItem('wtw-token', response.token);
+      }
+    })
+  }
+
   return (
     <section>
       <div className={SelectEnvirStyle.selectContainer}>
@@ -90,6 +133,13 @@ function SelectEnvir() {
       <div className={SelectEnvirStyle.newTag}>
         {show ? <SelectTag submitFunc={submitFunc} /> : <div></div>}
       </div>
+
+      {/* <div className={IncomeStyle.bottomBtn3}>
+        <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
+        <Link to="/">
+          <button onClick={() => {fetchFunc()}}  className={IncomeStyle.bottomBtnActive}>test완료</button>
+        </Link>
+      </div> */}
     </section>
   );
 }

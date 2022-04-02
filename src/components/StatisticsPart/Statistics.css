@@ -47,18 +47,6 @@
 
 /* Calendar */
 
-.calendar {
-  font-family: Pretendard;
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-color: #141b27;
-  color: white;
-  margin-top: 70px;
-  margin-bottom: 70px;
-}
-
 .month-box {
   font-family: Pretendard;
   position: relative;
@@ -461,4 +449,12 @@
   font-family: Pretendard;
   margin-left: 21px;
   color: #141b27;
+}
+
+.chart {
+  position: relative;
+  height: 90px;
+  top: 30px;
+  padding-top: 10px;
+  margin: 0px 36px;
 }

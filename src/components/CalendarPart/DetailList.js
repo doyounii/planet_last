@@ -322,6 +322,7 @@ export function DetailItem({ item, ecoCnt }) {
       <div
         className="details-memo"
         onClick={(e) => console.log(e.target.value)}
+        key={item.id}
       >
         {item.memo !== null ? item.memo : item.type}
         {item.ecoList.map((data) => {
@@ -348,84 +349,81 @@ function DetailList(props) {
   const [detailList, setDetailList] = useState([]);
   const [totalMoney, setTotalMoney] = useState(0);
   const [loading, setloading] = useState(true);
-  const [isModalOpen, setisModalOpen] = useState(false);
-  const [modalData, setmodalData] = useState({ type: {}, detail: {} });
 
-  // useEffect(() => {
-  //   let isSubscribed = true;
-  //   fetch(
-  //     `/api/calendar/user1@naver.com/${format(date, "M")}/${format(date, "d")}`,
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //       },
-  //     }
-  //   )
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       if (isSubscribed) {
-  //         setList(data);
-  //         setData(data);
-  //         setloading(false);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log("error!");
-  //       console.log(error);
-  //     });
-  //   return () => (isSubscribed = false);
-  // }, [date]);
+  const fetchData = async () => {
+    const response = await fetch(
+      `api/calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
+        props.value,
+        "d"
+      )}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setList(data);
+
+    setloading(false);
+  };
 
   useEffect(() => {
-    setList(tempData);
-    setData(tempData);
-    setloading(false);
+    fetchData();
+    setData(list);
   }, []);
+  console.log(list);
+  console.log(props.value);
 
   const setData = (data) => {
-    const getList = [];
+    let getList = [];
+    let totalTemp = [];
+    let detailTemp = [];
     let moneySum = 0;
+
+    // totalMoney(0)와 totalDetails(1) 나눔
     Object.keys(data).forEach((key) =>
       getList.push({ name: key, value: data[key] })
     );
 
     Object.keys(getList[0].value).forEach((key) => {
-      totalList.push({ name: key, value: getList[0].value[key] });
+      totalTemp.push({ name: key, value: getList[0].value[key] });
       moneySum += getList[0].value[key];
     });
+    // 토탈(하루 총 값): {}일 경우 작동 안함
+    if (totalTemp.length !== 0) {
+      detailTemp = Object.values(getList[1].value);
+    }
+    setTotalList(totalTemp);
+    setDetailList(detailTemp);
     setTotalMoney(moneySum);
-
-    setDetailList(Object.values(getList[1].value));
   };
 
   const renderDetailList = (filterType) => {
     let detailList = [];
     let ecoCnt = 0;
 
-    {
-      filterType !== undefined &&
-        filterType.forEach((item) => {
-          item.ecoList.forEach((item) => {
-            if (item.eco === "G") {
-              ecoCnt += 1;
-            } else if (item.eco === "R") {
-              ecoCnt -= 1;
-            }
-          });
-
-          detailList.push(
-            <div className="details" key={item.id}>
-              <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
-              <DetailItem item={item} ecoCnt={ecoCnt} />
-            </div>
-          );
-          ecoCnt = 0;
+    filterType !== undefined &&
+      filterType.forEach((item) => {
+        item.ecoList.forEach((item) => {
+          if (item.eco === "G") {
+            ecoCnt += 1;
+          } else if (item.eco === "R") {
+            ecoCnt -= 1;
+          }
         });
-    }
+
+        detailList.push(
+          <div className="details" key={item.id}>
+            <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
+            <DetailItem item={item} ecoCnt={ecoCnt} />
+          </div>
+        );
+        ecoCnt = 0;
+      });
+
     return detailList;
   };
 
@@ -435,6 +433,7 @@ function DetailList(props) {
     for (let i = 0; i < totalList.length; i++) {
       renderList.push(
         <Link
+          className="detail-link"
           to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
           state={{
             date: format(props.value, "M. d EEEEE", { locale: ko }),
@@ -462,19 +461,17 @@ function DetailList(props) {
   return (
     <>
       {!loading && (
-        <div className="detail-list">
-          <StyledDetailBlock>
+        <StyledDetailBlock>
+          <div className="detail-list">
             <div className="selected-detail">
               <div className="selected-date">
                 {format(props.value, "M. d EEEEE", { locale: ko })}
               </div>
-              <div className="selected-total">
-                {totalMoney.toLocaleString()}원
-              </div>
+              <div className="selected-total">{totalMoney}원</div>
             </div>
             {renderList()}
-          </StyledDetailBlock>
-        </div>
+          </div>
+        </StyledDetailBlock>
       )}
     </>
   );

@@ -31,6 +31,7 @@ import FloatingPrice from "./pages/Floating/FloatingPrice";
 import FloatingPrice2 from "./pages/Floating/FloatingPrice2";
 import Login from "./pages/Login/Login";
 import DetailCategory from "./components/CalendarPart/DetailCategory";
+import EcoCategory from './pages/Statistics/Part2/EcoCategory';
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
       <Route path="/expendCategory" element={<ExpendCategory />}></Route>
       <Route path="/expendmemo" element={<ExpendMemo />}></Route>
       <Route path="/expendlast" element={<ExpendLast />}></Route>
+      <Route path="/ecocategory" element={<EcoCategory />}></Route>
       <Route path="/login" element={<Login />}></Route>
     </Routes>
   );

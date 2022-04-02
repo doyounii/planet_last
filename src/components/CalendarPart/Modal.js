@@ -215,6 +215,7 @@ const ModalWrapper = styled.div`
     width: 20px;
     height: 20px;
     float: right;
+    cursor: pointer;
   }
   .infoModal .modal-close {
     margin-right: 25px;
@@ -232,12 +233,7 @@ const ModalWrapper = styled.div`
     color: #1466fe;
     left: 31%;
   }
-  .non-eco-circle {
-    color: #3a4556;
-  }
-  .eco-circle {
-    color: #07d4a9;
-  }
+
   .non-eco-cnt {
     position: fixed;
     top: ${(props) => props.className + 45}px;
@@ -321,10 +317,9 @@ const ModalInner = styled.div`
   box-sizing: border-box;
   position: relative;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-  background-color: #202632;
+  background-color: #141b27;
   border-radius: 10px;
   width: 90%;
-  height: 75%;
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
