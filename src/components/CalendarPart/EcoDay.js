@@ -1,7 +1,28 @@
 import React from "react";
 import styled from "styled-components";
-import { BsBoxArrowUpRight, BsWindowSidebar } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
+
+function EcoDay({ value }) {
+  let ecoDay = value[1];
+  const onClickLink = () => {
+    window.open(
+      `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${ecoDay}`,
+      "_blank"
+    );
+  };
+  return (
+    <div className="eco-day-container">
+      <StyledEco>
+        <div className="eco-day-box">
+          <span className="eco-text">오늘은 </span>
+          <span className="eco-day">{ecoDay !== undefined && ecoDay}</span>
+          <span className="eco-text">이에요!</span>
+          <RiShareBoxLine className="gotobrowser" onClick={onClickLink} />
+        </div>
+      </StyledEco>
+    </div>
+  );
+}
 
 const StyledEco = styled.div`
   .eco-day-box {
@@ -24,27 +45,5 @@ const StyledEco = styled.div`
     float: right;
   }
 `;
-
-function EcoDay() {
-  let ecoDay = "세계 오존층 보호의 날";
-  const onClickLink = () => {
-    window.open(
-      `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${ecoDay}`,
-      "_blank"
-    );
-  };
-  return (
-    <div className="eco-day-container">
-      <StyledEco>
-        <div className="eco-day-box">
-          <span className="eco-text">오늘은 </span>
-          <span className="eco-day">{ecoDay}</span>
-          <span className="eco-text">이에요!</span>
-          <RiShareBoxLine className="gotobrowser" onClick={onClickLink} />
-        </div>
-      </StyledEco>
-    </div>
-  );
-}
 
 export default EcoDay;
