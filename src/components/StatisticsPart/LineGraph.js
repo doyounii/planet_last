@@ -1,8 +1,11 @@
 import React, {useEffect} from 'react'
 import Chart from 'chart.js/auto'
-
+import { withTheme } from 'styled-components';
 
 let LineChart;
+
+Chart.defaults.font.size = 12;
+Chart.defaults.font.family = 'Pretendard';
 
 function LineGraph() {
     useEffect(() => {
@@ -27,61 +30,43 @@ function LineGraph() {
                     pointBorderColor: '#00C982', //포인트 테두리 컬러
                     pointBorderWidth: 1, //포인트 테두리 두께
                     pointRadius: 8,
-                    tension: 0.1 //직선
+                    tension: 0.1, //직선
                 }]
             },
             options: {
+                indexAxis: 'x',
+                scales: {
+                  y: {
+                    display: false,
+                    beginAtZero: true,
+                  },
+                  xAxes : {
+                    fontColor : 'rgba(255, 255, 255)',
+                    fontSize : 14
+                  }
+                },
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: false
+                        //제목 label 삭제
+                        display: false,
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
                     },
                 }, 
-                scales: {
-                    x: {
-                        grid: {
-                            display: false,
-                            drawBorder: false,
-                        },
-                    },
-                    y: {
-                        min: 0,
-                        max: 100,
-                        beginAtZero: false,
-                        grid: {
-                            display: false,
-                            drawBorder: false,
-                        },
-                    },
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize : 2,
-                            fontColor : "rgba(251, 203, 9, 1)",
-                            fontSize : 14,
-                        },
-                        gridLines: {
-                            display:false,
-                            lineWidth:0
-                        }
-                    }],
-                    yAxes:[{
-                        ticks:{
-                        display: false,
-                       }
-                     }],
-                },
                 animation: {
                     duration: 600,
                 },
-                
             }
         });
     }
 
     return (
-        <div>
-            <canvas id="LineChart" width="412px" height="248px"/>
+        <div style={{width:"90%", marginTop:"3%", margin:"0 auto"}}>
+            <canvas id="LineChart" width="375px" height="210px"/>
         </div>
     )
 }

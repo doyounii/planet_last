@@ -18,7 +18,6 @@ import { InfoModal } from "./Modal";
 import { Sliders } from "./Sliders";
 import Quote from "./Quote";
 import EcoDay from "./EcoDay";
-import DetailList from "./DetailList";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
@@ -37,7 +36,12 @@ function RenderWeekName() {
 }
 
 const data = {
-  anniversaryList: ["2022-03-03", "2022-03-13", "2022-03-17", "2022-03-24"],
+  anniversaryList: [
+    ["2022-03-03", "어쩌구저쩌구의 날"],
+    ["2022-03-13", "뭐뭐뭐뭐의 날"],
+    ["2022-03-17", "호롤롤로의 날"],
+    ["2022-03-24", "병아리의 날"],
+  ],
   calendarDto: {
     sumOfEcoCount: 29,
     sumOfNoneEcoCount: 12,
@@ -52,111 +56,6 @@ const data = {
         expenditureDays: 0,
       },
       {
-        date: "2022-03-02",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-03",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-04",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-05",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-06",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-07",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-08",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-09",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-10",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-11",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-12",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-13",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-14",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-15",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-16",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
         date: "2022-03-17",
         incomeDays: 1234,
         ecoCount: 6,
@@ -164,39 +63,11 @@ const data = {
         expenditureDays: 222,
       },
       {
-        date: "2022-03-18",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-19",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
         date: "2022-03-20",
         incomeDays: 0,
         ecoCount: 1,
         noneEcoCount: 1,
         expenditureDays: 2000,
-      },
-      {
-        date: "2022-03-21",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
-      },
-      {
-        date: "2022-03-22",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
       },
       {
         date: "2022-03-23",
@@ -225,13 +96,6 @@ const data = {
         ecoCount: 16,
         noneEcoCount: 3,
         expenditureDays: 561872,
-      },
-      {
-        date: "2022-03-27",
-        incomeDays: 0,
-        ecoCount: 0,
-        noneEcoCount: 0,
-        expenditureDays: 0,
       },
       {
         date: "2022-03-28",
@@ -267,18 +131,10 @@ const data = {
     "자연과 가까울수록 병은 멀어지고, 자연과 멀수록 병은 가까워진다. - 요한 볼프강 폰 괴테",
 };
 
-const form = {
-  date: "2022-02-29",
-  incomeDays: 0,
-  ecoCount: 0,
-  noneEcoCount: 0,
-  expenditureDays: 0,
-};
-
-function CalendarBody({ onChange }) {
+function CalendarBody({ value, onChange }) {
   const [loading, setloading] = useState(true);
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(value);
+  const [selectedDate, setSelectedDate] = useState(value);
   const [isMonthView, setIsMonthView] = useState(true);
   const [currentMonth, setCurrentMonth] = useState([]);
   const [prevMonth, setPrevMonth] = useState([]);
@@ -289,16 +145,21 @@ function CalendarBody({ onChange }) {
   const [position, setposition] = useState(0);
 
   const [message, setMessage] = useState({});
+  const [daysData, setDaysData] = useState([]);
   const [anniversary, setAnniversary] = useState([]);
   const [quote, setquote] = useState("");
-  const [daysData, setDaysData] = useState([]);
+
+  let errors = null;
 
   const ecoColor = (item) =>
     item > 5 ? "eco4" : item >= 4 ? "eco3" : item >= 1 ? "eco2" : "eco1";
 
   const fetchData = async () => {
-    const response = await fetch(
-      `api/calendar/user1@naver.com/2022/${format(currentDate, "M")}`,
+    fetch(
+      `calendar/user1@naver.com/${format(currentDate, "yyyy")}/${format(
+        currentDate,
+        "M"
+      )}`,
       {
         method: "GET",
         headers: {
@@ -306,13 +167,18 @@ function CalendarBody({ onChange }) {
           Accept: "application/json",
         },
       }
-    );
-    const data = await response.json();
-    setMessage(data.calendarDto);
-    setquote(data.content);
-    setDaysData([...data.calendarDto.calendarDayDtos, form, form, form]);
-    setAnniversary(data.anniversaryList);
-    setloading(false);
+    )
+      .then((data) => {
+        setMessage(data.calendarDto);
+        setquote(data.content);
+        setDaysData(data.calendarDto.calendarDayDtos);
+        setAnniversary(data.anniversaryList);
+        setloading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        errors = error;
+      });
   };
   console.log(daysData);
 
@@ -321,13 +187,12 @@ function CalendarBody({ onChange }) {
   }, []);
 
   useEffect(() => {
-    // setMessage(data.calendarDto);
-    // setquote(data.content);
-    // setAnniversary(data.anniversaryList);
-    // setloading(false);
-    fetchData();
-
-    return () => setloading(false);
+    setMessage(data.calendarDto);
+    setDaysData(data.calendarDto.calendarDayDtos);
+    setquote(data.content);
+    setAnniversary(data.anniversaryList);
+    setloading(false);
+    // fetchData();
   }, [currentDate]);
 
   const dateFormat = "yyyy-MM-dd";
@@ -429,6 +294,7 @@ function CalendarBody({ onChange }) {
       formattedDate = format(day, dayFormat); // "d"
       const dayStr = format(day, dateFormat); // "yyyy-MM-dd"
       const cloneDay = day;
+      let daily = {};
       let ex_cost = 0;
       let in_cost = 0;
       let eco_count = 0;
@@ -438,9 +304,12 @@ function CalendarBody({ onChange }) {
         daysData.length > 0 &&
         isSameMonth(cloneDay, currentDate)
       ) {
-        ex_cost = daysData[formattedDate - 1].expenditureDays;
-        in_cost = daysData[formattedDate - 1].incomeDays;
-        eco_count = daysData[formattedDate - 1].ecoCount;
+        daily = daysData.find((x) => x.date === dayStr);
+        if (daily !== undefined) {
+          in_cost = daily.incomeDays;
+          ex_cost = daily.expenditureDays;
+          eco_count = daily.ecoCount;
+        }
       }
       const cellStyle =
         isMonthView && !isSameMonth(day, currentDate)
@@ -459,16 +328,20 @@ function CalendarBody({ onChange }) {
             onDateClickHandle(cloneDay);
           }}
         >
-          {anniversary.find((x) => x === dayStr) && (
+          {anniversary.find((x) => x[0] === dayStr) && (
             <div className="eco-day-circle">●</div>
           )}
           <div className={`number ${cellStyle}`}>{formattedDate}</div>
           {ex_cost !== 0 && (
-            <div className={`detail-cost ex-day`}>-{ex_cost}</div>
+            <div className={`detail-cost ex-day`}>
+              -{ex_cost.toLocaleString()}
+            </div>
           )}
 
           {in_cost !== 0 && (
-            <div className={`detail-cost in-day`}>+{in_cost}</div>
+            <div className={`detail-cost in-day`}>
+              +{in_cost.toLocaleString()}
+            </div>
           )}
         </div>
       );
@@ -503,54 +376,49 @@ function CalendarBody({ onChange }) {
     }
   };
 
+  if (loading) return <div style={{ color: "white" }}>로딩중..</div>;
+  if (errors !== null)
+    return <div style={{ color: "white" }}>에러가 발생했습니다.</div>;
+
   return (
-    <>
-      {loading ? (
-        <div>loading...</div>
-      ) : (
-        <div className="calendar">
-          {renderHeader()}
-          <div className={animation}>
-            {isMonthView && (
-              <>
-                <Quote value={quote} />
-                <div className={`month-info`}>
-                  <div className="month-cost">
-                    <div className="month-type">수입</div>
-                    <div className="month-total">
-                      {message.totalMonthIncome}원
-                    </div>
-                  </div>
-                  <div className="month-cost">
-                    <div className="month-type">지출</div>
-                    <div className="month-total">
-                      {message.totalMonthExpenditure}원
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-            {isModalOpen && (
-              <InfoModal
-                className={position}
-                onClose={closeModal}
-                maskClosable={true}
-                visible={true}
-                children={isMonthView}
-              ></InfoModal>
-            )}
-
-            {renderMiddleBar()}
-            <RenderWeekName />
-            <div className="body">{renderCells()}</div>
-
-            {anniversary.find(
-              (x) => x === format(selectedDate, dateFormat)
-            ) && <EcoDay />}
+    <div className="calendar">
+      {renderHeader()}
+      <div className={`cald ${!isMonthView ? "move" : ""}`}>
+        <Quote value={quote} />
+        <div className={`month-info`}>
+          <div className="month-cost">
+            <div className="month-type">수입</div>
+            <div className="month-total">{message.totalMonthIncome}원</div>
+          </div>
+          <div className="month-cost">
+            <div className="month-type">지출</div>
+            <div className="month-total">{message.totalMonthExpenditure}원</div>
           </div>
         </div>
-      )}
-    </>
+
+        {isModalOpen && (
+          <InfoModal
+            className={position}
+            onClose={closeModal}
+            maskClosable={true}
+            visible={true}
+            children={isMonthView}
+          ></InfoModal>
+        )}
+
+        {renderMiddleBar()}
+        <RenderWeekName />
+        <div className="body">{renderCells()}</div>
+
+        {anniversary.find((x) => x[0] === format(selectedDate, dateFormat)) && (
+          <EcoDay
+            value={anniversary.find(
+              (x) => x[0] === format(selectedDate, dateFormat)
+            )}
+          />
+        )}
+      </div>
+    </div>
   );
 }
 

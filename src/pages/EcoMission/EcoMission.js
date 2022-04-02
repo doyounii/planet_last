@@ -6,7 +6,6 @@ import { FiShare } from 'react-icons/fi'
 function EcoMission() {
     const [list, setList] = useState({});
     const [loading, setloading] = useState(true);
-
     const [todayMission, setTodayMission] = useState({});
 
   useEffect(() => {

@@ -11,23 +11,28 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import planet from "../../planet/high.json";
+import high from "../../planet/1-1.json";
+import highmid from "../../planet/2.json";
+import low from "../../planet/4.json";
+import mid from "../../planet/3.json";
 import Lottie from "react-lottie";
 import { format } from "date-fns";
-import EditName from "../../components/Home/EditName";
+import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
-import { Modal } from "../../components/Home/QuestionModal";
+import { Modal } from "../../components/CalendarPart/Modal";
+import { QuestionModal } from "../../components/Home/QuestionModal";
 
 function Home({ activeHome }) {
   const [income, setIncome] = useState(0);
   const [message, setMessage] = useState(0);
-  const [edit, setEdit] = useState(false);
   const [expenditure, setExpenditure] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
 
   const [loading, setloading] = useState(true);
-  const [position, setposition] = useState(0);
+
+  const [position2, setposition2] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -35,7 +40,7 @@ function Home({ activeHome }) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/main/yui12@gmail.com/2022/${format(new Date(), "M")}`,
+      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -64,7 +69,6 @@ function Home({ activeHome }) {
   };
 
   const lottieOptions = {
-    animationData: planet,
     loop: true,
     autoplay: true,
     rendererSettings: {
@@ -73,17 +77,31 @@ function Home({ activeHome }) {
     },
   };
 
-  const editName = (e) => {
-    setEdit((edit) => !edit);
-  };
-
-  const openModal = (e) => {
-    setposition(e.clientY);
+  const openModal = () => {
     setIsModalOpen(true);
   };
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const openModal2 = (e) => {
+    setposition2(e.clientY);
+    setIsModalOpen2(true);
+  };
+  const closeModal2 = () => {
+    setIsModalOpen2(false);
+  };
+
+  const eco = 80;
+
+  if (eco >= 0 && eco < 25) {
+    lottieOptions.animationData = low;
+  } else if (eco >= 25 && eco < 50) {
+    lottieOptions.animationData = mid;
+  } else if (eco >= 50 && eco < 75) {
+    lottieOptions.animationData = highmid;
+  } else {
+    lottieOptions.animationData = high;
+  }
 
   return (
     <>
@@ -102,14 +120,20 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              행성 1호
-              {/* {message.userName} */}
+              {message.userName}
               <FiEdit3
-                onClick={editName}
                 className={homeStyle.icon}
                 alt="닉네임 변경"
+                onClick={(e) => openModal2(e)}
               ></FiEdit3>
-              {edit ? <EditName></EditName> : <div></div>}
+              {isModalOpen2 && (
+                <EditName
+                  className={position2}
+                  onClose={closeModal2}
+                  maskClosable={true}
+                  visible={true}
+                ></EditName>
+              )}
             </div>
             <div className={homeStyle.planet}>
               <AiOutlineQuestionCircle
@@ -117,7 +141,7 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <Lottie
-                options={lottieOptions}
+                options={{ ...lottieOptions }}
                 eventListeners={[
                   {
                     eventName: "complete",
@@ -129,11 +153,13 @@ function Home({ activeHome }) {
               <div>
                 {isModalOpen && (
                   <Modal
-                    className={position}
                     onClose={closeModal}
                     maskClosable={true}
                     visible={true}
-                  ></Modal>
+                    closable={true}
+                  >
+                    <QuestionModal />
+                  </Modal>
                 )}
               </div>
             </div>

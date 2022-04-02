@@ -19,6 +19,10 @@ import News from "./pages/News/News";
 import Setting from "./pages/Setting/Setting";
 import MyPage from "./pages/Setting/MyPage";
 import TermsOfUse from "./pages/Setting/TermsOfUse";
+import UsePage from "./pages/Setting/UsePage";
+import InformationPage from "./pages/Setting/InformationPage";
+import Coupon from "./pages/Coupon/Coupon";
+import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
 
 import ExpendLanding from "./pages/Floating/ExpendLanding";
@@ -30,6 +34,15 @@ import ExpendType from "./pages/Floating/ExpendType";
 import ExpendCategory from "./pages/Floating/ExpendCategory";
 import ExpendMemo from "./pages/Floating/ExpendMemo";
 import ExpendLast from "./pages/Floating/ExpendLast";
+import FloatingPage1 from "./pages/Floating/FloatingPage1";
+import FloatingPage2 from "./pages/Floating/FloatingPage2";
+import FloatingDate from "./pages/Floating/FloatingDate";
+import FloatingDate2 from "./pages/Floating/FloatingDate2";
+import FloatingPrice from "./pages/Floating/FloatingPrice";
+import FloatingPrice2 from "./pages/Floating/FloatingPrice2";
+import Login from "./pages/Login/Login";
+import DetailCategory from "./components/CalendarPart/DetailCategory";
+import EcoCategory from "./pages/Statistics/Part2/EcoCategory";
 
 function App() {
   return (
@@ -59,7 +72,12 @@ function App() {
       <Route path="/expendCategory" element={<ExpendCategory />}></Route>
       <Route path="/expendmemo" element={<ExpendMemo />}></Route>
       <Route path="/expendlast" element={<ExpendLast />}></Route>
+      <Route path="/ecocategory" element={<EcoCategory />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/usePage" element={<UsePage />}></Route>
+      <Route path="/informationPage" element={<InformationPage />}></Route>
+      <Route path="/coupon" element={<Coupon />}></Route>
+      <Route path="/couponJoin" element={<CouponJoin />}></Route>
     </Routes>
   );
 }

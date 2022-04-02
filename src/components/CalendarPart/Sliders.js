@@ -1,12 +1,12 @@
 import React from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
-import "slick-carousel/slick/slick.css";
+import "./Sliders.css";
 
 //children이 <Sliders index={}>여기!!!!!</Sliders>
-export function Sliders({ index, children }) {
+export function Sliders({ dots, index, children }) {
   var settings = {
-    dots: false,
+    dots: dots,
     arrows: false,
     infinite: false,
     speed: 500,

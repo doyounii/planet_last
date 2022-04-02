@@ -1,15 +1,58 @@
 @charset 'utf-8';
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+.openquestion {
+  position: absolute;
+  left: 43.15%;
+  right: 9.04%;
+  top: 91px;
+  background: rgba(86, 100, 121, 0.3);
+  backdrop-filter: blur(10px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  padding: 9px 12px;
+  border-radius: 7px;
+
+  z-index: 10000;
 }
-.question {
+.openquestion:after {
+  content: "";
+  position: fixed;
+  border-top: 10px solid rgba(86, 100, 121, 0.3);
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  top: -10px;
+  right: 130px;
+  z-index: 9999;
+
+  backdrop-filter: blur(10px);
+
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+.openquestion h1 {
   position: relative;
-  opacity: 0.4;
-  color: #ffffff;
-  cursor: pointer;
-  margin-left: 5px;
-  top: 2px;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  /* or 17px */
+
+  text-align: center;
+
+  /* green */
+
+  color: #00c982;
+}
+.openquestion span {
+  position: relative;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  /* or 17px */
+
+  text-align: center;
+  color: #ffff;
 }

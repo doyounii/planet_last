@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Modify.css";
-import { RiPencilLine, RiDeleteBin6Line } from 'react-icons/ri';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import HistorySample from '../../components/History/HistoryBack';
 import styled from "styled-components";
+import { FiEdit3 } from 'react-icons/fi';
 import { IoIosClose } from 'react-icons/io'
+import CalendarModal from "./CalendarModal";
+import DateModal from "./DateModal";
 
 function ModifyView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,6 +69,8 @@ function ModifyView() {
     };
   }, []);
 
+
+
   return (
     <div className="calendar">
       {renderHeader()}
@@ -94,14 +99,13 @@ function ModifyView() {
         <ModalWrap onClick={onCloseModal}>
         <ModalContainer>
           <ModalInner>
-            <p>자산</p>
+            <p>날짜</p>
             <h1>
                 <IoIosClose onClick={dateModalClose}/>
             </h1>
           </ModalInner>
-          <ModalInner>
-            <div>💳 <p>카드</p></div>
-          </ModalInner>
+          <DateModal />
+          {/*<CalendarModal />*/}
         </ModalContainer>
       </ModalWrap>
       )}
@@ -112,7 +116,7 @@ function ModifyView() {
               value={'커피 테이크아웃'}
               //onChange={this.handleChange}
           />
-          <p><RiPencilLine /></p>
+          <p><FiEdit3 /></p>
 
           <div className="modify-detail">
             <p>날짜</p>

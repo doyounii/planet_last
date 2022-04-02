@@ -39,6 +39,7 @@ const tempData = {
         income: false,
       },
       {
+<<<<<<< HEAD
         id: 12,
         type: "통신",
         cost: 1402,
@@ -110,6 +111,12 @@ const tempData = {
         type: "통신",
         cost: 1403,
         memo: "new memo5",
+=======
+        id: 24,
+        type: "통신",
+        cost: 1403,
+        memo: "new memo3",
+>>>>>>> f08a64d445fa6393af3f0b52195ae33888509ea4
         ecoList: [
           {
             eco: "G",
@@ -274,8 +281,10 @@ export function DetailItem({ item, ecoCnt }) {
       <div
         className="details-memo"
         onClick={(e) => console.log(e.target.value)}
+        key={item.id}
       >
         {item.memo !== null ? item.memo : item.type}
+<<<<<<< HEAD
         {item.ecoList.map((data) => {
           return (
             <div
@@ -286,6 +295,16 @@ export function DetailItem({ item, ecoCnt }) {
             </div>
           );
         })}
+=======
+        {item.ecoList !== null &&
+          item.ecoList.map((data) => {
+            return (
+              <div className={`details-detail ${isEcoT(data.eco)}`}>
+                {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
+              </div>
+            );
+          })}
+>>>>>>> f08a64d445fa6393af3f0b52195ae33888509ea4
       </div>
 
       <div className={`details-cost ${isEco(ecoCnt)}`}>
@@ -298,7 +317,6 @@ export function DetailItem({ item, ecoCnt }) {
 
 function DetailList(props) {
   let date = props.value;
-  const [list, setList] = useState({});
   const [totalList, setTotalList] = useState([]);
   const [detailList, setDetailList] = useState([]);
   const [totalMoney, setTotalMoney] = useState(0);
@@ -306,7 +324,11 @@ function DetailList(props) {
 
   const fetchData = async () => {
     const response = await fetch(
+<<<<<<< HEAD
       `api/calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
+=======
+      `calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
+>>>>>>> f08a64d445fa6393af3f0b52195ae33888509ea4
         props.value,
         "d"
       )}`,
@@ -319,6 +341,7 @@ function DetailList(props) {
       }
     );
     const data = await response.json();
+<<<<<<< HEAD
     setList(data);
 
     setloading(false);
@@ -355,6 +378,17 @@ function DetailList(props) {
   useEffect(() => {
     fetchData();
     setData(list);
+=======
+    setData(data);
+
+    setloading(false);
+  };
+
+  useEffect(() => {
+    // fetchData();
+    setData(tempData);
+    setloading(false);
+>>>>>>> f08a64d445fa6393af3f0b52195ae33888509ea4
   }, []);
   console.log(list);
   console.log(props.value);
@@ -440,7 +474,9 @@ function DetailList(props) {
     return <div className="item-list">{renderList}</div>;
   };
 
+  if (loading) return <div style={{ color: "white" }}>로딩중..</div>;
   return (
+<<<<<<< HEAD
     <>
       {!loading && (
         <StyledDetailBlock>
@@ -456,6 +492,19 @@ function DetailList(props) {
         </StyledDetailBlock>
       )}
     </>
+=======
+    <StyledDetailBlock>
+      <div className="detail-list">
+        <div className="selected-detail">
+          <div className="selected-date">
+            {format(props.value, "M. d EEEEE", { locale: ko })}
+          </div>
+          <div className="selected-total">{totalMoney}원</div>
+        </div>
+        {renderList()}
+      </div>
+    </StyledDetailBlock>
+>>>>>>> f08a64d445fa6393af3f0b52195ae33888509ea4
   );
 }
 
