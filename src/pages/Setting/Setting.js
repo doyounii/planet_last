@@ -10,7 +10,7 @@ function Setting() {
   return (
     <div className={SettingStyle.container}>
         <div className={SettingStyle.backBtn}>
-            <HistorySample></HistorySample>
+          <HistorySample></HistorySample>
         </div>
         <div className={SettingStyle.title}>
             설정
@@ -21,15 +21,15 @@ function Setting() {
         </div>
         <div className={SettingStyle.toggle_box}>
             가계부 미작성 알림
-            <SwitchButton className={SettingStyle.switch_btn} />
+            <SwitchButton />
         </div>
         <div className={SettingStyle.toggle_box}>
             이벤트 알림
-            <SwitchButton className={SettingStyle.switch_btn} />
+            <SwitchButton />
         </div>
         <div className={SettingStyle.toggle_box}>
             환경의 날 알림
-            <SwitchButton className={SettingStyle.switch_btn} />
+            <SwitchButton />
         </div>
         </div>
 
@@ -38,7 +38,7 @@ function Setting() {
             정보
         </div>
         <div className={SettingStyle.toggle_box2}>
-            법률정보 및 이용약관 (가제)
+            서비스 이용약관
             <Link to="/TermsOfUse">
               <FaChevronRight className={SettingStyle.info_icon}/>
             </Link>

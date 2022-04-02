@@ -56,7 +56,7 @@ function FloatingDate() {
 
         <div className={IncomeStyle.bottomBtn}>
           <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
-          <Link to={"/FloatingPrice"} state={{ date }}>
+          <Link to={"/FloatingPage1"} state={{ date }}>
             <button
               type="submit"
               disabled={disabled}

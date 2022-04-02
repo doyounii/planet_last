@@ -14,6 +14,10 @@ import News from "./pages/News/News";
 import Setting from "./pages/Setting/Setting";
 import MyPage from "./pages/Setting/MyPage";
 import TermsOfUse from "./pages/Setting/TermsOfUse";
+import UsePage from "./pages/Setting/UsePage";
+import InformationPage from "./pages/Setting/InformationPage";
+import Coupon from "./pages/Coupon/Coupon";
+import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
 import FloatingExpensePage from "./pages/Floating/FloatingExpensePage";
 import FloatingType from "./pages/Floating/FloatingType";
@@ -70,6 +74,10 @@ function App() {
       <Route path="/expendlast" element={<ExpendLast />}></Route>
       <Route path="/ecocategory" element={<EcoCategory />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/usePage" element={<UsePage />}></Route>
+      <Route path="/informationPage" element={<InformationPage />}></Route>
+      <Route path="/coupon" element={<Coupon />}></Route>
+      <Route path="/couponJoin" element={<CouponJoin />}></Route>
     </Routes>
   );
 }

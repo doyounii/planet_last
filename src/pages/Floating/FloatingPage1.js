@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import TopNav from '../../components/FloatingPart/TopNav';
 import Dashboard from '../../components/FloatingPart/Dashboard';
 import IncomeDate from '../../components/FloatingPart/IncomeDate';
-import InputPrice from '../../components/FloatingPart/InputPrice';
+import InputDateStyle from "../../components/FloatingPart/InputDate.module.css";
 
 //Content
 class Content extends Component {
@@ -19,6 +19,16 @@ class Content extends Component {
 }
 
 function FloatingPage1() {
+  const [price, setprice] = useState("");
+  const [disabled, setdisabled] = useState(true);
+  const [date, setData] = useState("");
+
+  const handlePriceValue = (e) => {
+    console.log(price);
+    setprice(e.target.value);
+    setdisabled(price.length === 0 ? true : false);
+  };
+
   return (
     <div className={IncomeStyle.container}>
       <TopNav></TopNav>
@@ -31,9 +41,22 @@ function FloatingPage1() {
       </Link>
 
       <Content title="얼마 받으셨나요?"></Content>
-      {/*Input Box 클릭 시 키보드 팝업 + 하단 버튼 구현하기*/}
-      <InputPrice></InputPrice>
+      <div className={InputDateStyle.inputPrice}>
+        <input
+          id="inputPrice"
+          type="text"
+          placeholder="0원"
+          onChange={(e) => handlePriceValue(e)}
+        />
+      </div>
 
+      <div className={IncomeStyle.bottomBtn2}>
+        <button className={IncomeStyle.bottomBtnDisabled}>뒤로</button>
+        <Link to={"/FloatingType"} state={{ date, price }}>
+          <button className={IncomeStyle.bottomBtnActive}
+          disabled={price.length !== 0 ? false : true}>다음</button>
+        </Link>
+      </div>
     </div>
   );
 }

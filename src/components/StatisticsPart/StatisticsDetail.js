@@ -59,14 +59,14 @@ function StatisticsDetail() {
         {isMonthView && (
           <>
           <div className="detail-box">
-          <Link to="/StatisticsIncome">
+          <Link to="/StatisticsIncome" style={{ textDecoration: "none" }}>
               <div className="income-box">
                   <p>수입</p>
                   <IoIosArrowForward className="detail-icon" />
                   <h1>800,000원</h1>
               </div>
           </Link>
-          <Link to="/StatisticsExpend">
+          <Link to="/StatisticsExpend" style={{ textDecoration: "none" }}>
               <div className="income-box">
                   <p>지출</p>
                   <IoIosArrowForward className="detail-icon" />

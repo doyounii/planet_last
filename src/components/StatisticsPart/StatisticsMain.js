@@ -4,12 +4,12 @@ import { format, subMonths, addMonths } from "date-fns";
 import "./Statistics.css";
 import { IoIosArrowForward } from "react-icons/io";
 import DonutChart from "./DonutChart";
-import HorizonChart from "./HorizonChart";
 import LineGraph from "./LineGraph";
-import Chart from 'chart.js/auto';
 import Eco from './Part2/EcoExpend';
+import Pollution from './Part2/PollutionExpend';
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { InfoModal } from "./QuestionModal";
 import { EcoBarChart } from './Part2/EcoBarChart';
-import EcoCategory from '../../pages/Statistics/Part2/EcoCategory';
 
 function StatisticsMain() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -17,6 +17,17 @@ function StatisticsMain() {
   const [isMonthView, setIsMonthView] = useState(true);
   const [monthView, setMonthView] = useState();
   const [animation, setanimation] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [position, setposition] = useState(0);
+
+  const openModal = (e) => {
+    setposition(e.clientY);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     setMonthView();
@@ -57,6 +68,13 @@ function StatisticsMain() {
 
   const nowMFormat = "M";
 
+  const containerStyle = {
+    backgroundImage:
+      "url(img/main_bg.png)",
+    width: "100vw",
+    height: "30%",
+  };
+
   return (
     <div className="calendar">
       {renderHeader()}
@@ -84,7 +102,7 @@ function StatisticsMain() {
 
             <div className="line-box"></div>
 
-            <div className="tag-graph-box">
+            <div className="tag-graph-box" style={containerStyle}>
               <h1>친환경 별자리 관측소 <img src="img/scope.png" alt="scope"></img></h1>
 
               <p>지난달 이맘때보다</p>
