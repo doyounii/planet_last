@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { FiEdit3 } from 'react-icons/fi';
 import { IoIosClose } from 'react-icons/io'
 import CalendarModal from "./CalendarModal";
+import DateModal from "./DateModal";
 
 function ModifyView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -103,7 +104,8 @@ function ModifyView() {
                 <IoIosClose onClick={dateModalClose}/>
             </h1>
           </ModalInner>
-          <CalendarModal />
+          <DateModal />
+          {/*<CalendarModal />*/}
         </ModalContainer>
       </ModalWrap>
       )}

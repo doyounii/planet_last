@@ -4,9 +4,7 @@ import { format, subMonths, addMonths } from "date-fns";
 import "./Statistics.css";
 import { IoIosArrowForward } from "react-icons/io";
 import DonutChart from "./DonutChart";
-import HorizonChart from "./HorizonChart";
 import LineGraph from "./LineGraph";
-import Chart from 'chart.js/auto';
 import Eco from './Part2/EcoExpend';
 import Pollution from './Part2/PollutionExpend';
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -69,6 +67,13 @@ function StatisticsMain() {
 
   const nowMFormat = "M";
 
+  const containerStyle = {
+    backgroundImage:
+      "url(img/main_bg.png)",
+    width: "100vw",
+    height: "30%",
+  };
+
   return (
     <div className="calendar">
       {renderHeader()}
@@ -106,7 +111,7 @@ function StatisticsMain() {
               ></InfoModal>
             )}
 
-          <div className="tag-graph-box">
+          <div className="tag-graph-box" style={containerStyle}>
               <h1>친환경 별자리 관측소 
                 <img src="img/scope.png" alt="scope"></img>
                 <AiOutlineQuestionCircle className="question-icon" onClick={(e)=>openModal(e)}/>
@@ -131,7 +136,7 @@ function StatisticsMain() {
 
           <div className="line-box"></div>
 
-          <Link to="#">
+          <Link to="#" style={{ textDecoration: "none" }}>
           <div className="expend-box">
               <h1>어떤 친환경 지출을 했을까요? 👍</h1>
               <IoIosArrowForward className="box-icon" />
@@ -141,7 +146,7 @@ function StatisticsMain() {
 
           <div className="line-box"></div>
 
-          <Link to="#">
+          <Link to="#" style={{ textDecoration: "none" }}>
           <div className="expend-box">
               <h1>어떤 반환경 지출을 했을까요? 👎</h1>
               <IoIosArrowForward className="box-icon" />
