@@ -152,5 +152,4 @@ function StatisticsMain() {
     </div>
   );
 }
-
 export default StatisticsMain;
