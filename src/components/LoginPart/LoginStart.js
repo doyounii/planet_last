@@ -4,11 +4,10 @@ import google from './img/ico-google.png';
 import naver from './img/ico-naver.png';
 import kakao from './img/ico-kakao.png';
 import logo from '../../components/LoginPart/img/Group 345.png';
-import planet from '../../planet/high.json';
+import planet from '../../planet/1.json';
 import Lottie from 'react-lottie';
 import Google from './Google';
 import Kakao from './Kakao';
-import Naver from './Naver';
 
 function Login() {
 

@@ -49,6 +49,7 @@
   margin-right: 30px;
   float: right;
 }
+
 .statistics-box .day-box .day-breakdown-box h2:nth-last-child(1) {
   font-family: Pretendard;
   position: relative;
@@ -59,6 +60,7 @@
   margin-right: 10px;
   float: right;
 }
+
 .statistics-box .day-box .day-breakdown-box p:nth-child(1) {
   font-family: Pretendard;
   font-size: 11px;
@@ -66,6 +68,7 @@
   margin-top: 3.12px;
   margin-left: 30px;
 }
+
 .statistics-box .day-box .day-breakdown-box span {
   font-family: Pretendard;
   font-size: 11px;
@@ -97,4 +100,5 @@
   cursor: pointer;
   margin: 0px 20px;
   font-size: 20px;
+  margin-bottom: 60px;
 }

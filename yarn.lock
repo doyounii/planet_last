@@ -9395,7 +9395,7 @@
     "whatwg-fetch" "^3.0.0"
     "ws" "^6.1.4"
 
-"react-naver-login@0.1.4":
+"react-naver-login@^0.1.4":
   "integrity" "sha512-ZFciTw96TyqSmCNjNqTqa8VeP1Y0Hl7Ult9uN6+Y6egpBSjLU8IwB1Y3gfltZYrPQC9uoqr6nICi4SX4JYhoGQ=="
   "resolved" "https://registry.npmjs.org/react-naver-login/-/react-naver-login-0.1.4.tgz"
   "version" "0.1.4"

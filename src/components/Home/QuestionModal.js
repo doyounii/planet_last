@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-
 import Lottie from "react-lottie";
-import high from "../../planet/high.json";
-import highmid from "../../planet/highmid.json";
-import low from "../../planet/low.json";
-import mid from "../../planet/mid.json";
-
+import high from "../../planet/1-1.json";
+import highmid from "../../planet/2.json";
+import low from "../../planet/4.json";
+import mid from "../../planet/3.json";
 import { Sliders } from "../CalendarPart/Sliders";
 import OpenQuestion from "./OpenQuestion";
 

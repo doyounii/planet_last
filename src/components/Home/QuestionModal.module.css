@@ -44,3 +44,15 @@
 
   color: #00c982;
 }
+.openquestion span {
+  position: relative;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  /* or 17px */
+
+  text-align: center;
+  color: #ffff;
+}

@@ -11,8 +11,10 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import planet from "../../planet/high.json";
-import Lottie from "react-lottie";
+import high from "../../planet/1-1.json";
+import highmid from "../../planet/2.json";
+import low from "../../planet/4.json";
+import mid from "../../planet/3.json"; import Lottie from "react-lottie";
 import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
@@ -65,8 +67,8 @@ function Home({ activeHome }) {
     );
   };
 
+
   const lottieOptions = {
-    animationData: planet,
     loop: true,
     autoplay: true,
     rendererSettings: {
@@ -88,6 +90,22 @@ function Home({ activeHome }) {
   const closeModal2 = () => {
     setIsModalOpen2(false);
   };
+
+
+  const eco = 80;
+
+  if (eco >= 0 && eco < 25) {
+    lottieOptions.animationData = low;
+  }
+  else if (eco >= 25 && eco < 50) {
+    lottieOptions.animationData = mid;
+  }
+  else if (eco >= 50 && eco < 75) {
+    lottieOptions.animationData = highmid;
+  }
+  else {
+    lottieOptions.animationData = high;
+  }
 
   return (
     <>
@@ -127,8 +145,7 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <Lottie
-                options={lottieOptions}
-                eventListeners={[
+                options={{ ...lottieOptions }} eventListeners={[
                   {
                     eventName: "complete",
                     callback: () => console.log("the animation completed"),
