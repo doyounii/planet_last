@@ -39,121 +39,6 @@ const tempData = {
         income: false,
       },
       {
-        id: 12,
-        type: "통신",
-        cost: 1402,
-        memo: "new memo2",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "기타",
-            etcMemo: "환경 관련 봉사활동 신청",
-          },
-          {
-            eco: "R",
-            ecoDetail: "식자재 낭비",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 11,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo3",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 21,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo3",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 22,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo3",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 23,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo3",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
         id: 24,
         type: "통신",
         cost: 1403,
@@ -325,13 +210,14 @@ export function DetailItem({ item, ecoCnt }) {
         key={item.id}
       >
         {item.memo !== null ? item.memo : item.type}
-        {item.ecoList.map((data) => {
-          return (
-            <div className={`details-detail ${isEcoT(data.eco)}`}>
-              {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
-            </div>
-          );
-        })}
+        {item.ecoList !== null &&
+          item.ecoList.map((data) => {
+            return (
+              <div className={`details-detail ${isEcoT(data.eco)}`}>
+                {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
+              </div>
+            );
+          })}
       </div>
 
       <div className={`details-cost ${isEco(ecoCnt)}`}>
@@ -344,7 +230,6 @@ export function DetailItem({ item, ecoCnt }) {
 
 function DetailList(props) {
   let date = props.value;
-  const [list, setList] = useState({});
   const [totalList, setTotalList] = useState([]);
   const [detailList, setDetailList] = useState([]);
   const [totalMoney, setTotalMoney] = useState(0);
@@ -352,7 +237,7 @@ function DetailList(props) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `api/calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
+      `calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
         props.value,
         "d"
       )}`,
@@ -365,17 +250,16 @@ function DetailList(props) {
       }
     );
     const data = await response.json();
-    setList(data);
+    setData(data);
 
     setloading(false);
   };
 
   useEffect(() => {
-    fetchData();
-    setData(list);
+    // fetchData();
+    setData(tempData);
+    setloading(false);
   }, []);
-  console.log(list);
-  console.log(props.value);
 
   const setData = (data) => {
     let getList = [];
@@ -458,22 +342,19 @@ function DetailList(props) {
     return <div className="item-list">{renderList}</div>;
   };
 
+  if (loading) return <div style={{ color: "white" }}>로딩중..</div>;
   return (
-    <>
-      {!loading && (
-        <StyledDetailBlock>
-          <div className="detail-list">
-            <div className="selected-detail">
-              <div className="selected-date">
-                {format(props.value, "M. d EEEEE", { locale: ko })}
-              </div>
-              <div className="selected-total">{totalMoney}원</div>
-            </div>
-            {renderList()}
+    <StyledDetailBlock>
+      <div className="detail-list">
+        <div className="selected-detail">
+          <div className="selected-date">
+            {format(props.value, "M. d EEEEE", { locale: ko })}
           </div>
-        </StyledDetailBlock>
-      )}
-    </>
+          <div className="selected-total">{totalMoney}원</div>
+        </div>
+        {renderList()}
+      </div>
+    </StyledDetailBlock>
   );
 }
 
