@@ -3,11 +3,15 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 //토글 스위치
 const CustomSwitch = ({
+  width,
+  height,
   selectionMode,
   option1,
   option2,
   onSelectSwitch,
   selectionColor,
+  backgroundColor1,
+  backgroundColor2,
 }) => {
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
 
@@ -15,9 +19,9 @@ const CustomSwitch = ({
     setSelectionMode(val);
     onSelectSwitch(val);
   };
-
   const setBackgroundColor = (index) =>
-    getSelectionMode === index ? selectionColor : "#1E2A35";
+    getSelectionMode === index ? selectionColor : `backgroundColor${index}`;
+
   const setTextColor = (index) =>
     getSelectionMode === index ? "white" : selectionColor;
 
@@ -32,10 +36,11 @@ const CustomSwitch = ({
     <View>
       <View
         style={{
-          height: 42,
-          width: 145,
+          width: width,
+          height: height,
           marginBottom: 60,
-          backgroundColor: "#1E2A35",
+          backgroundColor:
+            getSelectionMode === 1 ? backgroundColor1 : backgroundColor2,
           borderRadius: 25,
           borderWidth: 1,
           borderColor: "#1E2A35",
@@ -82,6 +87,15 @@ const CustomSwitch = ({
       </View>
     </View>
   );
+};
+
+CustomSwitch.defaultProps = {
+  width: 145,
+  height: 42,
+  option1: "",
+  option2: "",
+  backgroundColor1: "#1E2A35",
+  backgroundColor2: "#1E2A35",
 };
 
 export default CustomSwitch;

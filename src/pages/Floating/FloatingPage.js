@@ -108,6 +108,8 @@ export default function FloatingPage() {
       </div>
       <TopNav process={progress} total={total} />
       <CustomSwitch
+        width={145}
+        height={42}
         selectionMode={1}
         roundCorner={true}
         option1={"수입"}
