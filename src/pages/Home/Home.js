@@ -14,7 +14,8 @@ import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
 import high from "../../planet/1-1.json";
 import highmid from "../../planet/2.json";
 import low from "../../planet/4.json";
-import mid from "../../planet/3.json"; import Lottie from "react-lottie";
+import mid from "../../planet/3.json";
+import Lottie from "react-lottie";
 import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
@@ -67,7 +68,6 @@ function Home({ activeHome }) {
     );
   };
 
-
   const lottieOptions = {
     loop: true,
     autoplay: true,
@@ -91,19 +91,15 @@ function Home({ activeHome }) {
     setIsModalOpen2(false);
   };
 
-
   const eco = 80;
 
   if (eco >= 0 && eco < 25) {
     lottieOptions.animationData = low;
-  }
-  else if (eco >= 25 && eco < 50) {
+  } else if (eco >= 25 && eco < 50) {
     lottieOptions.animationData = mid;
-  }
-  else if (eco >= 50 && eco < 75) {
+  } else if (eco >= 50 && eco < 75) {
     lottieOptions.animationData = highmid;
-  }
-  else {
+  } else {
     lottieOptions.animationData = high;
   }
 
@@ -145,7 +141,8 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <Lottie
-                options={{ ...lottieOptions }} eventListeners={[
+                options={{ ...lottieOptions }}
+                eventListeners={[
                   {
                     eventName: "complete",
                     callback: () => console.log("the animation completed"),
@@ -224,7 +221,7 @@ function Home({ activeHome }) {
           </div>
         </section>
         <section>
-          <Link to="/FloatingPage1" className={activeHome}>
+          <Link to="/FloatingPage" className={activeHome}>
             <AiFillPlusCircle className={homeStyle.floating}></AiFillPlusCircle>
           </Link>
         </section>

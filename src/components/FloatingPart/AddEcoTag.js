@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import SelectEnvirStyle from "./SelectEnvir.module.css";
+import SelectEcoStyle from "./SelectEco.module.css";
 import { IoClose } from "react-icons/io5";
 
 function SelectTag({ submitFunc }) {
@@ -7,7 +7,7 @@ function SelectTag({ submitFunc }) {
   const array = [
     { id: 101, tag: "친환경", isEco: true },
     { id: 102, tag: "반환경", isEco: false },
-    { id: 103, tag: "일반", isEco: "etc" }
+    { id: 103, tag: "일반", isEco: "etc" },
   ];
   //선택한 태그(0 또는 환경 태그 이름(친환경/반환경/일반))
   const [selectedTag, setSelectedTag] = useState(0);
@@ -62,9 +62,9 @@ function SelectTag({ submitFunc }) {
 
   return (
     <section>
-      <div ref={outSideRef} className={SelectEnvirStyle.tag}>
-        <div className={SelectEnvirStyle.coment1}>태그 직접 추가</div>
-        <form className={SelectEnvirStyle.inputMemo} onSubmit={addTag}>
+      <div ref={outSideRef} className={SelectEcoStyle.tag}>
+        <div className={SelectEcoStyle.coment1}>태그 직접 추가</div>
+        <form className={SelectEcoStyle.inputMemo} onSubmit={addTag}>
           <input
             id="inputMemo"
             name="tagName"
@@ -73,28 +73,25 @@ function SelectTag({ submitFunc }) {
             onChange={handleChange}
             value={text}
           />
-          <IoClose
-            onClick={onReset}
-            className={SelectEnvirStyle.close}
-          ></IoClose>
+          <IoClose onClick={onReset} className={SelectEcoStyle.close}></IoClose>
         </form>
 
-        <div className={SelectEnvirStyle.coment2}>어떤 지출인가요?</div>
+        <div className={SelectEcoStyle.coment2}>어떤 지출인가요?</div>
 
-        <div className={SelectEnvirStyle.selectTag}>
+        <div className={SelectEcoStyle.selectTag}>
           {array.map((item) => {
             return (
               <button
-                className={`${SelectEnvirStyle.sbutton} ${
+                className={`${SelectEcoStyle.sbutton} ${
                   item.isEco !== "etc"
                     ? item.isEco
-                      ? SelectEnvirStyle.eco
-                      : SelectEnvirStyle.neco
-                    : SelectEnvirStyle.etc
+                      ? SelectEcoStyle.eco
+                      : SelectEcoStyle.neco
+                    : SelectEcoStyle.etc
                 } ${
                   selectedTag === item.tag
-                    ? SelectEnvirStyle.checked
-                    : SelectEnvirStyle.nchecked
+                    ? SelectEcoStyle.checked
+                    : SelectEcoStyle.nchecked
                 }`}
                 key={item.id}
                 value={item.tag}
@@ -106,9 +103,7 @@ function SelectTag({ submitFunc }) {
           })}
         </div>
         {request && (
-          <div className={SelectEnvirStyle.coment3}>
-            환경 태그를 선택해주세요
-          </div>
+          <div className={SelectEcoStyle.coment3}>환경 태그를 선택해주세요</div>
         )}
         {text}
       </div>

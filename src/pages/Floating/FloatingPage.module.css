@@ -1,0 +1,17 @@
+.floating_conainer {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(13, 21, 29);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: "Pretendard";
+}
+
+.floating_close {
+  position: fixed;
+  right: 85%;
+  top: 32px;
+}
