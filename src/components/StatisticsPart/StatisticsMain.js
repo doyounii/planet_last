@@ -6,7 +6,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import DonutChart from "./DonutChart";
 import LineGraph from "./LineGraph";
 import Eco from './Part2/EcoExpend';
-import Pollution from './Part2/PollutionExpend';
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { InfoModal } from "./QuestionModal";
 import { EcoBarChart } from './Part2/EcoBarChart';
@@ -20,6 +19,7 @@ function StatisticsMain() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [position, setposition] = useState(0);
+  const type = ["eco", "neco"];
 
   const openModal = (e) => {
     setposition(e.clientY);
@@ -123,7 +123,9 @@ function StatisticsMain() {
             </div>
             <div className="line-box"></div>
 
-            <Link to="/EcoCategory" name="eco">
+            <Link to="/EcoCategory" state={{
+              name: type[0],
+            }}>
               <div className="expend-box">
                 <h1>어떤 친환경 지출을 했을까요? 👍</h1>
                 <IoIosArrowForward className="box-icon" />
@@ -136,7 +138,9 @@ function StatisticsMain() {
 
             <div className="line-box"></div>
 
-            <Link to="/EcoCategory" name="neco">
+            <Link to="/EcoCategory" state={{
+              name: type[1],
+            }}>
               <div className="expend-box">
                 <h1>어떤 반환경 지출을 했을까요? 👎</h1>
                 <IoIosArrowForward className="box-icon" />

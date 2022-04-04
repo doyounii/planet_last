@@ -20,6 +20,7 @@ import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
+import DonutChart from '../../components/StatisticsPart/DonutChart';
 
 function Home({ activeHome }) {
   const [income, setIncome] = useState(0);

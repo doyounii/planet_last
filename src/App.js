@@ -36,6 +36,7 @@ import FloatingPrice2 from "./pages/Floating/FloatingPrice2";
 import Login from "./pages/Login/Login";
 import DetailCategory from "./components/CalendarPart/DetailCategory";
 import EcoCategory from './pages/Statistics/Part2/EcoCategory';
+import Detail from './components/StatisticsPart/Part2/ExpendDetail';
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
       <Route path="/informationPage" element={<InformationPage />}></Route>
       <Route path="/coupon" element={<Coupon />}></Route>
       <Route path="/couponJoin" element={<CouponJoin />}></Route>
+      <Route path="/detail" element={<Detail />}></Route>
     </Routes>
   );
 }
