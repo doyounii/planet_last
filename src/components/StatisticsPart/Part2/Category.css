@@ -153,3 +153,15 @@
   /* mid_gray */
   color: #566479;
 }
+
+.dateDtail {
+  margin: 10px 20px;
+  top: 100px;
+  color: #566479;
+
+}
+
+.dateDtail p {
+  margin-top: 100px;
+  color: #566479;
+}

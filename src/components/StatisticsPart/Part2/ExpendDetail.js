@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './Category.css';
+
 import { FaChevronLeft } from 'react-icons/fa';
 
 const expendData = [
@@ -264,7 +265,29 @@ function ExpendDetail() {
         if (data.ecodata === "eco") {
             for (let i = 0; i < expendData[exType].ecoList.length; i++) {
                 renderEcoExpendList.push(
-                    <div>
+                    <div className='dateDetail'>
+                        <p style={{ color: '#00C982' }}>
+                            ●
+                        </p>
+                        <p>
+                            sfdf {expendData[exType].memo}
+                        </p>
+                        <p>
+                            {expendData[exType].ecoList[i].ecoDetail}
+                        </p>
+                    </div>
+                )
+
+            }
+        } else {
+            for (let i = 0; i < expendData[exType].ecoList.length; i++) {
+                renderEcoExpendList.push(
+                    <div className='dateDetail'>
+                        <p style={{ color: '#566479' }}>
+                            ●
+                        </p>
+                        <p>
+                            {expendData[exType].memo}                        </p>
                         {expendData[exType].ecoList[i].ecoDetail}
                     </div>
                 )
@@ -292,7 +315,6 @@ function ExpendDetail() {
                     <h1>총 지출 금액 원</h1>
                 </div>
                 <div className="line-box"></div>
-                {data.exType}sss
 
                 {renderEcoExpendList(data.ecodata)}
             </div>

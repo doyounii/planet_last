@@ -41,6 +41,27 @@ class Kakao extends Component {
 const Container = styled.div`
     display: flex;
     flex-flow: column wrap;
+    position: relative;
+  width: 343px;
+  height: 48px;
+  top: 35px;
+
+  background: #FEE500;
+  border-radius: 10px;
+  box-sizing: border-box;
+
+  border: 0;
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* black */
+
+  color: #000000;
+  justify-content: center;
+  text-align: center;
 `
 
 

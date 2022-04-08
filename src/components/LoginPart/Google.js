@@ -41,6 +41,29 @@ class Google extends Component {
 const Container = styled.div`
     display: flex;
     flex-flow: column wrap;
+
+    position: relative;
+    width: 343px;
+    height: 45px;
+    top: 21px;
+    background: #ffffff;
+    /* gray_01 */
+  
+    border: 1px solid #d8d8d8;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 0;
+  
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+  
+    color: #000000;
+    justify-content: center;
+    text-align: center;
 `
 
 

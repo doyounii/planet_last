@@ -19,7 +19,6 @@ function StatisticsMain() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [position, setposition] = useState(0);
-  const type = ["eco", "neco"];
 
   const openModal = (e) => {
     setposition(e.clientY);
@@ -124,7 +123,7 @@ function StatisticsMain() {
             <div className="line-box"></div>
 
             <Link to="/EcoCategory" state={{
-              name: type[0],
+              name: "eco",
             }}>
               <div className="expend-box">
                 <h1>어떤 친환경 지출을 했을까요? 👍</h1>
@@ -139,7 +138,7 @@ function StatisticsMain() {
             <div className="line-box"></div>
 
             <Link to="/EcoCategory" state={{
-              name: type[1],
+              name: "neco",
             }}>
               <div className="expend-box">
                 <h1>어떤 반환경 지출을 했을까요? 👎</h1>

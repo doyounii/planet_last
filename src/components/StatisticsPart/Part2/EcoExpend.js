@@ -206,10 +206,14 @@ function EcoExpend(props) {
                     <div className="day-breakdown-box">
                         <p>지출 카테고리 <span>태그개수</span></p>
                         {renderExpendList(props)}
-                        < div className='more' >
-                            <h1 style={{ color: '#C7D2E8' }}>● 더보기 5개</h1>
-                            <h2>2개</h2>
-                        </div >
+                        <Link to="/EcoCategory" state={{
+                            name: "eco",
+                        }}>
+                            < div className='more' >
+                                <h1 style={{ color: '#C7D2E8' }}>● 더보기 5개</h1>
+                                <h2>2개</h2>
+                            </div >
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -223,10 +227,14 @@ function EcoExpend(props) {
                     <div className="day-breakdown-box">
                         <p>지출 카테고리 <span>태그개수</span></p>
                         {renderExpendList(props)}
-                        <div className='more'>
-                            <h1 style={{ color: '#C7D2E8' }}>● 더보기 10개</h1>
-                            <h2>2개</h2>
-                        </div>
+                        <Link to="/EcoCategory" state={{
+                            name: "neco",
+                        }}>
+                            <div className='more'>
+                                <h1 style={{ color: '#C7D2E8' }}>● 더보기 10개</h1>
+                                <h2>2개</h2>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>
