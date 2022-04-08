@@ -33,7 +33,7 @@ const textSet = [
   "해당하는 카테고리를 선택해 주세요",
 ];
 
-function SelectType({ propType, type, sendData }) {
+function SelectType({ propType, type, sendData, buttons }) {
   const [selected, setSelected] = useState({ type: "", emoji: "" });
   const [disabled, setDisabled] = useState(true);
   const array = allCategory[type];
@@ -52,39 +52,52 @@ function SelectType({ propType, type, sendData }) {
   function handleButton(value) {
     if (value.type === selected.type) {
       setSelected({ type: "" });
+      sendData("");
       setDisabled(true);
     } else {
       setSelected(value);
+      sendData(value);
       setDisabled(false);
     }
   }
 
   const onClickHandler = (btnType) => {
-    sendData({ btnType: btnType, value: selected });
+    if (sendData) {
+      sendData({ btnType: btnType, value: selected });
+    }
   };
 
   return (
-    <section className="shared-container type-container">
-      {text}
-      <div className="type">
-        {array.map((value, idx) => {
-          return (
-            <button
-              key={idx}
-              className={`type-box ${
-                selected.type === value.type ? "type-box-clicked" : ""
-              }`}
-              onClick={() => handleButton(value)}
-            >
-              <p className="type-box-emoji">{value.emoji}</p>
-              <p className="type-box-text">{value.type}</p>
-            </button>
-          );
-        })}
-      </div>
-      <FloatingButton onClick={onClickHandler} disabled={disabled} />
-    </section>
+    <>
+      <section className={`shared-container type-container wrap${type}`}>
+        {text}
+        <div className="type">
+          {array.map((value, idx) => {
+            return (
+              <button
+                key={idx}
+                className={`type-box ${
+                  selected.type === value.type ? "type-box-clicked" : ""
+                }`}
+                onClick={() => handleButton(value)}
+              >
+                <p className="type-box-emoji">{value.emoji}</p>
+                <p className="type-box-text">{value.type}</p>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+      {buttons && (
+        <FloatingButton onClick={onClickHandler} disabled={disabled} />
+      )}
+    </>
   );
 }
+
+SelectType.defaultProps = {
+  propType: { type: "", emoji: "" },
+  buttons: true,
+};
 
 export default SelectType;

@@ -24,33 +24,35 @@ function Memo({ propType, sendData }) {
     setMemo("");
   };
   return (
-    <section className={`shared-container memo-container ${up ? "move" : ""}`}>
-      남기고 싶은 메모를 작성해 주세요
-      <div className="type">
-        <div className={`type-box type-box-clicked`}>
-          <p className="type-box-emoji">{propType.emoji}</p>
-          <p className="type-box-text">{propType.type}</p>
+    <>
+      <div className={`shared-container memo-container ${up ? "move" : ""}`}>
+        <p>남기고 싶은 메모를 작성해 주세요</p>
+        <div className="type">
+          <div className={`type-box type-box-clicked`}>
+            <p className="type-box-emoji">{propType.emoji}</p>
+            <p className="type-box-text">{propType.type}</p>
+          </div>
+        </div>
+        <div ref={ref} className="input-data input-memo">
+          <input
+            id="inputMemo"
+            type="text"
+            placeholder="내용을 입력하세요"
+            onChange={handleChange}
+            value={memo}
+          />
+          <CgClose onClick={onReset} className="close" />
         </div>
       </div>
-      <div ref={ref} className="input-data input-memo">
-        <input
-          id="inputMemo"
-          type="text"
-          placeholder="ex) 스타벅스 아메리카노"
-          onChange={handleChange}
-          value={memo}
-        />
-        <CgClose onClick={onReset} className="close" />
-      </div>
       <FloatingButton
-        className={`memo-btn-container ${up ? "move" : ""}`}
+        className="memo-btn"
         onClick={onClickHandler}
         disabled={disabled}
       />
       <div className="memo-skip-btn" onClick={() => onClickHandler("다음")}>
         넘어갈래요
       </div>
-    </section>
+    </>
   );
 }
 

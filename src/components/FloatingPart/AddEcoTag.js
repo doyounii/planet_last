@@ -105,7 +105,6 @@ function SelectTag({ submitFunc }) {
         {request && (
           <div className={SelectEcoStyle.coment3}>환경 태그를 선택해주세요</div>
         )}
-        {text}
       </div>
     </section>
   );

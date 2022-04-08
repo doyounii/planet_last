@@ -8,7 +8,6 @@ import DetailCategory from "./components/CalendarPart/DetailCategory";
 import Statistics from "./pages/Statistics/Statistics";
 import StatisticsView from "./pages/Statistics/StatisticsView";
 import StatisticsIncome from "./pages/Statistics/StatisticsIncome";
-import StatisticsExpend from "./pages/Statistics/StatisticsExpend";
 import StatisticsModify from "./pages/Statistics/StatisticsModify";
 
 import Diary from "./pages/Diary/Diary";
@@ -36,8 +35,10 @@ function App() {
       <Route path="/calendar/:month/:day" element={<DetailCategory />}></Route>
       <Route path="/statistics" element={<Statistics />}></Route>
       <Route path="/statisticsView" element={<StatisticsView />}></Route>
-      <Route path="/statisticsIncome" element={<StatisticsIncome />}></Route>
-      <Route path="/statisticsExpend" element={<StatisticsExpend />}></Route>
+      <Route
+        path="/statisticsView/:way/:year/:month"
+        element={<StatisticsIncome />}
+      ></Route>
       <Route path="/statisticsModify" element={<StatisticsModify />}></Route>
       <Route path="/diary" element={<Diary />}></Route>
       <Route path="/news" element={<News />}></Route>

@@ -7,10 +7,12 @@
   align-items: center;
   transition: 0.5s;
 }
+.date-price-container {
+  margin-top: 10vh;
+}
 
-.shared-container.move {
-  transform: translatey(-60px);
-  height: 50%;
+.date-price-container.move:not(:last-child) {
+  transform: translatey(-20px);
 }
 
 .date-price-container.move * {
@@ -19,22 +21,19 @@
 }
 
 .date-price-container.move .moveup {
-  transform: translatey(120px);
+  transform: translatey(100px);
 }
 .select-eco-container.move {
-  transform: translatey(-170px);
-  height: 100%;
-}
-.select-eco-container.move .select-eco-btn {
-  transform: translatey(0);
-  height: 100%;
+  transform: translatey(-35vh);
 }
 
 .memo-container.move .type,
-.memo-container.move .inputData input,
-.memo-container.move .memo-btn-container {
-  transition: 0.3s;
-  margin-top: 10px;
+.memo-container.move .input-data input {
+  transition: 0.5s;
+}
+
+.shared-container.memo-container.move {
+  transform: translateY(-50px);
 }
 
 .input-data input {
@@ -96,6 +95,15 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.wrap0,
+.wrap1 {
+  margin-top: 15vh;
+}
+.wrap2 .type {
+  margin-top: 3vh;
+  height: 60vh;
+  overflow: scroll;
+}
 .type-box {
   position: relative;
   display: flex;
@@ -135,11 +143,15 @@
 
 .memo-skip-btn {
   position: absolute;
-  bottom: 20px;
+  bottom: 15px;
   color: #566479;
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   cursor: pointer;
+}
+
+.select-eco-comment {
+  margin: 8vh 0;
 }

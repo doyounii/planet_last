@@ -29,7 +29,6 @@ export function Modal({
   };
 
   useEffect(() => {
-    console.log("ener");
     document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
     return () => {
       const scrollY = document.body.style.top;

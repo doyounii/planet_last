@@ -1,103 +1,156 @@
 /*세부내역 수정 뷰*/
 .modify-container {
-    width: 100vw;
-    height: 100vh;
-    font-family: Pretendard;
-    margin-top: 26px;
+  width: 100vw;
+  height: 100vh;
+  font-family: Pretendard;
+  color: white;
+  position: relative;
 }
 
-.modify-container h1 {
-    display: inline;
-    font-family: Pretendard;
-    font-size: 20px;
-    margin-left: 20px;
-    margin-bottom: 37px;
+/*header style*/
+.modify-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 5% 0 5%;
+}
+.modify-header .modify-header-title {
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.modify-container input {
-    display: inline;
-    font-family: Pretendard;
-    font-size: 20px;
-    margin-left: 20px;
-    background-color: transparent;
-    color: #ffffff;
-    border: 0;
-    outline: 0;
-    width: 130px;
-    height: 20px;
+.modify-header .modify-header-delete {
+  width: 24px;
+  height: 24px;
+}
+/*title style*/
+.modify-title {
+  margin: 25px 0 30px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
-.modify-container p {
-    display: inline;
-    position: relative;
-    font-family: Pretendard;
-    font-size: 22px;
-    margin-left: 7px;
-    top: 3.5px;
-    color: rgb(255, 255, 255, 0.5);
-    cursor: pointer;
+.modify-title .modify-content-title {
+  font-weight: 600;
+  font-size: 20px;
+  margin-left: 5%;
+}
+.modify-title .modify-edit-title-icon {
+  width: 21px;
+  height: 21px;
+  opacity: 0.5;
+  margin-left: 5px;
+}
+/*modify-content-block*/
+.modify-detail-block {
+  width: 90%;
+  margin: 0 5%;
 }
 
-.modify-container .modify-detail {
-    width: 100%;
-    margin-bottom: 33px;
-    margin-top: 38px;
+.modify-detail-block > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0;
+  width: 100%;
 }
 
-.modify-container .modify-detail p {
-    font-family: Pretendard;
-    font-size: 14px;
-    display: inline;
-    color: #939393;
-    margin-left: 20px;
-    margin-right: 33px;
+.modify-detail-block .modify-detail-title {
+  font-size: 14px;
+  color: #939393;
+  margin-right: 5%;
+  width: 10%;
 }
 
-.modify-container .modify-detail input {
-    font-family: Pretendard;
-    font-size: 15px;
-    position: relative;
-    top: 3.5px;
-    display: inline;
-    margin: 0;
-    border: 0;
-    outline: 0;
-    background-color: transparent;
-    color: #ffffff;
+.modify-detail-block .modify-detail-value {
+  width: 100%;
+  font-size: 15px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 0;
+  outline: 0;
+  padding-bottom: 3px;
+  border-bottom: solid 1.5px transparent;
+}
+.modify-detail-block .modify-detail-value:focus {
+  font-size: 15px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 0;
+  outline: 0;
+  border-style: none;
+  caret-color: #00c982;
+  padding-bottom: 3px;
+  border-bottom: solid 1.5px #00c982;
 }
 
-.modify-container .modify-detail .modify-tag {
-    font-family: Pretendard;
-    font-size: 15px;
-    position: relative;
-    top: 3.5px;
-    display: inline;
-    margin-right: 10px;
-    border-radius: 43px;
-    padding: 8px 18px 8px 18px;
-    background-color: rgba(0, 201, 130, 0.1);
+.modify-save-btn {
+  right: 5vw;
+  font-size: 15px;
+  width: 90vw;
+  height: 7vh;
+  border-radius: 30px;
+  bottom: 20px;
+  position: absolute;
+  text-align: center;
+  border: 0;
+  color: #141b27;
+  background-color: #00c982;
+  cursor: pointer;
+}
+.modify-save-btn:disabled {
+  right: 5vw;
+  font-size: 15px;
+  width: 90vw;
+  height: 7vh;
+  border-radius: 30px;
+  bottom: 20px;
+  position: absolute;
+  text-align: center;
+  border: 0;
+  color: #141b27;
+  background-color: rgb(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
-.modify-container .modify-btn {
-    width: 100%;
-    margin-top: 253px;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+#modal-root .calendars {
+  width: 90%;
+  margin-top: 37px;
+  overflow: scroll;
 }
 
-.modify-container .modify-btn button{
-    font-family: Pretendard;
-    font-size: 15px;
-    width: 342px;
-    height: 52px;
-    border-radius: 30px;
-    margin: 0 auto;
-    position: relative;
-    text-align: center;
-    border: 0;
-    color: #141B27;
-    background-color: rgb(255, 255, 255, 0.2);
-    cursor: pointer;
+#modal-root .calendars .body .col {
+  height: 40px;
+}
+
+#modal-root .row {
+  width: 90%;
+  margin: 0px 3%;
+}
+
+#modal-root .number {
+  opacity: 1;
+}
+
+#modal-root .header {
+  position: absolute;
+  background-color: transparent;
+  padding: 5px;
+  top: 45px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+#modal-root .modify-modal-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+#modal-root .type-container.wrap0 {
+  margin-top: 10vh;
+  height: 30vh;
 }
