@@ -16,6 +16,8 @@ import MyPage from "./pages/Setting/MyPage";
 import TermsOfUse from "./pages/Setting/TermsOfUse";
 import UsePage from "./pages/Setting/UsePage";
 import InformationPage from "./pages/Setting/InformationPage";
+import Inquiry from "./pages/Setting/Inquiry";
+import InquiryForm from "./pages/Setting/InquiryForm";
 import Coupon from "./pages/Coupon/Coupon";
 import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
@@ -54,11 +56,7 @@ function App() {
       <Route path="/myPage" element={<MyPage />}></Route>
       <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
       <Route path="/ecoMission" element={<EcoMission />}></Route>
-      <Route
-        path="/floatingExpensePage"
-        element={<FloatingExpensePage />}
-      ></Route>
-
+      <Route path="/floatingExpensePage" element={<FloatingExpensePage />}></Route>
       <Route path="/floatingpage1" element={<FloatingPage1 />}></Route>
       <Route path="/floatingPage2" element={<FloatingPage2 />}></Route>
       <Route path="/floatingDate" element={<FloatingDate />}></Route>
@@ -78,6 +76,8 @@ function App() {
       <Route path="/informationPage" element={<InformationPage />}></Route>
       <Route path="/coupon" element={<Coupon />}></Route>
       <Route path="/couponJoin" element={<CouponJoin />}></Route>
+      <Route path="/inquiry" element={<Inquiry />}></Route>
+      <Route path="/inquiryForm" element={<InquiryForm />}></Route>
     </Routes>
   );
 }

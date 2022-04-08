@@ -17,7 +17,7 @@ function Coupon() {
             MY 쿠폰함
         </div>
 
-        <Link to="/CouponJoin" style={{ textDecoration: 'none' }}>
+        <Link to="/CouponJoin" style={{ textDecoration: 'none', color: 'white' }}>
         <div className={ CouponStyle.coupon_box }>
             쿠폰 등록
             <FaChevronRight className={ CouponStyle.info_icon }/>
@@ -25,7 +25,7 @@ function Coupon() {
         </Link>
 
         <div className={ CouponStyle.coupon_detail_box }>
-            <h1>현재 사용가능한 쿠폰 <b style={{color:"#00C982"}}>0</b>장이 남았어요</h1>
+            <h1>현재 사용가능한 쿠폰 <b style={{color:"#00C982"}}>1</b>장이 남았어요</h1>
             <div className={ CouponStyle.drop_box }>
               <p>총 1개</p>
               <div className={ CouponStyle.dropbox }><DropBox /></div>
@@ -34,10 +34,14 @@ function Coupon() {
 
         <div className={ CouponStyle.coupon_use_box }>
           <div className={ CouponStyle.coupon_available }>
+            <div className={ CouponStyle.coupon_dday }>D-365</div>
+            <img src="img/coupon.png" alt="planet-coupon"></img>
             <h1>친환경 상점 〈폼폼〉</h1>
             <p>10% 할인쿠폰</p>
           </div>
           <div className={ CouponStyle.coupon_expiration }>
+            <div className={ CouponStyle.coupon_dday }>사용완료</div>
+            <img src="img/coupon.png" alt="planet-coupon"></img>
             <h1>친환경 상점 〈폼폼〉</h1>
             <p>10% 할인쿠폰</p>
           </div>
