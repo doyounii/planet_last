@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import "./Statistics.css";
-import DateHeader from "../DateHeader";
+import DateHeader from "../../components/DateHeader";
 import ko from "date-fns/locale/ko";
 import HistorySample from "../../components/History/HistoryBack";
 
-function StatisticsDetail() {
+function StatisticsWays() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const { way, year, month } = useParams();
   const income = way === "income" ? true : false;
@@ -21,8 +21,8 @@ function StatisticsDetail() {
 
   return (
     <div className="static-detail-container">
-      <HistorySample />
       <DateHeader
+        goBack={true}
         getDate={currentMonth}
         sendDate={(date) => setCurrentMonth(date)}
       />
@@ -79,7 +79,7 @@ function StatisticsDetail() {
   );
 }
 
-StatisticsDetail.defaultProps = {
+StatisticsWays.defaultProps = {
   income: true,
 };
 const tempData = [
@@ -203,4 +203,4 @@ const tempData = [
 //     });
 // };
 
-export default StatisticsDetail;
+export default StatisticsWays;

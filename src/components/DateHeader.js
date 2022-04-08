@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { format, subMonths, addMonths } from "date-fns";
 import { IoIosArrowForward } from "react-icons/io";
 import styled from "styled-components";
 
-function DateHeader({ getDate, sendDate }) {
+function DateHeader({ goBack, getDate, sendDate }) {
+  const navigate = useNavigate();
   const [currentMonth, setCurrentMonth] = useState(getDate);
   useEffect(() => {
     setCurrentMonth(getDate);
@@ -25,6 +27,14 @@ function DateHeader({ getDate, sendDate }) {
   return (
     <StyledDateHeader>
       <div className="header row flex-middle">
+        {goBack && (
+          <IoIosArrowForward
+            className="gobackarrow"
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
+        )}
         <div className="col col-start">
           <IoIosArrowForward
             className="icon"
@@ -45,7 +55,17 @@ function DateHeader({ getDate, sendDate }) {
   );
 }
 
+DateHeader.defaultProps = {
+  goBack: false,
+};
+
 const StyledDateHeader = styled.div`
+  .gobackarrow {
+    position: fixed;
+    transform: rotate(180deg);
+    margin-left: 3%;
+    width: 20px;
+  }
   .row {
     padding: 0;
     display: flex;
@@ -91,6 +111,7 @@ const StyledDateHeader = styled.div`
 
   .header .icon {
     color: #9a9a9a;
+    width: 15px;
     cursor: pointer;
     margin: 0 2em;
   }

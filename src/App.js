@@ -7,7 +7,7 @@ import DetailCategory from "./components/CalendarPart/DetailCategory";
 
 import Statistics from "./pages/Statistics/Statistics";
 import StatisticsView from "./pages/Statistics/StatisticsView";
-import StatisticsIncome from "./pages/Statistics/StatisticsIncome";
+import StatisticsWays from "./pages/Statistics/StatisticsWays";
 import StatisticsModify from "./pages/Statistics/StatisticsModify";
 
 import Diary from "./pages/Diary/Diary";
@@ -37,7 +37,7 @@ function App() {
       <Route path="/statisticsView" element={<StatisticsView />}></Route>
       <Route
         path="/statisticsView/:way/:year/:month"
-        element={<StatisticsIncome />}
+        element={<StatisticsWays />}
       ></Route>
       <Route path="/statisticsModify" element={<StatisticsModify />}></Route>
       <Route path="/diary" element={<Diary />}></Route>
