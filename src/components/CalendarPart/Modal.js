@@ -13,6 +13,7 @@ export function Modal({
   maskClosable,
   closable,
   visible,
+  background,
   children,
 }) {
   const onMaskClick = (e) => {
@@ -28,6 +29,7 @@ export function Modal({
   };
 
   useEffect(() => {
+    console.log("ener");
     document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
     return () => {
       const scrollY = document.body.style.top;
@@ -43,9 +45,13 @@ export function Modal({
         className={className}
         onClick={maskClosable ? onMaskClick : null}
         tabIndex={-1}
-        visible={visible}
       >
-        <ModalInner tabIndex={0} className="modal-inner">
+        <ModalInner
+          visible={visible}
+          background={background}
+          tabIndex={0}
+          className="modal-inner"
+        >
           {closable && <CgClose className="modal-close" onClick={close} />}
           {children}
         </ModalInner>
@@ -112,7 +118,7 @@ export function InfoModal({
                 친환경 태그가 많을수록 초록빛을 띠어요
               </span>
               <RoundArrow className="calendar-arrow" />
-              <div className="calendar">
+              <div className="calendars">
                 <div className="body">
                   <div class="row">
                     <div class="col cell">
@@ -177,6 +183,7 @@ export function InfoModal({
 }
 
 Modal.defaultProps = {
+  background: "#141b27",
   visible: false,
   closable: true,
   maskClosable: true,
@@ -195,7 +202,6 @@ Modal.propTypes = {
 const ModalWrapper = styled.div`
   font-family: Pretendard;
   box-sizing: border-box;
-  display: ${(props) => (props.visible ? "block" : "none")};
   position: fixed;
   top: 0;
   right: 0;
@@ -273,9 +279,10 @@ const ModalWrapper = styled.div`
     left: 50%;
   }
 
-  .calendar {
-    position: fixed;
-    top: ${(props) => props.className + 120}px;
+  .calendars {
+    position: absolute;
+    width: 100%;
+    top: ${(props) => props.className + 190}px;
   }
 `;
 
@@ -316,11 +323,13 @@ const ModalInner = styled.div`
   box-sizing: border-box;
   position: relative;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-  background-color: #141b27;
+  background-color: ${(props) => (props.background ? "#202632" : "#141b27")};
   border-radius: 10px;
-  width: 90%;
+  width: ${(props) => (props.visible ? "90%" : "100%")};
+  height: ${(props) => (props.visible ? "none" : "50vh")};
   top: 50%;
-  transform: translateY(-50%);
+  transform: ${(props) => (props.visible ? "translateY(-50%)" : "none")};
   margin: 0 auto;
   padding: 20px 20px;
+  color: white;
 `;

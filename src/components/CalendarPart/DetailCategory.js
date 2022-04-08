@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { DetailItem } from "./DetailList";
 import SwipeableList from "../Swipeable/SwipeableList";
@@ -9,7 +9,7 @@ import Footer from "../Footer/Footer";
 function DetailCategory() {
   const history = useNavigate();
   const data = useLocation().state;
-  const [detailList, setDetailList] = useState(data.typeDetail);
+  const [detailList, setDetailList] = useState([]);
 
   const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
 
@@ -24,6 +24,12 @@ function DetailCategory() {
       });
     }, 2000);
   };
+
+  useEffect(() => {
+    if (data.typeDetail !== null) {
+      setDetailList(data.typeDetail);
+    }
+  }, [data]);
 
   const fetchData = async (index, income) => {
     const api = income ? "income" : "expenditure";
