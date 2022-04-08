@@ -22,21 +22,22 @@
   color: #ffffff;
 }
 
-.forward-arrow {
+.forwardArrow {
   color: white;
   width: 18px;
   height: 18px;
   margin-right: 10px;
   cursor: pointer;
-
+  size: 16px;
 }
 
-.category {
+.cateGory {
   display: inline;
-  font-family: Pretendard;
-  font-size: 20px;
-  margin-left: 20px;
-  margin-bottom: 37px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
 
   margin: 0;
   flex-grow: 1;
@@ -109,4 +110,58 @@
   margin-right: 20px;
   top: -3px;
   cursor: pointer;
+}
+
+
+.detailType {
+  position: relative;
+  margin: 30px;
+  margin-top: 40px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 16px;
+  /* identical to box height, or 89% */
+  color: #FFFFFF;
+}
+
+.detailType p {
+  position: relative;
+  display: inline;
+  font-size: 18px;
+  font-family: Pretendard;
+  color: #FFFFFF;
+  line-height: 16px;
+
+  float: right;
+}
+
+.detailType h1 {
+  position: relative;
+  left: 30px;
+  top: 14px;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+
+
+  /* mid_gray */
+  color: #566479;
+}
+
+.dateDtail {
+  margin: 10px 20px;
+  top: 100px;
+  color: #566479;
+
+}
+
+.dateDtail p {
+  margin-top: 100px;
+  color: #566479;
 }

@@ -11,15 +11,16 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import high from "../../planet/1-1.json";
-import highmid from "../../planet/2.json";
-import low from "../../planet/4.json";
-import mid from "../../planet/3.json"; import Lottie from "react-lottie";
+import high from "../../planet/1-2.json";
+import highmid from "../../planet/2-2.json";
+import low from "../../planet/4-2.json";
+import mid from "../../planet/3-2.json"; import Lottie from "react-lottie";
 import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
+import DonutChart from '../../components/StatisticsPart/DonutChart';
 
 function Home({ activeHome }) {
   const [income, setIncome] = useState(0);
@@ -28,7 +29,7 @@ function Home({ activeHome }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
-
+  const [isDonut, setIsDonut] = useState(false);
   const [loading, setloading] = useState(true);
 
   const [position2, setposition2] = useState(0);
@@ -91,6 +92,9 @@ function Home({ activeHome }) {
     setIsModalOpen2(false);
   };
 
+  const handleLottie = () => {
+    setIsDonut(true);
+  };
 
   const eco = 80;
 
@@ -139,19 +143,21 @@ function Home({ activeHome }) {
                 ></EditName>
               )}
             </div>
-            <div className={homeStyle.planet}>
+            <div>
               <AiOutlineQuestionCircle
                 className={homeStyle.question}
                 onClick={(e) => openModal(e)}
               />
-              <Lottie
-                options={{ ...lottieOptions }} eventListeners={[
-                  {
-                    eventName: "complete",
-                    callback: () => console.log("the animation completed"),
-                  },
-                ]}
-              />
+              <div onClick={handleLottie} className={homeStyle.planet}>
+                {isDonut ? <div style={{ width: '250px', height: '250px' }}>
+                  <DonutChart style={{ width: '250px', height: '250px' }}></DonutChart> </div> : <Lottie options={{ ...lottieOptions }} eventListeners={[
+                    {
+                      eventName: "complete",
+                      callback: () => console.log("the animation completed"),
+                    },
+                  ]}
+                    isClickToPauseDisabled={true}></Lottie>}
+              </div>
 
               <div>
                 {isModalOpen && (
@@ -231,7 +237,7 @@ function Home({ activeHome }) {
         <Footer activeMenu="home">
           <div>홈</div>
         </Footer>
-      </div>
+      </div >
     </>
   );
 }
