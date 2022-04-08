@@ -8,11 +8,15 @@ import LineGraph from "./LineGraph";
 import Eco from "./Part2/EcoExpend";
 import Pollution from "./Part2/PollutionExpend";
 import DateHeader from "../DateHeader";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import { EcoBarChart } from "./Part2/EcoBarChart";
+import { InfoModal } from "../CalendarPart/Modal";
 
 function StatisticsMain() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [position, setposition] = useState(0);
 
   const nowMFormat = "M";
 
@@ -25,11 +29,18 @@ function StatisticsMain() {
   const onchangeDate = (date) => {
     setCurrentMonth(date);
   };
+  const openModal = (e) => {
+    setposition(e.clientY);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div className="calendar">
+    <div className="statistic-main">
       <DateHeader getDate={currentMonth} sendDate={onchangeDate} />
-      <div className={`statistices`}>
+      <div className="stat-main-contents">
         <Link to="/StatisticsView">
           <div className="month-box">
             <div className="month-breakdown">
@@ -53,8 +64,22 @@ function StatisticsMain() {
 
         <div className="tag-graph-box" style={containerStyle}>
           <h1>
-            친환경 별자리 관측소 <img src="img/scope.png" alt="scope"></img>
+            친환경 별자리 관측소 <img src="img/scope.png" alt="scope" />
+            &nbsp;
+            <AiOutlineQuestionCircle
+              className="eco-info"
+              onClick={(e) => openModal(e)}
+            />
           </h1>
+          {isModalOpen && (
+            <InfoModal
+              className={position}
+              onClose={closeModal}
+              maskClosable={true}
+              visible={true}
+              children={true}
+            ></InfoModal>
+          )}
 
           <p>지난달 이맘때보다</p>
           <h2>

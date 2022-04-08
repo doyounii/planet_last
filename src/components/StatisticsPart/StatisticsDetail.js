@@ -106,6 +106,12 @@ const tempData = {
   ],
 };
 
+const OPTIONS = [
+  { value: "all", name: "전체" },
+  { value: "income", name: "수입" },
+  { value: "expend", name: "지출" },
+];
+
 function StatisticsDetail() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [detailData, setDetailData] = useState({
@@ -121,7 +127,7 @@ function StatisticsDetail() {
   const wayEmoji = (way) => (way === "은행" ? "🏦" : "카드" ? "💳" : "💰");
 
   return (
-    <div className="calendar">
+    <div className="static-detail-container">
       <DateHeader
         getDate={currentMonth}
         sendDate={(date) => setCurrentMonth(date)}
@@ -179,7 +185,7 @@ function StatisticsDetail() {
 
       <div className="statistics-box">
         <div className="drop-box">
-          <DropBox />
+          <DropBox options={OPTIONS} defaultValue="all" />
         </div>
 
         {detailList.map((data) => {

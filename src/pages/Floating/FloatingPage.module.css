@@ -14,4 +14,5 @@
   position: fixed;
   right: 85%;
   top: 32px;
+  z-index: 10;
 }

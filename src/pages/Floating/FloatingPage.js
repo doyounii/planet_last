@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import FloatingStyle from "./FloatingPage.module.css";
 import HistoryToHome from "../../components/History/HistoryToHome";
@@ -11,6 +12,7 @@ import SelectEco from "../../components/FloatingPart/SelectEco";
 import "./Contents.css";
 
 export default function FloatingPage() {
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(1);
   const [total, setTotal] = useState(4);
 
@@ -103,7 +105,13 @@ export default function FloatingPage() {
 
   return (
     <div className={FloatingStyle.floating_conainer}>
-      <div className={FloatingStyle.floating_close}>
+      <div
+        className={FloatingStyle.floating_close}
+        onClick={() => {
+          console.log("clicked!!");
+          navigate("/", { replace: true });
+        }}
+      >
         <HistoryToHome />
       </div>
       <TopNav process={progress} total={total} />
