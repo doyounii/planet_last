@@ -6,7 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import DonutChart from "../../components/StatisticsPart/DonutChart";
 import LineGraph from "../../components/StatisticsPart/LineGraph";
 import Eco from "../../components/StatisticsPart/Part2/EcoExpend";
-import Pollution from "../../components/StatisticsPart/Part2/PollutionExpend";
+
 import DateHeader from "../../components/DateHeader";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 

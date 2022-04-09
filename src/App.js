@@ -3,7 +3,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import CalendarPage from "./pages/Calendar/CalendarPage";
-import DetailCategory from "./components/CalendarPart/DetailCategory";
 
 import Statistics from "./pages/Statistics/Statistics";
 import StatisticsView from "./pages/Statistics/StatisticsView";

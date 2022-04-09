@@ -40,6 +40,8 @@ function CalendarBody({
   const [selectedDate, setSelectedDate] = useState(selectedValue);
   const [isMonthView, setIsMonthView] = useState(monthView);
 
+  const [loading, setloading] = useState(true);
+  const [message, setMessage] = useState([]);
   const [daysData, setDaysData] = useState([]);
   const [anniversary, setAnniversary] = useState([]);
   const [quote, setquote] = useState("");
@@ -50,12 +52,12 @@ function CalendarBody({
     item > 7
       ? "eco4"
       : item >= 5
-      ? "eco3"
-      : item >= 3
-      ? "eco2"
-      : item === 0
-      ? ""
-      : "eco1";
+        ? "eco3"
+        : item >= 3
+          ? "eco2"
+          : item === 0
+            ? ""
+            : "eco1";
 
   const fetchData = async () => {
     fetch(
@@ -142,10 +144,10 @@ function CalendarBody({
         isMonthView && !isSameMonth(day, currentDate)
           ? "disabled"
           : isSameDay(day, new Date())
-          ? "today"
-          : ex_cost === 0 && in_cost === 0
-          ? "empty"
-          : ecoColor(eco_count);
+            ? "today"
+            : ex_cost === 0 && in_cost === 0
+              ? "empty"
+              : ecoColor(eco_count);
 
       days.push(
         <div
