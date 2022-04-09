@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import InquiryStyle from './Inquiry.module.css';
 import HistorySample from '../../components/History/HistoryBack';
-import { View, StyleSheet, Button, Alert } from "react-native";
 
 function Inquiry() {
   const onSubmit = () => {

@@ -178,16 +178,17 @@
     border-radius: 13px;
     text-align: center;
     padding: 4.5px;
-    float: right;
-    margin-right: 9px;
+    position: relative;
+    left: 80%;
+    transform: translate(-50%, 0%);
 }
-
 
 .coupon_available img {
     width: 125px;
     height: 75px;
     margin-top: 16px;
     margin-bottom: 16px;
+    clear: none;
 }
 
 .coupon_available h1 {
@@ -227,8 +228,9 @@
     border-radius: 13px;
     text-align: center;
     padding: 4.5px;
-    float: right;
-    margin-right: 9px;
+    position: relative;
+    left: 80%;
+    transform: translate(-50%, 0%);
 }
 
 .coupon_expiration img {
