@@ -52,40 +52,13 @@ function CalendarBody({
     item > 7
       ? "eco4"
       : item >= 5
-        ? "eco3"
-        : item >= 3
-          ? "eco2"
-          : item === 0
-            ? ""
-            : "eco1";
+      ? "eco3"
+      : item >= 3
+      ? "eco2"
+      : item === 0
+      ? ""
+      : "eco1";
 
-  const fetchData = async () => {
-    fetch(
-      `calendar/user1@naver.com/${format(currentDate, "yyyy")}/${format(
-        currentDate,
-        "M"
-      )}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    )
-      .then((data) => {
-        setMessage(data.calendarDto);
-        setquote(data.content);
-        setDaysData(data.calendarDto.calendarDayDtos);
-        setAnniversary(data.anniversaryList);
-        setloading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        errors = error;
-      });
-  };
-  console.log(daysData);
   useEffect(() => {
     setDaysData(events);
   }, [events]);
@@ -144,10 +117,10 @@ function CalendarBody({
         isMonthView && !isSameMonth(day, currentDate)
           ? "disabled"
           : isSameDay(day, new Date())
-            ? "today"
-            : ex_cost === 0 && in_cost === 0
-              ? "empty"
-              : ecoColor(eco_count);
+          ? "today"
+          : ex_cost === 0 && in_cost === 0
+          ? "empty"
+          : ecoColor(eco_count);
 
       days.push(
         <div

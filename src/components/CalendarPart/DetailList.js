@@ -238,7 +238,7 @@ function DetailList(props) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
+      `calendar/yui12@gmail.com/2022/${format(props.value, "M")}/${format(
         props.value,
         "d"
       )}`,
@@ -257,12 +257,10 @@ function DetailList(props) {
   };
 
   useEffect(() => {
-    // fetchData();
-    setData(tempData);
-    setloading(false);
-  }, []);
-  console.log(list);
-  console.log(props.value);
+    fetchData();
+    // setData(tempData);
+    // setloading(false);
+  }, [props.value]);
 
   const setData = (data) => {
     let getList = [];
@@ -294,13 +292,16 @@ function DetailList(props) {
 
     filterType !== undefined &&
       filterType.forEach((item) => {
-        item.ecoList.forEach((item) => {
-          if (item.eco === "G") {
-            ecoCnt += 1;
-          } else if (item.eco === "R") {
-            ecoCnt -= 1;
-          }
-        });
+        {
+          item.ecoList !== null &&
+            item.ecoList.forEach((item) => {
+              if (item.eco === "G") {
+                ecoCnt += 1;
+              } else if (item.eco === "R") {
+                ecoCnt -= 1;
+              }
+            });
+        }
 
         detailList.push(
           <div className="details" key={item.id}>
@@ -323,7 +324,7 @@ function DetailList(props) {
           className="detail-link"
           to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
           state={{
-            date: format(props.value, "M. d EEEEE", { locale: ko }),
+            date: props.value,
             typeName: totalList[i].name,
             typeCost: totalList[i].value,
             typeDetail: detailList[i],

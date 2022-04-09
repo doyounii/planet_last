@@ -22,6 +22,7 @@ import logo from "./img/PLANet.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
 import DonutChart from "../../components/StatisticsPart/DonutChart";
+import { CgClose } from "react-icons/cg";
 
 function Home({ activeHome }) {
   const [income, setIncome] = useState(0);
@@ -34,11 +35,11 @@ function Home({ activeHome }) {
   const [loading, setloading] = useState(true);
 
   const [position2, setposition2] = useState(0);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     fetchData();
   }, []);
-
 
   const fetchData = async () => {
     const response = await fetch(
@@ -54,7 +55,32 @@ function Home({ activeHome }) {
     );
     const data = await response.json();
     setMessage(data);
+    setUserName(data.userName);
     setloading(false);
+  };
+
+  const fetchFunc = (e) => {
+    e.preventDefault();
+    //백엔드로 데이터 보내기
+    fetch(`/main/update/yui12@gmail.com/${userName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        useName: userName,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      })
+      .then((e) => {
+        Navigate("/");
+      });
   };
 
   console.log(income);
@@ -77,6 +103,20 @@ function Home({ activeHome }) {
       className: "add-class", // svg에 적용
       preserveAspectRatio: "xMidYMid slice",
     },
+  };
+
+  const handleChange = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const maxLength = (text) => {
+    if (text.length > text.maxLength) {
+      text = text.slice(0, text.maxLength);
+    }
+  };
+
+  const onReset = () => {
+    setUserName("");
   };
 
   const openModal = () => {
@@ -126,19 +166,36 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              {message.userName}
+              {userName}
               <FiEdit3
                 className={homeStyle.icon}
                 alt="닉네임 변경"
                 onClick={(e) => openModal2(e)}
               ></FiEdit3>
               {isModalOpen2 && (
-                <EditName
+                <Modal
                   className={position2}
                   onClose={closeModal2}
                   maskClosable={true}
                   visible={true}
-                ></EditName>
+                >
+                  <form onSubmit={fetchFunc}>
+                    <input
+                      id="inputMemo"
+                      type="text"
+                      value={userName}
+                      onChange={handleChange}
+                      maxLength="8"
+                      onInput={maxLength(userName)}
+                    />
+                    <CgClose onClick={onReset}></CgClose>
+
+                    <p>{userName.length}/8</p>
+
+                    <button type="submit">완료</button>
+                  </form>
+                  <button onClick={closeModal2}>취소</button>
+                </Modal>
               )}
             </div>
             <div>
@@ -148,9 +205,9 @@ function Home({ activeHome }) {
               />
               <div onClick={handleLottie} className={homeStyle.planet}>
                 {isDonut ? (
-                  <DonutChart
-                    style={{ width: "300px", height: "300px" }}
-                  ></DonutChart>
+                  <div>
+                    <DonutChart></DonutChart>{" "}
+                  </div>
                 ) : (
                   <Lottie
                     options={{ ...lottieOptions }}

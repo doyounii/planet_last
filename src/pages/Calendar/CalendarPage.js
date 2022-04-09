@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
+import { format, isSameMonth } from "date-fns";
 import Footer from "../../components/Footer/Footer";
 import DateHeader from "../../components/DateHeader";
 import Calendar from "../../components/CalendarPart/CalendarBody";
@@ -27,12 +27,9 @@ function CalendarPage() {
   const [isMonthView, setIsMonthView] = useState(true);
   let errors = null;
 
-  const fetchData = async () => {
-    fetch(
-      `calendar/user1@naver.com/${format(currentDate, "yyyy")}/${format(
-        currentDate,
-        "M"
-      )}`,
+  const fetchData = async (date) => {
+    const response = await fetch(
+      `calendar/yui12@gmail.com/${format(date, "yyyy")}/${format(date, "M")}`,
       {
         method: "GET",
         headers: {
@@ -42,29 +39,36 @@ function CalendarPage() {
       }
     )
       .then((data) => {
-        setMessage(data.calendarDto);
-        setquote(data.content);
-        setDaysData(data.calendarDto.calendarDayDtos);
-        setAnniversary(data.anniversaryList);
-        setloading(false);
+        return data;
       })
       .catch((error) => {
         console.log(error);
         errors = error;
       });
+    const data = await response.json();
+    setMessage(data.calendarDto);
+    setquote(data.content);
+
+    setDaysData(data.calendarDto.calendarDayDtos);
+
+    setAnniversary(data.anniversaryList);
+    setloading(false);
   };
 
   useEffect(() => {
-    setMessage(data.calendarDto);
-    setDaysData(data.calendarDto.calendarDayDtos);
-    setquote(data.content);
-    setAnniversary(data.anniversaryList);
-    setloading(false);
-    // fetchData();
+    // setMessage(data.calendarDto);
+    // setDaysData(data.calendarDto.calendarDayDtos);
+    // setquote(data.content);
+    // setAnniversary(data.anniversaryList);
+    // setloading(false);
+    fetchData(currentDate);
   }, [currentDate]);
 
   const changeDate = (date) => {
     setSelectedDate(date);
+    if (!isSameMonth(date, currentDate)) {
+      setCurrentDate(date);
+    }
   };
   const openModal = (e) => {
     setposition(e.clientY);
@@ -105,58 +109,63 @@ function CalendarPage() {
   if (errors !== null)
     return <div style={{ color: "white" }}>에러가 발생했습니다.</div>;
 
-  return (
-    <div className="calendarPage" style={{ marginBottom: "100px" }}>
-      <DateHeader
-        getDate={selectedDate}
-        sendDate={(date) => setCurrentDate(date)}
-      />
-      <div className={`cald ${!isMonthView ? "move" : ""}`}>
-        <Quote value={quote} />
-        <div className={`month-info`}>
-          <div className="month-cost">
-            <div className="month-type">수입</div>
-            <div className="month-total">{message.totalMonthIncome}원</div>
-          </div>
-          <div className="month-cost">
-            <div className="month-type">지출</div>
-            <div className="month-total">{message.totalMonthExpenditure}원</div>
-          </div>
-        </div>
-
-        {isModalOpen && (
-          <InfoModal
-            className={position}
-            onClose={closeModal}
-            maskClosable={true}
-            visible={true}
-            children={isMonthView}
-          ></InfoModal>
-        )}
-
-        {renderMiddleBar()}
-        <Calendar
-          monthView={isMonthView}
-          events={daysData}
-          ecoEvents={anniversary}
-          selectedValue={selectedDate}
-          currentValue={currentDate}
-          onChange={changeDate}
+  if (!loading)
+    return (
+      <div className="calendarPage" style={{ marginBottom: "100px" }}>
+        <DateHeader
+          getDate={currentDate}
+          sendDate={(date) => setCurrentDate(date)}
         />
-        {anniversary.find((x) => x[0] === format(selectedDate, dateFormat)) && (
-          <EcoDay
-            value={anniversary.find(
-              (x) => x[0] === format(selectedDate, dateFormat)
-            )}
+        <div className={`cald ${!isMonthView ? "move" : ""}`}>
+          <Quote value={quote} />
+          <div className={`month-info`}>
+            <div className="month-cost">
+              <div className="month-type">수입</div>
+              <div className="month-total">{message.totalMonthIncome}원</div>
+            </div>
+            <div className="month-cost">
+              <div className="month-type">지출</div>
+              <div className="month-total">
+                {message.totalMonthExpenditure}원
+              </div>
+            </div>
+          </div>
+
+          {isModalOpen && (
+            <InfoModal
+              className={position}
+              onClose={closeModal}
+              maskClosable={true}
+              visible={true}
+              children={isMonthView}
+            ></InfoModal>
+          )}
+
+          {renderMiddleBar()}
+          <Calendar
+            monthView={isMonthView}
+            events={daysData}
+            ecoEvents={anniversary}
+            selectedValue={selectedDate}
+            currentValue={currentDate}
+            onChange={changeDate}
           />
-        )}
-        <DetailList value={selectedDate} />
+          {anniversary.find(
+            (x) => x[0] === format(selectedDate, dateFormat)
+          ) && (
+            <EcoDay
+              value={anniversary.find(
+                (x) => x[0] === format(selectedDate, dateFormat)
+              )}
+            />
+          )}
+          <DetailList value={selectedDate} />
+        </div>
+        <Footer activeMenu="calendar">
+          <div>달력</div>
+        </Footer>
       </div>
-      <Footer activeMenu="calendar">
-        <div>달력</div>
-      </Footer>
-    </div>
-  );
+    );
 }
 
 export default CalendarPage;

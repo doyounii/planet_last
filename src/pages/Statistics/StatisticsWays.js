@@ -175,7 +175,7 @@ const tempData = [
     ],
   },
 ];
-//const id = " user1@naver.com";
+//const id = " yui12@gmail.com";
 
 // const fetchData = () => {
 //   fetch(

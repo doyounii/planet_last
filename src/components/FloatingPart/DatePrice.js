@@ -30,10 +30,8 @@ function DatePrice({ propDate, propPrice, sendData }) {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+
+    //분리할것
   };
 
   const onClickHandler = (btnType) => {
