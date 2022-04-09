@@ -6,6 +6,7 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
 .content {
   position: absolute;
   padding-top: 13px;
@@ -18,11 +19,13 @@
   display: flex;
   justify-content: space-around;
 }
+
 .container {
   position: relative;
   top: 100px;
   left: 60px;
 }
+
 .container p {
   font-family: "Pretendard";
   font-style: normal;
@@ -43,6 +46,7 @@
 
   z-index: 2;
 }
+
 .logo {
   position: relative;
   width: 168px;
@@ -50,6 +54,7 @@
   justify-content: center;
   text-align: center;
 }
+
 .planet {
   position: relative;
   width: 456px;
@@ -62,6 +67,7 @@
   justify-content: center;
   text-align: center;
 }
+
 .login {
   position: absolute;
   top: 557px;
@@ -71,6 +77,7 @@
   justify-content: center;
   text-align: center;
 }
+
 .login p {
   position: relative;
   width: 291px;
@@ -90,9 +97,10 @@
   /* gray2 */
 
   z-index: 3;
-
+  margin-top: 50px;
   color: #939393;
 }
+
 .google {
   position: relative;
   width: 343px;
@@ -117,6 +125,7 @@
   justify-content: center;
   text-align: center;
 }
+
 .logoimg {
   position: absolute;
   width: 46.54px;
@@ -124,6 +133,7 @@
   left: 31px;
   top: 0px;
 }
+
 .naver {
   position: relative;
   width: 343px;
@@ -146,6 +156,7 @@
   justify-content: center;
   text-align: center;
 }
+
 .kakao {
   position: relative;
   width: 343px;
