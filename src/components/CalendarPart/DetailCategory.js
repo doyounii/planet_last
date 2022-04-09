@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
+import ko from "date-fns/locale/ko";
 import { DetailItem } from "./DetailList";
 import SwipeableList from "../Swipeable/SwipeableList";
 import { StyledDetailPageBlock } from "./StyledDetail";
@@ -46,7 +48,9 @@ function DetailCategory() {
       <StyledDetailPageBlock>
         <div className="detail-page">
           <div className="detail-info-block">
-            <div className="selected-date">{data.date}</div>
+            <div className="selected-date">
+              {format(data.date, "M. d EEEEE", { locale: ko })}
+            </div>
             <div className="detail-info">
               <IoIosArrowForward
                 className="forward-arrow"
@@ -85,14 +89,24 @@ function DetailCategory() {
                   });
                 return (
                   //onClick-Link to 추가할 것
-                  <SwipeableList key={item.id} onSwipe={onSwipe}>
-                    <div className="details" key={item.id}>
-                      <div className={`details-circle ${isEco(ecoCnt)}`}>
-                        ● &nbsp;
+                  <Link
+                    className="detail-link"
+                    to={`/statisticsModify`}
+                    style={{ textDecoration: "none", color: "white" }}
+                    state={{
+                      item: item,
+                      date: data.date,
+                    }}
+                  >
+                    <SwipeableList key={item.id} onSwipe={onSwipe}>
+                      <div className="details" key={item.id}>
+                        <div className={`details-circle ${isEco(ecoCnt)}`}>
+                          ● &nbsp;
+                        </div>
+                        <DetailItem item={item} ecoCnt={ecoCnt} />
                       </div>
-                      <DetailItem item={item} ecoCnt={ecoCnt} />
-                    </div>
-                  </SwipeableList>
+                    </SwipeableList>
+                  </Link>
                 );
               })}
           </div>

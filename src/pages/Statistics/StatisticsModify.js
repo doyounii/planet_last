@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./Modify.css";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import HistorySample from "../../components/History/HistoryBack";
@@ -13,6 +14,7 @@ import SelectType from "../../components/FloatingPart/SelectType";
 function StatisticsModify() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mode, setmode] = useState("");
+  const data = useLocation().state;
 
   const [mdate, setMDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
@@ -20,7 +22,86 @@ function StatisticsModify() {
   const [type, setType] = useState({ type: "", emoji: "" });
   const [cate, setCate] = useState({ type: "", emoji: "" });
   const [memo, setMemo] = useState("");
+  const [ecoList, setEcoList] = useState([]);
   const [disabled, setDisabled] = useState(true);
+
+  const fetchData = () => {
+    if (data.item.income) {
+      fetch(`/income/${data.item.id}/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: "yui12@gmail.com",
+          in_cost: parseInt(price),
+          date: format(date, "yyyy-MM-dd"),
+          inType: cate.type,
+          inWay: type.type,
+          memo: memo,
+        }),
+      });
+    } else {
+      fetch(`/expenditure/${data.item.id}/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: "yui12@gmail.com",
+          ex_cost: parseInt(price),
+          date: format(date, "yyyy-MM-dd"),
+          exType: cate.type,
+          exWay: type.type,
+          memo: memo,
+          ecoDetail: ["친환경 제품 구매", "일회용품 사용", "기타"],
+          userAdd: ["샤워 오래함"],
+          eco: ["R"],
+        }),
+      });
+    }
+  };
+
+  // fetch(`/income/yui12@gmail.com/new`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Accept: "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     in_way: filter,
+  //     in_type: cate,
+  //     in_cost: price,
+  //     memo: text,
+  //     date:
+  //       "20" +
+  //       date.slice(0, 2) +
+  //       "-" +
+  //       date.slice(3, 5) +
+  //       "-" +
+  //       date.slice(6, 8),
+  //   }),
+  // })
+  //   .then((response) => response.json())
+  //   .then((response) => {
+  //     if (response.token) {
+  //       localStorage.setItem("wtw-token", response.token);
+  //     }
+  //   });
+
+  useEffect(() => {
+    console.log(data);
+    if (data !== null) {
+      const item = data.item;
+
+      setDate(data.date);
+      setPrice(item.cost);
+      setType({ type: item.way, emoji: "" });
+      setCate({ type: item.type, emoji: "" });
+      setMemo(item.memo);
+      if (item.ecoList !== null) setEcoList(item.ecoList);
+    }
+  }, [data]);
 
   const setArticle = (stype) => {
     let article = null;
@@ -88,11 +169,13 @@ function StatisticsModify() {
     <div className="modify-container">
       <div className="modify-header">
         <HistorySample />
-        <span className="modify-header-title">식비</span>
+        <span className="modify-header-title">{cate.type}</span>
         <RiDeleteBin6Line className="modify-header-delete" />
       </div>
       <div className="modify-title">
-        <p className="modify-content-title">커피 테이크아웃</p>
+        <p className="modify-content-title">
+          {memo !== null || memo !== "" ? memo : cate}
+        </p>
         <FiEdit3 className="modify-edit-title-icon" />
       </div>
       <div className="modify-detail-block">
@@ -150,8 +233,10 @@ function StatisticsModify() {
         <div className="modify-detail">
           <p className="modify-detail-title">태그</p>
           {/* 태그는 어떻게 받아올지 모르겠음 .. */}
-          <div className="modify-tag">다회용기 사용</div>
-          <div className="modify-tag">비닐봉투 소비</div>
+          {ecoList.length !== 0 &&
+            ecoList.map((value) => {
+              return <div className="modify-tag">{value.ecoDetail}</div>;
+            })}
         </div>
 
         <div className="modify-detail">
@@ -164,7 +249,11 @@ function StatisticsModify() {
         </div>
       </div>
 
-      <button disabled={disabled} className="modify-save-btn">
+      <button
+        disabled={disabled}
+        className="modify-save-btn"
+        onClick={fetchData}
+      >
         저장
       </button>
     </div>
