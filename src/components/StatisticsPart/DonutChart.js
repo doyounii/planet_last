@@ -1,25 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { PieChart } from "react-minimal-pie-chart";
 import { useState } from "react";
+import { useLocation } from 'react-router-dom';
 
-const percent = 67; //받아오는 데이터 값
 
-const data = [
-  {
-    index: 0,
-    title: "친환경 지출",
-    value: percent,
-    color: "url(#gradient)",
-  },
-  {
-    //친환경 단일 데이터로 진행하셨던 것 같은데
-    //반환경도 선택/강조가 있어서 부득이하게 데이터를 추가했습니다!
-    index: 1,
-    title: "반환경 지출",
-    value: 100 - percent, //반환경은 계산되도록
-    color: "#566479",
-  },
-];
 
 //퍼센테이지 라벨
 const defaultLabelStyle = {
@@ -31,7 +15,25 @@ const defaultLabelStyle = {
 
 const segmentsStyle = { cursor: "pointer" };
 
-const DonutChart = ({ percentage }) => {
+const DonutChart = () => {
+
+  const percentage = 67;
+  const data = [
+    {
+      index: 0,
+      title: "친환경 지출",
+      value: percentage,
+      color: "url(#gradient)",
+    },
+    {
+      //친환경 단일 데이터로 진행하셨던 것 같은데
+      //반환경도 선택/강조가 있어서 부득이하게 데이터를 추가했습니다!
+      index: 1,
+      title: "반환경 지출",
+      value: 100 - percentage, //반환경은 계산되도록
+      color: "#566479",
+    },
+  ];
   const [selected, setSelected] = useState(0);
 
   return (

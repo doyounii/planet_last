@@ -46,7 +46,7 @@ export function QuestionModal() {
         나의 행성은 어떤 상태일까요?{" "}
         <AiOutlineQuestionCircle
           className="question"
-          // onClick={(e) => openModal(e)}
+        // onClick={(e) => openModal(e)}
         />
       </p>
       <Sliders dots={true} index={0}>
@@ -66,12 +66,6 @@ export function QuestionModal() {
               </div>
               <p className="ment" key={10 + index}>
                 {data.ment}
-              </p>
-              <p className="ment" key={20 + index}>
-                {data.ment2}
-              </p>
-              <p className="ment3" key={30 + index}>
-                {data.ment3}
               </p>
             </>
           );
@@ -117,30 +111,14 @@ const ModalWrapper = styled.div`
     margin-bottom: 20px;
     white-space: pre-wrap; /* 줄바꿈용 */
 
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 4px;
+    line-height: 20px;
     text-align: center;
 
     /* light grey */
     color: #b4b6b8;
     z-index: 100;
-  }
-  .ment3 {
-    margin: 20px 5%;
-
-    font-family: "Pretendard";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 5px;
-    text-align: center;
-
-    /* light grey */
-    color: #b4b6b8;
-    z-index: 100;
-    margin-bottom: 40px;
   }
 `;

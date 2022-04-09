@@ -39,9 +39,10 @@ function Home({ activeHome }) {
     fetchData();
   }, []);
 
+
   const fetchData = async () => {
     const response = await fetch(
-      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
+      `/main/yui12@gmail.com/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -147,11 +148,9 @@ function Home({ activeHome }) {
               />
               <div onClick={handleLottie} className={homeStyle.planet}>
                 {isDonut ? (
-                  <div style={{ width: "250px", height: "250px" }}>
-                    <DonutChart
-                      style={{ width: "250px", height: "250px" }}
-                    ></DonutChart>{" "}
-                  </div>
+                  <DonutChart
+                    style={{ width: "300px", height: "300px" }}
+                  ></DonutChart>
                 ) : (
                   <Lottie
                     options={{ ...lottieOptions }}
@@ -173,6 +172,7 @@ function Home({ activeHome }) {
                     maskClosable={true}
                     visible={true}
                     closable={true}
+                    background={false}
                   >
                     <QuestionModal />
                   </Modal>

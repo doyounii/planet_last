@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./EcoExpend.css";
 
@@ -154,46 +154,87 @@ const NEcoExpendData = [
   },
 ];
 
-const renderExpendList = (props) => {
+const renderExpendList = (props, message) => {
   let renderExpendList = [];
 
-  if (props.name === "eco") {
-    for (let i = 0; i < 4; i++) {
-      renderExpendList.push(
-        <div>
-          <div
-            className="day-breakdown-box-icon"
-            style={{ color: EcoExpendData[i].color }}
-          >
-            ● {EcoExpendData[i].emoji}
+  if (message.length !== 0) {
+    if (props.name === "eco") {
+      for (let i = 0; i < 4; i++) {
+        renderExpendList.push(
+          <div>
+            <div
+              className="day-breakdown-box-icon"
+              style={{ color: EcoExpendData[i].color }}
+            >
+              ● {EcoExpendData[i].emoji}
+            </div>
+            {/* <h1>{message.ecoTagCounts[i][0]}</h1>
+            <h2>{message.ecoTagCounts[i][1]}개</h2> */}
+            <h1>{EcoExpendData[i].exType}</h1>
+            <h2>{EcoExpendData[i].count}</h2>
+            <p></p>
           </div>
-          <h1>{EcoExpendData[i].exType}</h1>
-          <h2>{EcoExpendData[i].count}</h2>
-          <p></p>
-        </div>
-      );
-    }
-  } else {
-    for (let i = 0; i < 4; i++) {
-      renderExpendList.push(
-        <div>
-          <div
-            className="day-breakdown-box-icon"
-            style={{ color: NEcoExpendData[i].color }}
-          >
-            ● {NEcoExpendData[i].emoji}
+        );
+      }
+    } else {
+      for (let i = 0; i < 4; i++) {
+        renderExpendList.push(
+          <div>
+            <div
+              className="day-breakdown-box-icon"
+              style={{ color: NEcoExpendData[i].color }}
+            >
+              ● {NEcoExpendData[i].emoji}
+            </div>
+            {/* <h1>{message.noEcoTagCounts[i][0]}</h1>
+            <h2>{message.noEcoTagCounts[i][1]}개</h2> */}
+            <h1>{NEcoExpendData[i].exType}</h1>
+            <h2>{NEcoExpendData[i].count}</h2>
+            <p></p>
           </div>
-          <h1>{NEcoExpendData[i].exType}</h1>
-          <h2>{NEcoExpendData[i].count}</h2>
-          <p></p>
-        </div>
-      );
+        );
+      }
     }
   }
 
+
   return <div>{renderExpendList}</div>;
 };
+
 function EcoExpend(props) {
+  const [message, setMessage] = useState([]);
+  const [loading, setloading] = useState(true);
+  const [ecoTagCounts, setEcoTagCounts] = useState([]);
+  const [noEcoTagCounts, setNoEcoTagCounts] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // const ecoSize = message.ecoTagCounts.length - 1;
+  // const noEcoSize = message.noEcoTagCounts.length - 1;
+
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `/statistics/yui12@gmail.com/2022/2`,
+      //${format(new Date(), "M")}
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setMessage(data);
+    setEcoTagCounts(message.ecoTagCounts);
+    setNoEcoTagCounts(message.noEcoTagCounts);
+    setloading(false);
+  };
+
+
+  console.log(message);
   if (props.name === "eco") {
     return (
       <div className="statistics-box">
@@ -202,7 +243,7 @@ function EcoExpend(props) {
             <p>
               지출 카테고리 <span>태그개수</span>
             </p>
-            {renderExpendList(props)}
+            {renderExpendList(props, message)}
             <Link
               to="/EcoCategory"
               state={{
@@ -210,8 +251,8 @@ function EcoExpend(props) {
               }}
             >
               <div className="more">
-                <h1 style={{ color: "#C7D2E8" }}>● 더보기 5개</h1>
-                <h2>2개</h2>
+                <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
+                {/* <h2>{message.ecoTagCounts[2][1]}개</h2> */}
               </div>
             </Link>
           </div>
@@ -226,7 +267,7 @@ function EcoExpend(props) {
             <p>
               지출 카테고리 <span>태그개수</span>
             </p>
-            {renderExpendList(props)}
+            {renderExpendList(props, message)}
             <Link
               to="/EcoCategory"
               state={{
@@ -234,13 +275,13 @@ function EcoExpend(props) {
               }}
             >
               <div className="more">
-                <h1 style={{ color: "#C7D2E8" }}>● 더보기 10개</h1>
-                <h2>2개</h2>
+                <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
+                {/* <h2>{noEcoTagCounts[2][1]}개</h2> */}
               </div>
             </Link>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     );
   }
 }
