@@ -16,6 +16,8 @@ import MyPage from "./pages/Setting/MyPage";
 import TermsOfUse from "./pages/Setting/TermsOfUse";
 import UsePage from "./pages/Setting/UsePage";
 import InformationPage from "./pages/Setting/InformationPage";
+import Inquiry from "./pages/Setting/Inquiry";
+import InquiryForm from "./pages/Setting/InquiryForm";
 import Coupon from "./pages/Coupon/Coupon";
 import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
@@ -57,6 +59,8 @@ function App() {
       <Route path="/coupon" element={<Coupon />}></Route>
       <Route path="/couponJoin" element={<CouponJoin />}></Route>
       <Route path="/detail" element={<Detail />}></Route>
+      <Route path="/inquiry" element={<Inquiry />}></Route>
+      <Route path="/inquiryForm" element={<InquiryForm />}></Route>
     </Routes>
   );
 }
