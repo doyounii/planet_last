@@ -9,7 +9,7 @@ const data = [
     index: 0,
     title: "친환경 지출",
     value: percent,
-    color: "url(#gradient)"
+    color: "url(#gradient)",
   },
   {
     //친환경 단일 데이터로 진행하셨던 것 같은데
@@ -17,8 +17,8 @@ const data = [
     index: 1,
     title: "반환경 지출",
     value: 100 - percent, //반환경은 계산되도록
-    color: "#566479"
-  }
+    color: "#566479",
+  },
 ];
 
 //퍼센테이지 라벨
@@ -26,7 +26,7 @@ const defaultLabelStyle = {
   fontSize: "8px",
   fontWeight: "900",
   fontFamily: "Pretendard",
-  fill: "white"
+  fill: "white",
 };
 
 const segmentsStyle = { cursor: "pointer" };
@@ -41,7 +41,7 @@ const DonutChart = ({ percentage }) => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          width: "500px",
+          width: "100vw",
         }}
       >
         <PieChart

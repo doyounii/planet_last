@@ -1,51 +1,13 @@
-.row {
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 96%;
-  margin-left: 2%;
-  margin-right: 2%;
+.statistic-main {
+  position: relative;
+  width: 100vw;
+  color: white;
+  font-family: Pretendard;
 }
 
-.row2 {
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
-  background-color: #ffffff;
+.stat-main-contents {
+  margin-top: 70px;
 }
-
-.row-middle {
-  align-items: center;
-}
-
-.col {
-  margin: 0;
-  flex-grow: 1;
-  flex-basis: 0;
-  max-width: 100%;
-}
-
-.col-start {
-  justify-content: flex-start;
-  text-align: left;
-}
-
-.col-center {
-  justify-content: center;
-  text-align: center;
-}
-
-.col-end {
-  justify-content: flex-end;
-  text-align: right;
-}
-
-/* Calendar */
 
 .month-box {
   font-family: Pretendard;
@@ -184,8 +146,9 @@
 
 .chart-graph-box span {
   background: linear-gradient(to right bottom, #00c982, #1466fe);
-  color: transparent;
+  background-clip: text;
   -webkit-background-clip: text;
+  color: transparent;
 }
 
 .expend-box {
@@ -218,6 +181,11 @@
 }
 
 /*세부내역 css*/
+
+.static-detail-container {
+  margin-top: 70px;
+  width: 100vw;
+}
 .detail-box {
   font-family: Pretendard;
   position: relative;
@@ -315,66 +283,34 @@
   width: 100%;
   background-color: #141b27;
   padding-bottom: 18px;
+  color: #f5f5f5;
 }
 
-.statistics-box .drop-box {
-  margin-bottom: 32px;
-  margin-left: 18px;
-  margin-top: 18px;
+.statistics-box .statistic-detail-list {
+  width: 90vw;
+  margin: 2vw 5vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  padding: 12px 0;
+
+  color: #b4b6b8;
 }
 
-.statistics-box .day-box {
-  margin-bottom: 32px;
-  margin-top: 17px;
+.statistics-box .stat-detail-icon {
+  font-size: 20px;
+  width: 20px;
+  margin-right: 5vw;
 }
 
-.statistics-box .day-box p {
-  font-family: Pretendard;
+.statistics-box .date {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 16px;
-  margin-left: 21px;
 }
 
-.statistics-box .day-box .day-breakdown-box {
-  width: 100%;
-}
-
-.statistics-box .day-box .day-breakdown-box h1 {
-  font-family: Pretendard;
-  position: relative;
-  display: inline;
-  font-size: 14px;
-  color: #b4b6b8;
-  padding-top: 15px;
-  margin-left: 12.6px;
-}
-
-.statistics-box .day-box .day-breakdown-box h2 {
-  font-family: Pretendard;
-  position: relative;
-  display: inline;
-  font-size: 14px;
-  color: #b4b6b8;
-  padding-top: 13px;
-  margin-right: 29.12px;
-  float: right;
-}
-
-.statistics-box .day-box .day-breakdown-box p {
-  font-family: Pretendard;
-  font-size: 11px;
-  color: #566479;
-  margin-top: 3.12px;
-  margin-left: 75px;
-}
-
-.statistics-box .day-box .day-breakdown-box .day-breakdown-box-icon {
-  position: relative;
-  display: inline;
-  font-size: 30px;
-  color: #434952;
-  margin-left: 21px;
+.statistics-box .stat-detail-money {
+  margin-left: auto;
 }
 
 /*StatisticsIncomeView.css*/
@@ -403,24 +339,13 @@
 .detail-box .balloon2 {
   position: relative;
   margin: 0 auto;
-  width: 382px;
+  width: 100vw;
   background: #061023;
   border-radius: 13px;
   margin-top: 18px;
   padding-top: 18.5px;
   padding-bottom: 18.5px;
   z-index: 2;
-}
-
-.detail-box .balloon2:after {
-  border-top: 0 solid transparent;
-  border-left: 13px solid transparent;
-  border-right: 13px solid transparent;
-  border-bottom: 13px solid #061023;
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 23px;
 }
 
 .detail-box .balloon2 p {
@@ -437,26 +362,6 @@
   margin-left: 21px;
   margin-bottom: 18.5px;
   color: #ffffff;
-}
-
-.detail-box .balloon2 .ballon-box {
-  position: relative;
-  margin: 0 auto;
-  width: 304px;
-  height: 70px;
-  background-color: #00c982;
-  padding-top: 13px;
-  border-radius: 13px;
-  font-family: Pretendard;
-  margin-bottom: 16px;
-  z-index: 1;
-}
-
-.detail-box .balloon2 .ballon-box p {
-  font-size: 16px;
-  font-family: Pretendard;
-  margin-left: 21px;
-  color: #141b27;
 }
 
 .chart {

@@ -1,0 +1,156 @@
+/*세부내역 수정 뷰*/
+.modify-container {
+  width: 100vw;
+  height: 100vh;
+  font-family: Pretendard;
+  color: white;
+  position: relative;
+}
+
+/*header style*/
+.modify-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 5% 0 5%;
+}
+.modify-header .modify-header-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.modify-header .modify-header-delete {
+  width: 24px;
+  height: 24px;
+}
+/*title style*/
+.modify-title {
+  margin: 25px 0 30px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.modify-title .modify-content-title {
+  font-weight: 600;
+  font-size: 20px;
+  margin-left: 5%;
+}
+.modify-title .modify-edit-title-icon {
+  width: 21px;
+  height: 21px;
+  opacity: 0.5;
+  margin-left: 5px;
+}
+/*modify-content-block*/
+.modify-detail-block {
+  width: 90%;
+  margin: 0 5%;
+}
+
+.modify-detail-block > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.modify-detail-block .modify-detail-title {
+  font-size: 14px;
+  color: #939393;
+  margin-right: 5%;
+  width: 10%;
+}
+
+.modify-detail-block .modify-detail-value {
+  width: 100%;
+  font-size: 15px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 0;
+  outline: 0;
+  padding-bottom: 3px;
+  border-bottom: solid 1.5px transparent;
+}
+.modify-detail-block .modify-detail-value:focus {
+  font-size: 15px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 0;
+  outline: 0;
+  border-style: none;
+  caret-color: #00c982;
+  padding-bottom: 3px;
+  border-bottom: solid 1.5px #00c982;
+}
+
+.modify-save-btn {
+  right: 5vw;
+  font-size: 15px;
+  width: 90vw;
+  height: 7vh;
+  border-radius: 30px;
+  bottom: 20px;
+  position: absolute;
+  text-align: center;
+  border: 0;
+  color: #141b27;
+  background-color: #00c982;
+  cursor: pointer;
+}
+.modify-save-btn:disabled {
+  right: 5vw;
+  font-size: 15px;
+  width: 90vw;
+  height: 7vh;
+  border-radius: 30px;
+  bottom: 20px;
+  position: absolute;
+  text-align: center;
+  border: 0;
+  color: #141b27;
+  background-color: rgb(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+#modal-root .calendars {
+  width: 90%;
+  margin-top: 37px;
+  overflow: scroll;
+}
+
+#modal-root .calendars .body .col {
+  height: 40px;
+}
+
+#modal-root .row {
+  width: 90%;
+  margin: 0px 3%;
+}
+
+#modal-root .number {
+  opacity: 1;
+}
+
+#modal-root .header {
+  position: absolute;
+  background-color: transparent;
+  padding: 5px;
+  top: 45px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+#modal-root .modify-modal-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+#modal-root .type-container.wrap0 {
+  margin-top: 10vh;
+  height: 30vh;
+}
