@@ -1,14 +1,19 @@
 /* eslint-disable */
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer/Footer";
+
+import Login from "./pages/Login/Login";
+
 import Home from "./pages/Home/Home";
 import CalendarPage from "./pages/Calendar/CalendarPage";
+import DetailCategory from "./components/CalendarPart/DetailCategory";
+
 import Statistics from "./pages/Statistics/Statistics";
 import StatisticsView from "./pages/Statistics/StatisticsView";
 import StatisticsIncome from "./pages/Statistics/StatisticsIncome";
 import StatisticsExpend from "./pages/Statistics/StatisticsExpend";
 import StatisticsModify from "./pages/Statistics/StatisticsModify";
+
 import Diary from "./pages/Diary/Diary";
 import News from "./pages/News/News";
 import Setting from "./pages/Setting/Setting";
@@ -19,8 +24,10 @@ import InformationPage from "./pages/Setting/InformationPage";
 import Coupon from "./pages/Coupon/Coupon";
 import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
-import FloatingExpensePage from "./pages/Floating/FloatingExpensePage";
-import FloatingType from "./pages/Floating/FloatingType";
+
+import ExpendLanding from "./pages/Floating/ExpendLanding";
+import IncomeLanding from "./pages/Floating/IncomeLanding";
+import IncomeType from "./pages/Floating/IncomeType";
 import FloatingCategory from "./pages/Floating/FloatingCategory";
 import FloatingMemo from "./pages/Floating/FloatingMemo";
 import ExpendType from "./pages/Floating/ExpendType";
@@ -35,8 +42,8 @@ import FloatingPrice from "./pages/Floating/FloatingPrice";
 import FloatingPrice2 from "./pages/Floating/FloatingPrice2";
 import Login from "./pages/Login/Login";
 import DetailCategory from "./components/CalendarPart/DetailCategory";
-import EcoCategory from './pages/Statistics/Part2/EcoCategory';
-import Detail from './components/StatisticsPart/Part2/ExpendDetail';
+import EcoCategory from "./pages/Statistics/Part2/EcoCategory";
+import Detail from "./components/StatisticsPart/Part2/ExpendDetail";
 
 function App() {
   return (
@@ -55,18 +62,11 @@ function App() {
       <Route path="/myPage" element={<MyPage />}></Route>
       <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
       <Route path="/ecoMission" element={<EcoMission />}></Route>
-      <Route
-        path="/floatingExpensePage"
-        element={<FloatingExpensePage />}
-      ></Route>
 
-      <Route path="/floatingpage1" element={<FloatingPage1 />}></Route>
-      <Route path="/floatingPage2" element={<FloatingPage2 />}></Route>
-      <Route path="/floatingDate" element={<FloatingDate />}></Route>
-      <Route path="/floatingDate2" element={<FloatingDate2 />}></Route>
-      <Route path="/floatingPrice" element={<FloatingPrice />}></Route>
-      <Route path="/floatingPrice2" element={<FloatingPrice2 />}></Route>
-      <Route path="/floatingType" element={<FloatingType />}></Route>
+      <Route path="/floatingpage1" element={<ExpendLanding />}></Route>
+      <Route path="/floatingPage2" element={<IncomeLanding />}></Route>
+
+      <Route path="/incomeType" element={<IncomeType />}></Route>
       <Route path="/floatingCategory" element={<FloatingCategory />}></Route>
       <Route path="/floatingMemo" element={<FloatingMemo />}></Route>
       <Route path="/expendType" element={<ExpendType />}></Route>

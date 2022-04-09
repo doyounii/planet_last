@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import IncomeStyle from "./Float.module.css";
 import TopNav from "../../components/FloatingPart/TopNav";
+import HistorySample from "../../components/History/History";
 import Dashboard from "../../components/FloatingPart/Dashboard";
-import SelectExpendType from "../../components/FloatingPart/SelectExpendType";
+import SelectType from "../../components/FloatingPart/SelectType";
 
 //Content
 class Content extends Component {
@@ -17,18 +17,20 @@ class Content extends Component {
   }
 }
 
-function ExpendType() {
+function IncomeType() {
   return (
     <div className={IncomeStyle.container}>
-      <TopNav process={2} total={5} />
-
-      <Dashboard value={2} />
+      <div className={IncomeStyle.closeBtn}>
+        <HistorySample />
+      </div>
+      <TopNav process={2} total={4} />
+      <Dashboard value={1} />
 
       <Content title="자산을 선택해주세요"></Content>
 
-      <SelectExpendType></SelectExpendType>
+      <SelectType></SelectType>
     </div>
   );
 }
 
-export default ExpendType;
+export default IncomeType;

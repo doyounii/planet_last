@@ -148,6 +148,7 @@ function CalendarBody({ value, onChange }) {
   const [daysData, setDaysData] = useState([]);
   const [anniversary, setAnniversary] = useState([]);
   const [quote, setquote] = useState("");
+
   let errors = null;
 
   const ecoColor = (item) =>
@@ -179,6 +180,7 @@ function CalendarBody({ value, onChange }) {
         errors = error;
       });
   };
+  console.log(daysData);
 
   useEffect(() => {
     setCurrentMonth(renderCells());

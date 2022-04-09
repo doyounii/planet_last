@@ -161,6 +161,7 @@ const StyledDetailPage = styled.div`
     margin-left: 5%;
     margin-bottom: 20px;
   }
+
   .details {
     width: 100%;
     display: flex;

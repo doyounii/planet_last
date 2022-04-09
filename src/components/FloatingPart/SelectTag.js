@@ -7,7 +7,7 @@ function SelectTag({ submitFunc }) {
   const array = [
     { id: 101, tag: "친환경", isEco: true },
     { id: 102, tag: "반환경", isEco: false },
-    { id: 103, tag: "일반", isEco: "etc" }
+    { id: 103, tag: "일반", isEco: "etc" },
   ];
   //선택한 태그(0 또는 환경 태그 이름(친환경/반환경/일반))
   const [selectedTag, setSelectedTag] = useState(0);

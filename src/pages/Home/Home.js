@@ -14,13 +14,14 @@ import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
 import high from "../../planet/1-2.json";
 import highmid from "../../planet/2-2.json";
 import low from "../../planet/4-2.json";
-import mid from "../../planet/3-2.json"; import Lottie from "react-lottie";
+import mid from "../../planet/3-2.json";
+import Lottie from "react-lottie";
 import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
-import DonutChart from '../../components/StatisticsPart/DonutChart';
+import DonutChart from "../../components/StatisticsPart/DonutChart";
 
 function Home({ activeHome }) {
   const [income, setIncome] = useState(0);
@@ -68,7 +69,6 @@ function Home({ activeHome }) {
     );
   };
 
-
   const lottieOptions = {
     loop: true,
     autoplay: true,
@@ -100,14 +100,11 @@ function Home({ activeHome }) {
 
   if (eco >= 0 && eco < 25) {
     lottieOptions.animationData = low;
-  }
-  else if (eco >= 25 && eco < 50) {
+  } else if (eco >= 25 && eco < 50) {
     lottieOptions.animationData = mid;
-  }
-  else if (eco >= 50 && eco < 75) {
+  } else if (eco >= 50 && eco < 75) {
     lottieOptions.animationData = highmid;
-  }
-  else {
+  } else {
     lottieOptions.animationData = high;
   }
 
@@ -149,14 +146,24 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <div onClick={handleLottie} className={homeStyle.planet}>
-                {isDonut ? <div style={{ width: '250px', height: '250px' }}>
-                  <DonutChart style={{ width: '250px', height: '250px' }}></DonutChart> </div> : <Lottie options={{ ...lottieOptions }} eventListeners={[
-                    {
-                      eventName: "complete",
-                      callback: () => console.log("the animation completed"),
-                    },
-                  ]}
-                    isClickToPauseDisabled={true}></Lottie>}
+                {isDonut ? (
+                  <div style={{ width: "250px", height: "250px" }}>
+                    <DonutChart
+                      style={{ width: "250px", height: "250px" }}
+                    ></DonutChart>{" "}
+                  </div>
+                ) : (
+                  <Lottie
+                    options={{ ...lottieOptions }}
+                    eventListeners={[
+                      {
+                        eventName: "complete",
+                        callback: () => console.log("the animation completed"),
+                      },
+                    ]}
+                    isClickToPauseDisabled={true}
+                  ></Lottie>
+                )}
               </div>
 
               <div>
@@ -237,7 +244,7 @@ function Home({ activeHome }) {
         <Footer activeMenu="home">
           <div>홈</div>
         </Footer>
-      </div >
+      </div>
     </>
   );
 }
