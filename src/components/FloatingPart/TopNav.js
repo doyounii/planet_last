@@ -14,7 +14,7 @@ function TopNav({ process, total }) {
 
   useEffect(() => {
     setNavigation(setNav());
-  }, []);
+  }, [process, total]);
 
   const setNav = () => {
     let tempNav = [];

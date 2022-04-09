@@ -1,0 +1,26 @@
+.bottomBtn {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  bottom: 40px;
+}
+
+.bottomBtnActive {
+  font-size: 13px;
+  color: #1b2434;
+  width: 117px;
+  height: 43px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 27.51px;
+  border: 0;
+  outline: 0;
+}
+
+.bottomBtndisabled {
+  opacity: 0.3;
+}
+
+.bottomBtnActive:active {
+  opacity: 0.8;
+}

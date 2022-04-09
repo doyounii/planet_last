@@ -237,7 +237,7 @@ function Home({ activeHome }) {
           </div>
         </section>
         <section>
-          <Link to="/FloatingPage1" className={activeHome}>
+          <Link to="/FloatingPage" className={activeHome}>
             <AiFillPlusCircle className={homeStyle.floating}></AiFillPlusCircle>
           </Link>
         </section>
