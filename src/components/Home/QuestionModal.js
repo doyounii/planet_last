@@ -46,7 +46,7 @@ export function QuestionModal() {
         나의 행성은 어떤 상태일까요?{" "}
         <AiOutlineQuestionCircle
           className="question"
-          // onClick={(e) => openModal(e)}
+        // onClick={(e) => openModal(e)}
         />
       </p>
       <Sliders dots={true} index={0}>

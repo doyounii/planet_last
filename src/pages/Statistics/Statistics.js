@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import "./Statistics.css";
@@ -18,6 +18,8 @@ function StatisticsMain() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [position, setposition] = useState(0);
+  const [message, setMessage] = useState(0);
+  const [loading, setloading] = useState(true);
 
   const nowMFormat = "M";
 
@@ -38,6 +40,27 @@ function StatisticsMain() {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `/statistics/yui12@gmail.com/2022/2`,
+      //${format(new Date(), "M")}
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setMessage(data);
+    setloading(false);
+  };
+
   return (
     <div className="statistic-main">
       <DateHeader getDate={currentMonth} sendDate={onchangeDate} />
@@ -51,12 +74,12 @@ function StatisticsMain() {
 
             <div className="month-breakdown">
               <p>수입</p>
-              <h1>780,120원</h1>
+              <h1>{message.incomeTotal}원</h1>
             </div>
 
             <div className="month-breakdown">
               <p>지출</p>
-              <h1>50,120원</h1>
+              <h1>{message.expenditureTotal}원</h1>
             </div>
           </div>
         </Link>
@@ -93,13 +116,13 @@ function StatisticsMain() {
         <div className="line-box"></div>
 
         <div className="chart-graph-box">
-          <h1>수빈님의 지출은 건강한가요?</h1>
+          <h1>{message.userName}님의 지출은 건강한가요?</h1>
           <div style={{ textAlign: "center" }}>
             <p style={{ color: "#07D4A9" }}>
-              <span>●</span> 11
+              <span>●</span> {message.nowEcoCount}
             </p>
             <p style={{ color: "#3A4556" }}>
-              <b style={{ color: "#566479" }}>●</b> 13
+              <b style={{ color: "#566479" }}>●</b> {message.nowNoneEcoCount}
             </p>
           </div>
           <div className="donut-chart">
