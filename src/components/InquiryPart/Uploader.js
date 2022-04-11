@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import "./Uploader.css";
-import { Spin } from 'antd';
 import axios from 'axios';
 
 const Uploader = (props) => {
-
+  const ref = useRef(null);
+  
   console.log(props)
   const [image, setImage] = useState({
     image_file: "",
@@ -73,7 +73,7 @@ const Uploader = (props) => {
         {loaded === false || loaded === true ? (
           <img src={image.preview_URL} />
         ) : (
-          <Spin className="img-spinner" tip = "이미지 불러오는중"/>
+            <div className="imgLoadingAnim" ref={ref} />
         )}
       </div>
     </div>

@@ -22,3 +22,28 @@
     width: 84px;
     height: 84px;
 }
+
+.imgLoadingAnim {
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform-origin: 50%;
+ 
+    margin-left: -21px;
+    margin-top: -21px;
+    border-radius: 50%;
+ 
+    border: 3px solid #566479;
+    border-top-color: transparent;
+    border-left-color: transparent;
+ 
+    animation: Rotate 0.8s infinite linear;
+    z-index: 100;
+ }
+  
+ @keyframes Rotate {
+   from {transform: rotate(0deg)}
+   to {transform: rotate(360deg)}
+ }
