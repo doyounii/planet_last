@@ -30,13 +30,12 @@ function Inquiry() {
           <div className={ InquiryStyle.inquiry_list }>
             {inquiryList === false ? <h1>내역 없음</h1> : null }
           </div>
-
-          <Link to="/InquiryForm">
+        </div>
+        <Link to="/InquiryForm">
             <div className={ InquiryStyle.inquiry_btn }>
               <button>문의하기</button>
             </div>
-          </Link>
-        </div>
+        </Link>
     </div>
   );
 }

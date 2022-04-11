@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import InquiryStyle from './Inquiry.module.css';
 import HistorySample from '../../components/History/HistoryBack';
+import Uploader from "../../components/InquiryPart/Uploader";
 
 function Inquiry() {
   const onSubmit = () => {
@@ -41,17 +42,17 @@ function Inquiry() {
           
           <div className={ InquiryStyle.inquiry_form }>
               <h1>사진</h1>
+              <Uploader />
               <p>유의사항</p>
               <h4>답변시간 이후 접수건은 운영시간 내 순차적 답변드립니다</h4>
               <h4>문의글은 등록 이후 수정이 불가합니다</h4>
           </div>
-
-          <Link to="#">
+        </div>
+        <Link to="#">
             <div className={ InquiryStyle.inquiry_submit_btn }>
               <button onClick={onSubmit}>등록하기</button>
             </div>
-          </Link>
-        </div>
+        </Link>
     </div>
   );
 }
