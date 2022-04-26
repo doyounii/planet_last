@@ -41,6 +41,8 @@
     flex-direction: column;
     position: relative;
     top: 15%;
+    bottom: 15%;
+    position: fixed;
     width: 100%;
 }
 
@@ -98,7 +100,7 @@
 /*문의, 등록 버튼*/
 .inquiry_btn {
     width: 100%;
-    position: relative;
+    position: absolute;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -123,7 +125,7 @@
 
 .inquiry_submit_btn {
     width: 100%;
-    position: relative;
+    position: absolute;
     align-items: center;
     justify-content: center;
     text-align: center;
