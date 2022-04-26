@@ -1,37 +1,35 @@
 /* eslint-disable */
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import CalendarPage from "./pages/Calendar/CalendarPage";
+
 import Statistics from "./pages/Statistics/Statistics";
 import StatisticsView from "./pages/Statistics/StatisticsView";
-import StatisticsIncome from "./pages/Statistics/StatisticsIncome";
-import StatisticsExpend from "./pages/Statistics/StatisticsExpend";
+import StatisticsWays from "./pages/Statistics/StatisticsWays";
 import StatisticsModify from "./pages/Statistics/StatisticsModify";
+
 import Diary from "./pages/Diary/Diary";
 import News from "./pages/News/News";
 import Setting from "./pages/Setting/Setting";
 import MyPage from "./pages/Setting/MyPage";
 import TermsOfUse from "./pages/Setting/TermsOfUse";
+import UsePage from "./pages/Setting/UsePage";
+import InformationPage from "./pages/Setting/InformationPage";
+import Inquiry from "./pages/Setting/Inquiry";
+import InquiryForm from "./pages/Setting/InquiryForm";
+import Coupon from "./pages/Coupon/Coupon";
+import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
-import FloatingExpensePage from "./pages/Floating/FloatingExpensePage";
-import FloatingType from "./pages/Floating/FloatingType";
-import FloatingCategory from "./pages/Floating/FloatingCategory";
-import FloatingMemo from "./pages/Floating/FloatingMemo";
-import ExpendType from "./pages/Floating/ExpendType";
-import ExpendCategory from "./pages/Floating/ExpendCategory";
-import ExpendMemo from "./pages/Floating/ExpendMemo";
-import ExpendLast from "./pages/Floating/ExpendLast";
-import FloatingPage1 from "./pages/Floating/FloatingPage1";
-import FloatingPage2 from "./pages/Floating/FloatingPage2";
-import FloatingDate from "./pages/Floating/FloatingDate";
-import FloatingDate2 from "./pages/Floating/FloatingDate2";
-import FloatingPrice from "./pages/Floating/FloatingPrice";
-import FloatingPrice2 from "./pages/Floating/FloatingPrice2";
-import Login from "./pages/Login/Login";
+
 import DetailCategory from "./components/CalendarPart/DetailCategory";
-import EcoCategory from './pages/Statistics/Part2/EcoCategory';
+
+import Detail from "./components/StatisticsPart/Part2/ExpendDetail";
+import FloatingPage from "./pages/Floating/FloatingPage";
+
+import Login from "./pages/Login/Login";
+
+import EcoCategory from "./pages/Statistics/Part2/EcoCategory";
 
 function App() {
   return (
@@ -41,8 +39,10 @@ function App() {
       <Route path="/calendar/:month/:day" element={<DetailCategory />}></Route>
       <Route path="/statistics" element={<Statistics />}></Route>
       <Route path="/statisticsView" element={<StatisticsView />}></Route>
-      <Route path="/statisticsIncome" element={<StatisticsIncome />}></Route>
-      <Route path="/statisticsExpend" element={<StatisticsExpend />}></Route>
+      <Route
+        path="/statisticsView/:way/:year/:month"
+        element={<StatisticsWays />}
+      ></Route>
       <Route path="/statisticsModify" element={<StatisticsModify />}></Route>
       <Route path="/diary" element={<Diary />}></Route>
       <Route path="/news" element={<News />}></Route>
@@ -50,26 +50,17 @@ function App() {
       <Route path="/myPage" element={<MyPage />}></Route>
       <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
       <Route path="/ecoMission" element={<EcoMission />}></Route>
-      <Route
-        path="/floatingExpensePage"
-        element={<FloatingExpensePage />}
-      ></Route>
 
-      <Route path="/floatingpage1" element={<FloatingPage1 />}></Route>
-      <Route path="/floatingPage2" element={<FloatingPage2 />}></Route>
-      <Route path="/floatingDate" element={<FloatingDate />}></Route>
-      <Route path="/floatingDate2" element={<FloatingDate2 />}></Route>
-      <Route path="/floatingPrice" element={<FloatingPrice />}></Route>
-      <Route path="/floatingPrice2" element={<FloatingPrice2 />}></Route>
-      <Route path="/floatingType" element={<FloatingType />}></Route>
-      <Route path="/floatingCategory" element={<FloatingCategory />}></Route>
-      <Route path="/floatingMemo" element={<FloatingMemo />}></Route>
-      <Route path="/expendType" element={<ExpendType />}></Route>
-      <Route path="/expendCategory" element={<ExpendCategory />}></Route>
-      <Route path="/expendmemo" element={<ExpendMemo />}></Route>
-      <Route path="/expendlast" element={<ExpendLast />}></Route>
+      <Route path="/floatingpage" element={<FloatingPage />}></Route>
       <Route path="/ecocategory" element={<EcoCategory />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/usePage" element={<UsePage />}></Route>
+      <Route path="/informationPage" element={<InformationPage />}></Route>
+      <Route path="/coupon" element={<Coupon />}></Route>
+      <Route path="/couponJoin" element={<CouponJoin />}></Route>
+      <Route path="/detail" element={<Detail />}></Route>
+      <Route path="/inquiry" element={<Inquiry />}></Route>
+      <Route path="/inquiryForm" element={<InquiryForm />}></Route>
     </Routes>
   );
 }

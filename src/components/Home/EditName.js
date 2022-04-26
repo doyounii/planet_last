@@ -34,9 +34,7 @@ export function EditName({ className, onClose, visible }) {
 
   const handleChange = (e) => {
     setText(e.target.value);
-    if (e.target.value.length >= 8) {
-      setText(e.target.value.slice(0, e.target.value.maxLength));
-    }
+    //여기서 8자 제한
   };
 
   const onReset = () => {

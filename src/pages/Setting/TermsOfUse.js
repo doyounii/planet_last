@@ -11,25 +11,21 @@ function Setting() {
         <div className={SettingStyle.backBtn}>
           <HistorySample></HistorySample>
         </div>
-        <div className={SettingStyle.title2}>
-            법률정보 및 이용약관
+        <div className={SettingStyle.title}>
+            서비스 이용약관
         </div>
-        <div>
-          <div className={SettingStyle.use_box}>
-            개인정보 처리방침 (가제)
-            <Link to="#">
-              <FaChevronRight className={SettingStyle.info_icon2}/>
-            </Link>
-          </div>
-          <div className={SettingStyle.use_box}>
-            이용약관 (가제)
-            <Link to="#">
-              <FaChevronRight className={SettingStyle.info_icon2}/>
-            </Link>
-          </div>
+        <Link to="/UsePage" style={{ textDecoration: 'none', color: 'white' }}>
+        <div className={SettingStyle.use_box}>
+            이용약관
+            <FaChevronRight className={SettingStyle.info_icon}/>
         </div>
-
-
+        </Link>
+        <Link to="/InformationPage" style={{ textDecoration: 'none', color: 'white' }}>
+        <div className={SettingStyle.use_box}>
+            개인정보 처리방침
+              <FaChevronRight className={SettingStyle.info_icon}/>
+        </div>
+        </Link>
         <Footer activeMenu="home">
             <div>홈</div>
         </Footer>

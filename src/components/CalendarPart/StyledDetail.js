@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledDetail = styled.div`
-  .detail-list {
+  /* .detail-list {
     margin-bottom: 70px;
-  }
+  } */
   .selected-detail {
     color: white;
     display: flex;
@@ -161,6 +161,7 @@ const StyledDetailPage = styled.div`
     margin-left: 5%;
     margin-bottom: 20px;
   }
+
   .details {
     width: 100%;
     display: flex;

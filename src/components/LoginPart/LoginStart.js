@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import LoginStyle from './Login.module.css';
-import google from './img/ico-google.png';
-import naver from './img/ico-naver.png';
-import kakao from './img/ico-kakao.png';
 import logo from '../../components/LoginPart/img/Group 345.png';
-import planet from '../../planet/1.json';
+import planet from '../../planet/1-2.json';
 import Lottie from 'react-lottie';
-
 
 function Login() {
 
@@ -51,10 +47,9 @@ function Login() {
                 </p>
             </div>
             <div className={LoginStyle.login}>
-                <p className={LoginStyle.login}>아이디와 비밀번호 없이 간편하게 로그인할 수 있어요</p>
-
+                <p >아이디와 비밀번호 없이 간편하게 로그인할 수 있어요</p>
             </div>
-        </section>
+        </section >
     );
 }
 

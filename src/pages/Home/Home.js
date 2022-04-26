@@ -11,15 +11,18 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import high from "../../planet/1-1.json";
-import highmid from "../../planet/2.json";
-import low from "../../planet/4.json";
-import mid from "../../planet/3.json"; import Lottie from "react-lottie";
+import high from "../../planet/1-2.json";
+import highmid from "../../planet/2-2.json";
+import low from "../../planet/4-2.json";
+import mid from "../../planet/3-2.json";
+import Lottie from "react-lottie";
 import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
+import DonutChart from "../../components/StatisticsPart/DonutChart";
+import { CgClose } from "react-icons/cg";
 
 function Home({ activeHome }) {
   const [income, setIncome] = useState(0);
@@ -28,10 +31,11 @@ function Home({ activeHome }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
-
+  const [isDonut, setIsDonut] = useState(false);
   const [loading, setloading] = useState(true);
 
   const [position2, setposition2] = useState(0);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -39,7 +43,7 @@ function Home({ activeHome }) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
+      `/main/yui12@gmail.com/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -51,7 +55,32 @@ function Home({ activeHome }) {
     );
     const data = await response.json();
     setMessage(data);
+    setUserName(data.userName);
     setloading(false);
+  };
+
+  const fetchFunc = (e) => {
+    e.preventDefault();
+    //백엔드로 데이터 보내기
+    fetch(`/main/update/yui12@gmail.com/${userName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        useName: userName,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      })
+      .then((e) => {
+        Navigate("/");
+      });
   };
 
   console.log(income);
@@ -67,7 +96,6 @@ function Home({ activeHome }) {
     );
   };
 
-
   const lottieOptions = {
     loop: true,
     autoplay: true,
@@ -75,6 +103,20 @@ function Home({ activeHome }) {
       className: "add-class", // svg에 적용
       preserveAspectRatio: "xMidYMid slice",
     },
+  };
+
+  const handleChange = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const maxLength = (text) => {
+    if (text.length > text.maxLength) {
+      text = text.slice(0, text.maxLength);
+    }
+  };
+
+  const onReset = () => {
+    setUserName("");
   };
 
   const openModal = () => {
@@ -91,19 +133,19 @@ function Home({ activeHome }) {
     setIsModalOpen2(false);
   };
 
+  const handleLottie = () => {
+    setIsDonut(true);
+  };
 
   const eco = 80;
 
   if (eco >= 0 && eco < 25) {
     lottieOptions.animationData = low;
-  }
-  else if (eco >= 25 && eco < 50) {
+  } else if (eco >= 25 && eco < 50) {
     lottieOptions.animationData = mid;
-  }
-  else if (eco >= 50 && eco < 75) {
+  } else if (eco >= 50 && eco < 75) {
     lottieOptions.animationData = highmid;
-  }
-  else {
+  } else {
     lottieOptions.animationData = high;
   }
 
@@ -124,34 +166,61 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              {message.userName}
+              {userName}
               <FiEdit3
                 className={homeStyle.icon}
                 alt="닉네임 변경"
                 onClick={(e) => openModal2(e)}
               ></FiEdit3>
               {isModalOpen2 && (
-                <EditName
+                <Modal
                   className={position2}
                   onClose={closeModal2}
                   maskClosable={true}
                   visible={true}
-                ></EditName>
+                >
+                  <form onSubmit={fetchFunc}>
+                    <input
+                      id="inputMemo"
+                      type="text"
+                      value={userName}
+                      onChange={handleChange}
+                      maxLength="8"
+                      onInput={maxLength(userName)}
+                    />
+                    <CgClose onClick={onReset}></CgClose>
+
+                    <p>{userName.length}/8</p>
+
+                    <button type="submit">완료</button>
+                  </form>
+                  <button onClick={closeModal2}>취소</button>
+                </Modal>
               )}
             </div>
-            <div className={homeStyle.planet}>
+            <div>
               <AiOutlineQuestionCircle
                 className={homeStyle.question}
                 onClick={(e) => openModal(e)}
               />
-              <Lottie
-                options={{ ...lottieOptions }} eventListeners={[
-                  {
-                    eventName: "complete",
-                    callback: () => console.log("the animation completed"),
-                  },
-                ]}
-              />
+              <div onClick={handleLottie} className={homeStyle.planet}>
+                {isDonut ? (
+                  <div>
+                    <DonutChart></DonutChart>{" "}
+                  </div>
+                ) : (
+                  <Lottie
+                    options={{ ...lottieOptions }}
+                    eventListeners={[
+                      {
+                        eventName: "complete",
+                        callback: () => console.log("the animation completed"),
+                      },
+                    ]}
+                    isClickToPauseDisabled={true}
+                  ></Lottie>
+                )}
+              </div>
 
               <div>
                 {isModalOpen && (
@@ -160,6 +229,7 @@ function Home({ activeHome }) {
                     maskClosable={true}
                     visible={true}
                     closable={true}
+                    background={false}
                   >
                     <QuestionModal />
                   </Modal>
@@ -224,7 +294,7 @@ function Home({ activeHome }) {
           </div>
         </section>
         <section>
-          <Link to="/FloatingPage1" className={activeHome}>
+          <Link to="/FloatingPage" className={activeHome}>
             <AiFillPlusCircle className={homeStyle.floating}></AiFillPlusCircle>
           </Link>
         </section>
