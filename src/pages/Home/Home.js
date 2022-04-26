@@ -38,12 +38,15 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    setMessage(data);
+    setUserName(data.userName);
+    setloading(false);
   }, []);
 
   const fetchData = async () => {
     const response = await fetch(
-      `/main/yui12@gmail.com/2022/${format(new Date(), "M")}`,
+      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -62,7 +65,7 @@ function Home({ activeHome }) {
   const fetchFunc = (e) => {
     e.preventDefault();
     //백엔드로 데이터 보내기
-    fetch(`/main/update/yui12@gmail.com/${userName}`, {
+    fetch(`/main/update/user1@naver.com/${userName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +86,7 @@ function Home({ activeHome }) {
       });
   };
 
-  console.log(income);
+  console.log(message);
   const renderHeader = () => {
     const yNmFormat = "M월";
 
@@ -148,7 +151,7 @@ function Home({ activeHome }) {
   } else {
     lottieOptions.animationData = high;
   }
-
+  if (loading) return <div>loading...</div>;
   return (
     <>
       <div className={homeStyle.contents}>
@@ -246,10 +249,10 @@ function Home({ activeHome }) {
             ></IoIosArrowForward>
           </Link>
           <div className={homeStyle.income}>
-            수입 {message.totalIncomeMonth}원
+            수입 {message.totalIncomeMonth.toLocaleString()}원
           </div>
           <div className={homeStyle.expend}>
-            지출 {message.totalExpenditureMonth}원
+            지출 {message.totalExpenditureMonth.toLocaleString()}원
           </div>
         </section>
         <section className={homeStyle.etc}>
@@ -307,3 +310,9 @@ function Home({ activeHome }) {
 }
 
 export default Home;
+
+const data = {
+  userName: "사용자1",
+  totalIncomeMonth: 102000,
+  totalExpenditureMonth: 54900,
+};
