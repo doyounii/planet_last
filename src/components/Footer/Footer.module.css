@@ -26,28 +26,34 @@
   color: #939393;
   text-decoration: none;
 }
+
 .link:hover {
   background-color: rgba(0, 0, 0, 0.05);
   text-decoration: none;
 }
+
 .icon {
   width: 20px;
   height: 20px;
 }
+
 .focused {
   color: white;
   text-decoration: none;
 }
+
 .focused:hover {
   background-color: rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
+
 .text {
   position: relative;
   top: 5.4px;
 
   color: #ffffff;
 }
+
 .text2 {
   position: relative;
   top: 5.4px;

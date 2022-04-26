@@ -34,6 +34,9 @@ export function EditName({ className, onClose, visible }) {
 
   const handleChange = (e) => {
     setText(e.target.value);
+    if (e.target.value.length >= 8) {
+      setText(e.target.value.slice(0, e.target.value.maxLength));
+    }
   };
 
   const onReset = () => {
