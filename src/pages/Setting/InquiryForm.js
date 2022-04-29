@@ -52,8 +52,8 @@ function Inquiry() {
         </div>
         <div className={ InquiryStyle.inquiry_submit_btn }>
           <button onClick={openModal}>등록하기</button>
-          <Popup open={modalOpen} close={closeModal} header="Modal heading">
-            팝업창입니다. 쉽게 만들 수 있어요. 같이 만들어봐요!
+          <Popup open={modalOpen} close={closeModal}>
+            문의를 등록하시겠습니까?
           </Popup>
         </div>
     </div>
