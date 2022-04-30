@@ -238,7 +238,7 @@ function DetailList(props) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `calendar/yui12@gmail.com/2022/${format(props.value, "M")}/${format(
+      `calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
         props.value,
         "d"
       )}`,

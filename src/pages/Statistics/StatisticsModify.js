@@ -33,7 +33,7 @@ function StatisticsModify() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: "yui12@gmail.com",
+          userId: "user1@naver.com",
           in_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
           inType: cate.type,
@@ -48,7 +48,7 @@ function StatisticsModify() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: "yui12@gmail.com",
+          userId: "user1@naver.com",
           ex_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
           exType: cate.type,
@@ -62,7 +62,7 @@ function StatisticsModify() {
     }
   };
 
-  // fetch(`/income/yui12@gmail.com/new`, {
+  // fetch(`/income/user1@naver.com/new`, {
   //   method: "POST",
   //   headers: {
   //     "Content-Type": "application/json",

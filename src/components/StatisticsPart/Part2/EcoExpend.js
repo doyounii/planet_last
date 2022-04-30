@@ -216,7 +216,7 @@ function EcoExpend(props) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/yui12@gmail.com/2022/2`,
+      `/statistics/user1@naver.com/2022/2`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -228,8 +228,8 @@ function EcoExpend(props) {
     );
     const data = await response.json();
     setMessage(data);
-    setEcoTagCounts(message.ecoTagCounts);
-    setNoEcoTagCounts(message.noEcoTagCounts);
+    setEcoTagCounts(data.ecoTagCounts);
+    setNoEcoTagCounts(data.noEcoTagCounts);
     setloading(false);
   };
 
@@ -252,7 +252,7 @@ function EcoExpend(props) {
             >
               <div className="more">
                 <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
-                {/* <h2>{message.ecoTagCounts[2][1]}개</h2> */}
+                <h2>{ecoTagCounts[2][1]}개</h2>
               </div>
             </Link>
           </div>
@@ -276,7 +276,7 @@ function EcoExpend(props) {
             >
               <div className="more">
                 <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
-                {/* <h2>{noEcoTagCounts[2][1]}개</h2> */}
+                <h2>{noEcoTagCounts[2][1]}개</h2>
               </div>
             </Link>
           </div>
