@@ -16,7 +16,7 @@ export default function FloatingPage() {
   const [progress, setProgress] = useState(1);
   const [total, setTotal] = useState(4);
 
-  const [date, setDate] = useState(format(new Date(), "yy.MM.dd"));
+  const [date, setDate] = useState(new Date());
   const [price, setprice] = useState("");
   const [type, setType] = useState({ type: "", emoji: "" });
   const [cate, setCate] = useState({ type: "", emoji: "" });
@@ -25,7 +25,7 @@ export default function FloatingPage() {
   const onSelectSwitch = (num) => {
     setTotal(num + 3);
     setProgress(1);
-    setDate(format(new Date(), "yy.MM.dd"));
+    setDate(new Date());
     setprice("");
     setType({ type: "", emoji: "" });
     setCate({ type: "", emoji: "" });
@@ -115,16 +115,20 @@ export default function FloatingPage() {
         <HistoryToHome />
       </div>
       <TopNav process={progress} total={total} />
-      <CustomSwitch
-        width={145}
-        height={42}
-        selectionMode={1}
-        roundCorner={true}
-        option1={"수입"}
-        option2={"지출"}
-        onSelectSwitch={onSelectSwitch}
-        selectionColor={"#374756"}
-      />
+      <div className={FloatingStyle.floating_button}>
+        <CustomSwitch
+          width={145}
+          height={42}
+          selectionMode={1}
+          roundCorner={true}
+          option1={"수입"}
+          option2={"지출"}
+          onSelectSwitch={onSelectSwitch}
+          selectionColor={"#374756"}
+        />
+      </div>
+
+      <div className={FloatingStyle.floating_margin} />
       {changeContent()}
     </div>
   );

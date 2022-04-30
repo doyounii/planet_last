@@ -38,7 +38,6 @@ const CustomSwitch = ({
         style={{
           width: width,
           height: height,
-          marginBottom: 60,
           backgroundColor:
             getSelectionMode === 1 ? backgroundColor1 : backgroundColor2,
           borderRadius: 25,

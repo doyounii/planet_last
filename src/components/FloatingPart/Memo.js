@@ -26,7 +26,7 @@ function Memo({ propType, sendData }) {
   return (
     <>
       <div className={`shared-container memo-container ${up ? "move" : ""}`}>
-        <p>남기고 싶은 메모를 작성해 주세요</p>
+        <p className="memo-info-text">남기고 싶은 메모를 작성해 주세요</p>
         <div className="type">
           <div className={`type-box type-box-clicked`}>
             <p className="type-box-emoji">{propType.emoji}</p>
