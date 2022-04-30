@@ -240,6 +240,18 @@
     margin-bottom: 16px;
 }
 
+.coupon_expiration h1 {
+    font-family: Pretendard;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.coupon_expiration p {
+    font-family: Pretendard;
+    font-size: 12px;
+    color: #00C982;
+}
+
 .coupon_modal {
     width: 100%;
     text-align: center;
@@ -256,6 +268,7 @@
     font-family: Pretendard;
     font-size: 18px;
     color: #B4B6B8;
+    margin-bottom: 41px;
 }
 
 .coupon_modal p {
@@ -294,6 +307,30 @@
     border: 0;
     color: #ffffff;
     cursor: pointer;
+}
+
+.coupon_info {
+    font-family: Pretendard;
+    color: #B4B6B8;
+    font-size: 12px;
+    margin-bottom: 23px;
+    text-align: start;
+    margin-left: 5px;
+}
+
+.coupon_info button{
+    color: #9a9a9a;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    width: 12px;
+    height: 18px;
+    margin-left: 4px;
+}
+
+.coupon_info svg {
+   padding-top: 4px;
 }
 
 

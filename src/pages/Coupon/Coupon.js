@@ -7,8 +7,16 @@ import { FaChevronRight } from 'react-icons/fa';
 import DropBox from '../../components/CouponPart/DropBox';
 import { Modal } from "../../components/CouponPart/CouponModal";
 import Popup from '../../components/InquiryPart/Popup';
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import CouponInfo from '../../components/InquiryPart/CouponInfo';
+import CouponUseInfo from '../../components/InquiryPart/CouponUseInfo';
+import CouponDetailInfo from '../../components/InquiryPart/CouponDetailInfo';
 
 function Coupon() {
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -70,6 +78,36 @@ function Coupon() {
               <p>10% 할인쿠폰</p>
               <img src="img/coupon.png" alt="planet-coupon"></img>
               <h2>2022.02.01 - 2023.02.01</h2>
+
+              <div className={ CouponStyle.coupon_info }>
+                사용정보
+                <button onClick={() => {
+                  setVisible(!visible);
+                }}>{visible ? <BsChevronUp /> : <BsChevronDown />}
+                </button>
+                <br/>
+                {visible && <CouponUseInfo />}
+              </div>
+
+              <div className={ CouponStyle.coupon_info }>
+                쿠폰설명
+                <button onClick={() => {
+                  setVisible2(!visible2);
+                }}>{visible2 ? <BsChevronUp /> : <BsChevronDown />}
+                </button>
+                <br/>
+                {visible2 && <CouponInfo />}
+              </div>
+
+              <div className={ CouponStyle.coupon_info }>
+                상세정보
+                <button onClick={() => {
+                  setVisible3(!visible3);
+                }}>{visible3 ? <BsChevronUp /> : <BsChevronDown />}
+                </button>
+                <br/>
+                {visible3 && <CouponDetailInfo />}
+              </div>
 
               <div className={ CouponStyle.coupon_use_btn }>
                 <button onClick={isopenModal}>사용하기</button>
