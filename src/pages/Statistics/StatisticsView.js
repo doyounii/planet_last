@@ -11,37 +11,29 @@ import { DetailItem } from "../../components/CalendarPart/DetailList";
 import { StyledDetailPageBlock } from "../../components/CalendarPart/StyledDetail";
 
 const tempData = {
-  totalMonthIncome: 36000,
-  totalMonthExpenditure: 14000,
+  totalMonthIncome: 102000,
+  totalMonthExpenditure: 54900,
   inMore: false, //더 들어왔는지
-  exMore: true, //더 썼는지
-  inDif: 92000, //더 들어온 가격
-  exDif: 14000, //더 쓴 가격
+  exMore: false, //더 썼는지
+  inDif: 463000, //더 들어온 가격
+  exDif: 487000, //더 쓴 가격
   detailDtoList: [
     {
-      date: "2022-04-26",
+      date: "2022-04-11",
       detailDtoList: [
         {
           way: "현금",
           type: "경조사/회비",
-          cost: 92503,
-          memo: null,
+          cost: 10000,
+          memo: "동아리 회비",
           ecoList: null,
-          income: true,
-        },
-        {
-          way: "은행",
-          type: "월급",
-          cost: 1726000,
-          memo: "3월 + 4월",
-          ecoList: null,
-          income: true,
+          income: false,
         },
         {
           way: "카드",
           type: "생필품",
-          cost: 4990,
-          memo: "비누",
+          cost: 10000,
+          memo: "대나무 물티슈 구매",
           ecoList: [
             {
               eco: "G",
@@ -53,53 +45,54 @@ const tempData = {
               ecoDetail: "기타",
               etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
             },
-            {
-              eco: "G",
-              ecoDetail: "비건식당 방문",
-              etcMemo: null,
-            },
           ],
           income: false,
         },
         {
           way: "카드",
-          type: "가전",
-          cost: 50000,
-          memo: "가스레인지",
-          ecoList: null,
+          type: "식비",
+          cost: 5000,
+          memo: "본죽",
+          ecoList: [
+            {
+              eco: "G",
+              ecoDetail: "다회용기 사용",
+              etcMemo: null,
+            },
+            {
+              eco: "N",
+              ecoDetail: "기타",
+              etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
+            },
+          ],
           income: false,
         },
       ],
     },
     {
-      date: "2022-04-27",
+      date: "2022-04-10",
       detailDtoList: [
         {
-          way: "현금",
-          type: "생필품",
-          cost: 92503,
-          memo: "텀블러",
+          way: "은행",
+          type: "기타",
+          cost: 15000,
+          memo: "친구 생일선물",
           ecoList: [
             {
               eco: "G",
               ecoDetail: "친환경 제품 구매",
               etcMemo: null,
             },
-            {
-              eco: "N",
-              ecoDetail: "기타",
-              etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-            },
           ],
           income: false,
         },
         {
           way: "현금",
-          type: "카드",
-          cost: 92503,
-          memo: "학식",
+          type: "기타",
+          cost: 2000,
+          memo: "빌린 돈 갚음",
           ecoList: null,
-          income: false,
+          income: true,
         },
       ],
     },
@@ -206,14 +199,24 @@ function StatisticsDetail() {
                     }
                   });
                 return (
-                  <StyledDetailPageBlock>
-                    <div className="details" key={value.id}>
-                      <div className="stat-detail-icon">
-                        {wayEmoji(value.way)}
+                  <Link
+                    className="detail-link"
+                    to={`/statisticsModify`}
+                    style={{ textDecoration: "none", color: "white" }}
+                    state={{
+                      item: value,
+                      date: parseISO(data.date),
+                    }}
+                  >
+                    <StyledDetailPageBlock>
+                      <div className="details" key={value.id}>
+                        <div className="stat-detail-icon">
+                          {wayEmoji(value.way)}
+                        </div>
+                        <DetailItem item={value} ecoCnt={ecoCnt} />
                       </div>
-                      <DetailItem item={value} ecoCnt={ecoCnt} />
-                    </div>
-                  </StyledDetailPageBlock>
+                    </StyledDetailPageBlock>
+                  </Link>
                 );
               })}
             </>

@@ -53,8 +53,8 @@ export default function FloatingPage() {
   const changeData = (data) => {
     switch (progress) {
       case 1:
-        setDate(data.values.date);
-        setprice(data.values.price);
+        setDate(data.date);
+        setprice(data.price);
         break;
       case 2:
         setType(data.value);

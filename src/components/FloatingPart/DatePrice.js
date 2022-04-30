@@ -2,36 +2,41 @@ import React, { useState, useEffect } from "react";
 import FloatingButton from "../buttons/FloatingButton";
 // import "./Contents.css";
 import { useOutSideRef } from "../OutsideRef";
+import { isValid, format, parseISO } from "date-fns";
 
 function DatePrice({ propDate, propPrice, sendData }) {
-  const [inputs, setInputs] = useState({ date: propDate, price: propPrice });
+  const [date, setDate] = useState(propDate);
+  const [price, setPrice] = useState(propPrice);
   const [focus, setFocus] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const refs = useOutSideRef();
   const { ref, up } = refs;
 
-  const { date, price } = inputs;
-
-  useEffect(() => {
-    if (focus) {
-      if (date.length === 8) {
-        setDisabled(false);
-      } else {
-        setDisabled(true);
-      }
-    } else {
-      if (price.length !== 0) {
-        setDisabled(false);
-      } else {
-        setDisabled(true);
-      }
-    }
-  }, [focus, date, price]);
-
   const onChange = (e) => {
-    const { name, value } = e.target;
+    switch (e.target.name) {
+      case "date":
+        let temp = "20" + e.target.value.replace(/\./gi, "-");
 
-    //분리할것
+        if (e.target.value.indexOf(".") !== e.target.value.lastIndexOf(".")) {
+          setDate(e.target.value);
+        }
+        if (isValid(parseISO(temp))) {
+          setDisabled(false);
+        } else {
+          setDisabled(true);
+        }
+        break;
+      case "price":
+        setPrice(e.target.value);
+        if (price.length !== 0) {
+          setDisabled(false);
+        } else {
+          setDisabled(true);
+        }
+        break;
+      default:
+        break;
+    }
   };
 
   const onClickHandler = (btnType) => {
@@ -39,8 +44,9 @@ function DatePrice({ propDate, propPrice, sendData }) {
       case "다음":
         if (focus) {
           setFocus(false);
+          if (price.length === 0) setDisabled(true);
         } else {
-          sendData({ btnType: btnType, values: inputs });
+          sendData({ btnType: btnType, date: date, price: price });
         }
         break;
       case "뒤로":

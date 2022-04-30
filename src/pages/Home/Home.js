@@ -11,8 +11,8 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import high from "../../planet/1-2.json";
-import highmid from "../../planet/2-2.json";
+import high from "../../planet/1-2.json"
+import highmid from "../../planet/1-2.json";
 import low from "../../planet/4-2.json";
 import mid from "../../planet/3-2.json";
 import Lottie from "react-lottie";
@@ -38,12 +38,15 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    setMessage(data);
+    setUserName(data.userName);
+    setloading(false);
   }, []);
 
   const fetchData = async () => {
     const response = await fetch(
-      `/main/yui12@gmail.com/2022/${format(new Date(), "M")}`,
+      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -62,7 +65,7 @@ function Home({ activeHome }) {
   const fetchFunc = (e) => {
     e.preventDefault();
     //백엔드로 데이터 보내기
-    fetch(`/main/update/yui12@gmail.com/${userName}`, {
+    fetch(`/main/update/user1@naver.com/${userName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +86,7 @@ function Home({ activeHome }) {
       });
   };
 
-  console.log(income);
+  console.log(message);
   const renderHeader = () => {
     const yNmFormat = "M월";
 
@@ -148,7 +151,7 @@ function Home({ activeHome }) {
   } else {
     lottieOptions.animationData = high;
   }
-
+  if (loading) return <div>loading...</div>;
   return (
     <>
       <div className={homeStyle.contents}>
@@ -166,36 +169,42 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              {userName}
+              {message.userName}
               <FiEdit3
                 className={homeStyle.icon}
                 alt="닉네임 변경"
                 onClick={(e) => openModal2(e)}
               ></FiEdit3>
               {isModalOpen2 && (
-                <Modal
+                // <Modal
+                //   className={position2}
+                //   onClose={closeModal2}
+                //   maskClosable={true}
+                //   visible={true}
+                // >
+                //   <form onSubmit={fetchFunc}>
+                //     <input
+                //       id="inputMemo"
+                //       type="text"
+                //       value={userName}
+                //       onChange={handleChange}
+                //       maxLength="8"
+                //       onInput={maxLength(userName)}
+                //     />
+                //     <CgClose onClick={onReset}></CgClose>
+
+                //     <p>{userName.length}/8</p>
+
+                //     <button type="submit">완료</button>
+                //   </form>
+                //   <button onClick={closeModal2}>취소</button>
+                // </Modal>
+                <EditName
                   className={position2}
                   onClose={closeModal2}
                   maskClosable={true}
                   visible={true}
-                >
-                  <form onSubmit={fetchFunc}>
-                    <input
-                      id="inputMemo"
-                      type="text"
-                      value={userName}
-                      onChange={handleChange}
-                      maxLength="8"
-                      onInput={maxLength(userName)}
-                    />
-                    <CgClose onClick={onReset}></CgClose>
-
-                    <p>{userName.length}/8</p>
-
-                    <button type="submit">완료</button>
-                  </form>
-                  <button onClick={closeModal2}>취소</button>
-                </Modal>
+                ></EditName>
               )}
             </div>
             <div>
@@ -246,10 +255,10 @@ function Home({ activeHome }) {
             ></IoIosArrowForward>
           </Link>
           <div className={homeStyle.income}>
-            수입 {message.totalIncomeMonth}원
+            수입 {message.totalIncomeMonth.toLocaleString()}원
           </div>
           <div className={homeStyle.expend}>
-            지출 {message.totalExpenditureMonth}원
+            지출 {message.totalExpenditureMonth.toLocaleString()}원
           </div>
         </section>
         <section className={homeStyle.etc}>
@@ -307,3 +316,9 @@ function Home({ activeHome }) {
 }
 
 export default Home;
+
+const data = {
+  userName: "사용자1",
+  totalIncomeMonth: 102000,
+  totalExpenditureMonth: 54900,
+};
