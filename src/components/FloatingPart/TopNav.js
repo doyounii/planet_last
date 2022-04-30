@@ -1,23 +1,31 @@
-import React, { Component } from 'react';
-import IncomeStyle from './TopNav.module.css'
-import { AiOutlineMinus } from 'react-icons/ai';
-import HistorySample from '../History/History';
+import React from "react";
+import IncomeStyle from "./TopNav.module.css";
+import { HiOutlineMinus } from "react-icons/hi";
 
-//수입 상단바 
-class TopNav extends Component {
-    render() {
-      return (
-        <div className={IncomeStyle.backBtn}>
-            <HistorySample></HistorySample>
-            <div className={IncomeStyle.navBar}>
-            <li><AiOutlineMinus className="icon" size="40" color="white" /></li>
-            <li><AiOutlineMinus className="icon" size="40" color="#566479" /></li>
-            <li><AiOutlineMinus className="icon" size="40" color="#566479" /></li>
-            <li><AiOutlineMinus className="icon" size="40" color="#566479" /></li>
-            </div>
-        </div>
-      );
+const activeLine = (
+  <HiOutlineMinus className="flow-nav-icon" size="50" color="#F8F8F8" />
+);
+const nActiveLine = (
+  <HiOutlineMinus className="flow-nav-icon" size="50" color="#566479" />
+);
+
+function TopNav({ process, total }) {
+  const setNav = () => {
+    let tempNav = [];
+    for (let i = 0; i < process; i++) {
+      tempNav.push(<li key={i}>{activeLine}</li>);
     }
-  }
+    for (let i = process; i < total; i++) {
+      tempNav.push(<li key={i}>{nActiveLine}</li>);
+    }
+    return tempNav;
+  };
 
-  export default TopNav;
+  return (
+    <div className={IncomeStyle.header}>
+      <div className={IncomeStyle.navBar}>{setNav()}</div>
+    </div>
+  );
+}
+
+export default TopNav;

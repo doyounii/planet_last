@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+
 import styled from "styled-components";
+
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+
 import Lottie from "react-lottie";
 import high from "../../planet/1-2.json";
 import highmid from "../../planet/2-2.json";
 import low from "../../planet/4-2.json";
 import mid from "../../planet/3-2.json";
 import { Sliders } from "../CalendarPart/Sliders";
-import OpenQuestion from "./OpenQuestion";
 
 const lottieDefault = {
   loop: true,
@@ -21,44 +23,32 @@ const lottieDefault = {
 const modalData = [
   {
     animation: high,
-    ment: `당신은 행성 히어로!`,
-    ment2: `지금처럼 착한 소비 이어가주세요😇`,
+    ment: "당신은 행성 히어로!\n지금처럼 착한 소비 이어가주세요 😇",
   },
   {
     animation: highmid,
-    ment: `잘 하고 있어요!`,
-    ment2: `조금 더 노력하면 푸른 행성을 볼 수 있겠어요 🌎`,
+    ment: "잘 하고 있어요!\n조금 더 노력하면 푸른 행성을 볼 수 있겠어요 🌎",
   },
   {
     animation: mid,
-    ment: `노력하셔야겠어요 😱`,
-    ment2: `소비를 줄이고 친환경적 소비를 실천해주세요`,
+    ment: "노력하셔야겠어요 😱\n 소비를 줄이고 친환경적 소비를 실천해주세요",
   },
   {
     animation: low,
-    ment: `반환경 소비는 자제해주세요 ❌`,
-    ment2: `당신의 작은 변화가 행성을 바꿀 수 있어요`,
-    ment3: `플랜잇이 함께 할게요 💪🏻`,
+    ment: "반환경 소비는 자제해주세요 ❌\n 당신의 작은 변화가 행성을 바꿀 수 있어요\n플랜잇이 함께 할게요 💪🏻",
   },
 ];
 
 export function QuestionModal() {
-  const [open, setopen] = useState(false);
-
-  const openModal = () => {
-    setopen((open) => !open);
-  };
-
   return (
     <ModalWrapper>
       <p className="coment">
         나의 행성은 어떤 상태일까요?{" "}
         <AiOutlineQuestionCircle
           className="question"
-          onClick={() => openModal()}
+        // onClick={(e) => openModal(e)}
         />
       </p>
-      {open && <OpenQuestion />}
       <Sliders dots={true} index={0}>
         {modalData.map((data, index) => {
           return (
@@ -76,12 +66,6 @@ export function QuestionModal() {
               </div>
               <p className="ment" key={10 + index}>
                 {data.ment}
-              </p>
-              <p className="ment" key={20 + index}>
-                {data.ment2}
-              </p>
-              <p className="ment3" key={30 + index}>
-                {data.ment3}
               </p>
             </>
           );
@@ -124,33 +108,17 @@ const ModalWrapper = styled.div`
     color: #ffffff;
   }
   .ment {
-    margin: 20px 5%;
+    margin-bottom: 20px;
+    white-space: pre-wrap; /* 줄바꿈용 */
 
-    font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 4px;
+    line-height: 20px;
     text-align: center;
 
     /* light grey */
     color: #b4b6b8;
     z-index: 100;
-
-  }
-  .ment3 {
-    margin: 20px 5%;
-
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 5px;
-    text-align: center;
-
-    /* light grey */
-    color: #b4b6b8;
-    z-index: 100;
-    margin-bottom: 40px;
   }
 `;

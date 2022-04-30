@@ -68,7 +68,7 @@ const tempData = {
         id: 19,
         type: "가전",
         cost: 20432,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음8",
         ecoList: [
           {
             eco: "G",
@@ -94,7 +94,7 @@ const tempData = {
         id: 18,
         type: "교통",
         cost: 46486,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음9",
         ecoList: [
           {
             eco: "G",
@@ -120,7 +120,7 @@ const tempData = {
         id: 17,
         type: "생필품",
         cost: 3690,
-        memo: "엽떡 사먹음",
+        memo: "엽떡 사먹음10",
         ecoList: [
           {
             eco: "G",
@@ -139,7 +139,7 @@ const tempData = {
         id: 16,
         type: "생필품",
         cost: 70573,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음11",
         ecoList: [
           {
             eco: "G",
@@ -160,7 +160,7 @@ const tempData = {
         id: 15,
         type: "식비",
         cost: 83504,
-        memo: "엽떡 사먹음",
+        memo: "엽떡 사먹음12",
         ecoList: [
           {
             eco: "G",
@@ -179,7 +179,7 @@ const tempData = {
         id: 14,
         type: "식비",
         cost: 17192,
-        memo: "빵 사먹음",
+        memo: "빵 사먹음13",
         ecoList: [
           {
             eco: "G",
@@ -221,7 +221,7 @@ export function DetailItem({ item, ecoCnt }) {
       </div>
 
       <div className={`details-cost ${isEco(ecoCnt)}`}>
-        {item.income == true ? "+" : "-"}
+        {item.income ? "+" : "-"}
         {item.cost.toLocaleString("ko-KR")}원
       </div>
     </>
@@ -230,6 +230,7 @@ export function DetailItem({ item, ecoCnt }) {
 
 function DetailList(props) {
   let date = props.value;
+  const [list, setList] = useState([]);
   const [totalList, setTotalList] = useState([]);
   const [detailList, setDetailList] = useState([]);
   const [totalMoney, setTotalMoney] = useState(0);
@@ -237,7 +238,7 @@ function DetailList(props) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `calendar/user1@naver.com/2022/${format(props.value, "M")}/${format(
+      `calendar/yui12@gmail.com/2022/${format(props.value, "M")}/${format(
         props.value,
         "d"
       )}`,
@@ -256,10 +257,10 @@ function DetailList(props) {
   };
 
   useEffect(() => {
-    // fetchData();
-    setData(tempData);
-    setloading(false);
-  }, []);
+    fetchData();
+    // setData(tempData);
+    // setloading(false);
+  }, [props.value]);
 
   const setData = (data) => {
     let getList = [];
@@ -291,13 +292,16 @@ function DetailList(props) {
 
     filterType !== undefined &&
       filterType.forEach((item) => {
-        item.ecoList.forEach((item) => {
-          if (item.eco === "G") {
-            ecoCnt += 1;
-          } else if (item.eco === "R") {
-            ecoCnt -= 1;
-          }
-        });
+        {
+          item.ecoList !== null &&
+            item.ecoList.forEach((item) => {
+              if (item.eco === "G") {
+                ecoCnt += 1;
+              } else if (item.eco === "R") {
+                ecoCnt -= 1;
+              }
+            });
+        }
 
         detailList.push(
           <div className="details" key={item.id}>
@@ -320,7 +324,7 @@ function DetailList(props) {
           className="detail-link"
           to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
           state={{
-            date: format(props.value, "M. d EEEEE", { locale: ko }),
+            date: props.value,
             typeName: totalList[i].name,
             typeCost: totalList[i].value,
             typeDetail: detailList[i],

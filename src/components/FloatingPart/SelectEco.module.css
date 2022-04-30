@@ -1,0 +1,125 @@
+.selectContainer {
+  font-family: "Pretendard";
+  top: 25%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 84%;
+}
+
+.sbutton {
+  border-radius: 43px;
+  padding: 8px 18px;
+  margin: 5px;
+  border: none;
+}
+.nchecked {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.eco.nchecked {
+  background-color: rgba(0, 201, 130, 0.1);
+}
+
+.eco.checked {
+  background-color: rgba(0, 201, 130);
+  color: black;
+}
+
+.neco.nchecked {
+  background-color: rgb(86, 100, 121, 0.1);
+}
+.neco.checked {
+  background-color: #b4b6b8;
+  color: black;
+}
+
+.etc.checked {
+  background-color: white;
+  color: black;
+}
+
+.etc.nchecked {
+  background-color: rgb(255, 255, 255, 0.1);
+}
+
+.plusCircle {
+  width: 28px;
+  height: 28px;
+}
+
+.plusCircle.pluswhite {
+  color: #d3d3d3;
+}
+
+.plusCircle.plusgrey {
+  color: #d3d3d3;
+  opacity: 0.5;
+}
+
+.newTag {
+  position: relative;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.inputMemo {
+  display: flex;
+  margin: 20px auto;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  width: 260px;
+  height: 36px;
+}
+.inputMemo input {
+  position: relative;
+
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+
+  background-color: transparent;
+
+  border: none;
+
+  text-align: left;
+  padding-left: 15px;
+
+  color: #ffffff;
+}
+
+.selectTag {
+  position: relative;
+  top: 10px;
+}
+::-webkit-input-placeholder {
+  /* 크롬 4–56 */
+  color: #f5f5f5;
+  opacity: 10%;
+}
+
+.close {
+  position: relative;
+  top: 11px;
+  left: 30px;
+  font-size: 15px;
+
+  color: black;
+  background-color: transparent;
+}
+.coment3 {
+  margin-top: 25px;
+  color: rgba(0, 201, 130);
+}

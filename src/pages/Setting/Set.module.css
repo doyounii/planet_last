@@ -55,6 +55,8 @@
 /*toggle box*/
 .toggle_box {
   position: relative;
+  display: flex;
+  flex-direction: row;
   top: 158px;
   width: 90%;
   margin: 0 auto;
@@ -66,6 +68,11 @@
   font-size: 15px;
   font-family: Pretendard;
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.toggle_box > * {
+  position: absolute;
+  right: 5%;
 }
 
 .toggle_box2 {
@@ -85,7 +92,7 @@
 .info_icon {
   position: relative;
   width: 24px;
-  color: #676B73;
+  color: #676b73;
   cursor: pointer;
   float: right;
   margin-right: 5%;
@@ -117,7 +124,7 @@
   font-family: Pretendard;
   margin: 0;
   margin-top: 5px;
-  color: #64686F;
+  color: #64686f;
   line-height: 14.4px;
   width: 88%;
   margin: 0 auto;
@@ -154,7 +161,7 @@
   font-size: 12px;
   font-family: Pretendard;
   margin: 0;
-  color: #B4B6B8;
+  color: #b4b6b8;
 }
 
 .terms_detail_box p {
@@ -163,7 +170,7 @@
   width: 100%;
   margin: 0;
   margin-top: 5px;
-  color: #64686F;
+  color: #64686f;
   line-height: 14.4px;
 }
 
@@ -182,18 +189,18 @@
   margin-bottom: 7px;
 }
 
-.info_detail_box h2{
+.info_detail_box h2 {
   font-size: 12px;
   font-family: Pretendard;
   margin-top: 8px;
-  color: #B4B6B8;
+  color: #b4b6b8;
   line-height: 14.4px;
 }
 
-.info_detail_box p{
+.info_detail_box p {
   font-size: 12px;
   font-family: Pretendard;
   margin-top: 5px;
-  color: #64686F;
+  color: #64686f;
   line-height: 14.4px;
 }
