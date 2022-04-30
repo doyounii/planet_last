@@ -10,6 +10,7 @@ import DateHeader from "../../components/DateHeader";
 import Calendar from "../../components/CalendarPart/CalendarBody";
 import { Modal } from "../../components/CalendarPart/Modal";
 import SelectType from "../../components/FloatingPart/SelectType";
+import SelectEco from "../../components/FloatingPart/SelectEco";
 
 function StatisticsModify() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -152,6 +153,14 @@ function StatisticsModify() {
           </>
         );
         break;
+      case "eco":
+        article = (
+          <>
+            <p className="modify-modal-title">태그</p>
+            <SelectEco />
+          </>
+        );
+        break;
       default:
         break;
     }
@@ -233,10 +242,17 @@ function StatisticsModify() {
         <div className="modify-detail">
           <p className="modify-detail-title">태그</p>
           {/* 태그는 어떻게 받아올지 모르겠음 .. */}
-          {ecoList.length !== 0 &&
-            ecoList.map((value) => {
-              return <div className="modify-tag">{value.ecoDetail}</div>;
-            })}
+          <input
+            className="modify-detail-value"
+            value={
+              ecoList.length !== 0 &&
+              ecoList.map((value) => {
+                return value.ecoDetail;
+              })
+            }
+            onClick={() => openModal("eco")}
+            readOnly
+          />
         </div>
 
         <div className="modify-detail">

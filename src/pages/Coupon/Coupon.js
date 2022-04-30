@@ -7,6 +7,33 @@ import { FaChevronRight } from 'react-icons/fa';
 import DropBox from './DropBox';
 
 function Coupon() {
+  const calcDday = () => {
+    var today = new Date();
+   
+    const planetCoupon = [
+      {name: 'pompom', dday: new Date(2022, 11, 31)}, 
+      {name: 'pompompom', dday: new Date(2022, 3, 11)}
+    ];
+    
+    function isPompom(element) {
+      if(element.name === 'pompom')  {
+        return true;
+      }
+    }
+
+    const pompom = planetCoupon.find(isPompom);
+    var gap = pompom.dday.getTime() - today.getTime();
+    var result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+
+    if( result === 0 ) {
+      return 'D-day';
+    }
+    else if( result < 0 ) {
+      return '만료';
+    }
+    return 'D-' + result;
+  }
+
   return (
     <div className={ CouponStyle.container }>
         <div className={ CouponStyle.backBtn }>
@@ -34,13 +61,13 @@ function Coupon() {
 
         <div className={ CouponStyle.coupon_use_box }>
           <div className={ CouponStyle.coupon_available }>
-            <div className={ CouponStyle.coupon_dday }>D-365</div>
+            <div className={ CouponStyle.coupon_dday }>{calcDday()}</div>
             <img src="img/coupon.png" alt="planet-coupon"></img>
             <h1>친환경 상점 〈폼폼〉</h1>
             <p>10% 할인쿠폰</p>
           </div>
           <div className={ CouponStyle.coupon_expiration }>
-            <div className={ CouponStyle.coupon_dday }>사용완료</div>
+            <div className={ CouponStyle.coupon_dday }>{calcDday()}</div>
             <img src="img/coupon.png" alt="planet-coupon"></img>
             <h1>친환경 상점 〈폼폼〉</h1>
             <p>10% 할인쿠폰</p>

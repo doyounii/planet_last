@@ -38,7 +38,10 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    setMessage(data);
+    setUserName(data.userName);
+    setloading(false);
   }, []);
 
   const fetchData = async () => {
@@ -83,7 +86,7 @@ function Home({ activeHome }) {
       });
   };
 
-  console.log(income);
+  console.log(message);
   const renderHeader = () => {
     const yNmFormat = "M월";
 
@@ -148,7 +151,7 @@ function Home({ activeHome }) {
   } else {
     lottieOptions.animationData = high;
   }
-
+  if (loading) return <div>loading...</div>;
   return (
     <>
       <div className={homeStyle.contents}>
@@ -252,10 +255,10 @@ function Home({ activeHome }) {
             ></IoIosArrowForward>
           </Link>
           <div className={homeStyle.income}>
-            수입 {message.totalIncomeMonth}원
+            수입 {message.totalIncomeMonth.toLocaleString()}원
           </div>
           <div className={homeStyle.expend}>
-            지출 {message.totalExpenditureMonth}원
+            지출 {message.totalExpenditureMonth.toLocaleString()}원
           </div>
         </section>
         <section className={homeStyle.etc}>
@@ -313,3 +316,9 @@ function Home({ activeHome }) {
 }
 
 export default Home;
+
+const data = {
+  userName: "사용자1",
+  totalIncomeMonth: 102000,
+  totalExpenditureMonth: 54900,
+};

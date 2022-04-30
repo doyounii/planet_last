@@ -52,11 +52,11 @@ function SelectType({ propType, type, sendData, buttons }) {
   function handleButton(value) {
     if (value.type === selected.type) {
       setSelected({ type: "" });
-      sendData("");
+      if (!buttons) sendData("");
       setDisabled(true);
     } else {
       setSelected(value);
-      sendData(value);
+      if (!buttons) sendData(value);
       setDisabled(false);
     }
   }

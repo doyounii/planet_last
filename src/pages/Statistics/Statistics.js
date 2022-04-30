@@ -43,7 +43,9 @@ function StatisticsMain() {
   };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    setMessage(data);
+    setloading(false);
   }, []);
 
   const fetchData = async () => {
@@ -64,6 +66,7 @@ function StatisticsMain() {
     setnoEcoTagCounts(data.noecoTagCounts);
     setloading(false);
   };
+  if (loading) return <div>loading...</div>;
 
   return (
     <div className="statistic-main">
@@ -78,12 +81,12 @@ function StatisticsMain() {
 
             <div className="month-breakdown">
               <p>수입</p>
-              <h1>{message.incomeTotal}원</h1>
+              <h1>{message.incomeTotal.toLocaleString()}원</h1>
             </div>
 
             <div className="month-breakdown">
               <p>지출</p>
-              <h1>{message.expenditureTotal}원</h1>
+              <h1>{message.expenditureTotal.toLocaleString()}원</h1>
             </div>
           </div>
         </Link>
@@ -167,3 +170,10 @@ function StatisticsMain() {
 }
 
 export default StatisticsMain;
+const data = {
+  incomeTotal: 102000,
+  expenditureTotal: 549000,
+  userName: "사용자1",
+  nowEcoCount: 11,
+  nowNoneEcoCount: 4,
+};

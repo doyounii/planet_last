@@ -28,7 +28,7 @@ function DetailCategory() {
   };
 
   useEffect(() => {
-    if (data.typeDetail !== null) {
+    if (data.typeDetail !== undefined || data.typeDetail !== null) {
       setDetailList(data.typeDetail);
     }
   }, [data]);
@@ -79,7 +79,7 @@ function DetailCategory() {
             {detailList.length !== 0 &&
               detailList.map((item) => {
                 let ecoCnt = 0;
-                item.ecoList !== null &&
+                item.ecoList !== undefined &&
                   item.ecoList.forEach((item) => {
                     if (item.eco === "G") {
                       ecoCnt += 1;

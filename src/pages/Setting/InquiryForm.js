@@ -1,15 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import InquiryStyle from './Inquiry.module.css';
 import HistorySample from '../../components/History/HistoryBack';
+import Uploader from "../../components/InquiryPart/Uploader";
+import Popup from '../../components/InquiryPart/Popup';
 
 function Inquiry() {
-  const onSubmit = () => {
-    if (window.confirm("문의를 등록하시겠습니까?")) {
-      alert("등록되었습니다.");
-    } else {
-      alert("등록을 취소하였습니다.");
-    }
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -41,16 +44,17 @@ function Inquiry() {
           
           <div className={ InquiryStyle.inquiry_form }>
               <h1>사진</h1>
+              <Uploader />
               <p>유의사항</p>
               <h4>답변시간 이후 접수건은 운영시간 내 순차적 답변드립니다</h4>
               <h4>문의글은 등록 이후 수정이 불가합니다</h4>
           </div>
-
-          <Link to="#">
-            <div className={ InquiryStyle.inquiry_submit_btn }>
-              <button onClick={onSubmit}>등록하기</button>
-            </div>
-          </Link>
+        </div>
+        <div className={ InquiryStyle.inquiry_submit_btn }>
+          <button onClick={openModal}>등록하기</button>
+          <Popup open={modalOpen} close={closeModal} header="Modal heading">
+            팝업창입니다. 쉽게 만들 수 있어요. 같이 만들어봐요!
+          </Popup>
         </div>
     </div>
   );
