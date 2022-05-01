@@ -70,7 +70,7 @@ function SelectType({ propType, type, sendData, buttons }) {
   return (
     <>
       <section className={`shared-container type-container wrap${type}`}>
-        {text}
+        <p className="floating-type-text">{text}</p>
         <div className="type">
           {array.map((value, idx) => {
             return (
