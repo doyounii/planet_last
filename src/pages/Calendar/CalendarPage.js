@@ -29,7 +29,7 @@ function CalendarPage() {
 
   const fetchData = async (date) => {
     const response = await fetch(
-      `calendar/yui12@gmail.com/${format(date, "yyyy")}/${format(date, "M")}`,
+      `calendar/user1@naver.com/${format(date, "yyyy")}/${format(date, "M")}`,
       {
         method: "GET",
         headers: {
@@ -153,12 +153,12 @@ function CalendarPage() {
           {anniversary.find(
             (x) => x[0] === format(selectedDate, dateFormat)
           ) && (
-            <EcoDay
-              value={anniversary.find(
-                (x) => x[0] === format(selectedDate, dateFormat)
-              )}
-            />
-          )}
+              <EcoDay
+                value={anniversary.find(
+                  (x) => x[0] === format(selectedDate, dateFormat)
+                )}
+              />
+            )}
           <DetailList value={selectedDate} />
         </div>
         <Footer activeMenu="calendar">

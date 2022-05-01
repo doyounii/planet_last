@@ -8,10 +8,11 @@ import "../CalendarPart/Calendar.css";
 
 export function EditName({ className, onClose, visible }) {
   const [text, setText] = useState("");
+  const [count, setCount] = useState(0);
 
   const fetchFunc = (e) => {
     //백엔드로 데이터 보내기
-    fetch(`/main/update/yui12@gmail.com/${text}`, {
+    fetch(`/main/update/user1@naver.com/${text}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +35,10 @@ export function EditName({ className, onClose, visible }) {
 
   const handleChange = (e) => {
     setText(e.target.value);
+    setCount(e.length);
+
     //여기서 8자 제한
+
   };
 
   const onReset = () => {

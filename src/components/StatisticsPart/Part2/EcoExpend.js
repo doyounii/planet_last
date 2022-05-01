@@ -213,7 +213,7 @@ function EcoExpend(props) {
             >
               <div className="more">
                 <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
-                {/* <h2>{message.ecoTagCounts[2][1]}개</h2> */}
+                <h2>{ecoTagCounts[2][1]}개</h2>
               </div>
             </Link>
           </div>
@@ -237,7 +237,7 @@ function EcoExpend(props) {
             >
               <div className="more">
                 <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
-                {/* <h2>{noEcoTagCounts[2][1]}개</h2> */}
+                <h2>{noEcoTagCounts[2][1]}개</h2>
               </div>
             </Link>
           </div>

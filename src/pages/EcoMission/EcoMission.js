@@ -23,7 +23,7 @@ function EcoMission() {
 
   useEffect(() => {
     let isSubscribed = true;
-    fetch(`/mission/yui12@gmail.com`, {
+    fetch(`/mission/user1@naver.com`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function EcoMission() {
   const fetchFunc = () => {
     //백엔드로 데이터 보내기
     fetch(
-      `/mission/yui12@gmail.com/${todayMission.emoji}/${todayMission.name}`,
+      `/mission/user1@naver.com/${todayMission.emoji}/${todayMission.name}`,
       {
         method: "POST",
         headers: {

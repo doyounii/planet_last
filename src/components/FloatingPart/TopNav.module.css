@@ -6,6 +6,10 @@
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
+  background-color: #141b27;
+  box-shadow: inset 0 0 0 15px #141b27;
+
+  z-index: 10;
 }
 
 .navBar {

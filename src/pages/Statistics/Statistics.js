@@ -19,6 +19,8 @@ function StatisticsMain() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [position, setposition] = useState(0);
   const [message, setMessage] = useState(0);
+  const [ecoTagCounts, setEcoTagCounts] = useState([]);
+  const [noecoTagCounts, setnoEcoTagCounts] = useState([]);
   const [loading, setloading] = useState(true);
 
   const nowMFormat = "M";
@@ -48,7 +50,7 @@ function StatisticsMain() {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/user1@naver.com/2022/2`,
+      `/statistics/user1@naver.com/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -60,6 +62,8 @@ function StatisticsMain() {
     );
     const data = await response.json();
     setMessage(data);
+    setEcoTagCounts(data.ecoTagCounts);
+    setnoEcoTagCounts(data.noecoTagCounts);
     setloading(false);
   };
   if (loading) return <div>loading...</div>;
@@ -119,7 +123,7 @@ function StatisticsMain() {
         <div className="line-box"></div>
 
         <div className="chart-graph-box">
-          <h1>{message.userName}님의 지출은 건강한가요?</h1>
+          <h1>{message.userName}조유진님의 지출은 건강한가요?</h1>
           <div style={{ textAlign: "center" }}>
             <p style={{ color: "#07D4A9" }}>
               <span>●</span> {message.nowEcoCount}
