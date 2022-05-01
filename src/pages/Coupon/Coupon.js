@@ -33,7 +33,7 @@ function Coupon() {
     setModalOpen(false);
   };
 
-
+  //디데이 계산 함수
   const calcDday = () => {
     var today = new Date();
    
