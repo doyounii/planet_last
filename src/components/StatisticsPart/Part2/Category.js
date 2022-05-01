@@ -5,7 +5,6 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { IoIosArrowForward } from "react-icons/io";
 import { message } from 'antd';
 
-
 const expendData = [
   {
     emoji: "🛒",
