@@ -35,6 +35,14 @@
     margin-bottom: 0;
 }
 
+.title .select_month_button {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
 .title_icon {
     position: absolute;
     margin-top: 10%;
@@ -153,7 +161,7 @@
 
 .mission_box2 p {
   display: inline-block;
-  width: 40%;
+  width: 38%;
   margin-left: 5%;
   margin-right: 5%;
 }

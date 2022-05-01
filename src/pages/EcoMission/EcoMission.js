@@ -3,11 +3,23 @@ import Footer from '../../components/Footer/Footer';
 import EcoStyle from "./Eco.module.css";
 import HistorySample from "../../components/History/HistoryBackHome";
 import { FiShare } from "react-icons/fi";
+import { BsChevronDown } from 'react-icons/bs';
+import { Modal } from "../../components/CalendarPart/Modal";
 
 function EcoMission() {
   const [list, setList] = useState({});
   const [loading, setloading] = useState(true);
   const [todayMission, setTodayMission] = useState({});
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isopenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const iscloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     let isSubscribed = true;
@@ -62,7 +74,22 @@ function EcoMission() {
       <div className={EcoStyle.backBtn}>
         <HistorySample></HistorySample>
       </div>
-      <div className={EcoStyle.title}>10월</div>
+      <div className={EcoStyle.title}>
+
+      {isModalOpen && (
+          <Modal
+            onClose={iscloseModal}
+            maskClosable={true}
+            visible={false}
+            closable={true}
+            background={"#202632"}
+            className="ModalInner"
+          >
+          </Modal>
+      )}
+
+        10월 <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button>
+      </div>
       <div className={EcoStyle.title_icon}>
         <FiShare />
       </div>
