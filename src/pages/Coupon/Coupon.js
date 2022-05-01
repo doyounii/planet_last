@@ -151,7 +151,7 @@ function Coupon() {
             <p>10% 할인쿠폰</p>
           </div>
 
-          <div className={ CouponStyle.coupon_expiration }>
+          <div onClick={() => openModal()} className={ CouponStyle.coupon_expiration }>
             <div className={ CouponStyle.coupon_dday }>{calcDday()}</div>
             <img src="img/coupon.png" alt="planet-coupon"></img>
             <h1>친환경 상점 〈폼폼〉</h1>

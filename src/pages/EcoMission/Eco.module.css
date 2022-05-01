@@ -10,8 +10,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
   color: #ffffff;
   background-color: #141b27;
   font-family: Pretendard;
@@ -19,26 +19,27 @@
 
 /*이전 버튼*/
 .backBtn {
-  position: absolute;
-  top: 65px;
-  left: 22px;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 7%;
+    margin-bottom: 0;
 }
 
-/*제목, 부제목*/
 .title {
-  position: absolute;
-  top: 68px;
-  left: 172px;
-  font-size: 18px;
-  font-family: Pretendard;
+    position: absolute;
+    font-size: 18px;
+    font-family: Pretendard;
+    width: 100%;
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 0;
 }
 
 .title_icon {
-  position: absolute;
-  top: 64px;
-  left: 328px;
-  font-size: 18px;
-  font-family: Pretendard;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 88%;
+    margin-bottom: 0;
 }
 
 .title_icon svg {
@@ -47,9 +48,9 @@
 }
 
 .sub_title {
-  position: absolute;
-  top: 474px;
-  left: 26px;
+  position: relative;
+  top: 16%;
+  margin-left: 10%;
   font-family: Pretendard;
 }
 
@@ -68,15 +69,15 @@
 /*mission box*/
 .mission_box {
   position: relative;
-  top: 144px;
-  left: 16px;
-  width: 343px;
-  height: 286px;
+  top: 13%;
+  width: 82%;
+  height: 40%;
   border-radius: 20px;
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding-top: 5%;
+  padding-bottom: 5%;
   font-family: Pretendard;
   background-color: rgba(255, 255, 255, 0.05);
+  margin: 0 auto;
 }
 
 .mission_box p {
@@ -110,7 +111,7 @@
   height: 67px;
 }
 
-.mission_btn {
+.mission_box .mission_btn {
   font-family: Pretendard;
   display: block;
   margin: 0 auto;
@@ -127,42 +128,38 @@
 
 .mission_box2 {
   position: relative;
-  top: 250px;
-  left: 17px;
-  width: 343px;
+  top: 20%;
+  margin-left: 7%;
+  margin: 0 auto;
+  width: 82%;
   height: 75px;
   border-radius: 13px;
   margin-bottom: 12px;
-  padding-top: 18px;
   font-size: 15px;
   font-family: Pretendard;
   background-color: rgba(255, 255, 255, 0.05);
+  padding-top: 3.6%;
+}
+
+.mission_box2 .mission_icon {
+  display: inline-block;
+  font-size: 28px;
+  width: 34px;
+  height: 34px;
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
 }
 
 .mission_box2 p {
-  display: inline;
-  font-size: 30px;
-  margin-left: 20px;
-  margin-right: 20.86px;
+  display: inline-block;
+  width: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
-.mission_icon {
+.mission_box2 .mission_complete_btn {
   position: relative;
-  display: inline;
-  font-size: 30px;
-  margin-left: 20px;
-  margin-right: 20.86px;
-  top: 4px;
-}
-
-.mission_icon img {
-  position: relative;
-  display: inline;
-  width: 30px;
-  height: 30px;
-}
-
-.mission_complete_btn {
   width: 77px;
   height: 30.97px;
   border-radius: 10.88px;
@@ -170,7 +167,6 @@
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.05);
   cursor: pointer;
+  margin-right: 5%;
   float: right;
-  margin-right: 16px;
-  margin-top: 4px;
 }
