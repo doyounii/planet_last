@@ -15,9 +15,10 @@ const defaultLabelStyle = {
 
 const segmentsStyle = { cursor: "pointer" };
 
-const DonutChart = () => {
+const DonutChart = ({ percentage }) => {
 
-  const percentage = 67;
+  console.log(percentage);
+
   const data = [
     {
       index: 0,

@@ -42,15 +42,12 @@ function StatisticsMain() {
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    // fetchData();
-    setMessage(data);
-    setloading(false);
-  }, []);
+
+
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/user1@naver.com/2022/${format(new Date(), "M")}`,
+      `/statistics/user1@naver.com/2022/3`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -66,6 +63,14 @@ function StatisticsMain() {
     setnoEcoTagCounts(data.noecoTagCounts);
     setloading(false);
   };
+
+  useEffect(() => {
+    fetchData();
+    setMessage(data);
+    setEcoTagCounts(data.ecoTagCounts);
+    setnoEcoTagCounts(data.noEcoTagCounts);
+    setloading(false);
+  }, []);
   if (loading) return <div>loading...</div>;
 
   return (
@@ -114,7 +119,10 @@ function StatisticsMain() {
 
           <p>지난달 이맘때보다</p>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>5개</b> 늘었어요
+            친환경 태그가 <b style={{ color: "#00C982" }}>{message.ecoDifference}개</b> 늘고
+          </h2>
+          <h2>
+            친환경 태그가 <b style={{ color: "#00C982" }}>{message.noEcoDifference}개</b> 줄었어요
           </h2>
 
           <LineGraph></LineGraph>
@@ -122,8 +130,9 @@ function StatisticsMain() {
 
         <div className="line-box"></div>
 
+
         <div className="chart-graph-box">
-          <h1>{message.userName}조유진님의 지출은 건강한가요?</h1>
+          <h1>{message.userName}님의 지출은 건강한가요?</h1>
           <div style={{ textAlign: "center" }}>
             <p style={{ color: "#07D4A9" }}>
               <span>●</span> {message.nowEcoCount}
@@ -133,12 +142,14 @@ function StatisticsMain() {
             </p>
           </div>
           <div className="donut-chart">
-            <DonutChart />
+            <DonutChart percentage={message.percentage} />
           </div>
         </div>
         <div className="line-box"></div>
 
-        <Link to="/EcoCategory" name="eco">
+        <Link to="/EcoCategory" state={{
+          name: "eco",
+        }}>
           <div className="expend-box">
             <h1>어떤 친환경 지출을 했을까요? 👍</h1>
             <IoIosArrowForward className="box-icon" />
@@ -151,7 +162,9 @@ function StatisticsMain() {
 
         <div className="line-box"></div>
 
-        <Link to="/EcoCategory" name="neco">
+        <Link to="/EcoCategory" state={{
+          name: "neco",
+        }}>
           <div className="expend-box">
             <h1>어떤 반환경 지출을 했을까요? 👎</h1>
             <IoIosArrowForward className="box-icon" />
@@ -170,10 +183,17 @@ function StatisticsMain() {
 }
 
 export default StatisticsMain;
+
 const data = {
+  userName: "사용자1",
   incomeTotal: 102000,
   expenditureTotal: 549000,
-  userName: "사용자1",
-  nowEcoCount: 11,
+  ecoDifference: 6,
+  noEcoDifference: 3,
+  ecoCount: { "3": 6, "4": 12 },
+  nowEcoCount: 12,
   nowNoneEcoCount: 4,
+  percentage: 67.0,
+  ecoTagCounts: [["생필품", 2], ["경조사/회비", 2], ["마트", 2], ["더보기", 0]],
+  noEcoTagCounts: [["생필품", 1], ["경조사/회비", 1], ["마트", 1], ["더보기", 0]]
 };
