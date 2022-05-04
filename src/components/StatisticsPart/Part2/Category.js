@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import './Category.css';
 import { FaChevronLeft } from 'react-icons/fa';
 import { IoIosArrowForward } from "react-icons/io";
+import { message } from 'antd';
 
 
 const expendData = [
@@ -225,11 +226,11 @@ const expendData = [
 ];
 
 
-const renderexTypeList = (ecodata) => {
+const renderexTypeList = (ecodata, message) => {
   let renderexTypeList = [];
 
   if (ecodata.name === "eco") {
-    for (let i = 0; i < expendData.length; i++) {
+    for (let i = 0; i < message.length; i++) {
       renderexTypeList.push(
         <Link to={`/detail`}
           state={{
@@ -240,16 +241,16 @@ const renderexTypeList = (ecodata) => {
           }}
         >
           <div className='category-box'>
-            <p className='emoji'>{expendData[i].emoji} {" "}{expendData[i].exType}</p>
+            <p className='emoji'>{expendData[i].emoji} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
             <IoIosArrowForward className="detail-icon" />
-            <h1 className='count'>{expendData[i].count}</h1>
+            <h1 className='count'>{message[i][2]}개</h1>
           </div>
 
         </Link>
       )
     }
   } else {
-    for (let i = 0; i < expendData.length; i++) {
+    for (let i = 0; i < message.length; i++) {
       renderexTypeList.push(
         <Link to={`/detail`}
           state={{
@@ -262,9 +263,9 @@ const renderexTypeList = (ecodata) => {
         >
 
           <div className='category-box'>
-            <p className='emoji'>{expendData[i].emoji} {" "}{expendData[i].exType}</p>
+            <p className='emoji'>{expendData[i].emoji} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
             <IoIosArrowForward className="detail-icon" />
-            <h1 className='count'>{expendData[i].count}</h1>
+            <h1 className='count'>{message[i][2]}개</h1>
           </div>
 
 
@@ -278,13 +279,59 @@ const renderexTypeList = (ecodata) => {
 
 function Category() {
   const history = useNavigate();
+  const [message, setMessage] = useState([]);
+  const [message2, setMessage2] = useState([]);
+  const [loading, setloading] = useState(true);
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `/statistics/ecoCountsDetail/user1@naver.com/2022/3`,
+      //${format(new Date(), "M")}
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setMessage(data.tagList);
+    setloading(false);
+  };
+
+  const fetchData2 = async () => {
+    const response = await fetch(
+      `/statistics/noEcoCountsDetail/user1@naver.com/2022/3`,
+      //${format(new Date(), "M")}
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data2 = await response.json();
+    setMessage(data2.tagList);
+    console.log(data2);
+    setloading(false);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    // fetchData();
+    setMessage(data.tagList);
+    setMessage2(data2.tagList);
+    setloading(false);
   }, []);
 
+
+  console.log(message);
+  console.log(message2);
   const ecodata = useLocation().state;
 
+  if (loading) return <div>loading...</div>;
   if (ecodata.name === "eco") {
     return (
       <div className='container'>
@@ -298,7 +345,7 @@ function Category() {
           <h1 className='cateGory'>친환경 지출 카테고리</h1>
           <h1 className='title'>지출 카테고리별 소비</h1>
         </div>
-        {renderexTypeList(ecodata)}
+        {renderexTypeList(ecodata, message)}
       </div>
     )
   } else {
@@ -314,7 +361,7 @@ function Category() {
           <h1 className='cateGory'>반환경 지출 카테고리</h1>
           <h1 className='title'>지출 카테고리별 소비</h1>
         </div>
-        {renderexTypeList(ecodata)}
+        {renderexTypeList(ecodata, message2)}
       </div>
     )
   }
@@ -322,3 +369,10 @@ function Category() {
 }
 
 export default Category
+
+const data = {
+  tagList: [["생필품", 33, 2], ["경조사/회비", 33, 2], ["마트", 33, 2]]
+}
+const data2 = {
+  tagList: [["생필품", 33, 1], ["경조사/회비", 33, 1], ["마트", 33, 1]]
+}

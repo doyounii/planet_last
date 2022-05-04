@@ -11,8 +11,8 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import high from "../../planet/1-2.json";
-import highmid from "../../planet/2-2.json";
+import high from "../../planet/1-2.json"
+import highmid from "../../planet/1-2.json";
 import low from "../../planet/4-2.json";
 import mid from "../../planet/3-2.json";
 import Lottie from "react-lottie";
@@ -169,36 +169,42 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              {userName}
+              {message.userName}
               <FiEdit3
                 className={homeStyle.icon}
                 alt="닉네임 변경"
                 onClick={(e) => openModal2(e)}
               ></FiEdit3>
               {isModalOpen2 && (
-                <Modal
+                // <Modal
+                //   className={position2}
+                //   onClose={closeModal2}
+                //   maskClosable={true}
+                //   visible={true}
+                // >
+                //   <form onSubmit={fetchFunc}>
+                //     <input
+                //       id="inputMemo"
+                //       type="text"
+                //       value={userName}
+                //       onChange={handleChange}
+                //       maxLength="8"
+                //       onInput={maxLength(userName)}
+                //     />
+                //     <CgClose onClick={onReset}></CgClose>
+
+                //     <p>{userName.length}/8</p>
+
+                //     <button type="submit">완료</button>
+                //   </form>
+                //   <button onClick={closeModal2}>취소</button>
+                // </Modal>
+                <EditName
                   className={position2}
                   onClose={closeModal2}
                   maskClosable={true}
                   visible={true}
-                >
-                  <form onSubmit={fetchFunc}>
-                    <input
-                      id="inputMemo"
-                      type="text"
-                      value={userName}
-                      onChange={handleChange}
-                      maxLength="8"
-                      onInput={maxLength(userName)}
-                    />
-                    <CgClose onClick={onReset}></CgClose>
-
-                    <p>{userName.length}/8</p>
-
-                    <button type="submit">완료</button>
-                  </form>
-                  <button onClick={closeModal2}>취소</button>
-                </Modal>
+                ></EditName>
               )}
             </div>
             <div>

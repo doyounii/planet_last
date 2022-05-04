@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CouponStyle from './Coupon.module.css';
 import Footer from '../../components/Footer/Footer';
 import HistorySample from '../../components/History/HistoryBack';
 import { FaChevronRight } from 'react-icons/fa';
-import DropBox from './DropBox';
+import DropBox from '../../components/CouponPart/DropBox';
+import { Modal } from "../../components/CouponPart/CouponModal";
+import Popup from '../../components/InquiryPart/Popup';
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import CouponInfo from '../../components/InquiryPart/CouponInfo';
+import CouponUseInfo from '../../components/InquiryPart/CouponUseInfo';
+import CouponDetailInfo from '../../components/InquiryPart/CouponDetailInfo';
 
 function Coupon() {
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  //popup modal
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const isopenModal = () => {
+    setModalOpen(true);
+  };
+
+  const iscloseModal = () => {
+    setModalOpen(false);
+  };
+
+  //디데이 계산 함수
   const calcDday = () => {
     var today = new Date();
    
@@ -36,6 +63,62 @@ function Coupon() {
 
   return (
     <div className={ CouponStyle.container }>
+      {isModalOpen && (
+          <Modal
+            onClose={closeModal}
+            maskClosable={true}
+            visible={false}
+            closable={true}
+            background={"#202632"}
+            className="ModalInner"
+          >
+
+            <div className={ CouponStyle.coupon_modal }>
+              <h1>친환경 상점 〈폼폼〉</h1>
+              <p>10% 할인쿠폰</p>
+              <img src="img/coupon.png" alt="planet-coupon"></img>
+              <h2>2022.02.01 - 2023.02.01</h2>
+
+              <div className={ CouponStyle.coupon_info }>
+                사용정보
+                <button onClick={() => {
+                  setVisible(!visible);
+                }}>{visible ? <BsChevronUp /> : <BsChevronDown />}
+                </button>
+                <br/>
+                {visible && <CouponUseInfo />}
+              </div>
+
+              <div className={ CouponStyle.coupon_info }>
+                쿠폰설명
+                <button onClick={() => {
+                  setVisible2(!visible2);
+                }}>{visible2 ? <BsChevronUp /> : <BsChevronDown />}
+                </button>
+                <br/>
+                {visible2 && <CouponInfo />}
+              </div>
+
+              <div className={ CouponStyle.coupon_info }>
+                상세정보
+                <button onClick={() => {
+                  setVisible3(!visible3);
+                }}>{visible3 ? <BsChevronUp /> : <BsChevronDown />}
+                </button>
+                <br/>
+                {visible3 && <CouponDetailInfo />}
+              </div>
+
+              <div className={ CouponStyle.coupon_use_btn }>
+                <button onClick={isopenModal}>사용하기</button>
+                <Popup open={modalOpen} close={iscloseModal}>
+                  직원이신가요?
+                </Popup>
+              </div>
+            </div>
+
+          </Modal>
+        )}
         <div className={ CouponStyle.backBtn }>
             <HistorySample></HistorySample>
         </div>
@@ -60,18 +143,21 @@ function Coupon() {
         </div>
 
         <div className={ CouponStyle.coupon_use_box }>
-          <div className={ CouponStyle.coupon_available }>
+         
+          <div onClick={() => openModal()} className={ CouponStyle.coupon_available }>
             <div className={ CouponStyle.coupon_dday }>{calcDday()}</div>
             <img src="img/coupon.png" alt="planet-coupon"></img>
             <h1>친환경 상점 〈폼폼〉</h1>
             <p>10% 할인쿠폰</p>
           </div>
-          <div className={ CouponStyle.coupon_expiration }>
+
+          <div onClick={() => openModal()} className={ CouponStyle.coupon_expiration }>
             <div className={ CouponStyle.coupon_dday }>{calcDday()}</div>
             <img src="img/coupon.png" alt="planet-coupon"></img>
             <h1>친환경 상점 〈폼폼〉</h1>
             <p>10% 할인쿠폰</p>
           </div>
+          
         </div>
 
         <Footer activeMenu="home">

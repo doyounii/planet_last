@@ -110,56 +110,8 @@ const NEcoExpendData = [
   },
 ];
 
-const data = {
-  ecoTagCounts: EcoExpendData,
-  noEcoTagCounts: NEcoExpendData,
-};
 
-const renderExpendList = (props, message) => {
-  let renderExpendList = [];
 
-  if (message.length !== 0) {
-    if (props.name === "eco") {
-      for (let i = 0; i < 4; i++) {
-        renderExpendList.push(
-          <div>
-            <div
-              className="day-breakdown-box-icon"
-              style={{ color: EcoExpendData[i].color }}
-            >
-              ● {EcoExpendData[i].emoji}
-            </div>
-            {/* <h1>{message.ecoTagCounts[i][0]}</h1>
-            <h2>{message.ecoTagCounts[i][1]}개</h2> */}
-            <h1>{EcoExpendData[i].exType}</h1>
-            <h2>{EcoExpendData[i].count}</h2>
-            <p></p>
-          </div>
-        );
-      }
-    } else {
-      for (let i = 0; i < 4; i++) {
-        renderExpendList.push(
-          <div>
-            <div
-              className="day-breakdown-box-icon"
-              style={{ color: NEcoExpendData[i].color }}
-            >
-              ● {NEcoExpendData[i].emoji}
-            </div>
-            {/* <h1>{message.noEcoTagCounts[i][0]}</h1>
-            <h2>{message.noEcoTagCounts[i][1]}개</h2> */}
-            <h1>{NEcoExpendData[i].exType}</h1>
-            <h2>{NEcoExpendData[i].count}</h2>
-            <p></p>
-          </div>
-        );
-      }
-    }
-  }
-
-  return <div>{renderExpendList}</div>;
-};
 
 function EcoExpend(props) {
   const [message, setMessage] = useState([]);
@@ -168,13 +120,54 @@ function EcoExpend(props) {
   const [noEcoTagCounts, setNoEcoTagCounts] = useState([]);
   useEffect(() => {
     // fetchData();
-    // setMessage(data);
-    // setEcoTagCounts(data.ecoTagCounts);
-    // setNoEcoTagCounts(data.noEcoTagCounts);
+    setMessage(data);
+    setEcoTagCounts(data.ecoTagCounts);
+    setNoEcoTagCounts(data.noEcoTagCounts);
+    setloading(false);
+
   }, []);
 
-  // const ecoSize = message.ecoTagCounts.length - 1;
-  // const noEcoSize = message.noEcoTagCounts.length - 1;
+  const renderExpendList = (props, message) => {
+    let renderExpendList = [];
+
+    if (message.length !== 0) {
+      if (props.name === "eco") {
+        for (let i = 0; i < ecoTagCounts.length - 1; i++) {
+          renderExpendList.push(
+            <div>
+              <div
+                className="day-breakdown-box-icon"
+                style={{ color: EcoExpendData[i].color }}
+              >
+                ● {EcoExpendData[i].emoji}
+              </div>
+              <h1>{ecoTagCounts[i][0]}</h1>
+              <h2>{ecoTagCounts[i][1]}개</h2>
+              <p></p>
+            </div>
+          );
+        }
+      } else {
+        for (let i = 0; i < noEcoTagCounts.length - 1; i++) {
+          renderExpendList.push(
+            <div>
+              <div
+                className="day-breakdown-box-icon"
+                style={{ color: NEcoExpendData[i].color }}
+              >
+                ● {NEcoExpendData[i].emoji}
+              </div>
+              <h1>{noEcoTagCounts[i][0]}</h1>
+              <h2>{noEcoTagCounts[i][1]}개</h2>
+              <p></p>
+            </div>
+          );
+        }
+      }
+    }
+
+    return <div>{renderExpendList}</div>;
+  };
 
   const fetchData = async () => {
     const response = await fetch(
@@ -213,7 +206,7 @@ function EcoExpend(props) {
             >
               <div className="more">
                 <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
-                {/* <h2>{message.ecoTagCounts[2][1]}개</h2> */}
+                {/* <h2>{ecoTagCounts[2][1]}개</h2> */}
               </div>
             </Link>
           </div>
@@ -248,3 +241,17 @@ function EcoExpend(props) {
 }
 
 export default EcoExpend;
+
+const data = {
+  userName: "사용자1",
+  incomeTotal: 102000,
+  expenditureTotal: 549000,
+  ecoDifference: 6,
+  noEcoDifference: 3,
+  ecoCount: { "3": 6, "4": 12 },
+  nowEcoCount: 12,
+  nowNoneEcoCount: 4,
+  percentage: 55.0,
+  ecoTagCounts: [["생필품", 2], ["경조사/회비", 2], ["마트", 2], ["더보기", 0]],
+  noEcoTagCounts: [["마트", 1], ["생필품", 1], ["경조사/회비", 1], ["더보기", 0]]
+};
