@@ -173,12 +173,13 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-.eco {
-  color: #00c982;
-}
-.neco {
-  color: #566479;
-}
-.etc {
-  color: #b4b6b8;
+
+:root {
+  --green: 0, 201, 130;
+  --blue: 20, 102, 254;
+  --mid-gray: 86, 100, 121;
+  --gray: 180, 182, 184;
+  --light-gray: 245, 245, 245;
+  --red: 255, 95, 88;
+  --navy: 20, 27, 39;
 }

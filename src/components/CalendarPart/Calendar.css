@@ -44,7 +44,7 @@
   height: calc(100vh - 150px);
   overflow: scroll;
   margin-top: 70px;
-  background-color: #141b27;
+  background-color: rgba(var(--navy));
   -ms-overflow-style: none; /* IE and Edge 스크롤바 숨기기*/
   scrollbar-width: none; /* Firefox */
 }
@@ -108,19 +108,19 @@
   opacity: 0.5;
 }
 .eco1 {
-  background-color: rgba(0, 201, 130, 0.3);
+  background-color: rgba(var(--green), 0.3);
   border-radius: 50%;
 }
 .eco2 {
-  background-color: rgba(0, 201, 130, 0.5);
+  background-color: rgba(var(--green), 0.5);
   border-radius: 50%;
 }
 .eco3 {
-  background-color: rgba(0, 201, 130, 0.7);
+  background-color: rgba(var(--green), 0.7);
   border-radius: 50%;
 }
 .eco4 {
-  background-color: rgba(0, 201, 130, 1);
+  background-color: rgba(var(--green), 1);
   border-radius: 50%;
 }
 .detail-cost {
@@ -137,7 +137,7 @@
 .col .eco-day-circle {
   position: absolute;
   font-size: 10px;
-  color: #1466fe;
+  color: rgba(var(--blue));
 }
 
 .calendar-info {
@@ -165,9 +165,17 @@
 
 .calendar-info > .eco-day-circle {
   font-size: 10px;
-  color: #1466fe;
+  color: rgba(var(--blue));
   margin-top: 2.5px;
   margin-right: 6px;
+}
+
+.eco-cal-circle {
+  color: rgba(var(--green));
+}
+
+.neco-cal-circle {
+  color: rgba(var(--mid-gray));
 }
 
 .eco-info {

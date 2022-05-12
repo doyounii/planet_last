@@ -141,7 +141,7 @@ const ModalWrapper = styled.div`
   }
 
   .modal-close {
-    color: #f5f5f5;
+    color: rgba(var(--light-gray));
     width: 20px;
     height: 20px;
     float: right;
@@ -160,7 +160,7 @@ const ModalWrapper = styled.div`
   }
   .eco-day-circle {
     font-size: 10px;
-    color: #1466fe;
+    color: rgba(var(--blue));
     left: 31%;
   }
   .non-eco-cnt {
@@ -175,7 +175,7 @@ const ModalWrapper = styled.div`
   }
   .top-arrow {
     position: fixed;
-    color: #f5f5f5;
+    color: rgba(var(--light-gray));
     width: 20px;
     height: 20px;
     top: ${(props) => props.className - 33}px;
@@ -184,7 +184,7 @@ const ModalWrapper = styled.div`
 
   .bottom-arrow {
     position: fixed;
-    color: #f5f5f5;
+    color: rgba(var(--light-gray));
     transform: rotate(180deg);
     width: 20px;
     height: 20px;
@@ -218,7 +218,7 @@ const ModalOverlay = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(20, 27, 39, 0.9);
+  background-color: rgba(var(--navy), 0.9);
   z-index: 3;
 `;
 
@@ -237,7 +237,7 @@ const InfoModalOverlay = styled.div`
 
   z-index: 3;
   border-style: solid;
-  border-color: rgb(20, 27, 39);
+  border-color: rgba(var(--navy));
   opacity: 0.8;
   border-width: ${(props) => props.className - 10}px 20vh
     calc(100vh - ${(props) => props.className + 20}px) 0;
@@ -266,11 +266,12 @@ const calendarInfoData = (monthView) => {
       <RoundArrow className="top-arrow" />
       <RoundArrow className="bottom-arrow" />
       <div className="non-eco-cnt">
-        <span className="neco">●</span> 는 반환경적인 소비 항목의 횟수,
+        <span className="neco-cal-circle">●</span> 는 반환경적인 소비 항목의
+        횟수,
       </div>
       <span className="eco-cnt">
-        <span className="eco">●</span> 는 친환경적인 소비 항목의 횟수를
-        의미합니다.
+        <span className="eco-cal-circle">●</span> 는 친환경적인 소비 항목의
+        횟수를 의미합니다.
       </span>
 
       {monthView && (

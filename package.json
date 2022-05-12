@@ -23,13 +23,14 @@
     "react-minimal-pie-chart": "^8.2.0",
     "react-native": "0.67.2",
     "react-native-web": "0.17.5",
+    "react-query": "^3.38.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.0",
     "react-slick": "^0.28.1",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "https://192.168.1.125:8080/",
+  "proxy": "http://3.39.87.115:8080/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
