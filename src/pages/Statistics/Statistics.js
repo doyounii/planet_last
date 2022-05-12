@@ -42,9 +42,6 @@ function StatisticsMain() {
     setIsModalOpen(false);
   };
 
-
-
-
   const fetchData = async () => {
     const response = await fetch(
       `/statistics/user1@naver.com/2022/3`,
@@ -65,7 +62,7 @@ function StatisticsMain() {
   };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
     setMessage(data);
     setEcoTagCounts(data.ecoTagCounts);
     setnoEcoTagCounts(data.noEcoTagCounts);
