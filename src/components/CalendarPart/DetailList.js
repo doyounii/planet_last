@@ -2,153 +2,53 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 import ko from "date-fns/locale/ko";
+import { isSameDay, setDate } from "date-fns";
 import { StyledDetailBlock } from "./StyledDetail";
 
-const tempData = {
+const tempData3 = {
   totalMoney: {
-    가전: -20432,
-    교통: -46486,
-    생필품: -74263,
-    식비: -100696,
-    통신: -4200,
+    식비: -25000,
   },
   totalDetails: {
-    통신: [
+    식비: [
       {
-        id: 13,
-        type: "통신",
-        cost: 1401,
-        memo: "new memo1",
-        ecoList: [
-          {
-            eco: "R",
-            ecoDetail: "기타",
-            etcMemo: "라벨이 붙은 음료수 구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-          {
-            eco: "R",
-            ecoDetail: "비닐봉투 소비",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 24,
-        type: "통신",
-        cost: 1403,
-        memo: "new memo3",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "친환경 제품 구매",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-        ],
+        id: 119,
+        type: "식비",
+        cost: 25000,
+        memo: "짜장면 먹음",
+        ecoList: null,
         income: false,
       },
     ],
-    가전: [
+  },
+};
+
+const tempData4 = {
+  totalMoney: {
+    급여: +561000,
+    교통: -2000,
+    식비: -15000,
+  },
+  totalDetails: {
+    급여: [
       {
-        id: 19,
-        type: "가전",
-        cost: 20432,
-        memo: "빵 사먹음",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "라벨 붙은 음료수 삼",
-          },
-        ],
-        income: false,
+        id: 13,
+        type: "급여",
+        cost: 561000,
+        memo: "알바 월급 보너스",
+        income: true,
       },
     ],
     교통: [
       {
         id: 18,
         type: "교통",
-        cost: 46486,
-        memo: "빵 사먹음",
+        cost: 2000,
+        memo: "버스 두번 갈아탐",
         ecoList: [
           {
             eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
-            etcMemo: null,
-          },
-          {
-            eco: "N",
-            ecoDetail: "기타",
-            etcMemo: "라벨 붙은 음료수 삼",
-          },
-        ],
-        income: false,
-      },
-    ],
-    생필품: [
-      {
-        id: 17,
-        type: "생필품",
-        cost: 3690,
-        memo: "엽떡 사먹음",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "다회용기 사용",
-            etcMemo: null,
-          },
-          {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 16,
-        type: "생필품",
-        cost: 70573,
-        memo: "빵 사먹음",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
+            ecoDetail: "대중교통 이용",
             etcMemo: null,
           },
         ],
@@ -157,10 +57,29 @@ const tempData = {
     ],
     식비: [
       {
-        id: 15,
+        id: 17,
         type: "식비",
-        cost: 83504,
-        memo: "엽떡 사먹음",
+        cost: 9500,
+        memo: "친구랑 저녁",
+        ecoList: [
+          {
+            eco: "G",
+            ecoDetail: "비건식당 방문",
+            etcMemo: null,
+          },
+          {
+            eco: "G",
+            ecoDetail: "다회용기 사용",
+            etcMemo: null,
+          },
+        ],
+        income: false,
+      },
+      {
+        id: 16,
+        type: "식비",
+        cost: 3500,
+        memo: "아이스 아메리노",
         ecoList: [
           {
             eco: "G",
@@ -168,27 +87,8 @@ const tempData = {
             etcMemo: null,
           },
           {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-        ],
-        income: false,
-      },
-      {
-        id: 14,
-        type: "식비",
-        cost: 17192,
-        memo: "빵 사먹음",
-        ecoList: [
-          {
-            eco: "G",
-            ecoDetail: "중고거래/나눔/기부",
-            etcMemo: null,
-          },
-          {
-            eco: "G",
-            ecoDetail: "비건식당 방문",
+            eco: "R",
+            ecoDetail: "컵홀더 받아옴",
             etcMemo: null,
           },
         ],
@@ -210,7 +110,8 @@ export function DetailItem({ item, ecoCnt }) {
         key={item.id}
       >
         {item.memo !== null ? item.memo : item.type}
-        {item.ecoList !== null &&
+        {item.ecoList !== undefined &&
+          item.ecoList !== null &&
           item.ecoList.map((data) => {
             return (
               <div className={`details-detail ${isEcoT(data.eco)}`}>
@@ -221,7 +122,7 @@ export function DetailItem({ item, ecoCnt }) {
       </div>
 
       <div className={`details-cost ${isEco(ecoCnt)}`}>
-        {item.income == true ? "+" : "-"}
+        {item.income ? "+" : "-"}
         {item.cost.toLocaleString("ko-KR")}원
       </div>
     </>
@@ -230,6 +131,7 @@ export function DetailItem({ item, ecoCnt }) {
 
 function DetailList(props) {
   let date = props.value;
+  const [list, setList] = useState([]);
   const [totalList, setTotalList] = useState([]);
   const [detailList, setDetailList] = useState([]);
   const [totalMoney, setTotalMoney] = useState(0);
@@ -256,10 +158,16 @@ function DetailList(props) {
   };
 
   useEffect(() => {
-    // fetchData();
-    setData(tempData);
+    fetchData();
+
+    // if (isSameDay(props.value, new Date())) {
+    //   setData(tempData3);
+    // } else {
+    //   setDate(tempData4);
+    // }
+
     setloading(false);
-  }, []);
+  }, [props.value]);
 
   const setData = (data) => {
     let getList = [];
@@ -290,14 +198,19 @@ function DetailList(props) {
     let ecoCnt = 0;
 
     filterType !== undefined &&
+      filterType !== null &&
       filterType.forEach((item) => {
-        item.ecoList.forEach((item) => {
-          if (item.eco === "G") {
-            ecoCnt += 1;
-          } else if (item.eco === "R") {
-            ecoCnt -= 1;
-          }
-        });
+        {
+          item.ecoList !== undefined &&
+            item.ecoList !== null &&
+            item.ecoList.forEach((item) => {
+              if (item.eco === "G") {
+                ecoCnt += 1;
+              } else if (item.eco === "R") {
+                ecoCnt -= 1;
+              }
+            });
+        }
 
         detailList.push(
           <div className="details" key={item.id}>
@@ -320,7 +233,7 @@ function DetailList(props) {
           className="detail-link"
           to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
           state={{
-            date: format(props.value, "M. d EEEEE", { locale: ko }),
+            date: props.value,
             typeName: totalList[i].name,
             typeCost: totalList[i].value,
             typeDetail: detailList[i],

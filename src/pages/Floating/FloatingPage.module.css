@@ -1,0 +1,34 @@
+.floating_conainer {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(13, 21, 29);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: "Pretendard";
+}
+
+.floating_close {
+  position: fixed;
+  right: 85%;
+  top: 25px;
+  z-index: 15;
+}
+
+.floating_margin {
+  height: 20px;
+  width: 100vw;
+  background-color: rgb(13, 21, 29);
+}
+
+.floating_button {
+  width: 100vw;
+  height: 50px;
+  background-color: #141f12;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  z-index: 4;
+}

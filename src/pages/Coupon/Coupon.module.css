@@ -94,6 +94,7 @@
     border: 0;
     outline: 0;
     padding-left: 14px;
+    color: white;
 }
 
 .coupon_input_box ::-ms-input-placeholder {
@@ -111,7 +112,7 @@
     justify-content: center;
     text-align: center;
     left: 0;
-    bottom: 10%;
+    bottom: 12% !important;
 }
 
 .coupon_btn button {
@@ -165,6 +166,41 @@
     font-family: Pretendard;
     text-align: center;
     margin: 1.5%;
+    padding: 8px 0 8px 0;
+}
+
+.coupon_available .coupon_dday {
+    font-family: Pretendard;
+    font-size: 10px;
+    width: 48px;
+    height: 21px;
+    border: 1px solid #ffffff;
+    border-radius: 13px;
+    text-align: center;
+    padding: 4.5px;
+    position: relative;
+    left: 80%;
+    transform: translate(-50%, 0%);
+}
+
+.coupon_available img {
+    width: 125px;
+    height: 75px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    clear: none;
+}
+
+.coupon_available h1 {
+    font-family: Pretendard;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.coupon_available p {
+    font-family: Pretendard;
+    font-size: 12px;
+    color: #00C982;
 }
 
 .coupon_expiration {
@@ -180,5 +216,121 @@
     filter: alpha(opacity=60);
     -moz-opacity: 0.6;
     -khtml-opacity: 0.6;
+    padding: 8px 0 8px 0;
 }
+
+.coupon_expiration .coupon_dday {
+    font-family: Pretendard;
+    font-size: 10px;
+    width: 48px;
+    height: 21px;
+    border: 1px solid #ffffff;
+    border-radius: 13px;
+    text-align: center;
+    padding: 4.5px;
+    position: relative;
+    left: 80%;
+    transform: translate(-50%, 0%);
+}
+
+.coupon_expiration img {
+    width: 125px;
+    height: 75px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.coupon_expiration h1 {
+    font-family: Pretendard;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.coupon_expiration p {
+    font-family: Pretendard;
+    font-size: 12px;
+    color: #00C982;
+}
+
+.coupon_modal {
+    width: 100%;
+    text-align: center;
+}
+
+.coupon_modal h1 {
+    font-family: Pretendard;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.coupon_modal h2 {
+    font-family: Pretendard;
+    font-size: 18px;
+    color: #B4B6B8;
+    margin-bottom: 41px;
+}
+
+.coupon_modal p {
+    font-family: Pretendard;
+    font-size: 18px;
+    color: #00C982;
+}
+
+.coupon_modal img {
+    width: 271px;
+    height: 163px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.coupon_use_btn {
+    width: 100%;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    left: 0;
+    bottom: 3%;
+}
+
+.coupon_use_btn button {
+    font-family: Pretendard;
+    background-color: #00C982;
+    font-size: 16px;
+    width: 90%;
+    height: 52px;
+    border-radius: 30px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.coupon_info {
+    font-family: Pretendard;
+    color: #B4B6B8;
+    font-size: 12px;
+    margin-bottom: 23px;
+    text-align: start;
+    margin-left: 5px;
+}
+
+.coupon_info button{
+    color: #9a9a9a;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    width: 12px;
+    height: 18px;
+    margin-left: 4px;
+}
+
+.coupon_info svg {
+   padding-top: 4px;
+}
+
 

@@ -14,19 +14,18 @@ function Setting() {
         <div className={SettingStyle.title}>
             서비스 이용약관
         </div>
+        <Link to="/UsePage" style={{ textDecoration: 'none', color: 'white' }}>
         <div className={SettingStyle.use_box}>
             이용약관
-            <Link to="/UsePage">
-              <FaChevronRight className={SettingStyle.info_icon}/>
-            </Link>
+            <FaChevronRight className={SettingStyle.info_icon}/>
         </div>
+        </Link>
+        <Link to="/InformationPage" style={{ textDecoration: 'none', color: 'white' }}>
         <div className={SettingStyle.use_box}>
             개인정보 처리방침
-            <Link to="/InformationPage">
               <FaChevronRight className={SettingStyle.info_icon}/>
-            </Link>
         </div>
-
+        </Link>
         <Footer activeMenu="home">
             <div>홈</div>
         </Footer>

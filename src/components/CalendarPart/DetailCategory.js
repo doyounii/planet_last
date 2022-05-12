@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
+import ko from "date-fns/locale/ko";
 import { DetailItem } from "./DetailList";
 import SwipeableList from "../Swipeable/SwipeableList";
 import { StyledDetailPageBlock } from "./StyledDetail";
@@ -9,7 +11,7 @@ import Footer from "../Footer/Footer";
 function DetailCategory() {
   const history = useNavigate();
   const data = useLocation().state;
-  const [detailList, setDetailList] = useState(data.typeDetail);
+  const [detailList, setDetailList] = useState([]);
 
   const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
 
@@ -24,6 +26,12 @@ function DetailCategory() {
       });
     }, 2000);
   };
+
+  useEffect(() => {
+    if (data.typeDetail !== undefined || data.typeDetail !== null) {
+      setDetailList(data.typeDetail);
+    }
+  }, [data]);
 
   const fetchData = async (index, income) => {
     const api = income ? "income" : "expenditure";
@@ -40,7 +48,9 @@ function DetailCategory() {
       <StyledDetailPageBlock>
         <div className="detail-page">
           <div className="detail-info-block">
-            <div className="selected-date">{data.date}</div>
+            <div className="selected-date">
+              {format(data.date, "M. d EEEEE", { locale: ko })}
+            </div>
             <div className="detail-info">
               <IoIosArrowForward
                 className="forward-arrow"
@@ -69,7 +79,7 @@ function DetailCategory() {
             {detailList.length !== 0 &&
               detailList.map((item) => {
                 let ecoCnt = 0;
-                item.ecoList !== null &&
+                item.ecoList !== undefined &&
                   item.ecoList.forEach((item) => {
                     if (item.eco === "G") {
                       ecoCnt += 1;
@@ -79,14 +89,24 @@ function DetailCategory() {
                   });
                 return (
                   //onClick-Link to 추가할 것
-                  <SwipeableList key={item.id} onSwipe={onSwipe}>
-                    <div className="details" key={item.id}>
-                      <div className={`details-circle ${isEco(ecoCnt)}`}>
-                        ● &nbsp;
+                  <Link
+                    className="detail-link"
+                    to={`/statisticsModify`}
+                    style={{ textDecoration: "none", color: "white" }}
+                    state={{
+                      item: item,
+                      date: data.date,
+                    }}
+                  >
+                    <SwipeableList key={item.id} onSwipe={onSwipe}>
+                      <div className="details" key={item.id}>
+                        <div className={`details-circle ${isEco(ecoCnt)}`}>
+                          ● &nbsp;
+                        </div>
+                        <DetailItem item={item} ecoCnt={ecoCnt} />
                       </div>
-                      <DetailItem item={item} ecoCnt={ecoCnt} />
-                    </div>
-                  </SwipeableList>
+                    </SwipeableList>
+                  </Link>
                 );
               })}
           </div>
