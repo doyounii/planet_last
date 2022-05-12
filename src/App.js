@@ -33,7 +33,13 @@ import Login from "./pages/Login/Login";
 import EcoCategory from "./pages/Statistics/Part2/EcoCategory";
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
