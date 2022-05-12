@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import InquiryStyle from './Inquiry.module.css';
 import HistorySample from '../../components/History/HistoryBack';
 
-function Inquiry() {
-  const [inquiryList, setInquiryList] = useState(false);
+import InquiryList from './InquiryList';
 
+const Inquiry = ({onCreates}) => {
+  console.log({onCreates});
   return (
     <div className={ InquiryStyle.container }>
+        {/* <InquiryForm onCreate={onCreates} test=""/> */}
         <div className={ InquiryStyle.backBtn }>
             <HistorySample></HistorySample>
         </div>
@@ -28,7 +30,7 @@ function Inquiry() {
           <div className={ InquiryStyle.line_box }></div>
 
           <div className={ InquiryStyle.inquiry_list }>
-            {inquiryList === false ? <h1>내역 없음</h1> : null }
+            {onCreates === undefined ? <h1>내역 없음</h1> : <InquiryList list={onCreates} /> }
           </div>
         </div>
         <Link to="/InquiryForm">

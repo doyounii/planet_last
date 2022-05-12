@@ -1,11 +1,75 @@
-import React, { useState } from 'react';
-import { post } from 'axios';
+import React, { useState, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import InquiryStyle from './Inquiry.module.css';
 import HistorySample from '../../components/History/HistoryBack';
 import Uploader from "../../components/InquiryPart/Uploader";
 import Popup from '../../components/InquiryPart/Popup';
 
-function Inquiry() {
+import Inquiry from './Inquiry';
+
+const InquiryForm = () => {
+  // const [data, setData] = useState([]);
+  const [state, setState] = useState({
+    title: "",
+    content: "",
+  });
+  const dataId = useState(0);
+
+  const onCreates = (title, content) => {
+    const created_date = new Date().getTime();
+    console.log(title);
+
+    const newItem = {
+      title,
+      content,
+      created_date,
+      id : dataId.current
+    };
+
+    dataId.current += 1;
+    setState({newItem, ...state});
+  }
+
+  const navigate = useNavigate();
+
+  console.log('asda', onCreates);
+
+  // const [state, setState] = useState({
+  //   title: "",
+  //   content: "",
+  // });
+
+  const titleInput = useRef();
+  const contentTextarea = useRef();
+
+  const handleChangeState = (e) => {
+    setState({
+      ...state,
+      [e.target.name] : e.target.value,
+    });
+  };
+
+  const handleSubmit = () => {
+    if(state.title.length < 1){
+      titleInput.current.focus();
+      return;
+    }
+    if(state.content.length < 5){
+      contentTextarea.current.focus();
+      return;
+    }
+    //저장될 내용들 호출
+    onCreates(state.title, state.content);
+    console.log(onCreates);
+    window.confirm("성공!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    navigate("/inquiry");
+    
+    setState({
+      title: "",
+      content: "",
+    });
+  };
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -16,51 +80,10 @@ function Inquiry() {
     setModalOpen(false);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    addFormList()
-    
-    .then((response) => {
-      console.log(response.data);
-    })
-  }
-
-  const constructor = (props) => {
-    constructor.state = {
-      file: null,
-      title: '',
-      content: '',
-      fileName: '',
-    }
-    
-    constructor.handleFormSubmit = constructor.handleFormSubmit.bind(constructor)
-    constructor.handleFileChange = constructor.handleFileChange.bind(constructor)
-    constructor.handleValueChange = constructor.handleValueChange.bind(constructor)
-    constructor.addCustomer = constructor.addCustomer.bind(constructor)
-    
-    }
-
-  const addFormList = () =>{
- 
-    const url = '/api/customers';
-
-    const formData = new FormData();
-    
-    formData.append('image', constructor.state.file)
-    formData.append('title', this.state.title)
-    formData.append('content', this.state.content)
-    
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data'
-        }    
-    }
-    
-    return post(url, formData, config)
-  }
-
   return (
+    // <form onSubmit={handleSubmit}>
     <div className={ InquiryStyle.container }>
+      {/* <InquiryForm onCreate={onCreates} test=""/>  */}
         <div className={ InquiryStyle.backBtn }>
             <HistorySample></HistorySample>
         </div>
@@ -73,13 +96,19 @@ function Inquiry() {
           <div className={ InquiryStyle.time_info_box }>
               <h1>내용</h1>
               <input
+                ref={titleInput}
                 type="text"
-                name="inquiryTitle"
+                name="title"
+                value={state.title}
+                onChange={handleChangeState}
                 placeholder='제목을 입력하세요'
               />
               <textarea
+                ref={contentTextarea}
                 type="text"
-                name="inquiryContent"
+                name="content"
+                value={state.content}
+                onChange={handleChangeState}
                 placeholder='내용을 입력하세요 (0/1000)'
               />
           </div>
@@ -96,12 +125,13 @@ function Inquiry() {
         </div>
         <div className={ InquiryStyle.inquiry_submit_btn }>
           <button onClick={openModal}>등록하기</button>
-          <Popup open={modalOpen} close={closeModal} submit={onSubmit}>
+          <Popup open={modalOpen} close={closeModal} submit={handleSubmit}>
             문의를 등록하시겠습니까?
           </Popup>
         </div>
     </div>
+    // </form>
   );
 }
 
-export default Inquiry;
+export default InquiryForm;
