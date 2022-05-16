@@ -3,6 +3,10 @@ import LoginStyle from './Login.module.css';
 import logo from '../../components/LoginPart/img/Group 345.png';
 import planet from '../../planet/1-2.json';
 import Lottie from 'react-lottie';
+import google from './img/login_google.png';
+import naver from './img/login_naver.png';
+import kakao from './img/login_kakao.png';
+import { Link } from "react-router-dom";
 
 function Login() {
 
@@ -47,7 +51,18 @@ function Login() {
                 </p>
             </div>
             <div className={LoginStyle.login}>
-                <p >아이디와 비밀번호 없이 간편하게 로그인할 수 있어요</p>
+                <p >아이디와 비밀번호 없이 간편하게 로그인할 수 있어요!</p>
+            </div>
+            <div className={LoginStyle.loginButton}>
+                <Link to="/oauth2/authorization/google">
+                    <img src={google} />
+                </Link>
+                <Link to="/oauth2/authorization/naver">
+                    <img src={naver} />
+                </Link>
+                <Link to="/oauth2/authorization/kakao">
+                    <img src={kakao} />
+                </Link>
             </div>
         </section >
     );

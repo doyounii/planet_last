@@ -62,14 +62,16 @@ function StatisticsMain() {
   };
 
   useEffect(() => {
-    // fetchData();
-    setMessage(data);
-    setEcoTagCounts(data.ecoTagCounts);
-    setnoEcoTagCounts(data.noEcoTagCounts);
-    setloading(false);
+    fetchData();
+    // setMessage(data);
+    // setEcoTagCounts(data.ecoTagCounts);
+    // setnoEcoTagCounts(data.noEcoTagCounts);
+    // setloading(false);
   }, []);
   if (loading) return <div>loading...</div>;
 
+  const ecoDifference = Math.abs(message.ecoDifference)
+  const noEcoDifference = Math.abs(message.noEcoDifference)
   return (
     <div className="statistic-main">
       <DateHeader getDate={currentMonth} sendDate={onchangeDate} />
@@ -113,13 +115,12 @@ function StatisticsMain() {
               children={true}
             ></InfoModal>
           )}
-
           <p>지난달 이맘때보다</p>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>{message.ecoDifference}개</b> 늘고
+            친환경 태그가 <b style={{ color: "#00C982" }}>{ecoDifference}개</b> {message.ecoDifference >= 0 ? "늘고" : "줄고"}
           </h2>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>{message.noEcoDifference}개</b> 줄었어요
+            친환경 태그가 <b style={{ color: "#00C982" }}>{noEcoDifference}개</b> {message.noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
           </h2>
 
           <LineGraph></LineGraph>
@@ -185,12 +186,12 @@ const data = {
   userName: "사용자1",
   incomeTotal: 102000,
   expenditureTotal: 549000,
-  ecoDifference: 6,
+  ecoDifference: -6,
   noEcoDifference: 3,
   ecoCount: { "3": 6, "4": 12 },
   nowEcoCount: 12,
   nowNoneEcoCount: 4,
   percentage: 67.0,
-  ecoTagCounts: [["생필품", 2], ["경조사/회비", 2], ["마트", 2], ["더보기", 0]],
-  noEcoTagCounts: [["생필품", 1], ["경조사/회비", 1], ["마트", 1], ["더보기", 0]]
+  ecoTagCounts: [["식비", 6], ["급여", 2], ["기타", 2], ["생필품", 2], ["더보기", 0]],
+  noEcoTagCounts: [["식비", 3], ["기타", 1], ["생필품", 1], ["급여", 1], ["더보기", 0]]
 };
