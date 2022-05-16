@@ -34,7 +34,7 @@
   position: relative;
   display: inline;
   font-size: 15px;
-  color: #b4b6b8;
+  color: #FFFFFF;
   padding-top: 15px;
   margin-left: 12.6px;
 }
@@ -44,7 +44,7 @@
   position: relative;
   display: inline;
   font-size: 15px;
-  color: #b4b6b8;
+  color: #FFFFFF;
   padding-top: 15px;
   margin-right: 30px;
   float: right;
@@ -101,4 +101,5 @@
   margin: 0px 20px;
   font-size: 20px;
   margin-bottom: 60px;
+  color: #FFFFFF;
 }
