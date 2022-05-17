@@ -35,6 +35,13 @@ const StyledDetail = styled.div`
     padding: 20px;
   }
 
+  .detail-box .eco {
+    color: rgba(var(--green));
+  }
+  .detail-box .neco {
+    color: rgba(var(--mid-gray));
+  }
+
   .detail-box:active {
     opacity: 0.5;
   }
