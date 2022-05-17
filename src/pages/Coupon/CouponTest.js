@@ -70,23 +70,8 @@ function Coupon() {
 
   console.log(couponArr);
 
-  function Coupon({remainingDays, coupon, discount, availability}){
-    // const isActive = {availability}; 
-    // console.log(isActive);
-    return(
-      <div onClick={() => openModal()} className={ {availability} ? CouponStyle.coupon_available : CouponStyle.coupon_expiration }>
-      <div className={ CouponStyle.coupon_dday }>D-{remainingDays}</div>
-      <img src="img/coupon.png" alt="planet-coupon"></img>
-      <h1>{coupon}</h1>
-      <p>{discount}% 할인쿠폰</p>
-    </div>   
-    )
-  }
-
   return (
     <div className={ CouponStyle.container }>
-      
-      
       {isModalOpen && (
           <Modal
             onClose={closeModal}
@@ -144,10 +129,7 @@ function Coupon() {
 
           </Modal>
         )}
-
-
-
-      <div className={ CouponStyle.backBtn }>
+        <div className={ CouponStyle.backBtn }>
             <HistorySample></HistorySample>
         </div>
 
@@ -170,13 +152,27 @@ function Coupon() {
             </div>
         </div>
 
-      <div className={ CouponStyle.coupon_use_box }>
-        {couponArr.map(famous=> <Coupon coupon={famous.coupon} remainingDays={famous.remainingDays} discount={famous.discount} />)}
-      </div>
+        <div className={ CouponStyle.coupon_use_box }>
+         
+          <div onClick={() => openModal()} className={ CouponStyle.coupon_available }>
+            <div className={ CouponStyle.coupon_dday }>D-{couponArr[0].remainingDays}</div>
+            <img src="img/coupon.png" alt="planet-coupon"></img>
+            <h1>{couponArr[0].coupon}</h1>
+            <p>{couponArr[0].discount}% 할인쿠폰</p>
+          </div>
 
-      <Footer activeMenu="home">
-        <div>홈</div>
-      </Footer>
+          <div onClick={() => openModal()} className={ CouponStyle.coupon_expiration }>
+            <div className={ CouponStyle.coupon_dday }>D-{couponArr[1].remainingDays}</div>
+            <img src="img/coupon.png" alt="planet-coupon"></img>
+            <h1>{couponArr[1].coupon}</h1>
+            <p>{couponArr[1].discount}% 할인쿠폰</p>
+          </div>
+          
+        </div>
+
+        <Footer activeMenu="home">
+            <div>홈</div>
+        </Footer>
     </div>
   );
 }

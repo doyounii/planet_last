@@ -5,10 +5,12 @@ import { Navigate } from "react-router-dom";
 import Style from "./EditName.module.css";
 import { CgClose } from "react-icons/cg";
 import "../CalendarPart/Calendar.css";
+import editscss from "./EditName.css";
 
 export function EditName({ className, onClose, visible }) {
   const [text, setText] = useState("");
   const [count, setCount] = useState(0);
+  const [disabled, setDisabled] = useState(true);
 
   const fetchFunc = (e) => {
     //백엔드로 데이터 보내기
@@ -37,6 +39,12 @@ export function EditName({ className, onClose, visible }) {
     setText(e.target.value);
     setCount(e.length);
 
+    if (e.target.value === "") {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+
     //여기서 8자 제한
 
   };
@@ -50,7 +58,6 @@ export function EditName({ className, onClose, visible }) {
       text = text.slice(0, text.maxLength);
     }
   };
-
   /*
    function numberMaxLength(e){
         if(e.value.length > e.maxLength){
@@ -93,7 +100,7 @@ export function EditName({ className, onClose, visible }) {
 
             <p className={Style.count}>{text.length}/8</p>
 
-            <button type="submit" className={Style.button}>
+            <button type="submit" className={"button" + (disabled ? "Disabled" : "Active")} disabled={disabled}>
               완료
             </button>
           </form>
@@ -102,7 +109,7 @@ export function EditName({ className, onClose, visible }) {
           </button>
         </div>
       </ModalWrapper>
-    </Portal>
+    </Portal >
   );
 }
 
