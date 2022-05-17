@@ -171,7 +171,7 @@ function Coupon() {
         </div>
 
       <div className={ CouponStyle.coupon_use_box }>
-        {couponArr.map(famous=> <Coupon availability={famous.availability} coupon={famous.coupon} remainingDays={famous.remainingDays} discount={famous.discount} />)}
+        {couponArr.map(famous=> <Coupon coupon={famous.coupon} remainingDays={famous.remainingDays} discount={famous.discount} />)}
       </div>
 
       <Footer activeMenu="home">
