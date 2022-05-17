@@ -36,7 +36,7 @@ const StyledEco = styled.div`
 
   .eco-day {
     font-weight: 600;
-    color: #00b978;
+    color: rgba(var(--green));
   }
   .gotobrowser {
     width: 15px;
