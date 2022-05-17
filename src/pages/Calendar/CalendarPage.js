@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery, useQueries, queryClient, useQueryClient } from "react-query";
-import { format, isSameMonth, subMonths, addMonths } from "date-fns";
+import { format, isSameMonth, subMonths, addMonths, parseISO } from "date-fns";
 import Footer from "../../components/Footer/Footer";
 import DateHeader from "../../components/DateHeader";
 import Calendar from "../../components/CalendarPart/CalendarBody";
@@ -16,6 +16,26 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 const fetchData = async (date) => {
   const response = await fetch(
     `/calendar/user1@naver.com/${format(date, "yyyy")}/${format(date, "M")}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+  return data;
+};
+
+const fetchDetailData = async (day) => {
+  console.log("fetch");
+  const date = parseISO(day);
+  const response = await fetch(
+    `calendar/user1@naver.com/${format(date, "yyyy")}/${format(
+      date,
+      "M"
+    )}/${format(date, "d")}`,
     {
       method: "GET",
       headers: {
@@ -54,6 +74,15 @@ function CalendarPage() {
       return {
         queryKey: ["calnedarData", format(m, "yyyy-M")],
         queryFn: () => fetchData(m),
+      };
+    })
+  );
+
+  const details = useQueries(
+    daysData.map((data) => {
+      return {
+        queryKey: ["detailData", data.date],
+        queryFn: () => fetchDetailData(data.date),
       };
     })
   );
@@ -137,6 +166,12 @@ function CalendarPage() {
           </div>
         </div>
 
+        <div style={{ color: "white" }}>
+          <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao">
+            Naver
+          </a>
+        </div>
+
         {isModalOpen && (
           <InfoModal
             className={position}
@@ -167,12 +202,10 @@ function CalendarPage() {
         {daysData.find(
           (data) => data.date === format(selectedDate, dateFormat)
         ) ? (
-          <div style={{ color: "white" }}>data exist</div>
+          <DetailList value={selectedDate} />
         ) : (
           <div style={{ color: "white" }}>내역 없음</div>
         )}
-
-        {/* <DetailList value={selectedDate} />  */}
       </div>
       <Footer activeMenu="calendar">
         <div>달력</div>
