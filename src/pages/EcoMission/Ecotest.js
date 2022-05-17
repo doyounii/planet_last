@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from '../../components/Footer/Footer';
 import EcoStyle from "./Eco.module.css";
 import HistorySample from "../../components/History/HistoryBackHome";
@@ -7,10 +7,11 @@ import { FiShare } from "react-icons/fi";
 import { BsChevronDown } from 'react-icons/bs';
 import { Modal } from "../../components/EcoMissionPart/EcoModal";
 
-import DateList from "../../components/DateList";
-import EcoList from "../../components/EcoMissionPart/EcoList";
+// import DateContainer from "../../components/EcoMissionPart/DateContainer";
 
-const EcoMission = () => {
+import DateList from "../../components/DateList";
+
+function EcoMission() {
   const [list, setList] = useState({});
   const [loading, setloading] = useState(true);
   const [todayMission, setTodayMission] = useState({});
@@ -72,56 +73,6 @@ const EcoMission = () => {
   //       }
   //     });
   // };
-  const [inputs, setInputs] = useState({
-    emoji: '🧾',
-    text: '일회용품 지양하기'
-  });
-
-  const { emoji, text } = inputs;
-
-  const onChange = useCallback(e => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value
-    });
-  },
-  [inputs]
-  );
-
-  const [missions, setMissions] = useState([
-    {
-      id: 1,
-      emoji: '🍽',
-      text: '잔반 남기지 않기',
-    },
-  ]);
-
-  const nextId = useRef(2);
-
-  const onCreate = useCallback((e) => {
-      e.preventDefault();
-      const mission = {
-        id : nextId.current,
-        emoji,
-        text,
-      };
-      setMissions(missions.concat(mission));
-
-      setInputs({
-        emoji: '🧾',
-        text: '일회용품 지양하기'
-      });
-      nextId.current += 1;
-    }, [missions, emoji, text]);
-
-  // const onSubmit = useCallback(
-  //   e => {
-  //     onInsert();
-  //     e.preventDefault();
-  //   },
-  //   []
-  // );
   
   const [date, setDate] = useState(new Date());
 
@@ -156,32 +107,57 @@ const EcoMission = () => {
         <FiShare />
       </div>
 
-      <form className={EcoStyle.mission_box}>
+      <div className={EcoStyle.mission_box}>
         <p>새로운 미션이 도착했어요!</p>
         <h1>오늘의 데일리 에코 미션</h1>
-        <div className={EcoStyle.mission_box_input}>
-          <input 
-            value={text}
-            emoji={emoji}
-            text={text}
-            onChange={onChange}
-            onCreate={onCreate}
-          />
-        </div>
+        <h2>일회용품 지양하기</h2>
         {/* <h2>{todayMission.name}</h2> */}
         {/*<p>{String.fromCodePoint(todayMission.emoji)}</p>*/}
         <img src="img/recipt.png" alt="recipt"></img>
-        <button type="submit" onClick={onCreate} className={EcoStyle.mission_btn}>
+        <button type="submit" className={EcoStyle.mission_btn}>
           달성
         </button>
-      </form>
+      </div>
 
       <div className={EcoStyle.sub_title}>
         <h1>{format(date, "M월")} 내가 달성한 미션</h1>
         <p>내가 한 미션이 어떤 변화를 만들었을까요?</p>
       </div>
 
-      <EcoList missions={missions}/>
+      <div className={EcoStyle.mission_box2}>
+        <div className={EcoStyle.mission_icon}>🍽</div> 
+        <p>잔반 남기지 않기</p>
+        <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+      </div>
+
+      <div className={EcoStyle.mission_box2}>
+        <div className={EcoStyle.mission_icon}>🔌</div> 
+        <p>안 쓰는 코드 뽑기</p>
+        <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+      </div>
+
+      <div className={EcoStyle.mission_box2}>
+        <div className={EcoStyle.mission_icon}>🚿</div> 
+        <p>샤워 시간 단축하기</p>
+        <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+      </div>
+
+      <div className={EcoStyle.mission_box2}>
+        <div className={EcoStyle.mission_icon}>🛋</div> 
+        <p>실내조명 조도 낮추기를 해봅시다 어때요?</p>
+        <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+      </div>
+
+      <div className={EcoStyle.mission_box2}>
+        <div className={EcoStyle.mission_icon}>🪥</div>
+        <p>양치컵 사용하기</p>
+        <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+      </div>
+
+      <div className={EcoStyle.mission_box2}>
+        <div className={EcoStyle.mission_icon}>🚌</div> 대중교통 이용하기
+        <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+      </div>
 
       <Footer activeMenu="home">
           <div>홈</div>
