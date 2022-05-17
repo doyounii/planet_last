@@ -5,7 +5,6 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { IoIosArrowForward } from "react-icons/io";
 import { message } from 'antd';
 
-
 const expendData = [
   {
     emoji: "🛒",
@@ -225,6 +224,65 @@ const expendData = [
   },
 ];
 
+const emojiList = (ecoTagCounts) => {
+
+  switch (ecoTagCounts) {
+    case "식비":
+      return <h1>🌭</h1>
+    case "교통":
+      return <h1>🚗</h1>
+    case "문화생활":
+      return <h1>🎬</h1>
+    case "생필품":
+      return <h1>✏️</h1>
+    case "마트":
+      return <h1>🛒</h1>
+    case "교육":
+      return <h1>📚</h1>
+    case "통신":
+      return <h1>📱</h1>
+    case "의료/건강":
+      return <h1>🏥</h1>
+    case "경조사/회비":
+      return <h1>💵</h1>
+    case "가전":
+      return <h1>🛏</h1>
+    case "공과금":
+      return <h1>🧾</h1>
+    default:
+      return <h1>💬</h1>
+
+  }
+}
+
+const emojiList2 = (noEcoTagCounts) => {
+  switch (noEcoTagCounts) {
+    case "식비":
+      return <h1>🌭왜 안됨</h1>
+    case "교통":
+      return <h1>🚗</h1>
+    case "문화생활":
+      return <h1>🎬</h1>
+    case "생필품":
+      return <h1>✏️</h1>
+    case "마트":
+      return <h1>🛒</h1>
+    case "교육":
+      return <h1>📚</h1>
+    case "통신":
+      return <h1>📱</h1>
+    case "의료/건강":
+      return <h1>🏥</h1>
+    case "경조사/회비":
+      return <h1>💵</h1>
+    case "가전":
+      return <h1>🛏</h1>
+    case "공과금":
+      return <h1>🧾</h1>
+    default:
+      return <h1>💬</h1>
+  }
+}
 
 const renderexTypeList = (ecodata, message) => {
   let renderexTypeList = [];
@@ -313,17 +371,18 @@ function Category() {
       }
     );
     const data2 = await response.json();
-    setMessage(data2.tagList);
+    setMessage2(data2.tagList);
     console.log(data2);
     setloading(false);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // fetchData();
-    setMessage(data.tagList);
-    setMessage2(data2.tagList);
-    setloading(false);
+    fetchData();
+    fetchData2();
+    // setMessage(data.tagList);
+    // setMessage2(data2.tagList);
+    // setloading(false);
   }, []);
 
 
@@ -371,8 +430,8 @@ function Category() {
 export default Category
 
 const data = {
-  tagList: [["생필품", 33, 2], ["경조사/회비", 33, 2], ["마트", 33, 2]]
+  tagList: [["식비", 50, 6], ["기타", 17, 2], ["생필품", 17, 2], ["급여", 17, 2]]
 }
 const data2 = {
-  tagList: [["생필품", 33, 1], ["경조사/회비", 33, 1], ["마트", 33, 1]]
+  tagList: [["식비", 50, 3], ["급여", 17, 1], ["기타", 17, 1], ["생필품", 17, 1]]
 }

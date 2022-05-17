@@ -16,7 +16,7 @@
   justify-content: center;
 
   position: fixed;
-  width: 90%;
+  width: 100%;
   margin-left: 5%;
   margin-right: 5%;
   height: 100vh;
@@ -73,10 +73,8 @@
 
 .login {
   position: absolute;
-  top: 287px;
-  width: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
+  top: 527px;
+  width: 84%;
   display: flex;
   justify-content: center;
 }
@@ -99,86 +97,14 @@
   /* gray2 */
 
   z-index: 3;
-  margin-top: 50px;
   color: #939393;
 }
 
-.google {
+.loginButton img {
   position: relative;
-  width: 343px;
+  width: 82%;
   height: 48px;
-  top: 21px;
-  background: #ffffff;
-  /* gray_01 */
-
-  border: 1px solid #d8d8d8;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 0;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-  color: #000000;
-  justify-content: center;
-  text-align: center;
-}
-
-.logoimg {
-  position: absolute;
-  width: 46.54px;
-  height: 48px;
-  left: 31px;
-  top: 0px;
-}
-
-.naver {
-  position: relative;
-  width: 343px;
-  height: 48px;
-  top: 35px;
-
-  background: #2db400;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 0;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-  color: #ffffff;
-  justify-content: center;
-  text-align: center;
-}
-
-.kakao {
-  position: relative;
-  width: 343px;
-  height: 48px;
-  top: 49px;
-
-  background: #fee500;
-  border-radius: 10px;
-  box-sizing: border-box;
-
-  border: 0;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  /* black */
-
-  color: #000000;
-  justify-content: center;
-  text-align: center;
+  left: 16px;
+  top: 110px;
+  margin-bottom: 10px;
 }

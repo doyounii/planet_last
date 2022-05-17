@@ -2,116 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./EcoExpend.css";
 
-const EcoExpendData = [
-  {
-    emoji: "🛒",
-    exType: "마트",
-    count: "12개",
-    color: "#00c982",
-  },
-
-  {
-    emoji: "✏️",
-    exType: "생필품",
-    count: "7개",
-    color: "#C7D2E8",
-    ncolor: "#8593B1",
-  },
-  {
-    emoji: "🎬",
-    exType: "문화생활",
-    count: "5개",
-    color: "#083FA5",
-  },
-  {
-    emoji: "📚",
-    exType: "교육",
-    count: "4개",
-    color: "#C7D2E8",
-  },
-  {
-    emoji: "💵",
-    exType: "경조사/회비",
-    count: "4개",
-    color: "#C7D2E8",
-  },
-  {
-    emoji: "🏥",
-    exType: "의료/건강",
-    count: "3개",
-    color: "#C7D2E8",
-  },
-  {
-    emoji: "💬",
-    exType: "기타",
-    count: "3개",
-    color: "#728EC6",
-  },
-  {
-    emoji: "🚗",
-    exType: "교통",
-    count: "2개",
-    color: "#1466FE",
-  },
-
-  {
-    emoji: "🛏",
-    exType: "가전",
-    count: "1개",
-    color: "#C7D2E8",
-  },
-  {
-    emoji: "📱",
-    exType: "통신",
-    count: "1개",
-    color: "#C7D2E8",
-  },
-
-  {
-    emoji: "🧾",
-    exType: "공과금",
-    count: "0개",
-    color: "#C7D2E8",
-  },
-];
-
-const NEcoExpendData = [
-  {
-    emoji: "🌭",
-    exType: "식비",
-    count: "14개",
-    color: "#728EC6",
-    ncolor: "#303B51",
-  },
-  {
-    emoji: "🛒",
-    exType: "마트",
-    count: "12개",
-    color: "#8593B1",
-  },
-
-  {
-    emoji: "🚗",
-    exType: "교통",
-    count: "5개",
-    color: "#667492",
-  },
-  {
-    emoji: "✏️",
-    exType: "생필품",
-    count: "5개",
-    color: "#8593B1",
-  },
-  {
-    emoji: "🛏",
-    exType: "가전",
-    count: "2개",
-    color: "#8593B1",
-  },
-];
-
-
-
+const emoji = [
+  ["🌭", "식비"],
+  ["🚗", "교통"],
+  ["🎬", "문화생활"],
+  ["✏️", "생필품"],
+  ["🛒", "마트"],
+  ["📚", "교육"],
+  ["📱", "통신"],
+  ["🏥", "의료/건강"],
+  ["💵", "경조사/회비"],
+  ["🛏", "가전"],
+  ["🧾", "공과금"],
+  ["💬", "기타"],
+]
+const EcoExpendColor = [
+  "#00C982", "#1466FE", "#083FA5", "#728EC6"
+]
+const NEcoExpendColor = [
+  "#8593B1", "#667492", "#475572", "#303B51"
+]
 
 function EcoExpend(props) {
   const [message, setMessage] = useState([]);
@@ -119,27 +29,88 @@ function EcoExpend(props) {
   const [ecoTagCounts, setEcoTagCounts] = useState([]);
   const [noEcoTagCounts, setNoEcoTagCounts] = useState([]);
   useEffect(() => {
-    // fetchData();
-    setMessage(data);
-    setEcoTagCounts(data.ecoTagCounts);
-    setNoEcoTagCounts(data.noEcoTagCounts);
-    setloading(false);
+    fetchData();
+    // setMessage(data);
+    // setEcoTagCounts(data.ecoTagCounts);
+    // setNoEcoTagCounts(data.noEcoTagCounts);
+    // setloading(false);
 
   }, []);
 
+  const emojiList = (ecoTagCounts) => {
+
+    switch (ecoTagCounts) {
+      case "식비":
+        return <h1>🌭</h1>
+      case "교통":
+        return <h1>🚗</h1>
+      case "문화생활":
+        return <h1>🎬</h1>
+      case "생필품":
+        return <h1>✏️</h1>
+      case "마트":
+        return <h1>🛒</h1>
+      case "교육":
+        return <h1>📚</h1>
+      case "통신":
+        return <h1>📱</h1>
+      case "의료/건강":
+        return <h1>🏥</h1>
+      case "경조사/회비":
+        return <h1>💵</h1>
+      case "가전":
+        return <h1>🛏</h1>
+      case "공과금":
+        return <h1>🧾</h1>
+      default:
+        return <h1>💬</h1>
+
+    }
+  }
+
+  const emojiList2 = (noEcoTagCounts) => {
+    switch (noEcoTagCounts) {
+      case "식비":
+        return <h1>🌭왜 안됨</h1>
+      case "교통":
+        return <h1>🚗</h1>
+      case "문화생활":
+        return <h1>🎬</h1>
+      case "생필품":
+        return <h1>✏️</h1>
+      case "마트":
+        return <h1>🛒</h1>
+      case "교육":
+        return <h1>📚</h1>
+      case "통신":
+        return <h1>📱</h1>
+      case "의료/건강":
+        return <h1>🏥</h1>
+      case "경조사/회비":
+        return <h1>💵</h1>
+      case "가전":
+        return <h1>🛏</h1>
+      case "공과금":
+        return <h1>🧾</h1>
+      default:
+        return <h1>💬</h1>
+    }
+  }
+
+  console.log(ecoTagCounts)
   const renderExpendList = (props, message) => {
     let renderExpendList = [];
 
     if (message.length !== 0) {
       if (props.name === "eco") {
-        for (let i = 0; i < ecoTagCounts.length - 1; i++) {
+        for (let i = 0; i < ecoTagCounts.length - 1 && i < 4; i++) {
           renderExpendList.push(
             <div>
               <div
                 className="day-breakdown-box-icon"
-                style={{ color: EcoExpendData[i].color }}
+                style={{ color: EcoExpendColor[i] }}
               >
-                ● {EcoExpendData[i].emoji}
+                ●{emojiList(ecoTagCounts[i][0])}
               </div>
               <h1>{ecoTagCounts[i][0]}</h1>
               <h2>{ecoTagCounts[i][1]}개</h2>
@@ -148,14 +119,14 @@ function EcoExpend(props) {
           );
         }
       } else {
-        for (let i = 0; i < noEcoTagCounts.length - 1; i++) {
+        for (let i = 0; i < noEcoTagCounts.length - 1 && i < 4; i++) {
           renderExpendList.push(
             <div>
               <div
                 className="day-breakdown-box-icon"
-                style={{ color: NEcoExpendData[i].color }}
+                style={{ color: NEcoExpendColor[i] }}
               >
-                ● {NEcoExpendData[i].emoji}
+                ●{emojiList2(noEcoTagCounts[i][0])}
               </div>
               <h1>{noEcoTagCounts[i][0]}</h1>
               <h2>{noEcoTagCounts[i][1]}개</h2>
@@ -171,7 +142,7 @@ function EcoExpend(props) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/user1@naver.com/2022/2`,
+      `/statistics/user1@naver.com/2022/3`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -205,7 +176,8 @@ function EcoExpend(props) {
               }}
             >
               <div className="more">
-                <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
+                <h1 style={{ color: "#C7D2E8" }}>●</h1>
+                <h1>더보기</h1>
                 {/* <h2>{ecoTagCounts[2][1]}개</h2> */}
               </div>
             </Link>
@@ -229,7 +201,8 @@ function EcoExpend(props) {
               }}
             >
               <div className="more">
-                <h1 style={{ color: "#C7D2E8" }}>● 더보기</h1>
+                <h1 style={{ color: "#C7D2E8" }}>●</h1>
+                <h1>더보기</h1>
                 {/* <h2>{noEcoTagCounts[2][1]}개</h2> */}
               </div>
             </Link>
@@ -251,7 +224,7 @@ const data = {
   ecoCount: { "3": 6, "4": 12 },
   nowEcoCount: 12,
   nowNoneEcoCount: 4,
-  percentage: 55.0,
-  ecoTagCounts: [["생필품", 2], ["경조사/회비", 2], ["마트", 2], ["더보기", 0]],
-  noEcoTagCounts: [["마트", 1], ["생필품", 1], ["경조사/회비", 1], ["더보기", 0]]
+  percentage: 67.0,
+  ecoTagCounts: [["마트", 6], ["급여", 2], ["기타", 2], ["생필품", 2], ["더보기", 0], ["더보기", 0]],
+  noEcoTagCounts: [["식비", 3], ["기타", 1], ["생필품", 1], ["급여", 1], ["더보기", 0]]
 };
