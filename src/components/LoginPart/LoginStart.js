@@ -54,15 +54,15 @@ function Login() {
                 <p >아이디와 비밀번호 없이 간편하게 로그인할 수 있어요!</p>
             </div>
             <div className={LoginStyle.loginButton}>
-                <Link to="/oauth2/authorization/google">
+                <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google">
                     <img src={google} />
-                </Link>
-                <Link to="/oauth2/authorization/naver">
+                </a>
+                <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/naver">
                     <img src={naver} />
-                </Link>
-                <Link to="/oauth2/authorization/kakao">
+                </a>
+                <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao">
                     <img src={kakao} />
-                </Link>
+                </a>
             </div>
         </section >
     );

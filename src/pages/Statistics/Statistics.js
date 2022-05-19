@@ -44,7 +44,7 @@ function StatisticsMain() {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/user1@naver.com/2022/3`,
+      `/statistics/2022/5`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -62,11 +62,11 @@ function StatisticsMain() {
   };
 
   useEffect(() => {
-    fetchData();
-    // setMessage(data);
-    // setEcoTagCounts(data.ecoTagCounts);
-    // setnoEcoTagCounts(data.noEcoTagCounts);
-    // setloading(false);
+    // fetchData();
+    setMessage(data);
+    setEcoTagCounts(data.ecoTagCounts);
+    setnoEcoTagCounts(data.noEcoTagCounts);
+    setloading(false);
   }, []);
   if (loading) return <div>loading...</div>;
 
