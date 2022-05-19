@@ -2,20 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./EcoExpend.css";
 
-const emoji = [
-  ["🌭", "식비"],
-  ["🚗", "교통"],
-  ["🎬", "문화생활"],
-  ["✏️", "생필품"],
-  ["🛒", "마트"],
-  ["📚", "교육"],
-  ["📱", "통신"],
-  ["🏥", "의료/건강"],
-  ["💵", "경조사/회비"],
-  ["🛏", "가전"],
-  ["🧾", "공과금"],
-  ["💬", "기타"],
-]
 const EcoExpendColor = [
   "#00C982", "#1466FE", "#083FA5", "#728EC6"
 ]
@@ -142,7 +128,7 @@ function EcoExpend(props) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/user1@naver.com/2022/3`,
+      `/statistics/2022/3`,
       //${format(new Date(), "M")}
       {
         method: "GET",
