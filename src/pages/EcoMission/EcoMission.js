@@ -72,6 +72,7 @@ const EcoMission = () => {
   //       }
   //     });
   // };
+  
   const [inputs, setInputs] = useState({
     emoji: '🧾',
     text: '일회용품 지양하기'
@@ -130,6 +131,7 @@ const EcoMission = () => {
       <div className={EcoStyle.backBtn}>
         <HistorySample></HistorySample>
       </div>
+
       <div className={EcoStyle.title}>
 
       {isModalOpen && (
@@ -149,9 +151,9 @@ const EcoMission = () => {
           </Modal>
       )}
 
-        <input value={format(date, "M월")} onClick={isopenModal} readOnly/> 
-        {/* <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button> */}
+      {format(date, "M월")} <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button>
       </div>
+      
       <div className={EcoStyle.title_icon}>
         <FiShare />
       </div>
