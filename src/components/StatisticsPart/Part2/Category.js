@@ -224,126 +224,127 @@ const expendData = [
   },
 ];
 
-const emojiList = (ecoTagCounts) => {
-  switch (ecoTagCounts) {
-    case "식비":
-      return <h1>🌭</h1>;
-    case "교통":
-      return <h1>🚗</h1>;
-    case "문화생활":
-      return <h1>🎬</h1>;
-    case "생필품":
-      return <h1>✏️</h1>;
-    case "마트":
-      return <h1>🛒</h1>;
-    case "교육":
-      return <h1>📚</h1>;
-    case "통신":
-      return <h1>📱</h1>;
-    case "의료/건강":
-      return <h1>🏥</h1>;
-    case "경조사/회비":
-      return <h1>💵</h1>;
-    case "가전":
-      return <h1>🛏</h1>;
-    case "공과금":
-      return <h1>🧾</h1>;
-    default:
-      return <h1>💬</h1>;
-  }
-};
 
-const emojiList2 = (noEcoTagCounts) => {
-  switch (noEcoTagCounts) {
-    case "식비":
-      return <h1>🌭왜 안됨</h1>;
-    case "교통":
-      return <h1>🚗</h1>;
-    case "문화생활":
-      return <h1>🎬</h1>;
-    case "생필품":
-      return <h1>✏️</h1>;
-    case "마트":
-      return <h1>🛒</h1>;
-    case "교육":
-      return <h1>📚</h1>;
-    case "통신":
-      return <h1>📱</h1>;
-    case "의료/건강":
-      return <h1>🏥</h1>;
-    case "경조사/회비":
-      return <h1>💵</h1>;
-    case "가전":
-      return <h1>🛏</h1>;
-    case "공과금":
-      return <h1>🧾</h1>;
-    default:
-      return <h1>💬</h1>;
-  }
-};
-
-const renderexTypeList = (ecodata, message) => {
-  let renderexTypeList = [];
-
-  if (ecodata.name === "eco") {
-    for (let i = 0; i < message.length; i++) {
-      renderexTypeList.push(
-        <Link
-          to={`/detail`}
-          state={{
-            exType: expendData[i].exType,
-            emoji: expendData[i].emoji,
-            count: expendData[i].count,
-            ecodata: ecodata.name,
-          }}
-        >
-          <div className="category-box">
-            <p className="emoji">
-              {expendData[i].emoji} {message[i][0]}
-              {" | "}
-              {message[i][1]}%
-            </p>
-            <IoIosArrowForward className="detail-icon" />
-            <h1 className="count">{message[i][2]}개</h1>
-          </div>
-        </Link>
-      );
-    }
-  } else {
-    for (let i = 0; i < message.length; i++) {
-      renderexTypeList.push(
-        <Link
-          to={`/detail`}
-          state={{
-            exType: expendData[i].exType,
-            emoji: expendData[i].emoji,
-            count: expendData[i].count,
-            ecodata: ecodata.name,
-            memo: expendData[i].memo,
-          }}
-        >
-          <div className="category-box">
-            <p className="emoji">
-              {expendData[i].emoji} {message[i][0]}
-              {" | "}
-              {message[i][1]}%
-            </p>
-            <IoIosArrowForward className="detail-icon" />
-            <h1 className="count">{message[i][2]}개</h1>
-          </div>
-        </Link>
-      );
-    }
-  }
-
-  return <div>{renderexTypeList}</div>;
-};
 
 function Category() {
   const history = useNavigate();
   const [message, setMessage] = useState([]);
   const [message2, setMessage2] = useState([]);
   const [loading, setloading] = useState(true);
+
+  const emojiList = (ecoTagCounts) => {
+
+    switch (ecoTagCounts) {
+      case "식비":
+        return <h1>🌭</h1>
+      case "교통":
+        return <h1>🚗</h1>
+      case "문화생활":
+        return <h1>🎬</h1>
+      case "생필품":
+        return <h1>✏️</h1>
+      case "마트":
+        return <h1>🛒</h1>
+      case "교육":
+        return <h1>📚</h1>
+      case "통신":
+        return <h1>📱</h1>
+      case "의료/건강":
+        return <h1>🏥</h1>
+      case "경조사/회비":
+        return <h1>💵</h1>
+      case "가전":
+        return <h1>🛏</h1>
+      case "공과금":
+        return <h1>🧾</h1>
+      default:
+        return <h1>💬</h1>
+
+    }
+  }
+
+  const emojiList2 = (noEcoTagCounts) => {
+    switch (noEcoTagCounts) {
+      case "식비":
+        return <h1>🌭왜 안됨</h1>
+      case "교통":
+        return <h1>🚗</h1>
+      case "문화생활":
+        return <h1>🎬</h1>
+      case "생필품":
+        return <h1>✏️</h1>
+      case "마트":
+        return <h1>🛒</h1>
+      case "교육":
+        return <h1>📚</h1>
+      case "통신":
+        return <h1>📱</h1>
+      case "의료/건강":
+        return <h1>🏥</h1>
+      case "경조사/회비":
+        return <h1>💵</h1>
+      case "가전":
+        return <h1>🛏</h1>
+      case "공과금":
+        return <h1>🧾</h1>
+      default:
+        return <h1>💬</h1>
+    }
+  }
+
+  const renderexTypeList = (ecodata, message) => {
+    let renderexTypeList = [];
+
+    if (message.length !== 0 || message2.length !== 0) {
+      if (ecodata.name === "eco") {
+        for (let i = 0; i < message.length; i++) {
+          renderexTypeList.push(
+            // <Link to={`/detail`}
+            //   state={{
+            //     exType: expendData[i].exType,
+            //     emoji: expendData[i].emoji,
+            //     count: expendData[i].count,
+            //     ecodata: ecodata.name,
+            //   }}
+            // >
+            <div className='category-box'>
+              <p className='emoji'>{emojiList(message[i][0])} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
+              <IoIosArrowForward className="detail-icon" />
+              <h1 className='count'>{message[i][2]}개</h1>
+            </div>
+
+            // </Link>
+          )
+        }
+      } else {
+        for (let i = 0; i < message.length; i++) {
+          renderexTypeList.push(
+            // <Link to={`/detail`}
+            //   state={{
+            //     exType: expendData[i].exType,
+            //     emoji: expendData[i].emoji,
+            //     count: expendData[i].count,
+            //     ecodata: ecodata.name,
+            //     memo: expendData[i].memo,
+            //   }}
+            // >
+
+            <div className='category-box'>
+              <p className='emoji'>{emojiList(message2[i][0])} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
+              <IoIosArrowForward className="detail-icon" />
+              <h1 className='count'>{message[i][2]}개</h1>
+            </div>
+
+
+            // </Link>
+          )
+        }
+      }
+    }
+
+
+    return <div>{renderexTypeList}</div>;
+  }
 
   const fetchData = async () => {
     const response = await fetch(
@@ -382,11 +383,11 @@ function Category() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchData();
-    fetchData2();
-    // setMessage(data.tagList);
-    // setMessage2(data2.tagList);
-    // setloading(false);
+    // fetchData();
+    // fetchData2();
+    setMessage(data.tagList);
+    setMessage2(data2.tagList);
+    setloading(false);
   }, []);
 
   console.log(message);

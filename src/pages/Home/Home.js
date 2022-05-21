@@ -218,7 +218,7 @@ function Home({ activeHome }) {
               <div onClick={handleLottie} className={homeStyle.planet}>
                 {isDonut ? (
                   <div>
-                    <DonutChart></DonutChart>{" "}
+                    <DonutChart percentage={message.ecoPercentage}></DonutChart>{" "}
                   </div>
                 ) : eco === 0 ? (
                   <div>
