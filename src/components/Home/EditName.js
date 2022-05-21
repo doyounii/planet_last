@@ -13,8 +13,9 @@ export function EditName({ className, onClose, visible }) {
   const [disabled, setDisabled] = useState(true);
 
   const fetchFunc = (e) => {
+    e.preventDefault();
     //백엔드로 데이터 보내기
-    fetch(`/main/update/user1@naver.com/${text}`, {
+    fetch(`/main/update/${text}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
