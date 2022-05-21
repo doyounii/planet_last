@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import './Category.css';
-import { FaChevronLeft } from 'react-icons/fa';
+import "./Category.css";
+import { FaChevronLeft } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
-import { message } from 'antd';
+import { message } from "antd";
 
 const expendData = [
   {
@@ -225,64 +225,62 @@ const expendData = [
 ];
 
 const emojiList = (ecoTagCounts) => {
-
   switch (ecoTagCounts) {
     case "식비":
-      return <h1>🌭</h1>
+      return <h1>🌭</h1>;
     case "교통":
-      return <h1>🚗</h1>
+      return <h1>🚗</h1>;
     case "문화생활":
-      return <h1>🎬</h1>
+      return <h1>🎬</h1>;
     case "생필품":
-      return <h1>✏️</h1>
+      return <h1>✏️</h1>;
     case "마트":
-      return <h1>🛒</h1>
+      return <h1>🛒</h1>;
     case "교육":
-      return <h1>📚</h1>
+      return <h1>📚</h1>;
     case "통신":
-      return <h1>📱</h1>
+      return <h1>📱</h1>;
     case "의료/건강":
-      return <h1>🏥</h1>
+      return <h1>🏥</h1>;
     case "경조사/회비":
-      return <h1>💵</h1>
+      return <h1>💵</h1>;
     case "가전":
-      return <h1>🛏</h1>
+      return <h1>🛏</h1>;
     case "공과금":
-      return <h1>🧾</h1>
+      return <h1>🧾</h1>;
     default:
-      return <h1>💬</h1>
-
+      return <h1>💬</h1>;
   }
-}
+};
 
 const emojiList2 = (noEcoTagCounts) => {
   switch (noEcoTagCounts) {
     case "식비":
-      return <h1>🌭왜 안됨</h1>
+      return <h1>🌭왜 안됨</h1>;
     case "교통":
-      return <h1>🚗</h1>
+      return <h1>🚗</h1>;
     case "문화생활":
-      return <h1>🎬</h1>
+      return <h1>🎬</h1>;
     case "생필품":
-      return <h1>✏️</h1>
+      return <h1>✏️</h1>;
     case "마트":
-      return <h1>🛒</h1>
+      return <h1>🛒</h1>;
     case "교육":
-      return <h1>📚</h1>
+      return <h1>📚</h1>;
     case "통신":
-      return <h1>📱</h1>
+      return <h1>📱</h1>;
     case "의료/건강":
-      return <h1>🏥</h1>
+      return <h1>🏥</h1>;
     case "경조사/회비":
-      return <h1>💵</h1>
+      return <h1>💵</h1>;
     case "가전":
-      return <h1>🛏</h1>
+      return <h1>🛏</h1>;
     case "공과금":
-      return <h1>🧾</h1>
+      return <h1>🧾</h1>;
     default:
-      return <h1>💬</h1>
+      return <h1>💬</h1>;
   }
-}
+};
 
 const renderexTypeList = (ecodata, message) => {
   let renderexTypeList = [];
@@ -290,7 +288,8 @@ const renderexTypeList = (ecodata, message) => {
   if (ecodata.name === "eco") {
     for (let i = 0; i < message.length; i++) {
       renderexTypeList.push(
-        <Link to={`/detail`}
+        <Link
+          to={`/detail`}
           state={{
             exType: expendData[i].exType,
             emoji: expendData[i].emoji,
@@ -298,19 +297,23 @@ const renderexTypeList = (ecodata, message) => {
             ecodata: ecodata.name,
           }}
         >
-          <div className='category-box'>
-            <p className='emoji'>{expendData[i].emoji} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
+          <div className="category-box">
+            <p className="emoji">
+              {expendData[i].emoji} {message[i][0]}
+              {" | "}
+              {message[i][1]}%
+            </p>
             <IoIosArrowForward className="detail-icon" />
-            <h1 className='count'>{message[i][2]}개</h1>
+            <h1 className="count">{message[i][2]}개</h1>
           </div>
-
         </Link>
-      )
+      );
     }
   } else {
     for (let i = 0; i < message.length; i++) {
       renderexTypeList.push(
-        <Link to={`/detail`}
+        <Link
+          to={`/detail`}
           state={{
             exType: expendData[i].exType,
             emoji: expendData[i].emoji,
@@ -319,21 +322,22 @@ const renderexTypeList = (ecodata, message) => {
             memo: expendData[i].memo,
           }}
         >
-
-          <div className='category-box'>
-            <p className='emoji'>{expendData[i].emoji} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
+          <div className="category-box">
+            <p className="emoji">
+              {expendData[i].emoji} {message[i][0]}
+              {" | "}
+              {message[i][1]}%
+            </p>
             <IoIosArrowForward className="detail-icon" />
-            <h1 className='count'>{message[i][2]}개</h1>
+            <h1 className="count">{message[i][2]}개</h1>
           </div>
-
-
         </Link>
-      )
+      );
     }
   }
 
   return <div>{renderexTypeList}</div>;
-}
+};
 
 function Category() {
   const history = useNavigate();
@@ -343,7 +347,7 @@ function Category() {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/ecoCountsDetail/user1@naver.com/2022/3`,
+      `/statistics/ecoCountsDetail/2022/3`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -360,7 +364,7 @@ function Category() {
 
   const fetchData2 = async () => {
     const response = await fetch(
-      `/statistics/noEcoCountsDetail/user1@naver.com/2022/3`,
+      `/statistics/noEcoCountsDetail/2022/3`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -385,7 +389,6 @@ function Category() {
     // setloading(false);
   }, []);
 
-
   console.log(message);
   console.log(message2);
   const ecodata = useLocation().state;
@@ -393,45 +396,54 @@ function Category() {
   if (loading) return <div>loading...</div>;
   if (ecodata.name === "eco") {
     return (
-      <div className='container'>
-        <div className='header'>
+      <div className="container">
+        <div className="header">
           <FaChevronLeft
             className="forwardArrow"
             onClick={() => {
               history(-1);
             }}
           />
-          <h1 className='cateGory'>친환경 지출 카테고리</h1>
-          <h1 className='title'>지출 카테고리별 소비</h1>
+          <h1 className="cateGory">친환경 지출 카테고리</h1>
+          <h1 className="title">지출 카테고리별 소비</h1>
         </div>
         {renderexTypeList(ecodata, message)}
       </div>
-    )
+    );
   } else {
     return (
-      <div className='container'>
-        <div className='header'>
+      <div className="container">
+        <div className="header">
           <FaChevronLeft
             className="forward-arrow"
             onClick={() => {
               history(-1);
             }}
           />
-          <h1 className='cateGory'>반환경 지출 카테고리</h1>
-          <h1 className='title'>지출 카테고리별 소비</h1>
+          <h1 className="cateGory">반환경 지출 카테고리</h1>
+          <h1 className="title">지출 카테고리별 소비</h1>
         </div>
         {renderexTypeList(ecodata, message2)}
       </div>
-    )
+    );
   }
-
 }
 
-export default Category
+export default Category;
 
 const data = {
-  tagList: [["식비", 50, 6], ["기타", 17, 2], ["생필품", 17, 2], ["급여", 17, 2]]
-}
+  tagList: [
+    ["식비", 50, 6],
+    ["기타", 17, 2],
+    ["생필품", 17, 2],
+    ["급여", 17, 2],
+  ],
+};
 const data2 = {
-  tagList: [["식비", 50, 3], ["급여", 17, 1], ["기타", 17, 1], ["생필품", 17, 1]]
-}
+  tagList: [
+    ["식비", 50, 3],
+    ["급여", 17, 1],
+    ["기타", 17, 1],
+    ["생필품", 17, 1],
+  ],
+};

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Footer from '../../components/Footer/Footer';
+import Footer from "../../components/Footer/Footer";
 import EcoStyle from "./Eco.module.css";
 import HistorySample from "../../components/History/HistoryBackHome";
 import { format } from "date-fns";
 import { FiShare } from "react-icons/fi";
-import { BsChevronDown } from 'react-icons/bs';
+import { BsChevronDown } from "react-icons/bs";
 import { Modal } from "../../components/EcoMissionPart/EcoModal";
 
 // import DateContainer from "../../components/EcoMissionPart/DateContainer";
@@ -28,7 +28,7 @@ function EcoMission() {
 
   // useEffect(() => {
   //   let isSubscribed = true;
-  //   fetch(`/mission/user1@naver.com`, {
+  //   fetch(`/mission`, {
   //     method: "GET",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function EcoMission() {
   // const fetchFunc = () => {
   //   //백엔드로 데이터 보내기
   //   fetch(
-  //     `/mission/user1@naver.com/${todayMission.emoji}/${todayMission.name}`,
+  //     `/mission/${todayMission.emoji}/${todayMission.name}`,
   //     {
   //       method: "POST",
   //       headers: {
@@ -73,7 +73,7 @@ function EcoMission() {
   //       }
   //     });
   // };
-  
+
   const [date, setDate] = useState(new Date());
 
   return (
@@ -82,8 +82,7 @@ function EcoMission() {
         <HistorySample></HistorySample>
       </div>
       <div className={EcoStyle.title}>
-
-      {isModalOpen && (
+        {isModalOpen && (
           <Modal
             onClose={iscloseModal}
             maskClosable={true}
@@ -98,9 +97,9 @@ function EcoMission() {
               onChange={(date) => setDate(date)}
             />
           </Modal>
-      )}
+        )}
 
-        <input value={format(date, "M월")} onClick={isopenModal} readOnly/> 
+        <input value={format(date, "M월")} onClick={isopenModal} readOnly />
         {/* <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button> */}
       </div>
       <div className={EcoStyle.title_icon}>
@@ -125,25 +124,25 @@ function EcoMission() {
       </div>
 
       <div className={EcoStyle.mission_box2}>
-        <div className={EcoStyle.mission_icon}>🍽</div> 
+        <div className={EcoStyle.mission_icon}>🍽</div>
         <p>잔반 남기지 않기</p>
         <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
       </div>
 
       <div className={EcoStyle.mission_box2}>
-        <div className={EcoStyle.mission_icon}>🔌</div> 
+        <div className={EcoStyle.mission_icon}>🔌</div>
         <p>안 쓰는 코드 뽑기</p>
         <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
       </div>
 
       <div className={EcoStyle.mission_box2}>
-        <div className={EcoStyle.mission_icon}>🚿</div> 
+        <div className={EcoStyle.mission_icon}>🚿</div>
         <p>샤워 시간 단축하기</p>
         <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
       </div>
 
       <div className={EcoStyle.mission_box2}>
-        <div className={EcoStyle.mission_icon}>🛋</div> 
+        <div className={EcoStyle.mission_icon}>🛋</div>
         <p>실내조명 조도 낮추기를 해봅시다 어때요?</p>
         <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
       </div>
@@ -160,7 +159,7 @@ function EcoMission() {
       </div>
 
       <Footer activeMenu="home">
-          <div>홈</div>
+        <div>홈</div>
       </Footer>
     </div>
   );
