@@ -45,6 +45,7 @@ function StatisticsMain() {
   const fetchData = async () => {
     const response = await fetch(
       `/statistics/2022/${format(new Date(), "M")}`,
+      //${format(new Date(), "M")}
       {
         method: "GET",
         headers: {
@@ -61,11 +62,11 @@ function StatisticsMain() {
   };
 
   useEffect(() => {
-    fetchData();
-    // setMessage(data);
-    // setEcoTagCounts(data.ecoTagCounts);
-    // setnoEcoTagCounts(data.noEcoTagCounts);
-    // setloading(false);
+    // fetchData();
+    setMessage(data);
+    setEcoTagCounts(data.ecoTagCounts);
+    setnoEcoTagCounts(data.noEcoTagCounts);
+    setloading(false);
   }, []);
   if (loading) return <div>loading...</div>;
 

@@ -2,22 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./EcoExpend.css";
 
-const emoji = [
-  ["🌭", "식비"],
-  ["🚗", "교통"],
-  ["🎬", "문화생활"],
-  ["✏️", "생필품"],
-  ["🛒", "마트"],
-  ["📚", "교육"],
-  ["📱", "통신"],
-  ["🏥", "의료/건강"],
-  ["💵", "경조사/회비"],
-  ["🛏", "가전"],
-  ["🧾", "공과금"],
-  ["💬", "기타"],
-];
-const EcoExpendColor = ["#00C982", "#1466FE", "#083FA5", "#728EC6"];
-const NEcoExpendColor = ["#8593B1", "#667492", "#475572", "#303B51"];
+const EcoExpendColor = [
+  "#00C982", "#1466FE", "#083FA5", "#728EC6"
+]
+const NEcoExpendColor = [
+  "#8593B1", "#667492", "#475572", "#303B51"
+]
 
 function EcoExpend(props) {
   const [message, setMessage] = useState([]);

@@ -19,6 +19,7 @@ import Lottie from "react-lottie";
 import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
+import zero from "./img/Mask.png"
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
 import DonutChart from "../../components/StatisticsPart/DonutChart";
@@ -38,10 +39,10 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    // fetchData();
-    setMessage(data);
-    setUserName(data.userName);
-    setloading(false);
+    fetchData();
+    // setMessage(data);
+    // setUserName(data.userName);
+    // setloading(false);
   }, []);
 
   const fetchData = async () => {
@@ -140,16 +141,18 @@ function Home({ activeHome }) {
     setIsDonut(true);
   };
 
-  const eco = 80;
+  const eco = data.ecoPercentage;
 
-  if (eco >= 0 && eco < 25) {
-    lottieOptions.animationData = low;
-  } else if (eco >= 25 && eco < 50) {
-    lottieOptions.animationData = mid;
-  } else if (eco >= 50 && eco < 75) {
-    lottieOptions.animationData = highmid;
-  } else {
-    lottieOptions.animationData = high;
+  if (eco != 0) {
+    if (eco > 0 && eco < 25) {
+      lottieOptions.animationData = low;
+    } else if (eco >= 25 && eco < 50) {
+      lottieOptions.animationData = mid;
+    } else if (eco >= 50 && eco < 75) {
+      lottieOptions.animationData = highmid;
+    } else {
+      lottieOptions.animationData = high;
+    }
   }
   if (loading) return <div>loading...</div>;
   return (
@@ -213,22 +216,22 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <div onClick={handleLottie} className={homeStyle.planet}>
-                {isDonut ? (
+                {isDonut ?
                   <div>
                     <DonutChart></DonutChart>{" "}
                   </div>
-                ) : (
-                  <Lottie
-                    options={{ ...lottieOptions }}
-                    eventListeners={[
-                      {
-                        eventName: "complete",
-                        callback: () => console.log("the animation completed"),
-                      },
-                    ]}
-                    isClickToPauseDisabled={true}
-                  ></Lottie>
-                )}
+                  : (eco === 0 ? <div> <img src={zero} /><p>아직 행성이 만들어지지 않았어요! <br /> 지금 바로 가계부를 작성해보세요 </p></div> :
+                    <Lottie
+                      options={{ ...lottieOptions }}
+                      eventListeners={[
+                        {
+                          eventName: "complete",
+                          callback: () => console.log("the animation completed"),
+                        },
+                      ]}
+                      isClickToPauseDisabled={true}
+                    ></Lottie>
+                  )}
               </div>
 
               <div>
@@ -255,10 +258,10 @@ function Home({ activeHome }) {
             ></IoIosArrowForward>
           </Link>
           <div className={homeStyle.income}>
-            수입 {message.totalIncomeMonth.toLocaleString()}원
+            수입 <h1>{message.totalIncomeMonth.toLocaleString()}원</h1>
           </div>
           <div className={homeStyle.expend}>
-            지출 {message.totalExpenditureMonth.toLocaleString()}원
+            지출 <h1>{message.totalExpenditureMonth.toLocaleString()}원</h1>
           </div>
         </section>
         <section className={homeStyle.etc}>
@@ -321,4 +324,6 @@ const data = {
   userName: "사용자1",
   totalIncomeMonth: 102000,
   totalExpenditureMonth: 54900,
+  ecoPercentage: 0,
+  noEcoPercentage: 100
 };
