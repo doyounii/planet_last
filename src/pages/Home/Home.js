@@ -47,7 +47,7 @@ function Home({ activeHome }) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/main/2022/${format(new Date(), "M")}`,
+      `http://3.39.87.115:8080/main/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -62,7 +62,7 @@ function Home({ activeHome }) {
     setUserName(data.userName);
     setloading(false);
   };
-
+  console.log(message);
   // const fetchFunc = (e) => {
   //   e.preventDefault();
   //   //백엔드로 데이터 보내기
@@ -141,7 +141,7 @@ function Home({ activeHome }) {
     setIsDonut(true);
   };
 
-  const eco = data.ecoPercentage;
+  const eco = message.ecoPercentage;
 
   if (eco != 0) {
     if (eco > 0 && eco < 25) {
@@ -172,7 +172,7 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              {message.userName}
+              {userName}
               <FiEdit3
                 className={homeStyle.icon}
                 alt="닉네임 변경"
@@ -329,7 +329,7 @@ function Home({ activeHome }) {
 
 export default Home;
 
-const data = {
+const data2 = {
   userName: "사용자1",
   totalIncomeMonth: 102000,
   totalExpenditureMonth: 54900,

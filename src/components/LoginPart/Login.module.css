@@ -1,12 +1,6 @@
 @charset 'utf-8';
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
 .content {
   position: absolute;
 
@@ -107,4 +101,5 @@
   left: 16px;
   top: 110px;
   margin-bottom: 10px;
+  z-index: 3;
 }
