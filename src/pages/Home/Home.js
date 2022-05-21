@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import high from "../../planet/1-2.json"
+import high from "../../planet/1-2.json";
 import highmid from "../../planet/1-2.json";
 import low from "../../planet/4-2.json";
 import mid from "../../planet/3-2.json";
@@ -46,7 +46,7 @@ function Home({ activeHome }) {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
+      `/main/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -65,7 +65,7 @@ function Home({ activeHome }) {
   const fetchFunc = (e) => {
     e.preventDefault();
     //백엔드로 데이터 보내기
-    fetch(`/main/update/user1@naver.com/${userName}`, {
+    fetch(`/main/update/${userName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

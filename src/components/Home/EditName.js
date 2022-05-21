@@ -14,7 +14,7 @@ export function EditName({ className, onClose, visible }) {
 
   const fetchFunc = (e) => {
     //백엔드로 데이터 보내기
-    fetch(`/main/update/user1@naver.com/${text}`, {
+    fetch(`/main/update/${text}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,6 @@ export function EditName({ className, onClose, visible }) {
     }
 
     //여기서 8자 제한
-
   };
 
   const onReset = () => {
@@ -100,7 +99,11 @@ export function EditName({ className, onClose, visible }) {
 
             <p className={Style.count}>{text.length}/8</p>
 
-            <button type="submit" className={"button" + (disabled ? "Disabled" : "Active")} disabled={disabled}>
+            <button
+              type="submit"
+              className={"button" + (disabled ? "Disabled" : "Active")}
+              disabled={disabled}
+            >
               완료
             </button>
           </form>
@@ -109,7 +112,7 @@ export function EditName({ className, onClose, visible }) {
           </button>
         </div>
       </ModalWrapper>
-    </Portal >
+    </Portal>
   );
 }
 

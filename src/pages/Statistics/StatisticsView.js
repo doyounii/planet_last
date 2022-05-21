@@ -122,7 +122,7 @@ function StatisticsDetail() {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/user1@naver.com/2022/3`,
+      `/statistics/2022/3`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -255,211 +255,211 @@ function StatisticsDetail() {
 export default StatisticsDetail;
 
 const data = {
-  "totalMonthIncome": 0,
-  "totalMonthExpenditure": 92000,
-  "inMore": true,
-  "exMore": true,
-  "inDif": 0,
-  "exDif": 92000,
-  "detailDtoList": [
+  totalMonthIncome: 0,
+  totalMonthExpenditure: 92000,
+  inMore: true,
+  exMore: true,
+  inDif: 0,
+  exDif: 92000,
+  detailDtoList: [
     {
-      "date": "2022-03-01",
-      "detailDtoList": []
+      date: "2022-03-01",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-02",
-      "detailDtoList": []
+      date: "2022-03-02",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-03",
-      "detailDtoList": []
+      date: "2022-03-03",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-04",
-      "detailDtoList": [
+      date: "2022-03-04",
+      detailDtoList: [
         {
-          "type": "생필품",
-          "id": 8,
-          "cost": 32000,
-          "memo": "츄파츕스 사먹음",
-          "ecoList": [
+          type: "생필품",
+          id: 8,
+          cost: 32000,
+          memo: "츄파츕스 사먹음",
+          ecoList: [
             {
-              "eco": "G",
-              "ecoDetail": "중고거래/나눔/기부",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "중고거래/나눔/기부",
+              etcMemo: null,
             },
             {
-              "eco": "G",
-              "ecoDetail": "비건식당 방문",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "비건식당 방문",
+              etcMemo: null,
             },
             {
-              "eco": "R",
-              "ecoDetail": "식자재 낭비",
-              "etcMemo": null
-            }
+              eco: "R",
+              ecoDetail: "식자재 낭비",
+              etcMemo: null,
+            },
           ],
-          "income": false
-        }
-      ]
+          income: false,
+        },
+      ],
     },
     {
-      "date": "2022-03-05",
-      "detailDtoList": []
+      date: "2022-03-05",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-06",
-      "detailDtoList": []
+      date: "2022-03-06",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-07",
-      "detailDtoList": []
+      date: "2022-03-07",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-08",
-      "detailDtoList": []
+      date: "2022-03-08",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-09",
-      "detailDtoList": []
+      date: "2022-03-09",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-10",
-      "detailDtoList": []
+      date: "2022-03-10",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-11",
-      "detailDtoList": []
+      date: "2022-03-11",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-12",
-      "detailDtoList": []
+      date: "2022-03-12",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-13",
-      "detailDtoList": []
+      date: "2022-03-13",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-14",
-      "detailDtoList": []
+      date: "2022-03-14",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-15",
-      "detailDtoList": []
+      date: "2022-03-15",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-16",
-      "detailDtoList": []
+      date: "2022-03-16",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-17",
-      "detailDtoList": []
+      date: "2022-03-17",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-18",
-      "detailDtoList": []
+      date: "2022-03-18",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-19",
-      "detailDtoList": []
+      date: "2022-03-19",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-20",
-      "detailDtoList": [
+      date: "2022-03-20",
+      detailDtoList: [
         {
-          "type": "마트",
-          "id": 12,
-          "cost": 53000,
-          "memo": "츄파츕스 사먹음",
-          "ecoList": [
+          type: "마트",
+          id: 12,
+          cost: 53000,
+          memo: "츄파츕스 사먹음",
+          ecoList: [
             {
-              "eco": "G",
-              "ecoDetail": "중고거래/나눔/기부",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "중고거래/나눔/기부",
+              etcMemo: null,
             },
             {
-              "eco": "G",
-              "ecoDetail": "비건식당 방문",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "비건식당 방문",
+              etcMemo: null,
             },
             {
-              "eco": "R",
-              "ecoDetail": "식자재 낭비",
-              "etcMemo": null
-            }
+              eco: "R",
+              ecoDetail: "식자재 낭비",
+              etcMemo: null,
+            },
           ],
-          "income": false
-        }
-      ]
+          income: false,
+        },
+      ],
     },
     {
-      "date": "2022-03-21",
-      "detailDtoList": []
+      date: "2022-03-21",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-22",
-      "detailDtoList": []
+      date: "2022-03-22",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-23",
-      "detailDtoList": [
+      date: "2022-03-23",
+      detailDtoList: [
         {
-          "type": "경조사/회비",
-          "id": 9,
-          "cost": 7000,
-          "memo": "츄파츕스 사먹음",
-          "ecoList": [
+          type: "경조사/회비",
+          id: 9,
+          cost: 7000,
+          memo: "츄파츕스 사먹음",
+          ecoList: [
             {
-              "eco": "G",
-              "ecoDetail": "중고거래/나눔/기부",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "중고거래/나눔/기부",
+              etcMemo: null,
             },
             {
-              "eco": "G",
-              "ecoDetail": "비건식당 방문",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "비건식당 방문",
+              etcMemo: null,
             },
             {
-              "eco": "R",
-              "ecoDetail": "식자재 낭비",
-              "etcMemo": null
-            }
+              eco: "R",
+              ecoDetail: "식자재 낭비",
+              etcMemo: null,
+            },
           ],
-          "income": false
-        }
-      ]
+          income: false,
+        },
+      ],
     },
     {
-      "date": "2022-03-24",
-      "detailDtoList": []
+      date: "2022-03-24",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-25",
-      "detailDtoList": []
+      date: "2022-03-25",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-26",
-      "detailDtoList": []
+      date: "2022-03-26",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-27",
-      "detailDtoList": []
+      date: "2022-03-27",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-28",
-      "detailDtoList": []
+      date: "2022-03-28",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-29",
-      "detailDtoList": []
+      date: "2022-03-29",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-30",
-      "detailDtoList": []
+      date: "2022-03-30",
+      detailDtoList: [],
     },
     {
-      "date": "2022-03-31",
-      "detailDtoList": []
-    }
-  ]
-}
+      date: "2022-03-31",
+      detailDtoList: [],
+    },
+  ],
+};
