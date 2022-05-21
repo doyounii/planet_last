@@ -39,10 +39,10 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    fetchData();
-    // setMessage(data);
-    // setUserName(data.userName);
-    // setloading(false);
+    // fetchData();
+    setMessage(data);
+    setUserName(data.userName);
+    setloading(false);
   }, []);
 
   const fetchData = async () => {
@@ -218,7 +218,7 @@ function Home({ activeHome }) {
               <div onClick={handleLottie} className={homeStyle.planet}>
                 {isDonut ?
                   <div>
-                    <DonutChart></DonutChart>{" "}
+                    <DonutChart percentage={message.ecoPercentage}></DonutChart>{" "}
                   </div>
                   : (eco === 0 ? <div> <img src={zero} /><p>아직 행성이 만들어지지 않았어요! <br /> 지금 바로 가계부를 작성해보세요 </p></div> :
                     <Lottie

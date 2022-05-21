@@ -15,11 +15,11 @@ function EcoExpend(props) {
   const [ecoTagCounts, setEcoTagCounts] = useState([]);
   const [noEcoTagCounts, setNoEcoTagCounts] = useState([]);
   useEffect(() => {
-    fetchData();
-    // setMessage(data);
-    // setEcoTagCounts(data.ecoTagCounts);
-    // setNoEcoTagCounts(data.noEcoTagCounts);
-    // setloading(false);
+    // fetchData();
+    setMessage(data);
+    setEcoTagCounts(data.ecoTagCounts);
+    setNoEcoTagCounts(data.noEcoTagCounts);
+    setloading(false);
 
   }, []);
 
@@ -57,7 +57,7 @@ function EcoExpend(props) {
   const emojiList2 = (noEcoTagCounts) => {
     switch (noEcoTagCounts) {
       case "식비":
-        return <h1>🌭왜 안됨</h1>
+        return <h1>🌭</h1>
       case "교통":
         return <h1>🚗</h1>
       case "문화생활":
