@@ -1,6 +1,7 @@
 /* eslint-disable */
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Home from "./pages/Home/Home";
 import CalendarPage from "./pages/Calendar/CalendarPage";
 
@@ -32,36 +33,48 @@ import Login from "./pages/Login/Login";
 import EcoCategory from "./pages/Statistics/Part2/EcoCategory";
 
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
   return (
-    <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/calendar" element={<CalendarPage />}></Route>
-      <Route path="/calendar/:month/:day" element={<DetailCategory />}></Route>
-      <Route path="/statistics" element={<Statistics />}></Route>
-      <Route path="/statisticsView" element={<StatisticsView />}></Route>
-      <Route
-        path="/statisticsView/:way/:year/:month"
-        element={<StatisticsWays />}
-      ></Route>
-      <Route path="/statisticsModify" element={<StatisticsModify />}></Route>
-      <Route path="/diary" element={<Diary />}></Route>
-      <Route path="/news" element={<News />}></Route>
-      <Route path="/setting" element={<Setting />}></Route>
-      <Route path="/myPage" element={<MyPage />}></Route>
-      <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
-      <Route path="/ecoMission" element={<EcoMission />}></Route>
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/calendar" element={<CalendarPage />}></Route>
+        <Route
+          path="/calendar/:month/:day"
+          element={<DetailCategory />}
+        ></Route>
+        <Route path="/statistics" element={<Statistics />}></Route>
+        <Route path="/statisticsView" element={<StatisticsView />}></Route>
+        <Route
+          path="/statisticsView/:way/:year/:month"
+          element={<StatisticsWays />}
+        ></Route>
+        <Route path="/statisticsModify" element={<StatisticsModify />}></Route>
+        <Route path="/diary" element={<Diary />}></Route>
+        <Route path="/news" element={<News />}></Route>
+        <Route path="/setting" element={<Setting />}></Route>
+        <Route path="/myPage" element={<MyPage />}></Route>
+        <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
+        <Route path="/ecoMission" element={<EcoMission />}></Route>
 
-      <Route path="/floatingpage" element={<FloatingPage />}></Route>
-      <Route path="/ecocategory" element={<EcoCategory />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/usePage" element={<UsePage />}></Route>
-      <Route path="/informationPage" element={<InformationPage />}></Route>
-      <Route path="/coupon" element={<Coupon />}></Route>
-      <Route path="/couponJoin" element={<CouponJoin />}></Route>
-      <Route path="/detail" element={<Detail />}></Route>
-      <Route path="/inquiry" element={<Inquiry />}></Route>
-      <Route path="/inquiryForm" element={<InquiryForm />}></Route>
-    </Routes>
+        <Route path="/floatingpage" element={<FloatingPage />}></Route>
+        <Route path="/ecocategory" element={<EcoCategory />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/usePage" element={<UsePage />}></Route>
+        <Route path="/informationPage" element={<InformationPage />}></Route>
+        <Route path="/coupon" element={<Coupon />}></Route>
+        <Route path="/couponJoin" element={<CouponJoin />}></Route>
+        <Route path="/detail" element={<Detail />}></Route>
+        <Route path="/inquiry" element={<Inquiry />}></Route>
+        <Route path="/inquiryForm" element={<InquiryForm />}></Route>
+      </Routes>
+    </QueryClientProvider>
   );
 }
 

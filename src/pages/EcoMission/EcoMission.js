@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Footer from '../../components/Footer/Footer';
+import Footer from "../../components/Footer/Footer";
 import EcoStyle from "./Eco.module.css";
 import HistorySample from "../../components/History/HistoryBackHome";
 import { format } from "date-fns";
 import { FiShare } from "react-icons/fi";
-import { BsChevronDown } from 'react-icons/bs';
+import { BsChevronDown } from "react-icons/bs";
 import { Modal } from "../../components/EcoMissionPart/EcoModal";
 
 import DateList from "../../components/DateList";
@@ -27,7 +27,7 @@ const EcoMission = () => {
 
   // useEffect(() => {
   //   let isSubscribed = true;
-  //   fetch(`/mission/user1@naver.com`, {
+  //   fetch(`/mission`, {
   //     method: "GET",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const EcoMission = () => {
   // const fetchFunc = () => {
   //   //백엔드로 데이터 보내기
   //   fetch(
-  //     `/mission/user1@naver.com/${todayMission.emoji}/${todayMission.name}`,
+  //     `/mission/${todayMission.emoji}/${todayMission.name}`,
   //     {
   //       method: "POST",
   //       headers: {
@@ -74,47 +74,51 @@ const EcoMission = () => {
   // };
   
   const [inputs, setInputs] = useState({
-    emoji: '🧾',
-    text: '일회용품 지양하기'
+    emoji: "🧾",
+    text: "일회용품 지양하기",
   });
 
   const { emoji, text } = inputs;
 
-  const onChange = useCallback(e => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value
-    });
-  },
-  [inputs]
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+    },
+    [inputs]
   );
 
   const [missions, setMissions] = useState([
     {
       id: 1,
-      emoji: '🍽',
-      text: '잔반 남기지 않기',
+      emoji: "🍽",
+      text: "잔반 남기지 않기",
     },
   ]);
 
   const nextId = useRef(2);
 
-  const onCreate = useCallback((e) => {
+  const onCreate = useCallback(
+    (e) => {
       e.preventDefault();
       const mission = {
-        id : nextId.current,
+        id: nextId.current,
         emoji,
         text,
       };
       setMissions(missions.concat(mission));
 
       setInputs({
-        emoji: '🧾',
-        text: '일회용품 지양하기'
+        emoji: "🧾",
+        text: "일회용품 지양하기",
       });
       nextId.current += 1;
-    }, [missions, emoji, text]);
+    },
+    [missions, emoji, text]
+  );
 
   // const onSubmit = useCallback(
   //   e => {
@@ -123,7 +127,7 @@ const EcoMission = () => {
   //   },
   //   []
   // );
-  
+
   const [date, setDate] = useState(new Date());
 
   return (
@@ -133,8 +137,7 @@ const EcoMission = () => {
       </div>
 
       <div className={EcoStyle.title}>
-
-      {isModalOpen && (
+        {isModalOpen && (
           <Modal
             onClose={iscloseModal}
             maskClosable={true}
@@ -149,7 +152,7 @@ const EcoMission = () => {
               onChange={(date) => setDate(date)}
             />
           </Modal>
-      )}
+        )}
 
       {format(date, "M월")} <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button>
       </div>
@@ -162,7 +165,7 @@ const EcoMission = () => {
         <p>새로운 미션이 도착했어요!</p>
         <h1>오늘의 데일리 에코 미션</h1>
         <div className={EcoStyle.mission_box_input}>
-          <input 
+          <input
             value={text}
             emoji={emoji}
             text={text}
@@ -173,7 +176,11 @@ const EcoMission = () => {
         {/* <h2>{todayMission.name}</h2> */}
         {/*<p>{String.fromCodePoint(todayMission.emoji)}</p>*/}
         <img src="img/recipt.png" alt="recipt"></img>
-        <button type="submit" onClick={onCreate} className={EcoStyle.mission_btn}>
+        <button
+          type="submit"
+          onClick={onCreate}
+          className={EcoStyle.mission_btn}
+        >
           달성
         </button>
       </form>
@@ -183,13 +190,13 @@ const EcoMission = () => {
         <p>내가 한 미션이 어떤 변화를 만들었을까요?</p>
       </div>
 
-      <EcoList missions={missions}/>
+      <EcoList missions={missions} />
 
       <Footer activeMenu="home">
-          <div>홈</div>
+        <div>홈</div>
       </Footer>
     </div>
   );
-}
+};
 
 export default EcoMission;
