@@ -44,7 +44,7 @@ function StatisticsMain() {
 
   const fetchData = async () => {
     const response = await fetch(
-      `/statistics/2022/5`,
+      `/statistics/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -70,8 +70,8 @@ function StatisticsMain() {
   }, []);
   if (loading) return <div>loading...</div>;
 
-  const ecoDifference = Math.abs(message.ecoDifference)
-  const noEcoDifference = Math.abs(message.noEcoDifference)
+  const ecoDifference = Math.abs(message.ecoDifference);
+  const noEcoDifference = Math.abs(message.noEcoDifference);
   return (
     <div className="statistic-main">
       <DateHeader getDate={currentMonth} sendDate={onchangeDate} />
@@ -117,17 +117,19 @@ function StatisticsMain() {
           )}
           <p>지난달 이맘때보다</p>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>{ecoDifference}개</b> {message.ecoDifference >= 0 ? "늘고" : "줄고"}
+            친환경 태그가 <b style={{ color: "#00C982" }}>{ecoDifference}개</b>{" "}
+            {message.ecoDifference >= 0 ? "늘고" : "줄고"}
           </h2>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>{noEcoDifference}개</b> {message.noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
+            친환경 태그가{" "}
+            <b style={{ color: "#00C982" }}>{noEcoDifference}개</b>{" "}
+            {message.noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
           </h2>
 
           <LineGraph></LineGraph>
         </div>
 
         <div className="line-box"></div>
-
 
         <div className="chart-graph-box">
           <h1>{message.userName}님의 지출은 건강한가요?</h1>
@@ -145,9 +147,12 @@ function StatisticsMain() {
         </div>
         <div className="line-box"></div>
 
-        <Link to="/EcoCategory" state={{
-          name: "eco",
-        }}>
+        <Link
+          to="/EcoCategory"
+          state={{
+            name: "eco",
+          }}
+        >
           <div className="expend-box">
             <h1>어떤 친환경 지출을 했을까요? 👍</h1>
             <IoIosArrowForward className="box-icon" />
@@ -160,9 +165,12 @@ function StatisticsMain() {
 
         <div className="line-box"></div>
 
-        <Link to="/EcoCategory" state={{
-          name: "neco",
-        }}>
+        <Link
+          to="/EcoCategory"
+          state={{
+            name: "neco",
+          }}
+        >
           <div className="expend-box">
             <h1>어떤 반환경 지출을 했을까요? 👎</h1>
             <IoIosArrowForward className="box-icon" />
@@ -188,10 +196,22 @@ const data = {
   expenditureTotal: 549000,
   ecoDifference: -6,
   noEcoDifference: 3,
-  ecoCount: { "3": 6, "4": 12 },
+  ecoCount: { 3: 6, 4: 12 },
   nowEcoCount: 12,
   nowNoneEcoCount: 4,
   percentage: 67.0,
-  ecoTagCounts: [["식비", 6], ["급여", 2], ["기타", 2], ["생필품", 2], ["더보기", 0]],
-  noEcoTagCounts: [["식비", 3], ["기타", 1], ["생필품", 1], ["급여", 1], ["더보기", 0]]
+  ecoTagCounts: [
+    ["식비", 6],
+    ["급여", 2],
+    ["기타", 2],
+    ["생필품", 2],
+    ["더보기", 0],
+  ],
+  noEcoTagCounts: [
+    ["식비", 3],
+    ["기타", 1],
+    ["생필품", 1],
+    ["급여", 1],
+    ["더보기", 0],
+  ],
 };

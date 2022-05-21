@@ -4,45 +4,43 @@ import InquiryStyle from './Inquiry.module.css';
 import HistorySample from '../../components/History/HistoryBack';
 import Uploader from "../../components/InquiryPart/Uploader";
 import Popup from '../../components/InquiryPart/Popup';
+
 import Inquiry from './Inquiry';
 
 const InquiryForm = () => {
-  const [data, setData] = useState([]);
-  const dataId = useRef(1);
-
-  const [dummy, setDummy] = useState([
-    {
-      id:1,
-      title: "문의",
-      content: "문의할게요!",
-      create_date: new Date().getTime()
-    },
-  ]);
-
-  const onCreate = (title, content) => {
-    const created_date = new Date().getTime();
-    
-    const newItem = {
-      title,
-      content,
-      created_date,
-      id: dataId.current
-    };
-    setDummy(dummy.concat(newItem));
-
-    dataId.current += 1;
-
-    setData([newItem, ...data]);
-  }
-
+  // const [data, setData] = useState([]);
   const [state, setState] = useState({
     title: "",
     content: "",
   });
+  const dataId = useState(0);
+
+  const onCreates = (title, content) => {
+    const created_date = new Date().getTime();
+    console.log(title);
+
+    const newItem = {
+      title,
+      content,
+      created_date,
+      id : dataId.current
+    };
+
+    dataId.current += 1;
+    setState({newItem, ...state});
+  }
 
   const navigate = useNavigate();
 
-  console.log('asda', onCreate);
+  console.log('asda', onCreates);
+
+  // const [state, setState] = useState({
+  //   title: "",
+  //   content: "",
+  // });
+
+  const titleInput = useRef();
+  const contentTextarea = useRef();
 
   const handleChangeState = (e) => {
     setState({
@@ -52,15 +50,23 @@ const InquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    <Inquiry dummy={dummy} />
-    console.log(state);
-    onCreate(state.title, state.content);
-    alert("저장 성공!");
-
-    navigate('/Inquiry');
-
+    if(state.title.length < 1){
+      titleInput.current.focus();
+      return;
+    }
+    if(state.content.length < 5){
+      contentTextarea.current.focus();
+      return;
+    }
+    //저장될 내용들 호출
+    onCreates(state.title, state.content);
+    console.log(onCreates);
+    window.confirm("성공!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    navigate("/inquiry");
+    
     setState({
-      title: "", content: "",
+      title: "",
+      content: "",
     });
   };
 
@@ -75,7 +81,9 @@ const InquiryForm = () => {
   };
 
   return (
+    // <form onSubmit={handleSubmit}>
     <div className={ InquiryStyle.container }>
+      {/* <InquiryForm onCreate={onCreates} test=""/>  */}
         <div className={ InquiryStyle.backBtn }>
             <HistorySample></HistorySample>
         </div>
@@ -88,18 +96,20 @@ const InquiryForm = () => {
           <div className={ InquiryStyle.time_info_box }>
               <h1>내용</h1>
               <input
+                ref={titleInput}
                 type="text"
                 name="title"
                 value={state.title}
-                placeholder='제목을 입력하세요'
                 onChange={handleChangeState}
+                placeholder='제목을 입력하세요'
               />
               <textarea
+                ref={contentTextarea}
                 type="text"
                 name="content"
                 value={state.content}
-                placeholder='내용을 입력하세요 (0/1000)'
                 onChange={handleChangeState}
+                placeholder='내용을 입력하세요 (0/1000)'
               />
           </div>
 
@@ -120,6 +130,7 @@ const InquiryForm = () => {
           </Popup>
         </div>
     </div>
+    // </form>
   );
 }
 

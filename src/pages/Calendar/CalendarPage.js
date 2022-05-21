@@ -15,7 +15,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 const fetchData = async (date) => {
   const response = await fetch(
-    `/calendar/user1@naver.com/${format(date, "yyyy")}/${format(date, "M")}`,
+    `/calendar/${format(date, "yyyy")}/${format(date, "M")}`,
     {
       method: "GET",
       headers: {
@@ -32,10 +32,10 @@ const fetchDetailData = async (day) => {
   console.log("fetch");
   const date = parseISO(day);
   const response = await fetch(
-    `calendar/user1@naver.com/${format(date, "yyyy")}/${format(
+    `calendar/${format(date, "yyyy")}/${format(date, "M")}/${format(
       date,
-      "M"
-    )}/${format(date, "d")}`,
+      "d"
+    )}`,
     {
       method: "GET",
       headers: {

@@ -43,7 +43,7 @@ function Coupon() {
     const fetchData = async () => {
       console.log('in function');
       const response = await fetch(
-        `zinzo1019@gmail.com/mypage/coupon`,
+        `/mypage/coupon`, //user1@naver.com
         {
           method: "GET",
           headers: {
