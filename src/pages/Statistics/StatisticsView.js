@@ -177,24 +177,24 @@ const data = {
           "memo": "츄파츕스 사먹음",
           "ecoList": [
             {
-              "eco": "G",
-              "ecoDetail": "중고거래/나눔/기부",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "중고거래/나눔/기부",
+              etcMemo: null,
             },
             {
-              "eco": "G",
-              "ecoDetail": "비건식당 방문",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "비건식당 방문",
+              etcMemo: null,
             },
             {
-              "eco": "R",
-              "ecoDetail": "식자재 낭비",
-              "etcMemo": null
-            }
+              eco: "R",
+              ecoDetail: "식자재 낭비",
+              etcMemo: null,
+            },
           ],
-          "income": false
-        }
-      ]
+          income: false,
+        },
+      ],
     },
     {
       "date": "2022-03-20",
@@ -206,24 +206,24 @@ const data = {
           "memo": "츄파츕스 사먹음",
           "ecoList": [
             {
-              "eco": "G",
-              "ecoDetail": "중고거래/나눔/기부",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "중고거래/나눔/기부",
+              etcMemo: null,
             },
             {
-              "eco": "G",
-              "ecoDetail": "비건식당 방문",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "비건식당 방문",
+              etcMemo: null,
             },
             {
-              "eco": "R",
-              "ecoDetail": "식자재 낭비",
-              "etcMemo": null
-            }
+              eco: "R",
+              ecoDetail: "식자재 낭비",
+              etcMemo: null,
+            },
           ],
-          "income": false
-        }
-      ]
+          income: false,
+        },
+      ],
     },
     {
       "date": "2022-03-23",
@@ -235,24 +235,24 @@ const data = {
           "memo": "츄파츕스 사먹음",
           "ecoList": [
             {
-              "eco": "G",
-              "ecoDetail": "중고거래/나눔/기부",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "중고거래/나눔/기부",
+              etcMemo: null,
             },
             {
-              "eco": "G",
-              "ecoDetail": "비건식당 방문",
-              "etcMemo": null
+              eco: "G",
+              ecoDetail: "비건식당 방문",
+              etcMemo: null,
             },
             {
-              "eco": "R",
-              "ecoDetail": "식자재 낭비",
-              "etcMemo": null
-            }
+              eco: "R",
+              ecoDetail: "식자재 낭비",
+              etcMemo: null,
+            },
           ],
-          "income": false
-        }
-      ]
+          income: false,
+        },
+      ],
     },
   ]
 }

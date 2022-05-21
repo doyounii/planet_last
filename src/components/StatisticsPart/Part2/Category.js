@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import './Category.css';
-import { FaChevronLeft } from 'react-icons/fa';
+import "./Category.css";
+import { FaChevronLeft } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
-import { message } from 'antd';
+import { message } from "antd";
 
 const expendData = [
   {
@@ -390,7 +390,6 @@ function Category() {
     setloading(false);
   }, []);
 
-
   console.log(message);
   console.log(message2);
   const ecodata = useLocation().state;
@@ -398,45 +397,54 @@ function Category() {
   if (loading) return <div>loading...</div>;
   if (ecodata.name === "eco") {
     return (
-      <div className='container'>
-        <div className='header'>
+      <div className="container">
+        <div className="header">
           <FaChevronLeft
             className="forwardArrow"
             onClick={() => {
               history(-1);
             }}
           />
-          <h1 className='cateGory'>친환경 지출 카테고리</h1>
-          <h1 className='title'>지출 카테고리별 소비</h1>
+          <h1 className="cateGory">친환경 지출 카테고리</h1>
+          <h1 className="title">지출 카테고리별 소비</h1>
         </div>
         {renderexTypeList(ecodata, message)}
       </div>
-    )
+    );
   } else {
     return (
-      <div className='container'>
-        <div className='header'>
+      <div className="container">
+        <div className="header">
           <FaChevronLeft
             className="forward-arrow"
             onClick={() => {
               history(-1);
             }}
           />
-          <h1 className='cateGory'>반환경 지출 카테고리</h1>
-          <h1 className='title'>지출 카테고리별 소비</h1>
+          <h1 className="cateGory">반환경 지출 카테고리</h1>
+          <h1 className="title">지출 카테고리별 소비</h1>
         </div>
         {renderexTypeList(ecodata, message2)}
       </div>
-    )
+    );
   }
-
 }
 
-export default Category
+export default Category;
 
 const data = {
-  tagList: [["식비", 50, 6], ["기타", 17, 2], ["생필품", 17, 2], ["급여", 17, 2]]
-}
+  tagList: [
+    ["식비", 50, 6],
+    ["기타", 17, 2],
+    ["생필품", 17, 2],
+    ["급여", 17, 2],
+  ],
+};
 const data2 = {
-  tagList: [["식비", 50, 3], ["급여", 17, 1], ["기타", 17, 1], ["생필품", 17, 1]]
-}
+  tagList: [
+    ["식비", 50, 3],
+    ["급여", 17, 1],
+    ["기타", 17, 1],
+    ["생필품", 17, 1],
+  ],
+};

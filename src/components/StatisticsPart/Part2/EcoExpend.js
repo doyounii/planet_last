@@ -24,66 +24,64 @@ function EcoExpend(props) {
   }, []);
 
   const emojiList = (ecoTagCounts) => {
-
     switch (ecoTagCounts) {
       case "식비":
-        return <h1>🌭</h1>
+        return <h1>🌭</h1>;
       case "교통":
-        return <h1>🚗</h1>
+        return <h1>🚗</h1>;
       case "문화생활":
-        return <h1>🎬</h1>
+        return <h1>🎬</h1>;
       case "생필품":
-        return <h1>✏️</h1>
+        return <h1>✏️</h1>;
       case "마트":
-        return <h1>🛒</h1>
+        return <h1>🛒</h1>;
       case "교육":
-        return <h1>📚</h1>
+        return <h1>📚</h1>;
       case "통신":
-        return <h1>📱</h1>
+        return <h1>📱</h1>;
       case "의료/건강":
-        return <h1>🏥</h1>
+        return <h1>🏥</h1>;
       case "경조사/회비":
-        return <h1>💵</h1>
+        return <h1>💵</h1>;
       case "가전":
-        return <h1>🛏</h1>
+        return <h1>🛏</h1>;
       case "공과금":
-        return <h1>🧾</h1>
+        return <h1>🧾</h1>;
       default:
-        return <h1>💬</h1>
-
+        return <h1>💬</h1>;
     }
-  }
+  };
 
   const emojiList2 = (noEcoTagCounts) => {
     switch (noEcoTagCounts) {
       case "식비":
         return <h1>🌭</h1>
       case "교통":
-        return <h1>🚗</h1>
+        return <h1>🚗</h1>;
       case "문화생활":
-        return <h1>🎬</h1>
+        return <h1>🎬</h1>;
       case "생필품":
-        return <h1>✏️</h1>
+        return <h1>✏️</h1>;
       case "마트":
-        return <h1>🛒</h1>
+        return <h1>🛒</h1>;
       case "교육":
-        return <h1>📚</h1>
+        return <h1>📚</h1>;
       case "통신":
-        return <h1>📱</h1>
+        return <h1>📱</h1>;
       case "의료/건강":
-        return <h1>🏥</h1>
+        return <h1>🏥</h1>;
       case "경조사/회비":
-        return <h1>💵</h1>
+        return <h1>💵</h1>;
       case "가전":
-        return <h1>🛏</h1>
+        return <h1>🛏</h1>;
       case "공과금":
-        return <h1>🧾</h1>
+        return <h1>🧾</h1>;
       default:
-        return <h1>💬</h1>
+        return <h1>💬</h1>;
     }
-  }
+  };
 
-  console.log(ecoTagCounts)
+  console.log(ecoTagCounts);
   const renderExpendList = (props, message) => {
     let renderExpendList = [];
 
@@ -207,10 +205,23 @@ const data = {
   expenditureTotal: 549000,
   ecoDifference: 6,
   noEcoDifference: 3,
-  ecoCount: { "3": 6, "4": 12 },
+  ecoCount: { 3: 6, 4: 12 },
   nowEcoCount: 12,
   nowNoneEcoCount: 4,
   percentage: 67.0,
-  ecoTagCounts: [["마트", 6], ["급여", 2], ["기타", 2], ["생필품", 2], ["더보기", 0], ["더보기", 0]],
-  noEcoTagCounts: [["식비", 3], ["기타", 1], ["생필품", 1], ["급여", 1], ["더보기", 0]]
+  ecoTagCounts: [
+    ["마트", 6],
+    ["급여", 2],
+    ["기타", 2],
+    ["생필품", 2],
+    ["더보기", 0],
+    ["더보기", 0],
+  ],
+  noEcoTagCounts: [
+    ["식비", 3],
+    ["기타", 1],
+    ["생필품", 1],
+    ["급여", 1],
+    ["더보기", 0],
+  ],
 };

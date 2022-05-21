@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import high from "../../planet/1-2.json"
+import high from "../../planet/1-2.json";
 import highmid from "../../planet/1-2.json";
 import low from "../../planet/4-2.json";
 import mid from "../../planet/3-2.json";
