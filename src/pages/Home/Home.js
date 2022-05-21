@@ -39,29 +39,29 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    // fetchData();
+    fetchData();
+    // setMessage(data);
+    // setUserName(data.userName);
+    // setloading(false);
+  }, []);
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `/main/2022/${format(new Date(), "M")}`,
+      //${format(new Date(), "M")}
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
     setMessage(data);
     setUserName(data.userName);
     setloading(false);
-  }, []);
-
-  // const fetchData = async () => {
-  //   const response = await fetch(
-  //     `/main/2022/${format(new Date(), "M")}`,
-  //     //${format(new Date(), "M")}
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //       },
-  //     }
-  //   );
-  //   const data = await response.json();
-  //   setMessage(data);
-  //   setUserName(data.userName);
-  //   setloading(false);
-  // };
+  };
 
   // const fetchFunc = (e) => {
   //   e.preventDefault();
