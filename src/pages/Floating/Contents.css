@@ -32,7 +32,7 @@
   transform: translateY(10px);
 }
 .select-eco-container.move {
-  transform: translatey(-35vh);
+  transform: translatey(-10vh);
 }
 
 .memo-container.move .type,

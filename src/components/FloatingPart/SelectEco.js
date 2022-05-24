@@ -17,7 +17,7 @@ const array = [
   { id: 9, tag: "기타", isEco: "etc" },
 ];
 
-function SelectEnvir() {
+function SelectEnvir({ sendData }) {
   const [counter, setCounter] = useState(10);
   const [show, setShow] = useState(false);
   const [tagArr, setTagArr] = useState(array);
@@ -30,29 +30,29 @@ function SelectEnvir() {
     setShow((show) => !show);
   }
 
-  const checkedItemHandler = (id, isEco, isChecked) => {
-    if (isEco === "etc") {
+  const checkedItemHandler = (item, isChecked) => {
+    if (item.isEco === "etc") {
       if (isChecked) {
-        selectedEtc.add(id);
+        selectedEtc.add(item);
         setSelectedEtc(selectedEtc);
-      } else if (!isChecked && selectedEtc.has(id)) {
-        selectedEtc.delete(id);
+      } else if (!isChecked && selectedEtc.has(item)) {
+        selectedEtc.delete(item);
         setSelectedEtc(selectedEtc);
       }
-    } else if (isEco) {
+    } else if (item.isEco) {
       if (isChecked) {
-        selectedEco.add(id);
+        selectedEco.add(item);
         setSelectedEco(selectedEco);
-      } else if (!isChecked && selectedEco.has(id)) {
-        selectedEco.delete(id);
+      } else if (!isChecked && selectedEco.has(item)) {
+        selectedEco.delete(item);
         setSelectedEco(selectedEco);
       }
     } else {
       if (isChecked) {
-        selectedNeco.add(id);
+        selectedNeco.add(item);
         setSelectedNeco(selectedNeco);
-      } else if (!isChecked && selectedNeco.has(id)) {
-        selectedNeco.delete(id);
+      } else if (!isChecked && selectedNeco.has(item)) {
+        selectedNeco.delete(item);
         setSelectedNeco(selectedNeco);
       }
     }
@@ -65,19 +65,33 @@ function SelectEnvir() {
     } else {
       setDisabled(true);
     }
-    // console.log("selectedEco, ", selectedEco);
-    // console.log("selectedNeco, ", selectedNeco);
-    // console.log("selectedEtc, ", selectedEtc);
   };
   const submitFunc = (value, eco) => {
-    let tempArr = tagArr.concat();
-    let ecoTag = eco === "친환경" ? true : eco === "반환경" ? false : "etc";
-    tempArr.push({ id: counter, tag: value, isEco: ecoTag });
-    setCounter(counter + 1);
-    setTagArr(tempArr);
+    if (value !== "취소") {
+      let tempArr = tagArr.concat();
+      let ecoTag = eco === "친환경" ? true : eco === "반환경" ? false : "etc";
+      tempArr.push({ id: counter, tag: value, isEco: ecoTag });
+      setCounter(counter + 1);
+      setTagArr(tempArr);
+    }
+
     addTag();
   };
-  const onClickHandler = () => console.log("clicked");
+  const onClickHandler = (btnType) => {
+    switch (btnType) {
+      case "취소":
+        setShow(false);
+        break;
+      case "다음":
+        break;
+      default:
+        sendData({
+          btnType: btnType,
+          data: [selectedEco, selectedNeco, selectedEtc],
+        });
+        break;
+    }
+  };
 
   return (
     <>
@@ -109,14 +123,21 @@ function SelectEnvir() {
           {show ? <AddEcoTag submitFunc={submitFunc} /> : <div></div>}
         </div>
       </section>
-      <FloatingButton
-        className="select-eco-btn"
-        onClick={onClickHandler}
-        disabled={disabled}
-      />
-      <div className="memo-skip-btn" onClick={() => onClickHandler("다음")}>
-        넘어갈래요
-      </div>
+
+      {!show ? (
+        <>
+          <FloatingButton
+            className="select-eco-btn"
+            onClick={onClickHandler}
+            disabled={disabled}
+            prev={"뒤로"}
+            next={"완료"}
+          />
+          <div className="memo-skip-btn" onClick={() => onClickHandler("다음")}>
+            넘어갈래요
+          </div>
+        </>
+      ) : null}
     </>
   );
 }
@@ -126,7 +147,7 @@ export function SelectButton({ item, onSelect }) {
 
   const checkHandler = ({ target }) => {
     setChecked(!checked);
-    onSelect(target.value, item.isEco, !target.checked);
+    onSelect(item, !target.checked);
   };
 
   return (
@@ -140,7 +161,7 @@ export function SelectButton({ item, onSelect }) {
       } ${checked ? SelectEcoStyle.checked : SelectEcoStyle.nchecked}`}
       key={item.id}
       checked={checked}
-      value={item.id}
+      value={item.tag}
       onClick={(e) => checkHandler(e)}
     >
       {item.tag}

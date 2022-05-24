@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
 import FloatingStyle from "./FloatingPage.module.css";
 import HistoryToHome from "../../components/History/HistoryToHome";
 import TopNav from "../../components/FloatingPart/TopNav";
@@ -9,6 +8,8 @@ import DatePrice from "../../components/FloatingPart/DatePrice";
 import SelectType from "../../components/FloatingPart/SelectType";
 import Memo from "../../components/FloatingPart/Memo";
 import SelectEco from "../../components/FloatingPart/SelectEco";
+import Lottie from "react-lottie";
+import Complete from "./complete.json";
 import "./Contents.css";
 
 export default function FloatingPage() {
@@ -21,6 +22,10 @@ export default function FloatingPage() {
   const [type, setType] = useState({ type: "", emoji: "" });
   const [cate, setCate] = useState({ type: "", emoji: "" });
   const [memo, setMemo] = useState("");
+  const [ecoTag, setEcoTag] = useState([]);
+  const [userTag, setUserTag] = useState([]);
+  const [userEcoTag, setUserEcoTag] = useState([]);
+  const [complete, setComplete] = useState(false);
 
   const onSelectSwitch = (num) => {
     setTotal(num + 3);
@@ -29,6 +34,7 @@ export default function FloatingPage() {
     setprice("");
     setType({ type: "", emoji: "" });
     setCate({ type: "", emoji: "" });
+    setEcoTag([]);
     setMemo("");
   };
 
@@ -43,7 +49,10 @@ export default function FloatingPage() {
         if (progress > 1) {
           setProgress(progress - 1);
         }
-        /* progress===total이면 여기서 데이터 전송 */
+        break;
+      case "완료":
+        setComplete(true);
+        console.log("끝");
         break;
       default:
         break;
@@ -65,11 +74,36 @@ export default function FloatingPage() {
       case 4:
         setMemo(data.memo);
         break;
+      case 5:
+        setEcoData(data.data);
+        break;
       default:
         break;
     }
     changePage(data.btnType);
   };
+
+  const setEcoData = (data) => {
+    let tempData = [...data[0], ...data[1], ...data[2]];
+    let tempUserTag = [];
+    let tempUserEcoTag = [];
+    let tagData = tempData.map((arr) => {
+      let eco = arr.isEco === "etc" ? "N" : arr.isEco === true ? "G" : "R";
+      if (arr.id > 9) {
+        tempUserTag.push(arr.tag);
+        tempUserEcoTag.push(eco);
+        return "사용자 추가";
+      } else {
+        return arr.tag;
+      }
+    });
+    setEcoTag(tagData);
+    setUserTag(tempUserTag);
+    setUserEcoTag(tempUserEcoTag);
+  };
+  console.log(ecoTag);
+  console.log(userTag);
+  console.log(userEcoTag);
 
   const changeContent = () => {
     let article = null;
@@ -95,13 +129,43 @@ export default function FloatingPage() {
         article = <Memo propType={cate} sendData={changeData} />;
         break;
       case 5:
-        article = <SelectEco />;
+        article = <SelectEco sendData={changeData} />;
         break;
       default:
         break;
     }
     return article;
   };
+
+  const lottieDefault = {
+    loop: true,
+    autoplay: true,
+    rendererSettings: {
+      className: "add-class", // svg에 적용
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  if (complete)
+    return (
+      <div className={FloatingStyle.floating_complete}>
+        <div>
+          가계부 작성 완료!
+          <br /> 홈 화면으로 돌아갑니다
+        </div>
+        <div className={FloatingStyle.floating_animation}>
+          <Lottie
+            options={{ ...lottieDefault, animationData: Complete }}
+            eventListeners={[
+              {
+                eventName: "complete",
+                callback: () => console.log("the animation completed"),
+              },
+            ]}
+          />
+        </div>
+      </div>
+    );
 
   return (
     <div className={FloatingStyle.floating_conainer}>
