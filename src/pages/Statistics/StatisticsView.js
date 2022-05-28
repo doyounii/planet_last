@@ -7,7 +7,7 @@ import HistorySample from "../../components/History/HistoryBack";
 import DropBox from "../../components/StatisticsPart/DropBox";
 import ko from "date-fns/locale/ko";
 import DateHeader from "../../components/DateHeader";
-import { DetailItem } from "../../components/CalendarPart/DetailList";
+import { DetailMemo } from "./StatisticsWays";
 import { StyledDetailPageBlock } from "../../components/CalendarPart/StyledDetail";
 
 const OPTIONS = [
@@ -61,7 +61,7 @@ function StatisticsDetail() {
             currentMonth,
             "M"
           )}`}
-          state={{ name: "eco" }}
+          state={{ name: "income" }}
           style={{ textDecoration: "none" }}
         >
           <div className="income-box">
@@ -75,7 +75,7 @@ function StatisticsDetail() {
             currentMonth,
             "M"
           )}`}
-          state={{ name: "neco" }}
+          state={{ name: "expenditure" }}
           style={{ textDecoration: "none" }}
         >
           <div className="income-box">
@@ -132,18 +132,18 @@ function StatisticsDetail() {
                   <Link
                     className="detail-link"
                     to={`/statisticsModify`}
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ textDecoration: "none" }}
                     state={{
                       item: value,
                       date: parseISO(data.date),
                     }}
                   >
                     <StyledDetailPageBlock>
-                      <div className="details" key={value.id}>
+                      <div className="statistic-detail-list" key={value.id}>
                         <div className="stat-detail-icon">
                           {wayEmoji(value.way)}
                         </div>
-                        <DetailItem item={value} ecoCnt={ecoCnt} />
+                        <DetailMemo item={value} ecoCnt={ecoCnt} />
                       </div>
                     </StyledDetailPageBlock>
                   </Link>

@@ -141,7 +141,7 @@ function Home({ activeHome }) {
     setIsDonut(true);
   };
 
-  const eco = message.ecoPercentage;
+  const eco = 80;
 
   if (eco != 0) {
     if (eco > 0 && eco < 25) {
