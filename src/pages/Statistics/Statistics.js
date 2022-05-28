@@ -126,7 +126,7 @@ function StatisticsMain() {
             {message.noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
           </h2>
 
-          <LineGraph></LineGraph>
+          <LineGraph dataset={message.ecoCount}></LineGraph>
         </div>
 
         <div className="line-box"></div>
@@ -196,7 +196,20 @@ const data = {
   expenditureTotal: 549000,
   ecoDifference: -6,
   noEcoDifference: 3,
-  ecoCount: { 3: 6, 4: 12 },
+  ecoCount: {
+    "1": 34,
+    "2": 23,
+    "3": 15,
+    "4": 32,
+    "5": 32,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0
+  },
   nowEcoCount: 12,
   nowNoneEcoCount: 4,
   percentage: 67.0,
