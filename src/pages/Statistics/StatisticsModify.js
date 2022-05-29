@@ -63,7 +63,7 @@ function StatisticsModify() {
     }
   };
 
-  // fetch(`/income/user1@naver.com/new`, {
+  // fetch(`/income/new`, {
   //   method: "POST",
   //   headers: {
   //     "Content-Type": "application/json",

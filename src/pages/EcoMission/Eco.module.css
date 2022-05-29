@@ -23,6 +23,7 @@
     margin-top: 10%;
     margin-left: 7%;
     margin-bottom: 0;
+    z-index: 1;
 }
 
 .title {
@@ -79,7 +80,6 @@
   position: relative;
   top: 13%;
   width: 82%;
-  height: 40%;
   border-radius: 20px;
   padding-top: 5%;
   padding-bottom: 5%;
@@ -158,13 +158,13 @@
   margin-left: 7%;
   margin: 0 auto;
   width: 82%;
-  height: 75px;
   border-radius: 13px;
   margin-bottom: 12px;
   font-size: 15px;
   font-family: Pretendard;
   background-color: rgba(255, 255, 255, 0.05);
   padding-top: 3.6%;
+  padding-bottom: 3.6%;
 }
 
 .mission_box2 .mission_icon {
@@ -178,21 +178,23 @@
 }
 
 .mission_box2 p {
+  position: relative;
   display: inline-block;
-  width: 38%;
+  width: 35%;
   margin-left: 5%;
   margin-right: 5%;
+  top: -5%;
 }
 
 .mission_box2 .mission_complete_btn {
   position: relative;
-  width: 77px;
-  height: 30.97px;
+  width: 25%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
   border-radius: 10.88px;
   border: 0;
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.05);
-  cursor: pointer;
   margin-right: 5%;
   float: right;
 }

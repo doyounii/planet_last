@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import high from "../../planet/1-2.json"
+import high from "../../planet/1-2.json";
 import highmid from "../../planet/1-2.json";
 import low from "../../planet/4-2.json";
 import mid from "../../planet/3-2.json";
@@ -19,7 +19,7 @@ import Lottie from "react-lottie";
 import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
-import zero from "./img/Mask.png"
+import zero from "./img/Mask.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
 import DonutChart from "../../components/StatisticsPart/DonutChart";
@@ -45,47 +45,47 @@ function Home({ activeHome }) {
     setloading(false);
   }, []);
 
-  const fetchData = async () => {
-    const response = await fetch(
-      `/main/user1@naver.com/2022/${format(new Date(), "M")}`,
-      //${format(new Date(), "M")}
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    setMessage(data);
-    setUserName(data.userName);
-    setloading(false);
-  };
+  // const fetchData = async () => {
+  //   const response = await fetch(
+  //     `/main/2022/${format(new Date(), "M")}`,
+  //     //${format(new Date(), "M")}
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //     }
+  //   );
+  //   const data = await response.json();
+  //   setMessage(data);
+  //   setUserName(data.userName);
+  //   setloading(false);
+  // };
 
-  const fetchFunc = (e) => {
-    e.preventDefault();
-    //백엔드로 데이터 보내기
-    fetch(`/main/update/user1@naver.com/${userName}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        useName: userName,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.token) {
-          localStorage.setItem("wtw-token", response.token);
-        }
-      })
-      .then((e) => {
-        Navigate("/");
-      });
-  };
+  // const fetchFunc = (e) => {
+  //   e.preventDefault();
+  //   //백엔드로 데이터 보내기
+  //   fetch(`/main/update/${userName}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       useName: userName,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       if (response.token) {
+  //         localStorage.setItem("wtw-token", response.token);
+  //       }
+  //     })
+  //     .then((e) => {
+  //       Navigate("/");
+  //     });
+  // };
 
   console.log(message);
   const renderHeader = () => {
@@ -141,7 +141,7 @@ function Home({ activeHome }) {
     setIsDonut(true);
   };
 
-  const eco = data.ecoPercentage;
+  const eco = 80;
 
   if (eco != 0) {
     if (eco > 0 && eco < 25) {
@@ -216,22 +216,31 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <div onClick={handleLottie} className={homeStyle.planet}>
-                {isDonut ?
+                {isDonut ? (
                   <div>
-                    <DonutChart></DonutChart>{" "}
+                    <DonutChart percentage={message.ecoPercentage}></DonutChart>{" "}
                   </div>
-                  : (eco === 0 ? <div> <img src={zero} /><p>아직 행성이 만들어지지 않았어요! <br /> 지금 바로 가계부를 작성해보세요 </p></div> :
-                    <Lottie
-                      options={{ ...lottieOptions }}
-                      eventListeners={[
-                        {
-                          eventName: "complete",
-                          callback: () => console.log("the animation completed"),
-                        },
-                      ]}
-                      isClickToPauseDisabled={true}
-                    ></Lottie>
-                  )}
+                ) : eco === 0 ? (
+                  <div>
+                    {" "}
+                    <img src={zero} />
+                    <p>
+                      아직 행성이 만들어지지 않았어요! <br /> 지금 바로 가계부를
+                      작성해보세요{" "}
+                    </p>
+                  </div>
+                ) : (
+                  <Lottie
+                    options={{ ...lottieOptions }}
+                    eventListeners={[
+                      {
+                        eventName: "complete",
+                        callback: () => console.log("the animation completed"),
+                      },
+                    ]}
+                    isClickToPauseDisabled={true}
+                  ></Lottie>
+                )}
               </div>
 
               <div>
@@ -325,5 +334,5 @@ const data = {
   totalIncomeMonth: 102000,
   totalExpenditureMonth: 54900,
   ecoPercentage: 0,
-  noEcoPercentage: 100
+  noEcoPercentage: 100,
 };

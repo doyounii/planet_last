@@ -51,7 +51,7 @@ export function Modal({
           className="modal-inner"
         >
           {closable && <CgClose className="modal-close" onClick={close} />}
-          {children}
+          <div onClick={close}>{children}</div>
         </ModalInner>
       </ModalWrapper>
     </Portal>
