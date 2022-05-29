@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-const CouponDetailInfo = () => {
-  // const [couponDetailInfo, setCouponDetailInfo] = useState({});
+//사용정보
+const CouponUseInfo = (props) => {
+  // const [couponUsageInfo, setCouponUsageInfo] = useState({});
 
   // const fetchData = async (date) => {
   //   const response = await fetch(
@@ -23,13 +24,15 @@ const CouponDetailInfo = () => {
 
   //   const data = await response.json();
 
-  //   setCouponDetailInfo(data.detail_info);
+  //   setCouponUsageInfo(data.usage_info);
   // };
     return(
-        <div style={{color:"rgba(180, 182, 184, 0.5)"}}>
-        {/* {couponDetailInfo} */}
-        </div>
+      <div style={{color:"rgba(180, 182, 184, 0.5)"}}>
+      <section>
+        <main>{props.children}</main>
+      </section>
+      </div>
     );
 }
 
-export default CouponDetailInfo;
+export default CouponUseInfo;

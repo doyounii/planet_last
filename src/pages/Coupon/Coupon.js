@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import CouponStyle from './Coupon.module.css';
 import Footer from '../../components/Footer/Footer';
 import HistorySample from '../../components/History/HistoryBack';
 import { FaChevronRight } from 'react-icons/fa';
 import DropBox from '../../components/CouponPart/DropBox';
-import { Modal } from "../../components/CouponPart/CouponModal";
+import Modal from "../../components/CouponPart/CouponModal";
 import Popup from '../../components/InquiryPart/Popup';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
-import CouponInfo from '../../components/InquiryPart/CouponInfo';
-import CouponUseInfo from '../../components/InquiryPart/CouponUseInfo';
-import CouponDetailInfo from '../../components/InquiryPart/CouponDetailInfo';
+import CouponInfo from '../../components/CouponPart/CouponInfo';
+import CouponUseInfo from '../../components/CouponPart/CouponUseInfo';
+import CouponDetailInfo from '../../components/CouponPart/CouponDetailInfo';
 
 function Coupon() {
+  const location = useLocation();
+  console.log(location);
+  
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
@@ -37,13 +40,15 @@ function Coupon() {
   const [couponArr, setCouponArr] = useState([]);
   const [couponCnt, setCouponCnt] = useState("");
 
+  const [string, setString] = useState("");
+
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       console.log('in function');
       const response = await fetch(
-        `/mypage/coupon`, //user1@naver.com
+        `brenna9981@gmail.com/coupon`, //user1@naver.com
         {
           method: "GET",
           headers: {
@@ -61,6 +66,11 @@ function Coupon() {
       console.log(data);
       setCouponArr(data.couponDtos);
       setCouponCnt(data.couponCount);
+      setString(data.couponDtos[0].cno || {});
+
+      if(data && data.length > 0) {
+        console.log(data[0]);
+      }
   
       setloading(false);
     };
@@ -71,8 +81,6 @@ function Coupon() {
   console.log(couponArr);
 
   function Coupon({remainingDays, coupon, discount, availability}){
-    // const isActive = {availability}; 
-    // console.log(isActive);
     return(
       <div onClick={() => openModal()} className={ {availability} ? CouponStyle.coupon_available : CouponStyle.coupon_expiration }>
       <div className={ CouponStyle.coupon_dday }>D-{remainingDays}</div>
@@ -82,6 +90,24 @@ function Coupon() {
     </div>   
     )
   }
+
+  const settings = {
+    notifications: {
+        follow: 'true',
+        alerts: true
+    },
+    color: {
+        theme: "dark"
+    },
+    couponData : {
+      string: string,
+    }
+};
+
+console.log(string);
+
+  const [current, setCurrent] = useState(settings);
+  console.log(settings); //데이터값이 다 넘어오고
 
   return (
     <div className={ CouponStyle.container }>
@@ -95,14 +121,15 @@ function Coupon() {
             closable={true}
             background={"#202632"}
             className="ModalInner"
+            current={current}
           >
 
             <div className={ CouponStyle.coupon_modal }>
+              <p>cno 불러오기 test : {couponArr[0].cno}</p>
               <h1>{couponArr[0].coupon}</h1>
               <p>{couponArr[0].discount}% 할인쿠폰</p>
               <img src="img/coupon.png" alt="planet-coupon"></img>
-              <h2>22.03.02 - 22.05.05</h2>
-              {/* <h2>{startDate} - {endDate}</h2> */}
+              <h2>{couponArr[0].startDate} - {couponArr[0].endDate}</h2>
 
               <div className={ CouponStyle.coupon_info }>
                 사용정보
@@ -111,7 +138,7 @@ function Coupon() {
                 }}>{visible ? <BsChevronUp /> : <BsChevronDown />}
                 </button>
                 <br/>
-                {visible && <CouponUseInfo />}
+                {visible && <CouponUseInfo>{couponArr[0].usageInfo}</CouponUseInfo>}
               </div>
 
               <div className={ CouponStyle.coupon_info }>
@@ -121,7 +148,7 @@ function Coupon() {
                 }}>{visible2 ? <BsChevronUp /> : <BsChevronDown />}
                 </button>
                 <br/>
-                {visible2 && <CouponInfo />}
+                {visible2 && <CouponInfo>{couponArr[0].couponInfo}</CouponInfo>}
               </div>
 
               <div className={ CouponStyle.coupon_info }>
@@ -131,7 +158,7 @@ function Coupon() {
                 }}>{visible3 ? <BsChevronUp /> : <BsChevronDown />}
                 </button>
                 <br/>
-                {visible3 && <CouponDetailInfo />}
+                {visible3 && <CouponDetailInfo>{couponArr[0].detailInfo}</CouponDetailInfo>}
               </div>
 
               <div className={ CouponStyle.coupon_use_btn }>

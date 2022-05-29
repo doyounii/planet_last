@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import InquiryStyle from './Inquiry.module.css';
 import HistorySample from '../../components/History/HistoryBack';
 
+import InquiryForm from './InquiryForm';
 import InquiryFormList from '../../components/InquiryPart/InquiryFormList';
 
-const Inquiry = ({dummy}) => {
-
-  console.log(dummy); //왜 안 받아와지냐고
+const Inquiry = () => {
 
   return (
     <div className={ InquiryStyle.container }>
@@ -33,7 +32,7 @@ const Inquiry = ({dummy}) => {
         <div className={ InquiryStyle.line_box }></div>
 
         <div className={InquiryStyle.inquiry_list}>
-          {dummy === undefined ? <h1>내역없음</h1> : <InquiryFormList inquiryList={dummy} />}
+          {/* {dummy === undefined ? <h1>내역없음</h1> : <InquiryFormList inquiryList={dummy} />} */}
         </div>
 
         </div>

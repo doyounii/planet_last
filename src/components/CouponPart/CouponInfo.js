@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-const CouponInfo = () => {
+//쿠폰 설명
+const CouponInfo = (props) => {
   // const [couponInfo, setCouponInfo] = useState({});
 
   // const fetchData = async (date) => {
@@ -28,7 +29,9 @@ const CouponInfo = () => {
 
     return(
         <div style={{color:"rgba(180, 182, 184, 0.5)"}}>
-        {/* {couponInfo} */}
+        <section>
+          <main>{props.children}</main>
+        </section>
         </div>
     );
 }

@@ -6,7 +6,7 @@ import { CgClose } from "react-icons/cg";
 
 import "../../components/CalendarPart/Calendar.css";
 
-export function Modal({
+const CouponModal = ({
   className,
   onClose,
   maskClosable,
@@ -14,7 +14,9 @@ export function Modal({
   visible,
   background,
   children,
-}) {
+  current
+}) => {
+
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose(e);
@@ -26,6 +28,16 @@ export function Modal({
       onClose(e);
     }
   };
+
+  const {
+    notifications: { follow },
+    color,
+    couponData,
+  } = current;
+
+  console.log(current);
+  console.log(follow);
+  console.log(color.theme);
 
   useEffect(() => {
     document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
@@ -50,6 +62,7 @@ export function Modal({
           tabIndex={0}
           className="modal-inner"
         >
+          {couponData.string}
           {closable && <CgClose className="modal-close" onClick={close} />}
           {children}
         </ModalInner>
@@ -58,15 +71,16 @@ export function Modal({
   );
 }
 
+export default CouponModal;
 
-Modal.defaultProps = {
+CouponModal.defaultProps = {
   background: "#141b27",
   visible: false,
   closable: true,
   maskClosable: true,
 };
 
-Modal.propTypes = {
+CouponModal.propTypes = {
   visible: PropTypes.bool,
 };
 
