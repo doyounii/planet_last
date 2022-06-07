@@ -1,16 +1,16 @@
 .SelectBoxWrapper {
-	display: flex;
+    display: flex;
 }
 
 select {
     margin: 0;
-	width: 56px;
+    width: 56px;
     height: 22px;
-	display: block;
-	font-size: 14px;
+    display: block;
+    font-size: 14px;
     border: 0;
-	color: #ffffff;
-	background-color: transparent;
+    color: #ffffff;
+    background-color: transparent;
 }
 
 select option {
@@ -20,4 +20,3 @@ select option {
     border: 0;
     list-style-type: none;
 }
-
