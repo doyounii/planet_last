@@ -5,9 +5,7 @@ import homeStyle from "./Home.module.css";
 import {
   FiSettings,
   FiUser,
-  FiCheckCircle,
   FiEdit3,
-  FiShoppingBag,
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
@@ -22,8 +20,6 @@ import logo from "./img/PLANet.png";
 import zero from "./img/Mask.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
-import DonutChart from "../../components/StatisticsPart/DonutChart";
-import { CgClose } from "react-icons/cg";
 
 function Home({ activeHome }) {
   const [income, setIncome] = useState(0);
@@ -32,7 +28,6 @@ function Home({ activeHome }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
-  const [isDonut, setIsDonut] = useState(false);
   const [loading, setloading] = useState(true);
 
   const [position2, setposition2] = useState(0);
@@ -137,10 +132,6 @@ function Home({ activeHome }) {
     setIsModalOpen2(false);
   };
 
-  const handleLottie = () => {
-    setIsDonut(true);
-  };
-
   const eco = message.ecoPercentage;
 
   if (eco != 0) {
@@ -215,12 +206,8 @@ function Home({ activeHome }) {
                 className={homeStyle.question}
                 onClick={(e) => openModal(e)}
               />
-              <div onClick={handleLottie} className={homeStyle.planet}>
-                {isDonut ? (
-                  <div>
-                    <DonutChart percentage={message.ecoPercentage}></DonutChart>{" "}
-                  </div>
-                ) : eco === 0 ? (
+              <div className={homeStyle.planet}>
+                {eco === 0 ? (
                   <div>
                     {" "}
                     <img src={zero} />
@@ -284,22 +271,6 @@ function Home({ activeHome }) {
                 ></IoIosArrowForward>
               </Link>
             </p>
-            <FiCheckCircle className={homeStyle.check}></FiCheckCircle>
-          </div>
-          <div className={homeStyle.box}>
-            <p className={homeStyle.box_text}>
-              친 · 반환경 <br /> 소비 횟수
-              <Link to="/#" className={activeHome}>
-                <IoIosArrowForward
-                  className={homeStyle.btn}
-                ></IoIosArrowForward>
-              </Link>
-              <div className={homeStyle.num}>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-              </div>
-            </p>
           </div>
           <div className={homeStyle.box}>
             <p className={homeStyle.box_text}>
@@ -311,7 +282,6 @@ function Home({ activeHome }) {
                 ></IoIosArrowForward>
               </Link>
             </p>
-            <FiShoppingBag className={homeStyle.bag}></FiShoppingBag>
           </div>
         </section>
         <section>

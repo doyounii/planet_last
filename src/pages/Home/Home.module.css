@@ -10,7 +10,7 @@
   width: 90%;
   height: calc(100vh - 70px);
   margin: 0 5% 70px 5%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .icon {
@@ -175,8 +175,8 @@
 }
 
 .income {
-  position: absolute;
-  width: 227px;
+  position: relative;
+  width: 100%;
   height: 23.13px;
   left: 26px;
   top: 60px;
@@ -193,10 +193,12 @@
 
 .income h1 {
   position: relative;
-  width: 95px;
+  width: 100%;
   height: 16px;
-  left: 200px;
   top: -20px;
+  float: right;
+  right: 26px;
+
 
   font-family: 'Pretendard';
   font-style: normal;
@@ -269,14 +271,12 @@
 
   width: 100%;
   top: 40px;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 
-  -ms-overflow-style: none;
+  /* -ms-overflow-style: none;
   /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+  /*scrollbar-width: none;
 }
-
 .etc::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera*/
@@ -285,7 +285,7 @@
 /*etc의 상자, 글씨, 버튼*/
 div.box {
   position: relative;
-  width: 156px;
+  width: 50%;
   height: 95px;
   left: 0px;
   top: 0px;
