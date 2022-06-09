@@ -10,7 +10,6 @@
 .contents {
   position: absolute;
   width: 83%;
-  margin: 0 auto;
 }
 
 .form {
@@ -31,8 +30,7 @@
   margin-right: 5%;
   top: 251px;
   bottom: 525px;
-  padding-right: 50px;
-
+  padding-left: 7%;
   box-sizing: border-box;
   border-radius: 8px;
 
@@ -62,7 +60,7 @@
   /* 크롬 4–56 */
   position: relative;
   color: #ffffff;
-  opacity: 50%;
+  opacity: 100%;
 }
 
 
@@ -70,7 +68,7 @@
   position: relative;
   height: 13px;
   top: 225px;
-  left: 95%;
+  float: right;
   color: #ffff;
 }
 
@@ -85,6 +83,7 @@
   width: 41%;
   height: 43px;
   top: 416.75px;
+  margin-left: 3%;
 
   background: #424750;
   box-shadow: 0px 0px 15.5887px rgba(0, 0, 0, 0.09);

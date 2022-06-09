@@ -7,7 +7,7 @@ import { CgClose } from "react-icons/cg";
 import "../CalendarPart/Calendar.css";
 import editscss from "./EditName.css";
 
-export function EditName({ className, onClose, visible }) {
+export function EditName({ className, onClose, visible, state }) {
   const [text, setText] = useState("");
   const [count, setCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
@@ -95,6 +95,7 @@ export function EditName({ className, onClose, visible }) {
               onChange={handleChange}
               maxLength="8"
               onInput={maxLength(text)}
+              placeholder={state}
             />
             <CgClose onClick={onReset} className={Style.close}></CgClose>
 

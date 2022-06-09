@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
+import { BsPlusCircle } from "react-icons/bs";
 import high from "../../planet/1-2.json";
 import highmid from "../../planet/1-2.json";
 import low from "../../planet/4-2.json";
@@ -198,6 +199,7 @@ function Home({ activeHome }) {
                   onClose={closeModal2}
                   maskClosable={true}
                   visible={true}
+                  state={message.userName}
                 ></EditName>
               )}
             </div>
@@ -262,31 +264,31 @@ function Home({ activeHome }) {
         </section>
         <section className={homeStyle.etc}>
           <div className={homeStyle.box}>
+            <Link to="/EcoMission" className={activeHome}>
+              <IoIosArrowForward
+                className={homeStyle.btn}
+              ></IoIosArrowForward>
+            </Link>
             <p className={homeStyle.box_text}>
               데일리
               <br /> 에코 미션
-              <Link to="/EcoMission" className={activeHome}>
-                <IoIosArrowForward
-                  className={homeStyle.btn}
-                ></IoIosArrowForward>
-              </Link>
             </p>
           </div>
           <div className={homeStyle.box}>
+            <Link to="/statistics" className={activeHome}>
+              <IoIosArrowForward
+                className={homeStyle.btn}
+              ></IoIosArrowForward>
+            </Link>
             <p className={homeStyle.box_text}>
-              월간 <br />
-              플랜잇
-              <Link to="/#" className={activeHome}>
-                <IoIosArrowForward
-                  className={homeStyle.btn}
-                ></IoIosArrowForward>
-              </Link>
+              월간
+              <br /> 플랜잇
             </p>
           </div>
         </section>
         <section>
           <Link to="/FloatingPage" className={activeHome}>
-            <AiFillPlusCircle className={homeStyle.floating}></AiFillPlusCircle>
+            <BsPlusCircle className={homeStyle.floating}></BsPlusCircle>
           </Link>
         </section>
         <Footer activeMenu="home">

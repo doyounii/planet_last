@@ -193,11 +193,9 @@
 
 .income h1 {
   position: relative;
-  width: 100%;
   height: 16px;
   top: -20px;
-  float: right;
-  right: 26px;
+  right: 52px;
 
 
   font-family: 'Pretendard';
@@ -219,7 +217,7 @@
 
 .expend {
   position: absolute;
-  width: 237px;
+  width: 100%;
   height: 22.66px;
   left: 26px;
   top: 100px;
@@ -237,10 +235,9 @@
 
 .expend h1 {
   position: relative;
-  width: 95px;
   height: 16px;
-  left: 200px;
   top: -20px;
+  right: 52px;
 
   font-family: 'Pretendard';
   font-style: normal;
@@ -263,7 +260,6 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 0px;
 
   position: relative;
 
@@ -285,7 +281,7 @@
 /*etc의 상자, 글씨, 버튼*/
 div.box {
   position: relative;
-  width: 50%;
+  width: 48%;
   height: 95px;
   left: 0px;
   top: 0px;
@@ -295,11 +291,14 @@ div.box {
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 0px 5px;
 
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0px 0px 19px rgba(0, 0, 0, 0.08);
   border-radius: 13px;
+}
+
+.etc div:nth-of-type(1) {
+  margin-right: 4%;
 }
 
 p.box_text {
@@ -323,8 +322,11 @@ p.box_text {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 110px;
-  top: -3px;
+  right: 12px;
+  top: 12px;
+
+  display: flex;
+
   opacity: 0.4;
   color: #ffffff;
 }
@@ -334,100 +336,13 @@ p.box_text {
   width: 55px;
   height: 55px;
   right: 18px;
-  bottom: 70px;
-  color: #566479;
-}
-
-.check>path {
-  stroke: #00c982;
-}
-
-.check {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  left: 111px;
-  top: 56px;
-}
-
-.check>polyline {
-  stroke: white;
-}
-
-.bag {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  left: 111px;
-  top: 56px;
-
-  color: white;
-}
-
-.bag>line {
-  stroke: #00c982;
-}
-
-.bag>path:nth-child(1) {
-  stroke: #00c982;
-}
-
-.bag>path:nth-child(2) {
-  stroke: #ffffff;
-}
-
-.num {
-  position: relative;
-  width: 31px;
-  height: 35px;
-  left: 100px;
-  right: 18px;
-}
-
-.num>p:nth-child(1) {
-  position: absolute;
-  left: 0%;
-  right: 73.97%;
-  top: 18.46%;
-  bottom: 35.68%;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14.3077px;
-  line-height: 17px;
-
+  bottom: 85px;
   color: #00c982;
+  background-color: #00c982;
+  border-radius: 100px;
 }
 
-.num>p:nth-child(2) {
-  position: absolute;
-  left: 37.54%;
-  right: 32.09%;
-  top: 46.49%;
-  bottom: 0%;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16.3333px;
-  line-height: 20px;
-
-  color: rgba(0, 201, 130, 0.5);
-}
-
-.num>p:nth-child(3) {
-  position: absolute;
-  left: 64.63%;
-  right: 6.45%;
-  top: 0%;
-  bottom: 49.03%;
-
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15.5555px;
-  line-height: 19px;
-
-  color: rgba(0, 201, 131, 0.3);
+.floating>path:nth-of-type(2) {
+  color: #ffffff;
+  box-shadow: 0px 5px 18.75px rgba(0, 0, 0, 0.55);
 }
