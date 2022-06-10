@@ -101,9 +101,6 @@ export default function FloatingPage() {
     setUserTag(tempUserTag);
     setUserEcoTag(tempUserEcoTag);
   };
-  console.log(ecoTag);
-  console.log(userTag);
-  console.log(userEcoTag);
 
   const changeContent = () => {
     let article = null;
@@ -129,7 +126,16 @@ export default function FloatingPage() {
         article = <Memo propType={cate} sendData={changeData} />;
         break;
       case 5:
-        article = <SelectEco sendData={changeData} />;
+        article = (
+          <SelectEco
+            sendData={changeData}
+            propData={{
+              ecoTag: ecoTag,
+              userTag: userTag,
+              userEcoTag: userEcoTag,
+            }}
+          />
+        );
         break;
       default:
         break;

@@ -1,12 +1,9 @@
-.selectContainer {
-  font-family: "Pretendard";
-  top: 25%;
+.addTagContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 84%;
+  margin: 20px;
+  height: 250px;
 }
 
 .sbutton {
@@ -45,35 +42,6 @@
   background-color: rgb(255, 255, 255, 0.1);
 }
 
-.plusCircle {
-  width: 28px;
-  height: 28px;
-}
-
-.plusCircle.pluswhite {
-  color: #d3d3d3;
-}
-
-.plusCircle.plusgrey {
-  color: #d3d3d3;
-  opacity: 0.5;
-}
-
-.newTag {
-  position: relative;
-  top: 50px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  height: 300px;
-}
-
-.tag {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .inputMemo {
   display: flex;
   margin: 20px auto;
@@ -85,6 +53,7 @@
 }
 .inputMemo input {
   position: relative;
+  height: 36px;
 
   font-family: Pretendard;
   font-style: normal;
@@ -113,15 +82,14 @@
 }
 
 .close {
-  position: relative;
+  position: absolute;
   top: 11px;
-  left: 30px;
+  right: 12px;
   font-size: 15px;
 
   color: rgba(255, 255, 255, 0.3);
   background-color: transparent;
 }
 .coment3 {
-  margin-top: 25px;
   color: rgba(var(--green));
 }

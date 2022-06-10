@@ -3,7 +3,7 @@ import SelectEcoStyle from "./SelectEco.module.css";
 import { IoClose } from "react-icons/io5";
 import FloatingButton from "../buttons/FloatingButton";
 
-function SelectTag({ submitFunc }) {
+function SelectTag({ submitFunc, btn }) {
   const outSideRef = useRef(null);
   const array = [
     { id: 101, tag: "친환경", isEco: true },
@@ -79,10 +79,11 @@ function SelectTag({ submitFunc }) {
   };
 
   return (
-    <div ref={outSideRef} className={SelectEcoStyle.tag}>
+    <div ref={outSideRef} className={SelectEcoStyle.addTagContainer}>
       <div className={SelectEcoStyle.coment1}>태그 직접 추가</div>
       <form className={SelectEcoStyle.inputMemo} onSubmit={addTag}>
         <input
+          className={SelectEcoStyle.inputName}
           id="inputMemo"
           name="tagName"
           type="text"
@@ -119,17 +120,23 @@ function SelectTag({ submitFunc }) {
           );
         })}
       </div>
-      <FloatingButton
-        onClick={onClickHandler}
-        disabled={disabled}
-        prev={"취소"}
-        next={"다음"}
-      />
+      {btn && (
+        <FloatingButton
+          onClick={onClickHandler}
+          disabled={disabled}
+          prev={"취소"}
+          next={"다음"}
+        />
+      )}
       {request && (
         <div className={SelectEcoStyle.coment3}>환경 태그를 선택해주세요</div>
       )}
     </div>
   );
 }
+
+SelectTag.defaultProps = {
+  btn: true,
+};
 
 export default SelectTag;

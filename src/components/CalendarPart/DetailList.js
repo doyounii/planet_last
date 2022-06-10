@@ -23,7 +23,9 @@ export function DetailItem({ item, ecoCnt }) {
           item.ecoList.map((data) => {
             return (
               <div className={`details-detail ${isEcoT(data.eco)}`}>
-                {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
+                {data.ecoDetail === "사용자 추가"
+                  ? data.userAdd
+                  : data.ecoDetail}
               </div>
             );
           })}
@@ -74,7 +76,7 @@ function DetailList({ value }) {
   };
 
   const renderDetailList = (filterType) => {
-    let detailList = [];
+    let detailTemp = [];
     let ecoCnt = 0;
     console.log(filterType);
     filterType !== undefined &&
@@ -92,7 +94,7 @@ function DetailList({ value }) {
             });
         }
 
-        detailList.push(
+        detailTemp.push(
           <div className="details" key={item.id}>
             <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
             <DetailItem item={item} ecoCnt={ecoCnt} />
@@ -101,7 +103,7 @@ function DetailList({ value }) {
         ecoCnt = 0;
       });
 
-    return detailList;
+    return detailTemp;
   };
 
   const renderList = () => {
