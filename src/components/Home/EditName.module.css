@@ -58,11 +58,12 @@
 
 ::-webkit-input-placeholder {
   /* 크롬 4–56 */
-  position: relative;
-  color: #ffffff;
   opacity: 100%;
 }
 
+#inputMemo {
+  color: #ffffff;
+}
 
 .close {
   position: relative;

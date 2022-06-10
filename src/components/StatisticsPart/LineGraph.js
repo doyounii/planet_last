@@ -71,8 +71,8 @@ function LineGraph({ dataset }) {
     }
 
     return (
-        <div style={{ width: "90%", marginTop: "3%", margin: "0 auto" }}>
-            <canvas id="LineChart" width="375px" height="210px" />
+        <div style={{ width: "90%", marginTop: "3%", margin: "0 auto", "overflow-y": "scroll" }}>
+            <canvas id="LineChart" width="375px" height="210px" style={{ "overflow-y": "scroll" }} />
         </div>
     )
 }
