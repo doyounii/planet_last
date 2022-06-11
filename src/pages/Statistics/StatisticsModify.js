@@ -11,6 +11,7 @@ import Calendar from "../../components/CalendarPart/CalendarBody";
 import { Modal } from "../../components/CalendarPart/Modal";
 import SelectType from "../../components/FloatingPart/SelectType";
 import SelectEco from "../../components/FloatingPart/SelectEco";
+import { SelectButton } from "../../components/FloatingPart/SelectEco";
 
 function StatisticsModify() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,6 +26,11 @@ function StatisticsModify() {
   const [memo, setMemo] = useState("");
   const [ecoList, setEcoList] = useState([]);
   const [disabled, setDisabled] = useState(true);
+
+  const [ecoTag, setEcoTag] = useState([]);
+  const [userTag, setUserTag] = useState([]);
+  const [userEcoTag, setUserEcoTag] = useState([]);
+  console.log(ecoList);
 
   const fetchData = () => {
     if (data.item.income) {
@@ -55,9 +61,9 @@ function StatisticsModify() {
           exType: cate.type,
           exWay: type.type,
           memo: memo,
-          ecoDetail: ["친환경 제품 구매", "일회용품 사용", "기타"],
-          userAdd: ["샤워 오래함"],
-          eco: ["R"],
+          ecoDetail: ecoTag,
+          userAdd: userTag,
+          eco: userEcoTag,
         }),
       });
     }
@@ -100,9 +106,12 @@ function StatisticsModify() {
       setType({ type: item.way, emoji: "" });
       setCate({ type: item.type, emoji: "" });
       setMemo(item.memo);
-      if (item.ecoList !== null) setEcoList(item.ecoList);
+      if (item.ecoList !== null) {
+        setEcoList(item.ecoList);
+      }
     }
   }, [data]);
+  console.log(ecoList);
 
   const setArticle = (stype) => {
     let article = null;
@@ -110,7 +119,7 @@ function StatisticsModify() {
       case "date":
         article = (
           <>
-            <p className="modify-modal-title">날짜</p>
+            <div className="modify-modal-title">날짜</div>
             <DateHeader getDate={date} sendDate={(date) => setMDate(date)} />
             <Calendar
               selectedValue={date}
@@ -123,7 +132,7 @@ function StatisticsModify() {
       case "type":
         article = (
           <>
-            <p className="modify-modal-title">자산</p>
+            <div className="modify-modal-title">자산</div>
             <SelectType
               propType={type}
               type={0}
@@ -156,8 +165,18 @@ function StatisticsModify() {
       case "eco":
         article = (
           <>
-            <p className="modify-modal-title">태그</p>
-            <SelectEco />
+            <div className="modify-modal-title">태그</div>
+            <div className="modify-modal-eco-content">
+              <SelectEco
+                buttons={false}
+                sendData={setEcoData}
+                propData={{
+                  ecoTag: ecoTag,
+                  userTag: userTag,
+                  userEcoTag: userEcoTag,
+                }}
+              />
+            </div>
           </>
         );
         break;
@@ -166,6 +185,27 @@ function StatisticsModify() {
     }
     return article;
   };
+
+  const setEcoData = (data) => {
+    let tempData = [...data[0], ...data[1], ...data[2]];
+    setEcoList(tempData);
+    let tempUserTag = [];
+    let tempUserEcoTag = [];
+    let tagData = tempData.map((arr) => {
+      let eco = arr.isEco === "etc" ? "N" : arr.isEco === true ? "G" : "R";
+      if (arr.id > 9) {
+        tempUserTag.push(arr.tag);
+        tempUserEcoTag.push(eco);
+        return "사용자 추가";
+      } else {
+        return arr.tag;
+      }
+    });
+    setEcoTag(tagData);
+    setUserTag(tempUserTag);
+    setUserEcoTag(tempUserEcoTag);
+  };
+  console.log(ecoTag, userTag, userEcoTag);
 
   const openModal = (stype) => {
     setmode(stype);
@@ -241,18 +281,34 @@ function StatisticsModify() {
 
         <div className="modify-detail">
           <p className="modify-detail-title">태그</p>
-          {/* 태그는 어떻게 받아올지 모르겠음 .. */}
-          <input
-            className="modify-detail-value"
-            value={
-              ecoList.length !== 0 &&
-              ecoList.map((value) => {
-                return value.ecoDetail;
-              })
-            }
+
+          <div
+            className="modify-detail-value modify-eco"
             onClick={() => openModal("eco")}
-            readOnly
-          />
+          >
+            {ecoList.length !== 0 &&
+              ecoList.map((value) => {
+                return (
+                  <button
+                    className={`modify-eco-tag ${
+                      value.eco === "G"
+                        ? "eco"
+                        : value.eco === "R"
+                        ? "neco"
+                        : "etc"
+                    }`}
+                    key={value.id}
+                    value={value.tag}
+                  >
+                    {value.tag !== undefined
+                      ? value.tag
+                      : value.ecoDetail === "사용자 추가"
+                      ? value.userAdd
+                      : value.ecoDetail}
+                  </button>
+                );
+              })}
+          </div>
         </div>
 
         <div className="modify-detail">

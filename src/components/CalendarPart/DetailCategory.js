@@ -77,7 +77,7 @@ function DetailCategory() {
           <div className="detail-div-list">
             <div className="detail-history">내역</div>
             {detailList.length !== 0 &&
-              detailList.map((item) => {
+              detailList.value.map((item) => {
                 let ecoCnt = 0;
                 item.ecoList !== undefined &&
                   item.ecoList.forEach((item) => {

@@ -184,6 +184,14 @@ const StyledDetailPage = styled.div`
     font-size: 8px;
   }
 
+  .details-circle.eco {
+    color: rgb(var(--green));
+  }
+
+  .details-circle.neco {
+    color: rgb(var(--mid-gray));
+  }
+
   .details-memo {
     font-size: 15px;
     line-height: 16px;
@@ -194,6 +202,12 @@ const StyledDetailPage = styled.div`
     line-height: 13px;
     margin-top: 7px;
     font-weight: 400;
+  }
+  .details-detail.eco {
+    color: rgb(var(--green));
+  }
+  .details-detail.neco {
+    color: rgb(var(--mid-gray));
   }
   .details .details-cost {
     font-size: 15px;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SelectEcoStyle from "./SelectEco.module.css";
 import AddEcoTag from "./AddEcoTag";
 import FloatingButton from "../buttons/FloatingButton";
@@ -6,18 +6,18 @@ import { AiFillPlusCircle } from "react-icons/ai";
 // import "./Contents.css";
 
 const array = [
-  { id: 1, tag: "친환경 제품 구매", isEco: true },
-  { id: 2, tag: "비건식당 방문", isEco: true },
-  { id: 3, tag: "다회용기 사용", isEco: true },
-  { id: 4, tag: "장바구니 / 개인가방 사용", isEco: true },
-  { id: 5, tag: "중고거래 / 나눔 / 기부", isEco: true },
-  { id: 6, tag: "일회용품 사용", isEco: false },
-  { id: 7, tag: "비닐봉투 소비", isEco: false },
-  { id: 8, tag: "식자재 낭비", isEco: false },
-  { id: 9, tag: "기타", isEco: "etc" },
+  { id: 1, tag: "친환경 제품 구매", eco: "G" },
+  { id: 2, tag: "비건식당 방문", eco: "G" },
+  { id: 3, tag: "다회용기 사용", eco: "G" },
+  { id: 4, tag: "장바구니 / 개인가방 사용", eco: "G" },
+  { id: 5, tag: "중고거래 / 나눔 / 기부", eco: "G" },
+  { id: 6, tag: "일회용품 사용", eco: "R" },
+  { id: 7, tag: "비닐봉투 소비", eco: "R" },
+  { id: 8, tag: "식자재 낭비", eco: "R" },
+  { id: 9, tag: "기타", eco: "N" },
 ];
 
-function SelectEnvir() {
+function SelectEnvir({ sendData, propData, buttons }) {
   const [counter, setCounter] = useState(10);
   const [show, setShow] = useState(false);
   const [tagArr, setTagArr] = useState(array);
@@ -30,29 +30,42 @@ function SelectEnvir() {
     setShow((show) => !show);
   }
 
-  const checkedItemHandler = (id, isEco, isChecked) => {
-    if (isEco === "etc") {
+  useEffect(() => {
+    // if (propData.ecoTag.length > 0) {
+    //   propData.ecoTag.map((data) => {
+    //     if (data.id > 9) {
+    //       submitFunc(data.tag, data.eco);
+    //       setShow(false);
+    //     }
+    //     checkedItemHandler(data, true);
+    //   });
+    // }
+    console.log(propData);
+  }, []);
+
+  const checkedItemHandler = (item, isChecked) => {
+    if (item.eco === "N") {
       if (isChecked) {
-        selectedEtc.add(id);
+        selectedEtc.add(item);
         setSelectedEtc(selectedEtc);
-      } else if (!isChecked && selectedEtc.has(id)) {
-        selectedEtc.delete(id);
+      } else if (!isChecked && selectedEtc.has(item)) {
+        selectedEtc.delete(item);
         setSelectedEtc(selectedEtc);
       }
-    } else if (isEco) {
+    } else if (item.eco === "G") {
       if (isChecked) {
-        selectedEco.add(id);
+        selectedEco.add(item);
         setSelectedEco(selectedEco);
-      } else if (!isChecked && selectedEco.has(id)) {
-        selectedEco.delete(id);
+      } else if (!isChecked && selectedEco.has(item)) {
+        selectedEco.delete(item);
         setSelectedEco(selectedEco);
       }
     } else {
       if (isChecked) {
-        selectedNeco.add(id);
+        selectedNeco.add(item);
         setSelectedNeco(selectedNeco);
-      } else if (!isChecked && selectedNeco.has(id)) {
-        selectedNeco.delete(id);
+      } else if (!isChecked && selectedNeco.has(item)) {
+        selectedNeco.delete(item);
         setSelectedNeco(selectedNeco);
       }
     }
@@ -65,32 +78,45 @@ function SelectEnvir() {
     } else {
       setDisabled(true);
     }
-    // console.log("selectedEco, ", selectedEco);
-    // console.log("selectedNeco, ", selectedNeco);
-    // console.log("selectedEtc, ", selectedEtc);
+
+    if (!buttons) {
+      sendData([selectedEco, selectedNeco, selectedEtc]);
+    }
   };
   const submitFunc = (value, eco) => {
-    let tempArr = tagArr.concat();
-    let ecoTag = eco === "친환경" ? true : eco === "반환경" ? false : "etc";
-    tempArr.push({ id: counter, tag: value, isEco: ecoTag });
-    setCounter(counter + 1);
-    setTagArr(tempArr);
+    if (value !== "취소") {
+      let tempArr = tagArr.concat();
+      let ecoTag = eco === "친환경" ? "G" : eco === "반환경" ? "R" : "N";
+      tempArr.push({ id: counter, tag: value, eco: ecoTag });
+      setCounter(counter + 1);
+      setTagArr(tempArr);
+    }
+
     addTag();
   };
-  const onClickHandler = () => console.log("clicked");
+  const onClickHandler = (btnType) => {
+    switch (btnType) {
+      case "취소":
+        setShow(false);
+        break;
+      case "다음":
+        break;
+      default:
+        sendData({
+          btnType: btnType,
+          data: [selectedEco, selectedNeco, selectedEtc],
+        });
+        break;
+    }
+  };
 
   return (
     <>
-      <section
-        className={`shared-container select-eco-container ${
-          show ? "move" : ""
-        }`}
-      >
-        <div className={SelectEcoStyle.selectContainer}>
+      <section className={`select-eco-container ${show ? "move" : ""}`}>
+        <div className="select-eco-tag-container">
           {tagArr.map((item, idx) => {
             return (
               <SelectButton
-                className={SelectEcoStyle.sbutton}
                 key={idx}
                 item={item}
                 onSelect={checkedItemHandler}
@@ -98,49 +124,58 @@ function SelectEnvir() {
             );
           })}
           <AiFillPlusCircle
-            className={`${SelectEcoStyle.plusCircle} ${
-              show ? SelectEcoStyle.pluswhite : SelectEcoStyle.plusgrey
+            className={`select-eco-plus-circle ${
+              show ? "pluswhite" : "plusgrey"
             }`}
             onClick={addTag}
           ></AiFillPlusCircle>
         </div>
 
-        <div className={SelectEcoStyle.newTag}>
-          {show ? <AddEcoTag submitFunc={submitFunc} /> : <div></div>}
-        </div>
+        {show && <AddEcoTag submitFunc={submitFunc} btn={buttons} />}
       </section>
-      <FloatingButton
-        className="select-eco-btn"
-        onClick={onClickHandler}
-        disabled={disabled}
-      />
-      <div className="memo-skip-btn" onClick={() => onClickHandler("다음")}>
-        넘어갈래요
-      </div>
+
+      {buttons && !show ? (
+        <>
+          <FloatingButton
+            className="select-eco-btn"
+            onClick={onClickHandler}
+            disabled={disabled}
+            prev={"뒤로"}
+            next={"완료"}
+          />
+          <div className="memo-skip-btn" onClick={() => onClickHandler("다음")}>
+            넘어갈래요
+          </div>
+        </>
+      ) : null}
     </>
   );
 }
 
-export function SelectButton({ item, onSelect }) {
-  const [checked, setChecked] = useState(false);
+SelectEnvir.defaultProps = {
+  buttons: true,
+};
+
+export function SelectButton({ item, onSelect, check }) {
+  const [checked, setChecked] = useState(check);
 
   const checkHandler = ({ target }) => {
     setChecked(!checked);
-    onSelect(target.value, item.isEco, !target.checked);
+    onSelect(item, !target.checked);
   };
 
   return (
     <button
       className={`${SelectEcoStyle.sbutton} ${
-        item.isEco !== "etc"
-          ? item.isEco
-            ? SelectEcoStyle.eco
-            : SelectEcoStyle.neco
+        item.eco === "G"
+          ? SelectEcoStyle.eco
+          : item.eco === "R"
+          ? SelectEcoStyle.neco
           : SelectEcoStyle.etc
       } ${checked ? SelectEcoStyle.checked : SelectEcoStyle.nchecked}`}
       key={item.id}
       checked={checked}
-      value={item.id}
+      value={item.tag}
       onClick={(e) => checkHandler(e)}
     >
       {item.tag}
