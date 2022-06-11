@@ -25,6 +25,8 @@ function StatisticsMain() {
 
   const nowMFormat = "M";
 
+
+
   const containerStyle = {
     backgroundImage: "url(img/main_bg.png)",
     width: "100vw",
@@ -159,7 +161,7 @@ function StatisticsMain() {
           </div>
         </Link>
         <div className="chart">
-          <EcoBarChart name="eco"></EcoBarChart>
+          <EcoBarChart barData={message.ecoTagCounts} name="eco"></EcoBarChart>
         </div>
         <Eco name="eco"></Eco>
 
@@ -177,7 +179,7 @@ function StatisticsMain() {
           </div>
         </Link>
         <div className="chart">
-          <EcoBarChart name="neco"></EcoBarChart>
+          <EcoBarChart barData={message.noEcoTagCounts} name="neco"></EcoBarChart>
         </div>
         <Eco name="neco"></Eco>
       </div>

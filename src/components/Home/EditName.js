@@ -7,8 +7,8 @@ import { CgClose } from "react-icons/cg";
 import "../CalendarPart/Calendar.css";
 import editscss from "./EditName.css";
 
-export function EditName({ className, onClose, visible }) {
-  const [text, setText] = useState("");
+export function EditName({ className, onClose, visible, state }) {
+  const [text, setText] = useState(state);
   const [count, setCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
 
