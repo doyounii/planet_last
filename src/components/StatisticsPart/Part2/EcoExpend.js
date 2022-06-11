@@ -23,8 +23,8 @@ function EcoExpend(props) {
 
   }, []);
 
-  const emojiList = (ecoTagCounts) => {
-    switch (ecoTagCounts) {
+  const emojiList = (ecoTagCounts, noEcoTagCounts) => {
+    switch (ecoTagCounts || noEcoTagCounts) {
       case "식비":
         return <h1>🌭</h1>;
       case "교통":
@@ -51,36 +51,6 @@ function EcoExpend(props) {
         return <h1>💬</h1>;
     }
   };
-
-  const emojiList2 = (noEcoTagCounts) => {
-    switch (noEcoTagCounts) {
-      case "식비":
-        return <h1>🌭</h1>
-      case "교통":
-        return <h1>🚗</h1>;
-      case "문화생활":
-        return <h1>🎬</h1>;
-      case "생필품":
-        return <h1>✏️</h1>;
-      case "마트":
-        return <h1>🛒</h1>;
-      case "교육":
-        return <h1>📚</h1>;
-      case "통신":
-        return <h1>📱</h1>;
-      case "의료/건강":
-        return <h1>🏥</h1>;
-      case "경조사/회비":
-        return <h1>💵</h1>;
-      case "가전":
-        return <h1>🛏</h1>;
-      case "공과금":
-        return <h1>🧾</h1>;
-      default:
-        return <h1>💬</h1>;
-    }
-  };
-
   console.log(ecoTagCounts);
   const renderExpendList = (props, message) => {
     let renderExpendList = [];
@@ -110,7 +80,7 @@ function EcoExpend(props) {
                 className="day-breakdown-box-icon"
                 style={{ color: NEcoExpendColor[i] }}
               >
-                ●{emojiList2(noEcoTagCounts[i][0])}
+                ●{emojiList(noEcoTagCounts[i][0])}
               </div>
               <h1>{noEcoTagCounts[i][0]}</h1>
               <h2>{noEcoTagCounts[i][1]}개</h2>
