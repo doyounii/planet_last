@@ -11,7 +11,6 @@ import DateList from "../../components/DateList";
 import EcoList from "../../components/EcoMissionPart/EcoList";
 
 const EcoMission = () => {
-  const [list, setList] = useState({});
   const [loading, setloading] = useState(true);
   const [todayMission, setTodayMission] = useState({});
 
@@ -24,6 +23,15 @@ const EcoMission = () => {
   const iscloseModal = () => {
     setIsModalOpen(false);
   };
+
+  //배열..
+  const [missions, setMissions] = useState([
+    {
+      id: 1,
+      emoji: "",
+      text: "",
+    },
+  ]);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -39,7 +47,19 @@ const EcoMission = () => {
       })
       .then((data) => {
         if (isSubscribed) {
-          setTodayMission(data.todayMission);
+          // setTodayMission(data.todayMission);
+          // setMissName(data.todayMission.name || {});
+          // setMissionEmo(data.todayMission.emoji || {});
+
+          setMissions({
+            emoji: data.todayMission.emoji,
+            text: data.todayMission.name,
+          })
+
+          if (data && data.length > 0) {
+            console.log(data[0]);
+          }
+
           setloading(false);
         }
       })
@@ -47,6 +67,7 @@ const EcoMission = () => {
         console.log("error!");
         console.log(error);
       });
+
     return () => (isSubscribed = false);
   }, []);
 
@@ -73,17 +94,18 @@ const EcoMission = () => {
   //     });
   // };
 
-  console.log(todayMission);
-  console.log(todayMission.name);
-  console.log(todayMission.emoji);
-
-  const missionName = todayMission.name;
-  console.log('----',missionName);
+  console.log('----');
+  // console.log(missName);
+  // console.log(missionEmo);
+  console.log(missions);
+  console.log(missions.emoji);
+  console.log(missions.text);
+  console.log('----');
   
   const [inputs, setInputs] = useState({
-    //setInputs로 업데이트
-    emoji: "🧾",
-    text: missionName,
+    //missions.map 오류
+    emoji: missions[0].emoji,
+    text: missions[0].text,
     // emoji: String.fromCodePoint(todayMission.emoji),
     // text: todayMission.name,
   });
@@ -101,14 +123,6 @@ const EcoMission = () => {
   //   [inputs]
   // );
 
-  const [missions, setMissions] = useState([
-    {
-      id: 1,
-      emoji: "🍽",
-      text: "잔반 남기지 않기",
-    },
-  ]);
-
   const nextId = useRef(1);
 
   const onCreate = useCallback(
@@ -123,8 +137,8 @@ const EcoMission = () => {
       
       //다음날 데이터로 초기화
       setInputs({
-        emoji: "",
-        text: "",
+        emoji: "#",
+        text: "다음날 데이터",
       });
       nextId.current += 1;
     },

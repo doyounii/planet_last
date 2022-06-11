@@ -30,14 +30,10 @@ const CouponModal = ({
   };
 
   const {
-    notifications: { follow },
-    color,
     couponData,
   } = current;
 
   console.log(current);
-  console.log(follow);
-  console.log(color.theme);
 
   useEffect(() => {
     document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
@@ -62,7 +58,7 @@ const CouponModal = ({
           tabIndex={0}
           className="modal-inner"
         >
-          {couponData.string}
+          {couponData.coupon}
           {closable && <CgClose className="modal-close" onClick={close} />}
           {children}
         </ModalInner>

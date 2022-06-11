@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CouponStyle from "./Coupon.module.css";
 import Footer from "../../components/Footer/Footer";
 import HistorySample from "../../components/History/HistoryBack";
@@ -14,8 +14,6 @@ import CouponUseInfo from "../../components/CouponPart/CouponUseInfo";
 import CouponDetailInfo from "../../components/CouponPart/CouponDetailInfo";
 
 function Coupon() {
-  const location = useLocation();
-  console.log(location);
 
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
@@ -43,15 +41,8 @@ function Coupon() {
   const [loading, setloading] = useState(true);
 
   const [current, setCurrent] = useState({
-    notifications: {
-      follow: "true",
-      alerts: true,
-    },
-    color: {
-      theme: "dark",
-    },
     couponData: {
-      string: "",
+      coupon: "",
     },
   });
 
@@ -81,7 +72,7 @@ function Coupon() {
 
     setCurrent({
       ...current,
-      couponData: { string: data.couponDtos[0].cno || {} },
+      couponData: { coupon: data.couponDtos[0].coupon || {} },
     });
 
     if (data && data.length > 0) {
