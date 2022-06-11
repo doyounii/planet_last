@@ -66,28 +66,28 @@ const EcoMission = () => {
     return () => (isSubscribed = false);
   }, []);
 
-  // const fetchFunc = () => {
-  //   //백엔드로 데이터 보내기
-  //   fetch(
-  //     `/mission/${todayMission.emoji}/${todayMission.name}`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         mission: todayMission.emoji,
-  //       }),
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       if (response.token) {
-  //         localStorage.setItem("wtw-token", response.token);
-  //       }
-  //     });
-  // };
+  const fetchFunc = () => {
+    //백엔드로 데이터 보내기
+    fetch(
+      `/mission/${todayMission.emoji}/${todayMission.name}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          mission: todayMission.emoji,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      });
+  };
 
   console.log('----');
   console.log(missions);
