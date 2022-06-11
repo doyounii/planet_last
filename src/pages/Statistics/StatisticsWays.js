@@ -13,6 +13,7 @@ const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
 
 
 export function DetailMemo({ item, ecoCnt }) {
+  console.log(ecoCnt)
   return (
     <>
       <div
@@ -34,10 +35,24 @@ export function DetailMemo({ item, ecoCnt }) {
           })}
       </div>
 
-      <div className={`stat-detail-money ${isEco(ecoCnt)}`}>
-        {item.income ? "+" : "-"}
-        {item.cost.toLocaleString("ko-KR")}원
-      </div>
+      {ecoCnt > 0 ?
+        <div className={`stat-detail-money ${isEco(ecoCnt)}`} style={{ color: "#00C982" }}>
+          {item.income ? "+" : "-"}
+          {item.cost.toLocaleString("ko-KR")}원
+        </div> :
+        (
+          ecoCnt < 0 ?
+            <div className={`stat-detail-money ${isEco(ecoCnt)}`} style={{ color: "#566479" }}>
+              {item.income ? "+" : "-"}
+              {item.cost.toLocaleString("ko-KR")}원
+            </div> :
+            <div className={`stat-detail-money ${isEco(ecoCnt)}`} style={{ color: "#939393" }}>
+              {item.income ? "+" : "-"}
+              {item.cost.toLocaleString("ko-KR")}원
+            </div>
+        )
+      }
+
     </>
   );
 }
@@ -131,22 +146,32 @@ function StatisticsWays() {
                 </p>
                 {data.detailDtoList.map((value) => {
                   return (
-                    <div key={value.id} className="statistic-detail-list">
-                      <span
-                        role="img"
-                        aria-label="something"
-                        className="stat-detail-icon"
-                      >
-                        {wayEmoji(value.way)}
-                      </span>
-                      <p className="stat-detail-type">
-                        {value.memo === null ? value.type : value.memo}
-                      </p>
-                      <p className="stat-detail-money">
-                        {value.income ? "+" : "-"}
-                        {value.cost.toLocaleString()}원
-                      </p>
-                    </div>
+                    <Link
+                      className="detail-link"
+                      to={`/statisticsModify`}
+                      style={{ textDecoration: "none" }}
+                      state={{
+                        item: value,
+                        date: parseISO(data.date),
+                      }}
+                    >
+                      <div key={value.id} className="statistic-detail-list">
+                        <span
+                          role="img"
+                          aria-label="something"
+                          className="stat-detail-icon"
+                        >
+                          {wayEmoji(value.way)}
+                        </span>
+                        <p className="stat-detail-type">
+                          {value.memo === null ? value.type : value.memo}
+                        </p>
+                        <p className="stat-detail-money">
+                          {value.income ? "+" : "-"}
+                          {value.cost.toLocaleString()}원
+                        </p>
+                      </div>
+                    </Link>
                   );
                 })}
               </>

@@ -141,7 +141,7 @@ function Home({ activeHome }) {
     setIsDonut(true);
   };
 
-  const eco = 80;
+  const eco = message.ecoPercentage;
 
   if (eco != 0) {
     if (eco > 0 && eco < 25) {
@@ -333,6 +333,6 @@ const data = {
   userName: "사용자1",
   totalIncomeMonth: 102000,
   totalExpenditureMonth: 54900,
-  ecoPercentage: 0,
-  noEcoPercentage: 100,
+  ecoPercentage: 34,
+  noEcoPercentage: 66,
 };
