@@ -142,6 +142,8 @@ const EcoMission = () => {
   //   []
   // );
 
+  console.log(missions[0].text);
+
   const [date, setDate] = useState(new Date());
   return (
     <div className={EcoStyle.container}>
@@ -181,10 +183,10 @@ const EcoMission = () => {
         
         <div className={EcoStyle.mission_box_input}>
           <input
-            value={missions.text || ''}
+            value={missions[0].text || 'test'}
             emoji={emoji}
-            text={missions.text}
-            // onChange={onChange}
+            text={text}
+            onChange={onChange}
             onCreate={onCreate}
           />
         </div>
