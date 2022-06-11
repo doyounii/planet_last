@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import FloatingStyle from "./FloatingPage.module.css";
 import HistoryToHome from "../../components/History/HistoryToHome";
@@ -11,6 +13,7 @@ import SelectEco from "../../components/FloatingPart/SelectEco";
 import Lottie from "react-lottie";
 import Complete from "./complete.json";
 import "./Contents.css";
+import { Modal } from "../../components/CalendarPart/Modal";
 
 export default function FloatingPage() {
   const navigate = useNavigate();
@@ -26,6 +29,58 @@ export default function FloatingPage() {
   const [userTag, setUserTag] = useState([]);
   const [userEcoTag, setUserEcoTag] = useState([]);
   const [complete, setComplete] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const fetchData = () => {
+    if (total === 4) {
+      axios
+        .post("http://3.39.87.115:8080/income/new", {
+          userId: "user1@naver.com",
+          in_cost: parseInt(price),
+          date: format(date, "yyyy-MM-dd"),
+          inType: cate.type,
+          inWay: type.type,
+          memo: memo,
+        })
+        .then(() => {
+          closeModal();
+          setComplete(true);
+          setTimeout(() => {
+            history.replace("/");
+          }, 2000);
+        })
+        .catch((error) => {
+          window.alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        });
+    } else {
+      axios
+        .post("http://3.39.87.115:8080/expenditure/new", {
+          userId: "user1@naver.com",
+          ex_cost: parseInt(price),
+          date: format(date, "yyyy-MM-dd"),
+          exType: cate.type,
+          exWay: type.type,
+          memo: memo,
+          ecoDetail: ecoTag,
+          userAdd: userTag,
+          eco: userEcoTag,
+        })
+        .then(() => {
+          closeModal();
+          setComplete(true);
+          setTimeout(() => {
+            history.replace("/");
+          }, 2000);
+        })
+        .catch((error) => {
+          window.alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        });
+    }
+  };
 
   const onSelectSwitch = (num) => {
     setTotal(num + 3);
@@ -51,8 +106,9 @@ export default function FloatingPage() {
         }
         break;
       case "완료":
-        setComplete(true);
-        console.log("끝");
+        openModal();
+        // setComplete(true);
+        // console.log("끝");
         break;
       default:
         break;
@@ -178,7 +234,6 @@ export default function FloatingPage() {
       <div
         className={FloatingStyle.floating_close}
         onClick={() => {
-          console.log("clicked!!");
           navigate("/", { replace: true });
         }}
       >
@@ -200,6 +255,30 @@ export default function FloatingPage() {
 
       <div className={FloatingStyle.floating_margin} />
       {changeContent()}
+
+      {isModalOpen && (
+        <Modal
+          className="floating-confirm"
+          onClose={closeModal}
+          maskClosable={true}
+          closable={false}
+          visible={true}
+        >
+          <div className="floating-confirm-modal">
+            <div className="floating-confirm-message">
+              가계부 작성을 완료하시겠습니까?
+            </div>
+            <div className="floating-confirm-button">
+              <div className="floating-cancel" onClick={closeModal}>
+                취소
+              </div>
+              <div className="floating-complete" onClick={fetchData}>
+                완료
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
