@@ -1,23 +1,73 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import "./Statistics.css";
 import DateHeader from "../../components/DateHeader";
 import ko from "date-fns/locale/ko";
 import HistorySample from "../../components/History/HistoryBack";
+import { StyledDetailBlock } from "../../components/CalendarPart/StyledDetail";
+import { StyledDetailPageBlock } from "../../components/CalendarPart/StyledDetail";
+const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
+const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
 
-function StatisticsWays(props) {
+
+
+export function DetailMemo({ item, ecoCnt }) {
+  console.log(ecoCnt)
+  return (
+    <>
+      <div
+        className="stat-detail-type"
+        onClick={(e) => console.log(e.target.value)}
+        key={item.id}
+      >
+        {item.memo !== null ? item.memo : item.type}
+        {item.ecoList !== undefined &&
+          item.ecoList !== null &&
+          item.ecoList.map((data) => {
+            return (
+              <div className={`details-detail ${isEcoT(data.eco)}`}>
+                {data.ecoDetail === "기타" ? <div style={{ color: "#939393" }}> {data.etcMemo} </div> :
+                  (data.eco === "G" ? <div style={{ color: "#00C982" }}> {data.ecoDetail} </div>
+                    : <div style={{ color: "#566479" }}> {data.ecoDetail} </div>)}
+              </div>
+            );
+          })}
+      </div>
+
+      {ecoCnt > 0 ?
+        <div className={`stat-detail-money ${isEco(ecoCnt)}`} style={{ color: "#00C982" }}>
+          {item.income ? "+" : "-"}
+          {item.cost.toLocaleString("ko-KR")}원
+        </div> :
+        (
+          ecoCnt < 0 ?
+            <div className={`stat-detail-money ${isEco(ecoCnt)}`} style={{ color: "#566479" }}>
+              {item.income ? "+" : "-"}
+              {item.cost.toLocaleString("ko-KR")}원
+            </div> :
+            <div className={`stat-detail-money ${isEco(ecoCnt)}`} style={{ color: "#939393" }}>
+              {item.income ? "+" : "-"}
+              {item.cost.toLocaleString("ko-KR")}원
+            </div>
+        )
+      }
+
+    </>
+  );
+}
+function StatisticsWays() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const { way, year, month } = useParams();
   const income = way === "income" ? true : false;
   const nowMFormat = "M";
-  const [detailList, setDetailList] = useState(tempData);
   const [message, setMessage] = useState(0);
   const [detailDtoList, setDetailDtoList] = useState([]);
   const [message2, setMessage2] = useState(0);
   const [detailDtoList2, setDetailDtoList2] = useState([]);
   const wayEmoji = (way) => (way === "은행" ? "🏦" : (way === "카드" ? "💳" : "💵"));
 
+  const selectWay = useLocation().state;
   const fetchData = async () => {
     const response = await fetch(
       `/statistics/${way}/${format(currentMonth, "yyyy")}/${format(
@@ -36,7 +86,8 @@ function StatisticsWays(props) {
         return res.json();
       })
       .then((data) => {
-        setDetailList(data.detailDtoList);
+        setDetailDtoList(tempData.detailDtoList);
+        setDetailDtoList2(tempData2.detailDtoList);
       })
       .catch((error) => {
         console.log("error!");
@@ -56,7 +107,11 @@ function StatisticsWays(props) {
     setDetailDtoList2(tempData2.detailDtoList);
   }, [year, month]);
 
-  if (props.name === "eco") {
+  console.log(detailDtoList);
+  // console.log(detailDtoList[0].detailDtoList[2].ecoList);
+
+
+  if (selectWay.name === "income") {
     return (
       <div className="static-detail-container">
         <DateHeader
@@ -71,10 +126,10 @@ function StatisticsWays(props) {
             </p>
             <h1>{message.totalMonthIncome}원</h1>
           </div>
-          <div className="balloon2">
+          <div className="balloon3">
             <p>지난달 이맘때보다</p>
             <h1>
-              약 <b style={{ color: "#00C982" }}>{message.inDif}{" "}
+              약 <b style={{ color: "#00C982" }}>{message.inDif}원{" "}
                 {message.inMore ? "더 " : "덜"}</b>들어왔어요
             </h1>
           </div>
@@ -91,22 +146,32 @@ function StatisticsWays(props) {
                 </p>
                 {data.detailDtoList.map((value) => {
                   return (
-                    <div key={value.id} className="statistic-detail-list">
-                      <span
-                        role="img"
-                        aria-label="something"
-                        className="stat-detail-icon"
-                      >
-                        {wayEmoji(value.way)}
-                      </span>
-                      <p className="stat-detail-type">
-                        {value.memo === null ? value.type : value.memo}
-                      </p>
-                      <p className="stat-detail-money">
-                        {value.income ? "+" : "-"}
-                        {value.cost.toLocaleString()}원
-                      </p>
-                    </div>
+                    <Link
+                      className="detail-link"
+                      to={`/statisticsModify`}
+                      style={{ textDecoration: "none" }}
+                      state={{
+                        item: value,
+                        date: parseISO(data.date),
+                      }}
+                    >
+                      <div key={value.id} className="statistic-detail-list">
+                        <span
+                          role="img"
+                          aria-label="something"
+                          className="stat-detail-icon"
+                        >
+                          {wayEmoji(value.way)}
+                        </span>
+                        <p className="stat-detail-type">
+                          {value.memo === null ? value.type : value.memo}
+                        </p>
+                        <p className="stat-detail-money">
+                          {value.income ? "+" : "-"}
+                          {value.cost.toLocaleString()}원
+                        </p>
+                      </div>
+                    </Link>
                   );
                 })}
               </>
@@ -133,39 +198,54 @@ function StatisticsWays(props) {
           <div className="balloon2">
             <p>지난달 이맘때보다</p>
             <h1>
-              약 <b style={{ color: "#00C982" }}>{message2.exDif}{" "}
+              약 <b style={{ color: "#00C982" }}>{message2.exDif}원{" "}
                 {message2.exMore ? "더 " : "덜"}</b>썼어요
             </h1>
+            <div className="green-Box">
+              <p>친환경 지출에 약 <b style={{ color: "#FFFFFF" }}>30만원 더</b> 썼어요</p>
+              <p>반환경 지출에 약 <b style={{ color: "#FFFFFF" }}>30만원 더</b> 썼어요</p>
+            </div>
           </div>
         </div>
 
         <div className="line-box" />
 
         <div className="statistics-box">
-          {detailDtoList.map((data) => {
+          {detailDtoList2.map((data) => {
             return (
               <>
                 <p className="statistic-detail-list date">
                   {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
                 </p>
                 {data.detailDtoList.map((value) => {
+                  let ecoCnt = 0;
+                  value.ecoList !== null &&
+                    value.ecoList.forEach((value) => {
+                      if (value.eco === "G") {
+                        ecoCnt += 1;
+                      } else if (value.eco === "R") {
+                        ecoCnt -= 1;
+                      }
+                    });
                   return (
-                    <div key={value.id} className="statistic-detail-list">
-                      <span
-                        role="img"
-                        aria-label="something"
-                        className="stat-detail-icon"
-                      >
-                        {wayEmoji(value.way)}
-                      </span>
-                      <p className="stat-detail-type">
-                        {value.memo === null ? value.type : value.memo}
-                      </p>
-                      <p className="stat-detail-money">
-                        {value.income ? "+" : "-"}
-                        {value.cost.toLocaleString()}원
-                      </p>
-                    </div>
+                    <Link
+                      className="detail-link"
+                      to={`/statisticsModify`}
+                      style={{ textDecoration: "none" }}
+                      state={{
+                        item: value,
+                        date: parseISO(data.date),
+                      }}
+                    >
+                      <StyledDetailPageBlock>
+                        <div className="statistic-detail-list" key={value.id}>
+                          <div className="stat-detail-icon">
+                            {wayEmoji(value.way)}
+                          </div>
+                          <DetailMemo item={value} ecoCnt={ecoCnt} />
+                        </div>
+                      </StyledDetailPageBlock>
+                    </Link>
                   );
                 })}
               </>
@@ -181,7 +261,7 @@ StatisticsWays.defaultProps = {
   income: true,
 };
 const tempData = {
-  "totalMonthIncome": 880,
+  "totalMonthIncome": 884,
   "totalMonthExpenditure": 92000,
   "inMore": true,
   "exMore": true,
@@ -196,7 +276,7 @@ const tempData = {
           way: "현금",
           type: "경조사/회비",
           cost: 92503,
-          memo: "income memo",
+          memo: "여기는 수입이구요",
           ecoList: null,
           income: true,
         },
@@ -232,7 +312,7 @@ const tempData = {
               etcMemo: null,
             },
           ],
-          income: false,
+          income: true,
         },
         {
           id: 14,
@@ -241,7 +321,7 @@ const tempData = {
           cost: 50000,
           memo: "가스레인지",
           ecoList: null,
-          income: false,
+          income: true,
         },
       ],
     },
@@ -266,7 +346,7 @@ const tempData = {
               etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
             },
           ],
-          income: false,
+          income: true,
         },
         {
           id: 16,
@@ -275,7 +355,7 @@ const tempData = {
           cost: 92503,
           memo: "학식",
           ecoList: null,
-          income: false,
+          income: true,
         },
       ],
     },
@@ -284,11 +364,11 @@ const tempData = {
 
 const tempData2 = {
   "totalMonthIncome": 880,
-  "totalMonthExpenditure": 92000,
+  "totalMonthExpenditure": 92001,
   "inMore": true,
   "exMore": true,
   "inDif": 880,
-  "exDif": 92000,
+  "exDif": 92003,
   "detailDtoList": [
     {
       date: "2022-04-26",
@@ -298,9 +378,9 @@ const tempData2 = {
           way: "현금",
           type: "경조사/회비",
           cost: 92503,
-          memo: "income memo",
+          memo: "지출입니동",
           ecoList: null,
-          income: true,
+          income: false,
         },
         {
           id: 2,
@@ -309,7 +389,7 @@ const tempData2 = {
           cost: 1726000,
           memo: null,
           ecoList: null,
-          income: true,
+          income: false,
         },
         {
           id: 13,
@@ -329,7 +409,7 @@ const tempData2 = {
               etcMemo: "평생 쓰는 물건 잃어버려서 재구매",
             },
             {
-              eco: "G",
+              eco: "R",
               ecoDetail: "비건식당 방문",
               etcMemo: null,
             },
