@@ -24,7 +24,6 @@ const EcoMission = () => {
     setIsModalOpen(false);
   };
 
-  //배열..
   const [missions, setMissions] = useState([
     {
       id: 1,
@@ -47,14 +46,10 @@ const EcoMission = () => {
       })
       .then((data) => {
         if (isSubscribed) {
-          // setTodayMission(data.todayMission);
-          // setMissName(data.todayMission.name || {});
-          // setMissionEmo(data.todayMission.emoji || {});
-
-          setMissions({
+          setMissions([{
             emoji: data.todayMission.emoji,
             text: data.todayMission.name,
-          })
+          }])
 
           if (data && data.length > 0) {
             console.log(data[0]);
@@ -95,33 +90,27 @@ const EcoMission = () => {
   // };
 
   console.log('----');
-  // console.log(missName);
-  // console.log(missionEmo);
   console.log(missions);
-  console.log(missions.emoji);
-  console.log(missions.text);
   console.log('----');
+
+  const testStr = missions[0].emoji.slice(2, 8);
+  console.log(testStr);
+  console.log(String.fromCodePoint(testStr));
   
-  const [inputs, setInputs] = useState({
-    //missions.map 오류
-    emoji: missions[0].emoji,
-    text: missions[0].text,
-    // emoji: String.fromCodePoint(todayMission.emoji),
-    // text: todayMission.name,
-  });
+  const [inputs, setInputs] = useState([]);
 
   const { emoji, text } = inputs;
 
-  // const onChange = useCallback(
-  //   (e) => {
-  //     const { name, value } = e.target;
-  //     setInputs({
-  //       ...inputs,
-  //       [name]: value,
-  //     });
-  //   },
-  //   [inputs]
-  // );
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+    },
+    [inputs]
+  );
 
   const nextId = useRef(1);
 
@@ -136,10 +125,10 @@ const EcoMission = () => {
       setMissions(missions.concat(mission));
       
       //다음날 데이터로 초기화
-      setInputs({
-        emoji: "#",
-        text: "다음날 데이터",
-      });
+      setInputs([...inputs, {
+        emoji: String.fromCodePoint(testStr),
+        text: missions[0].text,
+      }]);
       nextId.current += 1;
     },
     [missions, emoji, text]
@@ -192,14 +181,15 @@ const EcoMission = () => {
         
         <div className={EcoStyle.mission_box_input}>
           <input
-            value={text || ''}
+            value={missions.text || ''}
             emoji={emoji}
-            text={text}
+            text={missions.text}
             // onChange={onChange}
-            // onCreate={onCreate}
+            onCreate={onCreate}
           />
         </div>
-        {/* <p>{String.fromCodePoint(todayMission.emoji)}</p> */}
+
+        <p>{String.fromCodePoint(testStr)}</p>
 
         <button
           type="submit"
@@ -215,7 +205,7 @@ const EcoMission = () => {
         <p>내가 한 미션이 어떤 변화를 만들었을까요?</p>
       </div>
 
-      <EcoList missions={missions} />
+      <EcoList missions={inputs} />
 
       <Footer activeMenu="home">
         <div>홈</div>
