@@ -39,7 +39,7 @@ export default function FloatingPage() {
     if (total === 4) {
       axios
         .post("http://3.39.87.115:8080/income/new", {
-          userId: "user1@naver.com",
+          userId: null,
           in_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
           inType: cate.type,
@@ -50,7 +50,7 @@ export default function FloatingPage() {
           closeModal();
           setComplete(true);
           setTimeout(() => {
-            history.replace("/");
+            navigate("/", { replace: true });
           }, 2000);
         })
         .catch((error) => {
@@ -59,7 +59,7 @@ export default function FloatingPage() {
     } else {
       axios
         .post("http://3.39.87.115:8080/expenditure/new", {
-          userId: "user1@naver.com",
+          userId: null,
           ex_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
           exType: cate.type,
@@ -73,7 +73,7 @@ export default function FloatingPage() {
           closeModal();
           setComplete(true);
           setTimeout(() => {
-            history.replace("/");
+            navigate("/", { replace: true });
           }, 2000);
         })
         .catch((error) => {
