@@ -7,7 +7,6 @@ export function useOutSideRef() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        console.log("click");
         setup(false);
       } else {
         setup(true);

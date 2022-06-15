@@ -20,7 +20,6 @@ function DetailCategory() {
       setDetailList(detailList.filter((item) => item.id !== parseInt(index)));
       detailList.find((x) => {
         if (x.id === parseInt(index)) {
-          console.log("match", x.id);
           fetchData(x.id, x.income);
         }
       });
