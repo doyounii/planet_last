@@ -7,7 +7,7 @@ import DateHeader from "../DateHeader";
 import Calendar from "../CalendarPart/CalendarBody";
 import { Modal } from "../CalendarPart/Modal";
 
-function DatePrice({ propDate, propPrice, sendData }) {
+function DatePrice({ income, propDate, propPrice, sendData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [date, setDate] = useState(propDate);
   const [price, setPrice] = useState(propPrice);
@@ -28,7 +28,6 @@ function DatePrice({ propDate, propPrice, sendData }) {
       setDisabled(true);
     }
   };
-  console.log(focus);
 
   const onClickHandler = (btnType) => {
     sendData({ btnType: btnType, date: date, price: price });
@@ -42,7 +41,9 @@ function DatePrice({ propDate, propPrice, sendData }) {
     <div
       className={`shared-container date-price-container ${up ? "move" : ""}`}
     >
-      <p className={`date-text ${focus ? "moveup" : ""}`}>언제 받으셨나요?</p>
+      <p className={`date-text ${focus ? "moveup" : ""}`}>
+        언제 {income ? "받으" : "쓰"}셨나요?
+      </p>
       <div
         ref={ref}
         className={`input-data input-date ${up && focus ? "moveup" : ""}`}
@@ -76,7 +77,7 @@ function DatePrice({ propDate, propPrice, sendData }) {
         </Modal>
       )}
 
-      <p className="price-text">얼마 받으셨나요?</p>
+      <p className="price-text">얼마 {income ? "받으" : "쓰"}셨나요?</p>
       <div ref={ref} className="input-data input-price">
         <input
           id="inputPrice"

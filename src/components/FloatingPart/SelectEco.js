@@ -40,7 +40,6 @@ function SelectEnvir({ sendData, propData, buttons }) {
     //     checkedItemHandler(data, true);
     //   });
     // }
-    console.log(propData);
   }, []);
 
   const checkedItemHandler = (item, isChecked) => {

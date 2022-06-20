@@ -3,7 +3,7 @@ import FloatingButton from "../buttons/FloatingButton";
 import { CgClose } from "react-icons/cg";
 import { useOutSideRef } from "../OutsideRef";
 
-function Memo({ propType, sendData }) {
+function Memo({ income, propType, sendData }) {
   const [memo, setMemo] = useState("");
   const [disabled, setDisabled] = useState(true);
   const refs = useOutSideRef();
@@ -46,10 +46,14 @@ function Memo({ propType, sendData }) {
       </div>
       <FloatingButton
         className="memo-btn"
+        next={income ? "완료" : "다음"}
         onClick={onClickHandler}
         disabled={disabled}
       />
-      <div className="memo-skip-btn" onClick={() => onClickHandler("다음")}>
+      <div
+        className="memo-skip-btn"
+        onClick={() => onClickHandler(income ? "완료" : "다음")}
+      >
         넘어갈래요
       </div>
     </>

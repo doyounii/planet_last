@@ -20,7 +20,6 @@ function SelectTag({ submitFunc, btn }) {
   useEffect(() => {
     function handleClickOutside(event) {
       if (outSideRef.current && !outSideRef.current.contains(event.target)) {
-        console.log("click");
         addTag(event);
       }
     }
@@ -51,7 +50,6 @@ function SelectTag({ submitFunc, btn }) {
   };
 
   const checkHandler = ({ target }) => {
-    console.log(target);
     if (target.value === selectedTag) {
       setSelectedTag(0);
       setRequest(true);
@@ -68,7 +66,6 @@ function SelectTag({ submitFunc, btn }) {
         submitFunc("취소", "취소");
         break;
       case "다음":
-        console.log(text);
         if (text.length !== 0 && selectedTag !== 0) {
           submitFunc(text, selectedTag);
         }
