@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useQueries, useQueryClient } from "react-query";
 import { format, isSameMonth, subMonths, addMonths, parseISO } from "date-fns";
 import Footer from "../../components/Footer/Footer";
