@@ -88,6 +88,7 @@
   font-family: Pretendard;
   margin-left: 21px;
   color: #FFFFFF;
+  float: left;
 }
 
 .category-box h1 {
@@ -96,6 +97,15 @@
   font-size: 15px;
   font-family: Pretendard;
   color: #ffffff;
+  float: right;
+}
+
+.category-box h2 {
+  display: inline;
+  font-size: 15px;
+  font-family: Pretendard;
+  margin-left: 3px;
+  color: #FFFFFF;
 }
 
 .category-box .detail-icon {
