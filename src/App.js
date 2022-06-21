@@ -2,7 +2,9 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import Auth from "./hoc/Auth";
 import Home from "./pages/Home/Home";
+import Oauth from "./components/LoginPart/Oauth";
 import CalendarPage from "./pages/Calendar/CalendarPage";
 
 import Statistics from "./pages/Statistics/Statistics";
@@ -43,36 +45,37 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/calendar" element={<CalendarPage />}></Route>
+        <Route path="/" element={Auth(Home, true)} />
+        <Route path="/login" element={Auth(Login, null)} />
+        <Route path="/oauth" element={Auth(Oauth, null)} />
+        <Route path="/calendar" element={Auth(CalendarPage, true)} />
         <Route
           path="/calendar/:month/:day"
-          element={<DetailCategory />}
-        ></Route>
-        <Route path="/statistics" element={<Statistics />}></Route>
-        <Route path="/statisticsView" element={<StatisticsView />}></Route>
+          element={Auth(DetailCategory, true)}
+        />
+        <Route path="/statistics" element={<Statistics />} />
+        <Route path="/statisticsView" element={<StatisticsView />} />
         <Route
           path="/statisticsView/:way/:year/:month"
           element={<StatisticsWays />}
-        ></Route>
-        <Route path="/statisticsModify" element={<StatisticsModify />}></Route>
-        <Route path="/diary" element={<Diary />}></Route>
-        <Route path="/news" element={<News />}></Route>
-        <Route path="/setting" element={<Setting />}></Route>
-        <Route path="/myPage" element={<MyPage />}></Route>
-        <Route path="/termsOfUse" element={<TermsOfUse />}></Route>
-        <Route path="/ecoMission" element={<EcoMission />}></Route>
+        />
+        <Route path="/statisticsModify" element={<StatisticsModify />} />
+        <Route path="/diary" element={<Diary />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/setting" element={<Setting />} />
+        <Route path="/myPage" element={<MyPage />} />
+        <Route path="/termsOfUse" element={<TermsOfUse />} />
+        <Route path="/ecoMission" element={<EcoMission />} />
 
-        <Route path="/floatingpage" element={<FloatingPage />}></Route>
-        <Route path="/ecocategory" element={<EcoCategory />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/usePage" element={<UsePage />}></Route>
-        <Route path="/informationPage" element={<InformationPage />}></Route>
-        <Route path="/coupon" element={<Coupon />}></Route>
-        <Route path="/couponJoin" element={<CouponJoin />}></Route>
-        <Route path="/detail" element={<Detail />}></Route>
-        <Route path="/inquiry" element={<Inquiry />}></Route>
-        <Route path="/inquiryForm" element={<InquiryForm />}></Route>
+        <Route path="/floatingpage" element={<FloatingPage />} />
+        <Route path="/ecocategory" element={<EcoCategory />} />
+        <Route path="/usePage" element={<UsePage />} />
+        <Route path="/informationPage" element={<InformationPage />} />
+        <Route path="/coupon" element={<Coupon />} />
+        <Route path="/couponJoin" element={<CouponJoin />} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/inquiry" element={<Inquiry />} />
+        <Route path="/inquiryForm" element={<InquiryForm />} />
       </Routes>
     </QueryClientProvider>
   );

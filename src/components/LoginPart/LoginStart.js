@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginStyle from "./Login.module.css";
 import logo from "../../components/LoginPart/img/Group 345.png";
 import planet from "../../planet/1-2.json";
@@ -6,7 +6,9 @@ import Lottie from "react-lottie";
 import google from "./img/login_google.png";
 import naver from "./img/login_naver.png";
 import kakao from "./img/login_kakao.png";
-import { Link } from "react-router-dom";
+
+const API_KEY = process.env.REACT_APP_REST_API_KEY;
+const REDIRECT_URI = "http://localhost:3000/oauth";
 
 function Login() {
   const lottieOptions = {
@@ -18,6 +20,8 @@ function Login() {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   return (
     <section className={LoginStyle.content}>
@@ -50,13 +54,19 @@ function Login() {
         <p>아이디와 비밀번호 없이 간편하게 로그인할 수 있어요!</p>
       </div>
       <div className={LoginStyle.loginButton}>
-        <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google">
+        <a
+          alt="구글로 로그인하기"
+          href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google"
+        >
           <img src={google} />
         </a>
-        <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/naver">
+        <a
+          alt="네이버로 로그인하기"
+          href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/naver"
+        >
           <img src={naver} />
         </a>
-        <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao">
+        <a alt="카카오로 로그인하기" href={KAKAO_AUTH_URI}>
           <img src={kakao} />
         </a>
       </div>
