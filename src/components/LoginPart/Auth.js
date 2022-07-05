@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Auth(SpecificComponent, option, adminRoute = null) {
+function Auth(SpecificComponent, option) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
+    const userId = window.localStorage.getItem("userId");
 
-    if (!token) {
-      if (option) {
+    if (option) {
+      if (!userId) {
         alert("로그인하세요");
         navigate("/login");
       }
