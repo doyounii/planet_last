@@ -2,75 +2,57 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
 .content {
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   flex-wrap: wrap;
 
-  display: flex;
-  justify-content: center;
-
   position: fixed;
-  width: 100%;
+  width: 90%;
   margin-left: 5%;
   margin-right: 5%;
   height: 100vh;
+  overflow: scroll;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  top: 100px;
-  left: 60px;
+  /* margin-top: 40px; */
 }
 
 .container p {
   font-family: "Pretendard";
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 18px;
-  line-height: 160.52%;
+  line-height: 139.52%;
   /* or 29px */
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin-top: -290px;
 
   /* white */
 
-  position: relative;
+  position: absolute;
   color: #ffffff;
+  text-align: center;
+  top: 48%;
 
   z-index: 2;
 }
 
 .logo {
-  position: relative;
+  margin-top: 20px;
   width: 168px;
   height: 23.3px;
-  display: flex;
-  justify-content: center;
-  margin-left: 5%;
-  margin-right: 5%;
 }
 
 .planet {
-  position: relative;
-  width: 100%;
-  height: 456px;
+  height: max-content;
   opacity: 0.4;
-  left: -85px;
   z-index: 1;
-
-  justify-content: center;
-  text-align: center;
-}
-
-.login {
-  position: absolute;
-  top: 527px;
-  width: 84%;
-  display: flex;
-  justify-content: center;
 }
 
 .login p {
@@ -82,24 +64,30 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 140%;
-  /* identical to box height, or 20px */
-
-  display: flex;
-  align-items: center;
   text-align: center;
 
   /* gray2 */
-
   z-index: 3;
   color: #939393;
+  margin-bottom: 20px;
 }
 
-.loginButton img {
+.loginButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginButton a {
   position: relative;
-  width: 82%;
+  width: 70vw;
+  max-width: 300px;
   height: 48px;
-  left: 16px;
-  top: 110px;
-  margin-bottom: 10px;
+  margin: 0 auto;
+
   z-index: 3;
+}
+.loginButton img {
+  width: 70vw;
+  max-width: 300px;
 }
