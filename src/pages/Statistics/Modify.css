@@ -5,6 +5,7 @@
   font-family: Pretendard;
   color: white;
   position: relative;
+  background-color: rgb(var(--navy));
 }
 
 /*header style*/
@@ -63,6 +64,17 @@
   color: #939393;
   margin-right: 5%;
   width: 10%;
+}
+
+.modify-detail-block :nth-child(5) {
+  position: relative;
+}
+.modify-detail-block :nth-child(5) .modify-detail-title {
+  position: absolute;
+  top: 9px;
+}
+.modify-detail-block :nth-child(5) .modify-detail-value {
+  margin-left: 11%;
 }
 
 .modify-detail-block .modify-detail-value {
