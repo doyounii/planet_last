@@ -41,7 +41,7 @@ function Home({ activeHome }) {
 
   const fetchData = async (userId) => {
     const response = await axios.get(
-      `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/main/2022/${format(
+      `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/main/2022/${format(
         new Date(),
         "M"
       )}`,
