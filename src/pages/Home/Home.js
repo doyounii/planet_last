@@ -31,28 +31,23 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    fetchData();
+    const userId = window.localStorage.getItem("userId");
+    fetchData(userId);
     // setMessage(data);
     // setUserName(data.userName);
     // setloading(false);
   }, []);
 
-  const fetchData = async () => {
-    const response = await fetch(
+  const fetchData = async (userId) => {
+    const response = await axios.get(
       `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/main/2022/${format(
         new Date(),
         "M"
       )}`,
-      //${format(new Date(), "M")}
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
+      { headers: { userId: userId } }
     );
-    const data = await response.json();
+    const data = await response.data;
+    console.log(response);
     setMessage(data);
     setUserName(data.userName);
     setloading(false);
