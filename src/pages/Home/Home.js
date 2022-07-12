@@ -35,15 +35,15 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    fetchData();
-    // setMessage(data);
-    // setUserName(data.userName);
-    // setloading(false);
+    // fetchData();
+    setMessage(data);
+    setUserName(data.userName);
+    setloading(false);
   }, []);
 
   const fetchData = async () => {
     const response = await fetch(
-      `http://3.39.87.115:8080/main/2022/${format(new Date(), "M")}`,
+      `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/main/2022/${format(new Date(), "M")}`,
       //${format(new Date(), "M")}
       {
         method: "GET",
@@ -301,7 +301,7 @@ function Home({ activeHome }) {
 
 export default Home;
 
-const data2 = {
+const data = {
   userName: "사용자1",
   totalIncomeMonth: 102000,
   totalExpenditureMonth: 54900,
