@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, useQueries, queryClient, useQueryClient } from "react-query";
+import { useQueries, useQueryClient } from "react-query";
+import axios from "axios";
 import { format, isSameMonth, subMonths, addMonths, parseISO } from "date-fns";
 import Footer from "../../components/Footer/Footer";
 import DateHeader from "../../components/DateHeader";
@@ -14,17 +15,14 @@ import { IoIosArrowForward } from "react-icons/io";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 const fetchData = async (date) => {
-  // const response = await fetch(
-  //   `/calendar/${format(date, "yyyy")}/${format(date, "M")}`,
-  //   {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //   }
+  // const response = await axios.get(
+  //   `https://플랜잇.웹.한국:8080/calendar/${format(date, "yyyy")}/${format(
+  //     date,
+  //     "M"
+  //   )}`
   // );
-  // const data = await response.json();
+  //const data = await response.data;
+
   const data = {
     anniversaryList: ["2022-06-03", "2022-06-13", "2022-06-17"],
     calendarDto: {
@@ -77,22 +75,15 @@ const fetchData = async (date) => {
 };
 
 const fetchDetailData = async (day) => {
-  // console.log("fetch");
   // const date = parseISO(day);
-  // const response = await fetch(
-  //   `calendar/${format(date, "yyyy")}/${format(date, "M")}/${format(
+
+  // const response = await axios.get(
+  //   `https://플랜잇.웹.한국:8080/calendar/${format(date, "yyyy")}/${format(
   //     date,
-  //     "d"
-  //   )}`,
-  //   {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //   }
+  //     "M"
+  //   )}/${format(date, "d")}`
   // );
-  // const data = await response.json();
+  // const data = await response.data;
   const data = {
     totalMoney: {
       가전: -20432,
@@ -115,12 +106,12 @@ const fetchDetailData = async (day) => {
               userAdd: null,
             },
             {
-              eco: "G",
+              eco: "R",
               ecoDetail: "비건식당 방문",
               userAdd: null,
             },
             {
-              eco: "N",
+              eco: "R",
               ecoDetail: "사용자 추가",
               userAdd: "라벨 붙은 음료수 삼",
             },
@@ -156,6 +147,14 @@ const fetchDetailData = async (day) => {
         },
       ],
       생필품: [
+        {
+          type: "기타",
+          way: "카드",
+          id: "125",
+          cost: 15000,
+          memo: "빌려준 돈 받음",
+          income: true,
+        },
         {
           type: "생필품",
           way: "카드",
@@ -226,6 +225,7 @@ const fetchDetailData = async (day) => {
       ],
     },
   };
+
   return data;
 };
 
@@ -324,7 +324,17 @@ function CalendarPage() {
   };
 
   if (results[1].status === "loading")
-    return <div style={{ color: "white" }}>로딩중..</div>;
+    return (
+      <div
+        style={{
+          color: "#8B8B8B",
+          textAlign: "center",
+          marginTop: "45vh",
+        }}
+      >
+        로딩중..
+      </div>
+    );
   if (results[1].status === "error")
     return <div style={{ color: "white" }}>에러가 발생했습니다.</div>;
 
@@ -345,12 +355,6 @@ function CalendarPage() {
             <div className="month-type">지출</div>
             <div className="month-total">{message.totalMonthExpenditure}원</div>
           </div>
-        </div>
-
-        <div style={{ color: "white" }}>
-          <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao">
-            Naver
-          </a>
         </div>
 
         {isModalOpen && (
@@ -385,7 +389,11 @@ function CalendarPage() {
         ) ? (
           <DetailList value={selectedDate} />
         ) : (
-          <div style={{ color: "white" }}>내역 없음</div>
+          <div
+            style={{ fontSize: "12px", color: "#8B8B8B", textAlign: "center" }}
+          >
+            내역 없음
+          </div>
         )}
       </div>
       <Footer activeMenu="calendar">

@@ -11,6 +11,7 @@ import Footer from "../Footer/Footer";
 function DetailCategory() {
   const history = useNavigate();
   const data = useLocation().state;
+  const [detailMoney, setDetailMoney] = useState({ income: 0, expend: 0 });
   const [detailList, setDetailList] = useState([]);
 
   const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
@@ -20,16 +21,26 @@ function DetailCategory() {
       setDetailList(detailList.filter((item) => item.id !== parseInt(index)));
       detailList.find((x) => {
         if (x.id === parseInt(index)) {
-          console.log("match", x.id);
           fetchData(x.id, x.income);
         }
       });
     }, 2000);
   };
-
+  console.log(detailMoney);
   useEffect(() => {
     if (data.typeDetail !== undefined || data.typeDetail !== null) {
       setDetailList(data.typeDetail);
+      if (detailMoney.income === 0 && detailMoney.expend === 0) {
+        let incomeTmp = 0;
+        let expendTmp = 0;
+        data.typeDetail.value.map((data) => {
+          console.log(detailMoney);
+          if (data.income) incomeTmp += data.cost;
+          else expendTmp += data.cost;
+          console.log(incomeTmp);
+        });
+        setDetailMoney({ income: incomeTmp, expend: expendTmp });
+      }
     }
   }, [data]);
 
@@ -42,6 +53,7 @@ function DetailCategory() {
       },
     });
   };
+  console.log(data);
 
   return (
     <>
@@ -63,12 +75,28 @@ function DetailCategory() {
             <div className="detail-cost">
               <div className="detail-info">
                 <div className="detail-cost-label">수입</div>
-                <div className="detail-cost-value">내역 없음</div>
+                <div
+                  className={`detail-cost-value ${
+                    detailMoney.income === 0 ? "none" : ""
+                  }`}
+                >
+                  {detailMoney.income !== 0
+                    ? detailMoney.income.toLocaleString()
+                    : "내역 없음"}
+                  원
+                </div>
               </div>
               <div className="detail-info">
                 <div className="detail-cost-label">지출</div>
-                <div className="detail-cost-value">
-                  {data.typeCost.toLocaleString()}원
+                <div
+                  className={`detail-cost-value ${
+                    detailMoney.expend === 0 ? "none" : ""
+                  }`}
+                >
+                  {detailMoney.expend !== 0
+                    ? detailMoney.expend.toLocaleString()
+                    : "내역 없음"}
+                  원
                 </div>
               </div>
             </div>
@@ -100,7 +128,11 @@ function DetailCategory() {
                   >
                     <SwipeableList key={item.id} onSwipe={onSwipe}>
                       <div className="details" key={item.id}>
-                        <div className={`details-circle ${isEco(ecoCnt)}`}>
+                        <div
+                          className={`details-circle ${isEco(ecoCnt)} ${
+                            item.income ? "none" : ""
+                          }`}
+                        >
                           ● &nbsp;
                         </div>
                         <DetailItem item={item} ecoCnt={ecoCnt} />

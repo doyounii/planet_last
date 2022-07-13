@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import { Link, Navigate } from "react-router-dom";
 import homeStyle from "./Home.module.css";
-import {
-  FiSettings,
-  FiUser,
-  FiEdit3,
-} from "react-icons/fi";
+import { FiSettings, FiUser, FiEdit3 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
 import { BsPlusCircle } from "react-icons/bs";
@@ -35,25 +31,23 @@ function Home({ activeHome }) {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    // fetchData();
-    setMessage(data);
-    setUserName(data.userName);
-    setloading(false);
+    const userId = window.localStorage.getItem("userId");
+    fetchData(userId);
+    // setMessage(data);
+    // setUserName(data.userName);
+    // setloading(false);
   }, []);
 
-  const fetchData = async () => {
-    const response = await fetch(
-      `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/main/2022/${format(new Date(), "M")}`,
-      //${format(new Date(), "M")}
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
+  const fetchData = async (userId) => {
+    const response = await axios.get(
+      `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/main/2022/${format(
+        new Date(),
+        "M"
+      )}`,
+      { headers: { userId: userId } }
     );
-    const data = await response.json();
+    const data = await response.data;
+    console.log(response);
     setMessage(data);
     setUserName(data.userName);
     setloading(false);
@@ -265,9 +259,7 @@ function Home({ activeHome }) {
         <section className={homeStyle.etc}>
           <div className={homeStyle.box}>
             <Link to="/EcoMission" className={activeHome}>
-              <IoIosArrowForward
-                className={homeStyle.btn}
-              ></IoIosArrowForward>
+              <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
             <p className={homeStyle.box_text}>
               데일리
@@ -276,9 +268,7 @@ function Home({ activeHome }) {
           </div>
           <div className={homeStyle.box}>
             <Link to="/statistics" className={activeHome}>
-              <IoIosArrowForward
-                className={homeStyle.btn}
-              ></IoIosArrowForward>
+              <IoIosArrowForward className={homeStyle.btn}></IoIosArrowForward>
             </Link>
             <p className={homeStyle.box_text}>
               월간

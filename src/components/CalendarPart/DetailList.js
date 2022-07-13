@@ -3,7 +3,6 @@ import { useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 import ko from "date-fns/locale/ko";
-import { isSameDay, setDate } from "date-fns";
 import { StyledDetailBlock } from "./StyledDetail";
 
 const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
@@ -12,11 +11,7 @@ const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
 export function DetailItem({ item, ecoCnt }) {
   return (
     <>
-      <div
-        className="details-memo"
-        onClick={(e) => console.log(e.target.value)}
-        key={item.id}
-      >
+      <div className="details-memo" key={item.id}>
         {item.memo !== null ? item.memo : item.type}
         {item.ecoList !== undefined &&
           item.ecoList !== null &&
@@ -78,7 +73,6 @@ function DetailList({ value }) {
   const renderDetailList = (filterType) => {
     let detailTemp = [];
     let ecoCnt = 0;
-    console.log(filterType);
     filterType !== undefined &&
       filterType !== null &&
       filterType.value.forEach((item) => {

@@ -163,7 +163,12 @@ export default function FloatingPage() {
     switch (progress) {
       case 1:
         article = (
-          <DatePrice propDate={date} propPrice={price} sendData={changeData} />
+          <DatePrice
+            income={total === 4 ? true : false}
+            propDate={date}
+            propPrice={price}
+            sendData={changeData}
+          />
         );
         break;
       case 2:
@@ -179,7 +184,13 @@ export default function FloatingPage() {
         );
         break;
       case 4:
-        article = <Memo propType={cate} sendData={changeData} />;
+        article = (
+          <Memo
+            income={total === 4 ? true : false}
+            propType={cate}
+            sendData={changeData}
+          />
+        );
         break;
       case 5:
         article = (
@@ -216,15 +227,7 @@ export default function FloatingPage() {
           <br /> 홈 화면으로 돌아갑니다
         </div>
         <div className={FloatingStyle.floating_animation}>
-          <Lottie
-            options={{ ...lottieDefault, animationData: Complete }}
-            eventListeners={[
-              {
-                eventName: "complete",
-                callback: () => console.log("the animation completed"),
-              },
-            ]}
-          />
+          <Lottie options={{ ...lottieDefault, animationData: Complete }} />
         </div>
       </div>
     );
