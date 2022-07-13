@@ -9,7 +9,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.19.5",
-    "axios": "^0.26.1",
+    "axios": "^0.27.2",
     "chart.js": "^3.7.1",
     "create-react-app": "^5.0.0",
     "date-fns": "^2.0.0-beta.5",
@@ -36,6 +36,7 @@
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
+  "proxy": "https://플랜잇.웹.한국:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

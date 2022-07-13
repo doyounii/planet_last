@@ -40,7 +40,7 @@ const lottieOptions = {
 
 function Home({ activeHome }) {
   const [message, setMessage] = useState(0);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("행성 1234호");
   const [income, setIncome] = useState(0);
   const [expenditure, setExpenditure] = useState(0);
 
@@ -48,6 +48,7 @@ function Home({ activeHome }) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [ecoPercentage, setEcoPercentage] = useState(0);
 
   const [position2, setposition2] = useState(0);
 
@@ -70,6 +71,7 @@ function Home({ activeHome }) {
       setUserName(messages.userName === null ? "" : messages.userName);
       setIncome(messages.totalIncomeMonth);
       setExpenditure(messages.totalExpenditureMonth);
+      setEcoPercentage(message.ecoPercentage);
     }
   }, [queryClient, results]);
 
@@ -93,19 +95,19 @@ function Home({ activeHome }) {
     setIsModalOpen2(false);
   };
 
-  const eco = message.ecoPercentage;
 
-  if (eco !== 0) {
-    if (eco > 0 && eco < 25) {
+  if (ecoPercentage !== 0) {
+    if (ecoPercentage > 0 && ecoPercentage < 25) {
       lottieOptions.animationData = low;
-    } else if (eco >= 25 && eco < 50) {
+    } else if (ecoPercentage >= 25 && ecoPercentage < 50) {
       lottieOptions.animationData = mid;
-    } else if (eco >= 50 && eco < 75) {
+    } else if (ecoPercentage >= 50 && ecoPercentage < 75) {
       lottieOptions.animationData = highmid;
     } else {
       lottieOptions.animationData = high;
     }
   }
+
   // if (results.status === "loading") return <div>loading...</div>;
   return (
     <>
@@ -124,7 +126,7 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              {!loading ? userName : ""}
+              {!loading ? userName : "행성 1234호"}
               <FiEdit3
                 className={homeStyle.icon}
                 alt="닉네임 변경"
@@ -146,7 +148,7 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <div className={homeStyle.planet}>
-                {eco === 0 ? (
+                {ecoPercentage === 0 ? (
                   <div>
                     {" "}
                     <img alt="만들어지지 않은 행성" src={zero} />
@@ -246,4 +248,5 @@ Home.defaultProps = {
   income: 0,
   expenditure: 0,
   userName: "",
+  ecoPercentage: 0,
 };

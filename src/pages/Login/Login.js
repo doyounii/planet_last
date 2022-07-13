@@ -23,6 +23,7 @@ function Login() {
 
   const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+  console.log(process.env.REACT_APP_API_URL);
   return (
     <section className={LoginStyle.content}>
       <div className={LoginStyle.container}>

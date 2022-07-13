@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MypageStyle from './Mypage.module.css';
 import Footer from '../../components/Footer/Footer';
@@ -9,6 +9,7 @@ function MyPage() {
   //계정 이름, 이메일, 로그인 여부 임의 설정
   const [userName, setUserName] = useState();
   const [userEmail, setUserEmail] = useState();
+  const [profileImage, setProfileImage] = useState();
 
   const [kakaoLogin, setKakaoLogin] = useState(true);
   const [naverLogin, setNaverLogin] = useState(false);
@@ -18,15 +19,23 @@ function MyPage() {
     try {
       // Kakao SDK API를 이용해 사용자 정보 획득
       let data = await window.Kakao.API.request({
-        //url: "",
+        url: "/v2/user/me",
       });
       // 사용자 정보 변수에 저장
       setUserEmail(data.id);
       setUserName(data.properties.nickname);
+      setProfileImage(data.properties.profile_image);
+
+      console.log(userName);
+      console.log(userEmail);
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <div className={ MypageStyle.container }>
@@ -38,10 +47,10 @@ function MyPage() {
         </div>
         <div className={ MypageStyle.name_box }>
             {/*소셜로그인 사용자 정보*/}
-            {/*<h1>{userName}</h1>*/}
-            {/*<p>{userEmail}</p>*/}
-            <h1>이수빈</h1>
-            <p>20201961@sungshin.ac.kr</p>
+            <h1>{userName}</h1>
+            <p>{userEmail}</p>
+            {/* <h1>이수빈</h1>
+            <p>20201961@sungshin.ac.kr</p> */}
         </div>
         <div className={ MypageStyle.login_box }>
             <h1>소셜로그인 연결</h1>
@@ -82,7 +91,10 @@ function MyPage() {
           </div>
         </Link>
 
-        <div className={ MypageStyle.logout_box }>
+        <div className={ MypageStyle.logout_box } onClick={()=>{
+              window.localStorage.removeItem('token');
+              window.localStorage.removeItem('userId');
+            }}>
             <p>로그아웃</p>
         </div>
 
@@ -94,6 +106,7 @@ function MyPage() {
         </Footer>
     </div>
   );
-}
+
+};
 
 export default MyPage;

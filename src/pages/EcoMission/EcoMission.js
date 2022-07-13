@@ -66,28 +66,28 @@ const EcoMission = () => {
     return () => (isSubscribed = false);
   }, []);
 
-  // const fetchFunc = () => {
-  //   //백엔드로 데이터 보내기
-  //   fetch(
-  //     `/mission/${todayMission.emoji}/${todayMission.name}`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         mission: todayMission.emoji,
-  //       }),
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       if (response.token) {
-  //         localStorage.setItem("wtw-token", response.token);
-  //       }
-  //     });
-  // };
+  const fetchFunc = () => {
+    //백엔드로 데이터 보내기
+    fetch(
+      `/mission/${todayMission.emoji}/${todayMission.name}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          mission: todayMission.emoji,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      });
+  };
 
   console.log('----');
   console.log(missions);
@@ -169,6 +169,7 @@ const EcoMission = () => {
           </Modal>
         )}
 
+      {/* To-do 달 바뀔 때마다 리스트 빈 화면으로 초기화 하기 */}
       {format(date, "M월")} <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button>
       </div>
       

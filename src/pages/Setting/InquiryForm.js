@@ -6,43 +6,14 @@ import Uploader from "../../components/InquiryPart/Uploader";
 import Popup from '../../components/InquiryPart/Popup';
 import Inquiry from './Inquiry';
 
-const InquiryForm = () => {
-  const [data, setData] = useState([]);
-  const dataId = useRef(1);
-
-  const [dummy, setDummy] = useState([
-    {
-      id:1,
-      title: "문의",
-      content: "문의할게요!",
-      create_date: new Date().getTime()
-    },
-  ]);
-
-  const onCreate = (title, content) => {
-    const created_date = new Date().getTime();
-    
-    const newItem = {
-      title,
-      content,
-      created_date,
-      id: dataId.current
-    };
-    setDummy(dummy.concat(newItem));
-
-    dataId.current += 1;
-
-    setData([newItem, ...data]);
-  }
-
+const InquiryForm = ({ onCreate }) => {
   const [state, setState] = useState({
-    title: "",
+    title : "",
     content: "",
   });
 
-  const navigate = useNavigate();
-
-  console.log('asda', onCreate);
+  const titleInput = useRef();
+  const contentTextarea = useRef();
 
   const handleChangeState = (e) => {
     setState({
@@ -52,17 +23,36 @@ const InquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    <Inquiry dummy={dummy} />
     console.log(state);
     onCreate(state.title, state.content);
-    alert("저장 성공!");
-
-    navigate('/Inquiry');
 
     setState({
       title: "", content: "",
     });
+
+    navigate('/Inquiry');
   };
+
+  const navigate = useNavigate();
+
+  // const onCreate = (title, content) => {
+  //   const created_date = new Date().getTime();
+    
+  //   const newItem = {
+  //     title,
+  //     content,
+  //     created_date,
+  //     id: dataId.current
+  //   };
+  //   setDummy(dummy.concat(newItem));
+
+  //   dataId.current += 1;
+
+  //   setData([newItem, ...data]);
+  // }
+
+
+  // console.log('asda', onCreate);
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -88,6 +78,7 @@ const InquiryForm = () => {
           <div className={ InquiryStyle.time_info_box }>
               <h1>내용</h1>
               <input
+                ref={titleInput}
                 type="text"
                 name="title"
                 value={state.title}
@@ -95,6 +86,7 @@ const InquiryForm = () => {
                 onChange={handleChangeState}
               />
               <textarea
+              ref={contentTextarea}
                 type="text"
                 name="content"
                 value={state.content}
