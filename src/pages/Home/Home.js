@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useQueryClient, useQuery } from "react-query";
 import Footer from "../../components/Footer/Footer";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import homeStyle from "./Home.module.css";
 import { FiSettings, FiUser, FiEdit3 } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
-import { AiFillPlusCircle, AiOutlineQuestionCircle } from "react-icons/ai";
-import { BsPlusCircle } from "react-icons/bs";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { HiOutlinePlus } from "react-icons/hi";
 import high from "../../planet/1-2.json";
 import highmid from "../../planet/1-2.json";
 import low from "../../planet/4-2.json";
@@ -18,100 +20,67 @@ import zero from "./img/Mask.png";
 import { Modal } from "../../components/CalendarPart/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
 
+const fetchData = async (userId) => {
+  const response = await axios.get(
+    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/main/2022/${format(
+      new Date(),
+      "M"
+    )}`,
+    { headers: { userId: userId } }
+  );
+  const data = await response.data;
+  return data;
+};
+
+const lottieOptions = {
+  loop: true,
+  autoplay: true,
+  rendererSettings: {
+    className: "add-class", // svg에 적용
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
 function Home({ activeHome }) {
-  const [income, setIncome] = useState(0);
   const [message, setMessage] = useState(0);
+  const [userName, setUserName] = useState("");
+  const [income, setIncome] = useState(0);
   const [expenditure, setExpenditure] = useState(0);
-  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const [loading, setLoading] = useState(true);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
-  const [loading, setloading] = useState(true);
 
   const [position2, setposition2] = useState(0);
-  const [userName, setUserName] = useState("");
+
+  const currentDate = new Date();
+  const userId = window.localStorage.getItem("userId");
+  const queryClient = useQueryClient();
+  const results = useQuery({
+    queryKey: "homeData",
+    queryFn: () => fetchData(userId),
+    enabled: !!userId,
+    staleTime: 1000 * 5 * 60, // 5분
+    cacheTime: Infinity, // 제한 없음
+  });
 
   useEffect(() => {
-    const userId = window.localStorage.getItem("userId");
-    fetchData(userId);
-    // setMessage(data);
-    // setUserName(data.userName);
-    // setloading(false);
-  }, []);
+    if (results.status === "success") {
+      const messages = queryClient.getQueryData("homeData");
 
-  const fetchData = async (userId) => {
-    const response = await axios.get(
-      `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/main/2022/${format(
-        new Date(),
-        "M"
-      )}`,
-      { headers: { userId: userId } }
-    );
-    const data = await response.data;
-    console.log(response);
-    setMessage(data);
-    setUserName(data.userName);
-    setloading(false);
-  };
-  console.log(message);
-  // const fetchFunc = (e) => {
-  //   e.preventDefault();
-  //   //백엔드로 데이터 보내기
-  //   fetch(`/main/update/${userName}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       useName: userName,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       if (response.token) {
-  //         localStorage.setItem("wtw-token", response.token);
-  //       }
-  //     })
-  //     .then((e) => {
-  //       Navigate("/");
-  //     });
-  // };
-
-  console.log(message);
-  const renderHeader = () => {
-    const yNmFormat = "M월";
-
-    return (
-      <div className="header row flex-middle">
-        <div className="col col-center">
-          <span>{format(currentDate, yNmFormat)}</span>
-        </div>
-      </div>
-    );
-  };
-
-  const lottieOptions = {
-    loop: true,
-    autoplay: true,
-    rendererSettings: {
-      className: "add-class", // svg에 적용
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-
-  const handleChange = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const maxLength = (text) => {
-    if (text.length > text.maxLength) {
-      text = text.slice(0, text.maxLength);
+      setMessage(messages);
+      setUserName(messages.userName === null ? "" : messages.userName);
+      setIncome(messages.totalIncomeMonth);
+      setExpenditure(messages.totalExpenditureMonth);
     }
-  };
+  }, [queryClient, results]);
 
-  const onReset = () => {
-    setUserName("");
-  };
+  useEffect(() => {
+    if (results.status === "success") {
+      setLoading(false);
+    }
+  }, [results.status]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -129,7 +98,7 @@ function Home({ activeHome }) {
 
   const eco = message.ecoPercentage;
 
-  if (eco != 0) {
+  if (eco !== 0) {
     if (eco > 0 && eco < 25) {
       lottieOptions.animationData = low;
     } else if (eco >= 25 && eco < 50) {
@@ -140,13 +109,13 @@ function Home({ activeHome }) {
       lottieOptions.animationData = high;
     }
   }
-  if (loading) return <div>loading...</div>;
+  // if (results.status === "loading") return <div>loading...</div>;
   return (
     <>
       <div className={homeStyle.contents}>
         <nav className={homeStyle.menu}>
           <Link to="/Login" className={activeHome}>
-            <img src={logo} className={homeStyle.logo} />
+            <img alt="플랜잇 로고" src={logo} className={homeStyle.logo} />
           </Link>
           <Link to="/Setting">
             <FiSettings className={homeStyle.icon}></FiSettings>
@@ -158,42 +127,19 @@ function Home({ activeHome }) {
         <section className={homeStyle.profiles}>
           <div className={homeStyle.main}>
             <div className={homeStyle.nickname}>
-              {userName}
+              {!loading ? userName : ""}
               <FiEdit3
                 className={homeStyle.icon}
                 alt="닉네임 변경"
                 onClick={(e) => openModal2(e)}
               ></FiEdit3>
               {isModalOpen2 && (
-                // <Modal
-                //   className={position2}
-                //   onClose={closeModal2}
-                //   maskClosable={true}
-                //   visible={true}
-                // >
-                //   <form onSubmit={fetchFunc}>
-                //     <input
-                //       id="inputMemo"
-                //       type="text"
-                //       value={userName}
-                //       onChange={handleChange}
-                //       maxLength="8"
-                //       onInput={maxLength(userName)}
-                //     />
-                //     <CgClose onClick={onReset}></CgClose>
-
-                //     <p>{userName.length}/8</p>
-
-                //     <button type="submit">완료</button>
-                //   </form>
-                //   <button onClick={closeModal2}>취소</button>
-                // </Modal>
                 <EditName
                   className={position2}
                   onClose={closeModal2}
                   maskClosable={true}
                   visible={true}
-                  state={message.userName}
+                  state={userName}
                 ></EditName>
               )}
             </div>
@@ -206,7 +152,7 @@ function Home({ activeHome }) {
                 {eco === 0 ? (
                   <div>
                     {" "}
-                    <img src={zero} />
+                    <img alt="만들어지지 않은 행성" src={zero} />
                     <p>
                       아직 행성이 만들어지지 않았어요! <br /> 지금 바로 가계부를
                       작성해보세요{" "}
@@ -243,17 +189,23 @@ function Home({ activeHome }) {
           </div>
         </section>
         <section className={homeStyle.monthly}>
-          <div className={homeStyle.month}>{renderHeader()}</div>
+          <div className={homeStyle.month}>
+            <div className="header row flex-middle">
+              <div className="col col-center">
+                <span>{format(currentDate, "M월")}</span>
+              </div>
+            </div>
+          </div>
           <Link to="/#" className={activeHome}>
             <IoIosArrowForward
               className={homeStyle.history}
             ></IoIosArrowForward>
           </Link>
           <div className={homeStyle.income}>
-            수입 <h1>{message.totalIncomeMonth.toLocaleString()}원</h1>
+            수입 <h1>{!loading ? income.toLocaleString() : 0}원</h1>
           </div>
           <div className={homeStyle.expend}>
-            지출 <h1>{message.totalExpenditureMonth.toLocaleString()}원</h1>
+            지출 <h1>{!loading ? expenditure.toLocaleString() : 0}원</h1>
           </div>
         </section>
         <section className={homeStyle.etc}>
@@ -278,7 +230,9 @@ function Home({ activeHome }) {
         </section>
         <section>
           <Link to="/FloatingPage" className={activeHome}>
-            <BsPlusCircle className={homeStyle.floating}></BsPlusCircle>
+            <div className={homeStyle.floating}>
+              <HiOutlinePlus className={homeStyle.plus} />
+            </div>
           </Link>
         </section>
         <Footer activeMenu="home">
@@ -291,10 +245,8 @@ function Home({ activeHome }) {
 
 export default Home;
 
-const data2 = {
-  userName: "사용자1",
-  totalIncomeMonth: 102000,
-  totalExpenditureMonth: 54900,
-  ecoPercentage: 34,
-  noEcoPercentage: 66,
+Home.defaultProps = {
+  income: 0,
+  expenditure: 0,
+  userName: "",
 };

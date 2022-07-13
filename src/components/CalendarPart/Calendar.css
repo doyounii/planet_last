@@ -104,8 +104,8 @@
   color: rgba(255, 255, 255, 0.18);
 }
 
-.cell .empty {
-  opacity: 0.5;
+.number.empty {
+  color: #6a6f76;
 }
 .eco1 {
   background-color: rgba(var(--green), 0.3);
@@ -257,4 +257,53 @@
 
 .move {
   transform: translatey(-140px);
+}
+
+/*예시 모달 스타일링 ( 페이지에 직접 영향 x )*/
+.calendar-example .week {
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: row;
+  width: 96%;
+  margin-left: 2%;
+}
+
+.calendar-example .days {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  flex-grow: 0;
+  flex-basis: calc(100% / 7);
+  width: calc(100% / 7);
+  height: 72px;
+  width: 30px;
+}
+
+.calendar-example .days .number {
+  display: flex;
+  font-size: 14px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 12px;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 0.5em;
+}
+.calendar-example .number.highlight {
+  color: white;
+  border-radius: 15px;
+}
+.calendar-example .days .expend {
+  color: white;
+}
+.calendar-example .number.today {
+  font-weight: 700;
+  border: 1px solid white;
+}
+
+.days .money {
+  font-size: 10px;
+  margin-bottom: 4px;
 }

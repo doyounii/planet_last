@@ -12,11 +12,13 @@ import { Modal } from "../../components/CalendarPart/Modal";
 import SelectType from "../../components/FloatingPart/SelectType";
 import SelectEco from "../../components/FloatingPart/SelectEco";
 import { SelectButton } from "../../components/FloatingPart/SelectEco";
+import axios from "axios";
 
 function StatisticsModify() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mode, setmode] = useState("");
   const data = useLocation().state;
+  console.log(data);
 
   const [mdate, setMDate] = useState(new Date());
   const [date, setDate] = useState(new Date());
@@ -30,71 +32,53 @@ function StatisticsModify() {
   const [ecoTag, setEcoTag] = useState([]);
   const [userTag, setUserTag] = useState([]);
   const [userEcoTag, setUserEcoTag] = useState([]);
-  console.log(ecoList);
 
-  const fetchData = () => {
+  const userId = window.localStorage.getItem("userId");
+
+  const fetchData = (e) => {
+    e.preventDefault();
+    window.alert("submit!");
     if (data.item.income) {
-      fetch(`/income/${data.item.id}/update`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: "user1@naver.com",
-          in_cost: parseInt(price),
-          date: format(date, "yyyy-MM-dd"),
-          inType: cate.type,
-          inWay: type.type,
-          memo: memo,
-        }),
-      });
+      axios.post(
+        `https://플랜잇.웹.한국:8080/income/${data.item.id}/update`,
+        { headers: { userId: userId } },
+        {
+          body: {
+            body: JSON.stringify({
+              userId: userId,
+              in_cost: parseInt(price),
+              date: format(date, "yyyy-MM-dd"),
+              inType: cate.type,
+              inWay: type.type,
+              memo: memo,
+            }),
+          },
+        }
+      );
     } else {
-      fetch(`/expenditure/${data.item.id}/update`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      axios.post(
+        `https://플랜잇.웹.한국:8080/expenditure/${data.item.id}/update`,
+        {
+          headers: {
+            userId: userId,
+          },
         },
-        body: JSON.stringify({
-          userId: "user1@naver.com",
-          ex_cost: parseInt(price),
-          date: format(date, "yyyy-MM-dd"),
-          exType: cate.type,
-          exWay: type.type,
-          memo: memo,
-          ecoDetail: ecoTag,
-          userAdd: userTag,
-          eco: userEcoTag,
-        }),
-      });
+        {
+          body: JSON.stringify({
+            userId: userId,
+            ex_cost: parseInt(price),
+            date: format(date, "yyyy-MM-dd"),
+            exType: cate.type,
+            exWay: type.type,
+            memo: memo.length === 0 ? cate.type : memo,
+            ecoDetail: ecoTag,
+            userAdd: userTag,
+            eco: userEcoTag,
+          }),
+        }
+      );
     }
   };
-
-  // fetch(`/income/new`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Accept: "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     in_way: filter,
-  //     in_type: cate,
-  //     in_cost: price,
-  //     memo: text,
-  //     date:
-  //       "20" +
-  //       date.slice(0, 2) +
-  //       "-" +
-  //       date.slice(3, 5) +
-  //       "-" +
-  //       date.slice(6, 8),
-  //   }),
-  // })
-  //   .then((response) => response.json())
-  //   .then((response) => {
-  //     if (response.token) {
-  //       localStorage.setItem("wtw-token", response.token);
-  //     }
-  //   });
 
   useEffect(() => {
     console.log(data);
@@ -111,7 +95,6 @@ function StatisticsModify() {
       }
     }
   }, [data]);
-  console.log(ecoList);
 
   const setArticle = (stype) => {
     let article = null;
@@ -124,7 +107,10 @@ function StatisticsModify() {
             <Calendar
               selectedValue={date}
               currentValue={mdate}
-              onChange={(date) => setDate(date)}
+              onChange={(date) => {
+                setDate(date);
+                setDisabled(false);
+              }}
             />
           </>
         );
@@ -157,6 +143,7 @@ function StatisticsModify() {
               sendData={(data) => {
                 setCate(data);
                 closeModal();
+                setDisabled(false);
               }}
             />
           </>
@@ -183,6 +170,7 @@ function StatisticsModify() {
       default:
         break;
     }
+
     return article;
   };
 
@@ -204,6 +192,7 @@ function StatisticsModify() {
     setEcoTag(tagData);
     setUserTag(tempUserTag);
     setUserEcoTag(tempUserEcoTag);
+    setDisabled(false);
   };
   console.log(ecoTag, userTag, userEcoTag);
 
@@ -221,113 +210,116 @@ function StatisticsModify() {
         <span className="modify-header-title">{cate.type}</span>
         <RiDeleteBin6Line className="modify-header-delete" />
       </div>
-      <div className="modify-title">
-        <p className="modify-content-title">
-          {memo !== null || memo !== "" ? memo : cate}
-        </p>
-        <FiEdit3 className="modify-edit-title-icon" />
-      </div>
-      <div className="modify-detail-block">
-        {isModalOpen && (
-          <Modal
-            onClose={closeModal}
-            maskClosable={true}
-            visible={false}
-            closable={true}
-            background={"#202632"}
-          >
-            {setArticle(mode)}
-          </Modal>
-        )}
-        <div className="modify-detail">
-          <p className="modify-detail-title">날짜</p>
+      <form onSubmit={fetchData}>
+        <div className="modify-title">
           <input
-            className="modify-detail-value"
-            value={format(date, "yy년 MM월 dd일")}
-            onClick={() => openModal("date")}
-            readOnly
+            className="modify-content-title"
+            value={memo !== null || memo !== "" ? memo : cate}
+            onChange={(e) => setMemo(e.target.value)}
           />
+          <FiEdit3 className="modify-edit-title-icon" />
         </div>
+        <div className="modify-detail-block">
+          {isModalOpen && (
+            <Modal
+              onClose={closeModal}
+              maskClosable={true}
+              visible={false}
+              closable={true}
+              background={"#202632"}
+            >
+              {setArticle(mode)}
+            </Modal>
+          )}
+          <div className="modify-detail">
+            <p className="modify-detail-title">날짜</p>
+            <input
+              className="modify-detail-value"
+              value={format(date, "yy년 MM월 dd일")}
+              onClick={() => openModal("date")}
+              readOnly
+            />
+          </div>
 
-        <div className="modify-detail">
-          <p className="modify-detail-title">자산</p>
-          <input
-            className="modify-detail-value"
-            value={type.type}
-            onClick={() => openModal("type")}
-            readOnly
-          />
-        </div>
+          <div className="modify-detail">
+            <p className="modify-detail-title">자산</p>
+            <input
+              className="modify-detail-value"
+              value={type.type}
+              onClick={() => openModal("type")}
+              readOnly
+            />
+          </div>
 
-        <div className="modify-detail">
-          <p className="modify-detail-title">금액</p>
-          <input
-            className="modify-detail-value price"
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
+          <div className="modify-detail">
+            <p className="modify-detail-title">금액</p>
+            <input
+              className="modify-detail-value price"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
 
-        <div className="modify-detail">
-          <p className="modify-detail-title">분류</p>
-          <input
-            className="modify-detail-value"
-            value={cate.type}
-            onClick={() => openModal("cate")}
-            readOnly
-          />
-        </div>
+          <div className="modify-detail">
+            <p className="modify-detail-title">분류</p>
+            <input
+              className="modify-detail-value"
+              value={cate.type}
+              onClick={() => openModal("cate")}
+              readOnly
+            />
+          </div>
 
-        <div className="modify-detail">
-          <p className="modify-detail-title">태그</p>
+          <div className="modify-detail">
+            <p className="modify-detail-title">태그</p>
 
-          <div
-            className="modify-detail-value modify-eco"
-            onClick={() => openModal("eco")}
-          >
-            {ecoList.length !== 0 &&
-              ecoList.map((value) => {
-                return (
-                  <button
-                    className={`modify-eco-tag ${
-                      value.eco === "G"
-                        ? "eco"
-                        : value.eco === "R"
-                        ? "neco"
-                        : "etc"
-                    }`}
-                    key={value.id}
-                    value={value.tag}
-                  >
-                    {value.tag !== undefined
-                      ? value.tag
-                      : value.ecoDetail === "사용자 추가"
-                      ? value.userAdd
-                      : value.ecoDetail}
-                  </button>
-                );
-              })}
+            <div
+              className="modify-detail-value modify-eco"
+              onClick={() => openModal("eco")}
+            >
+              {ecoList.length !== 0 &&
+                ecoList.map((value) => {
+                  return (
+                    <button
+                      type="button"
+                      className={`modify-eco-tag ${
+                        value.eco === "G"
+                          ? "eco"
+                          : value.eco === "R"
+                          ? "neco"
+                          : "etc"
+                      }`}
+                      key={value.id}
+                      value={value.tag}
+                    >
+                      {value.tag !== undefined
+                        ? value.tag
+                        : value.ecoDetail === "사용자 추가"
+                        ? value.userAdd
+                        : value.ecoDetail}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+
+          <div className="modify-detail">
+            <p className="modify-detail-title">메모</p>
+            <input
+              className="modify-detail-value"
+              value={memo}
+              onChange={(e) => setMemo(e.target.value)}
+            />
           </div>
         </div>
 
-        <div className="modify-detail">
-          <p className="modify-detail-title">메모</p>
-          <input
-            className="modify-detail-value"
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-          />
-        </div>
-      </div>
-
-      <button
-        disabled={disabled}
-        className="modify-save-btn"
-        onClick={fetchData}
-      >
-        저장
-      </button>
+        {!disabled && (
+          <button type="submit" disabled={disabled} className="modify-save-btn">
+            저장하기
+          </button>
+        )}
+      </form>
     </div>
   );
 }

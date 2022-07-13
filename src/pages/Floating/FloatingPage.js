@@ -34,12 +34,13 @@ export default function FloatingPage() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const userId = window.localStorage.getItem("userId");
 
   const fetchData = () => {
     if (total === 4) {
       axios
-        .post("http://3.39.87.115:8080/income/new", {
-          userId: null,
+        .post("https://플랜잇.웹.한국:8080/income/new", {
+          userId: userId,
           in_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
           inType: cate.type,
@@ -58,8 +59,8 @@ export default function FloatingPage() {
         });
     } else {
       axios
-        .post("http://3.39.87.115:8080/expenditure/new", {
-          userId: null,
+        .post("https://플랜잇.웹.한국:8080/expenditure/new", {
+          userId: userId,
           ex_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
           exType: cate.type,

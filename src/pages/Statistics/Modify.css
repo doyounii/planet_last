@@ -38,6 +38,19 @@
   font-weight: 600;
   font-size: 20px;
   margin-left: 5%;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: white;
+  border-top: solid 1.5px transparent;
+  padding: 3px 0;
+}
+
+.modify-title .modify-content-title:focus {
+  caret-color: #00c982;
+  padding: 3px 0;
+  border-bottom: solid 1.5px #00c982;
+  border-top: solid 1.5px transparent;
 }
 .modify-title .modify-edit-title-icon {
   width: 21px;
@@ -84,7 +97,8 @@
   color: #ffffff;
   border: 0;
   outline: 0;
-  padding-bottom: 3px;
+  padding: 3px 0;
+  border-top: solid 1.5px transparent;
   border-bottom: solid 1.5px transparent;
 }
 .modify-detail-block .modify-detail-value:focus {
@@ -95,8 +109,9 @@
   outline: 0;
   border-style: none;
   caret-color: #00c982;
-  padding-bottom: 3px;
+  padding: 3px 0;
   border-bottom: solid 1.5px #00c982;
+  border-top: solid 1.5px transparent;
 }
 
 .modify-eco .modify-eco-tag {
@@ -139,6 +154,10 @@
   color: #141b27;
   background-color: #00c982;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
 }
 .modify-save-btn:disabled {
   right: 5vw;
