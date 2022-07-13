@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import CouponStyle from './Coupon.module.css';
 import Footer from '../../components/Footer/Footer';
 import HistorySample from '../../components/History/HistoryBack';
+import Popup from "../../components/InquiryPart/Popup";
 
 function CouponJoin() {
   const [coupon, setCoupon] = useState("");
   const [disabled, setdisabled] = useState(true);
+
+     //popup modal
+     const [modalOpen, setModalOpen] = useState(false);
+ 
+     const isopenModal = () => {
+       setModalOpen(true);
+     };
+   
+     const iscloseModal = () => {
+       setModalOpen(false);
+     };
 
   const handleCouponValue = (e) => {
     setCoupon(e.target.value);
@@ -31,8 +43,10 @@ function CouponJoin() {
         </div>
 
         <div className={ CouponStyle.coupon_btn }>
-          <button
-            disabled={coupon.length !== 0 ? false : true}>등록하기</button>
+          <button onClick={isopenModal} disabled={coupon.length !== 0 ? false : true}>등록하기</button>
+          <Popup open={modalOpen} close={iscloseModal}>
+                쿠폰을 등록합니다!
+          </Popup>
         </div>
 
         <Footer activeMenu="home">
