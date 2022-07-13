@@ -14,6 +14,8 @@ export function EditName({ className, onClose, visible, state }) {
   const [disabled, setDisabled] = useState(true);
   const userId = window.localStorage.getItem("userId");
 
+  console.log(text);
+
   const fetchFunc = async (e) => {
     e.preventDefault();
     onClose();
@@ -23,6 +25,7 @@ export function EditName({ className, onClose, visible, state }) {
       { headers: { userId: userId } }
     );
     console.log(response);
+    console.log(text);
     onClose();
     // fetch(`/main/update/${text}`, {
     //   method: "POST",

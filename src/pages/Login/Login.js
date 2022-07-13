@@ -7,7 +7,7 @@ import google from "../../components/LoginPart/img/login_google.png";
 import naver from "../../components/LoginPart/img/login_naver.png";
 import kakao from "../../components/LoginPart/img/login_kakao.png";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_URL;
 const REDIRECT_URI = "http://localhost:3000/oauth";
 
 function Login() {
@@ -23,6 +23,7 @@ function Login() {
 
   const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+  console.log(process.env.REACT_APP_API_URL);
   return (
     <section className={LoginStyle.content}>
       <div className={LoginStyle.container}>
