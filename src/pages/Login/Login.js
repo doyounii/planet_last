@@ -7,7 +7,7 @@ import google from "../../components/LoginPart/img/login_google.png";
 import naver from "../../components/LoginPart/img/login_naver.png";
 import kakao from "../../components/LoginPart/img/login_kakao.png";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_URL;
 const REDIRECT_URI = "http://localhost:3000/oauth";
 
 function Login() {

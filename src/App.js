@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Auth from "./components/LoginPart/Auth";
 import Home from "./pages/Home/Home";
 import Oauth from "./components/LoginPart/Oauth";
+import Profile from "./components/LoginPart/Profile";
 import CalendarPage from "./pages/Calendar/CalendarPage";
 
 import Statistics from "./pages/Statistics/Statistics";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/" element={Auth(Home, true)} />
         <Route path="/login" element={<Login />} />
         <Route path="/oauth" element={<Oauth />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/calendar/:month/:day" element={<DetailCategory />} />
         <Route path="/statistics" element={<Statistics />} />

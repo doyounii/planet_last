@@ -52,12 +52,13 @@ const InquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    <Inquiry dummy={dummy} />
     console.log(state);
     onCreate(state.title, state.content);
     alert("저장 성공!");
 
     navigate('/Inquiry');
+
+    <Inquiry dummy={dummy} />
 
     setState({
       title: "", content: "",

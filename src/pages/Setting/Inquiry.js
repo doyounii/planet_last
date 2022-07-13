@@ -6,7 +6,9 @@ import HistorySample from '../../components/History/HistoryBack';
 import InquiryForm from './InquiryForm';
 import InquiryFormList from '../../components/InquiryPart/InquiryFormList';
 
-const Inquiry = () => {
+const Inquiry = ({dummy}) => {
+
+  console.log(dummy);
 
   return (
     <div className={ InquiryStyle.container }>
@@ -32,7 +34,7 @@ const Inquiry = () => {
         <div className={ InquiryStyle.line_box }></div>
 
         <div className={InquiryStyle.inquiry_list}>
-          {/* {dummy === undefined ? <h1>내역없음</h1> : <InquiryFormList inquiryList={dummy} />} */}
+          {dummy === undefined ? <h1>내역없음</h1> : <InquiryFormList inquiryList={dummy} />}
         </div>
 
         </div>
