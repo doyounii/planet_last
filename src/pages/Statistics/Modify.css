@@ -5,6 +5,7 @@
   font-family: Pretendard;
   color: white;
   position: relative;
+  background-color: rgb(var(--navy));
 }
 
 /*header style*/
@@ -37,6 +38,19 @@
   font-weight: 600;
   font-size: 20px;
   margin-left: 5%;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: white;
+  border-top: solid 1.5px transparent;
+  padding: 3px 0;
+}
+
+.modify-title .modify-content-title:focus {
+  caret-color: #00c982;
+  padding: 3px 0;
+  border-bottom: solid 1.5px #00c982;
+  border-top: solid 1.5px transparent;
 }
 .modify-title .modify-edit-title-icon {
   width: 21px;
@@ -65,6 +79,17 @@
   width: 10%;
 }
 
+.modify-detail-block :nth-child(5) {
+  position: relative;
+}
+.modify-detail-block :nth-child(5) .modify-detail-title {
+  position: absolute;
+  top: 9px;
+}
+.modify-detail-block :nth-child(5) .modify-detail-value {
+  margin-left: 11%;
+}
+
 .modify-detail-block .modify-detail-value {
   width: 100%;
   font-size: 15px;
@@ -72,7 +97,8 @@
   color: #ffffff;
   border: 0;
   outline: 0;
-  padding-bottom: 3px;
+  padding: 3px 0;
+  border-top: solid 1.5px transparent;
   border-bottom: solid 1.5px transparent;
 }
 .modify-detail-block .modify-detail-value:focus {
@@ -83,8 +109,36 @@
   outline: 0;
   border-style: none;
   caret-color: #00c982;
-  padding-bottom: 3px;
+  padding: 3px 0;
   border-bottom: solid 1.5px #00c982;
+  border-top: solid 1.5px transparent;
+}
+
+.modify-eco .modify-eco-tag {
+  border-radius: 43px;
+  padding: 6px 16px;
+  gap: 10px;
+  margin: 5px;
+  border: none;
+  color: white;
+}
+
+.modify-eco-tag.eco {
+  background-color: rgba(var(--green), 0.1);
+}
+
+.modify-eco-tag.neco {
+  background-color: rgba(var(--mid-gray), 0.1);
+}
+
+.modify-eco-tag.etc {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modify-modal-eco-content {
+  height: 35vh;
+  overflow: scroll;
+  padding-top: 70px;
 }
 
 .modify-save-btn {
@@ -100,6 +154,10 @@
   color: #141b27;
   background-color: #00c982;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
 }
 .modify-save-btn:disabled {
   right: 5vw;
@@ -148,6 +206,7 @@
   text-align: center;
   font-weight: 700;
   font-size: 18px;
+  padding: 10px 0;
 }
 
 #modal-root .type-container.wrap0 {

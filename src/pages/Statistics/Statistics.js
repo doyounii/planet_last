@@ -163,7 +163,19 @@ function StatisticsMain() {
         <div className="chart">
           <EcoBarChart barData={message.ecoTagCounts} name="eco"></EcoBarChart>
         </div>
-        <Eco name="eco"></Eco>
+        {message.ecoTagCounts.length < 2 ?
+          <div className="statistics-box"
+          >
+            <p style={{
+              'margin-bottom': '60px',
+              'margin-top': '0px',
+              'font-family': 'Pretendard',
+              'height': '52px',
+              'text-align': 'center',
+              'color': '#939393'
+            }}>이번달 지출이 없습니다</p>
+          </div>
+          : <Eco name="eco"></Eco>}
 
         <div className="line-box"></div>
 
@@ -181,12 +193,25 @@ function StatisticsMain() {
         <div className="chart">
           <EcoBarChart barData={message.noEcoTagCounts} name="neco"></EcoBarChart>
         </div>
-        <Eco name="neco"></Eco>
+        {message.noEcoTagCounts.length < 2 ?
+          <div className="statistics-box"
+          >
+            <p style={{
+              'margin-bottom': '60px',
+              'margin-top': '0px',
+              'font-family': 'Pretendard',
+              'height': '52px',
+              'text-align': 'center',
+              'color': '#939393'
+            }}>이번달 지출이 없습니다</p>
+          </div>
+          : <Eco name="neco"></Eco>}
+
       </div>
       <Footer activeMenu="statistics">
         <div>통계</div>
       </Footer>
-    </div>
+    </div >
   );
 }
 
@@ -199,27 +224,21 @@ const data = {
   ecoDifference: -6,
   noEcoDifference: 3,
   ecoCount: {
-    "1": 34,
-    "2": 23,
-    "3": 15,
-    "4": 32,
-    "5": 32,
-    "6": 0,
-    "7": 0,
-    "8": 0,
-    "9": 0,
-    "10": 0,
-    "11": 0,
-    "12": 0
+    "3": 5,
+    "4": 12,
+    "5": 22,
+    "6": 34,
+    "7": 46,
+    "8": 55,
   },
   nowEcoCount: 12,
   nowNoneEcoCount: 4,
-  percentage: 67.0,
+  percentage: 0.0,
   ecoTagCounts: [
-    ["식비", 6],
-    ["급여", 2],
-    ["기타", 2],
-    ["생필품", 2],
+    // ["식비", 6],
+    // ["급여", 2],
+    // ["기타", 2],
+    // ["생필품", 2],
     ["더보기", 0],
   ],
   noEcoTagCounts: [

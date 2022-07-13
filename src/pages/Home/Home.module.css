@@ -7,9 +7,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 90%;
+  width: 90vw;
   height: calc(100vh - 70px);
-  margin: 0 5% 70px 5%;
+  margin: 0 5vw 70px 5vw;
   /* overflow-y: scroll; */
 }
 
@@ -75,7 +75,7 @@
 
 .planet {
   position: absolute;
-  top: 30px;
+  top: 10px;
   width: 270px;
   height: 270px;
 
@@ -106,7 +106,7 @@
   left: 45px;
   top: 110px;
 
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -115,7 +115,7 @@
 
   text-align: center;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   opacity: 0.5;
 }
@@ -124,8 +124,8 @@
   position: absolute;
   width: 18px;
   height: 18px;
-  right: 40px;
-  top: 40px;
+  right: 70px;
+  top: 50px;
   opacity: 0.4;
   color: #ffffff;
   cursor: pointer;
@@ -196,8 +196,7 @@
   top: -20px;
   right: 52px;
 
-
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -209,9 +208,8 @@
 
   /* white */
 
-  color: #FFFFFF;
+  color: #ffffff;
   justify-content: flex-end;
-
 }
 
 .expend {
@@ -238,7 +236,7 @@
   top: -20px;
   right: 52px;
 
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -250,7 +248,7 @@
 
   /* white */
 
-  color: #FFFFFF;
+  color: #ffffff;
   justify-content: flex-end;
 }
 
@@ -334,14 +332,19 @@ p.box_text {
   position: fixed;
   width: 55px;
   height: 55px;
-  right: 18px;
+  right: 5vw;
   bottom: 85px;
   color: #00c982;
   background-color: #00c982;
   border-radius: 100px;
 }
 
-.floating>path:nth-of-type(2) {
-  color: #ffffff;
-  box-shadow: 0px 5px 18.75px rgba(0, 0, 0, 0.55);
+.floating .plus {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 12.5px;
+  left: 12.5px;
+  color: white;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }

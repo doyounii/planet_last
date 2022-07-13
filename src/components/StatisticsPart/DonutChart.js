@@ -18,13 +18,13 @@ const segmentsStyle = { cursor: "pointer" };
 const DonutChart = ({ percentage }) => {
 
   console.log(percentage);
-
   const data = [
     {
       index: 0,
       title: "친환경 지출",
       value: percentage,
       color: "url(#gradient)",
+      zero: "이번달 지출이 없습니다",
     },
     {
       //친환경 단일 데이터로 진행하셨던 것 같은데
@@ -36,6 +36,7 @@ const DonutChart = ({ percentage }) => {
     },
   ];
   const [selected, setSelected] = useState(0);
+  console.log(data.value);
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -55,7 +56,7 @@ const DonutChart = ({ percentage }) => {
           center={[100, 60]}
           animate
           labelPosition={0}
-          lineWidth={34} //도넛 두께
+          lineWidth={30} //도넛 두께
           segmentsStyle={(index) => {
             return index === selected //인덱스랑 현재 선택한 데이터 인덱스가 같으면 두껍게 하는 속성 추가
               ? { ...segmentsStyle, strokeWidth: 21 }
@@ -63,7 +64,9 @@ const DonutChart = ({ percentage }) => {
           }}
           onClick={(event, index) => {
             // 클릭하면 인덱스(친/반환경) 변경
-            setSelected(index);
+            if (percentage > 0) {
+              setSelected(index);
+            }
           }}
         >
           <defs>
@@ -80,7 +83,16 @@ const DonutChart = ({ percentage }) => {
             text-anchor="middle"
             style={{ fontSize: "8px", fill: "white" }} //친/반환경 지출 label
           >
-            {data[selected].title}
+            {data[selected].value != 0 ? data[selected].title : ""}
+          </text>
+          <text
+            dominant-baseline="central"
+            x="100"
+            y="60"
+            text-anchor="middle"
+            style={{ fontSize: "6px", fill: "#939393" }} //친/반환경 지출 label
+          >
+            {data[selected].value == 0 ? data[selected].zero : ""}
           </text>
           <text
             dominant-baseline="central"
@@ -91,7 +103,7 @@ const DonutChart = ({ percentage }) => {
             text-anchor="middle"
             style={defaultLabelStyle}
           >
-            {data[selected].value}%
+            {data[selected].value != 0 ? data[selected].value + "%" : ""}
           </text>
         </PieChart>
       </View>

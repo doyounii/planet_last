@@ -203,7 +203,7 @@ const ModalWrapper = styled.div`
     left: 50%;
   }
 
-  .calendars {
+  .calendar-example {
     position: absolute;
     width: 100%;
     top: ${(props) => props.className + 190}px;
@@ -280,64 +280,131 @@ const calendarInfoData = (monthView) => {
             친환경 태그가 많을수록 초록빛을 띠어요
           </span>
           <RoundArrow className="calendar-arrow" />
-          <div className="calendars">
-            <div className="body">
-              <div class="row">
-                <div class="col cell">
-                  <div class="number empty">11</div>
+
+          <div className="calendar-example">
+            {calendarData.map((weeks) => {
+              return (
+                <div className="week">
+                  {weeks.map((day) => {
+                    return (
+                      <div className="days">
+                        <div
+                          className={`number eco${day.ecoCount} ${
+                            day.incomeDays !== 0 || day.expenditureDays !== 0
+                              ? "highlight"
+                              : ""
+                          } ${day.date === 21 ? "today" : ""}`}
+                        >
+                          {day.date}
+                        </div>
+                        {day.incomeDays !== 0 && (
+                          <div className="money income">+{day.incomeDays}</div>
+                        )}
+                        {day.expenditureDays !== 0 && (
+                          <div className="money expend">
+                            -{day.expenditureDays}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-                <div class="col cell">
-                  <div class="number empty">12</div>
-                </div>
-                <div class="col cell">
-                  <div class="number empty">13</div>
-                </div>
-                <div class="col cell">
-                  <div class="number eco3">14</div>
-                  <div class="detail-cost ex-day">-14,000</div>
-                </div>
-                <div class="col cell">
-                  <div class="number empty">15</div>
-                </div>
-                <div class="col cell">
-                  <div class="number empty">16</div>
-                </div>
-                <div class="col cell">
-                  <div class="number eco2">17</div>
-                  <div class="detail-cost ex-day">-5,230</div>
-                  <div class="detail-cost in-day">+12,120</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col cell">
-                  <div class="number empty">18</div>
-                </div>
-                <div class="col cell">
-                  <div class="number empty">19</div>
-                </div>
-                <div class="col cell">
-                  <div class="number eco4">20</div>
-                  <div class="detail-cost in-day">+8,900</div>
-                </div>
-                <div class="col cell selected">
-                  <div class="number eco2">21</div>
-                  <div class="detail-cost ex-day">-34,000</div>
-                  <div class="detail-cost in-day">+128,990</div>
-                </div>
-                <div class="col cell">
-                  <div class="number empty">22</div>
-                </div>
-                <div class="col cell">
-                  <div class="number empty">23</div>
-                </div>
-                <div class="col cell">
-                  <div class="number empty">24</div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </>
       )}
     </>
   );
 };
+
+const calendarData = [
+  [
+    {
+      date: 11,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 12,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 13,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 14,
+      incomeDays: 0,
+      ecoCount: 3,
+      expenditureDays: 14000,
+    },
+    {
+      date: 15,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 16,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 17,
+      incomeDays: "12,120",
+      ecoCount: 2,
+      expenditureDays: 0,
+    },
+  ],
+  [
+    {
+      date: 18,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 19,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 20,
+      incomeDays: "8,900",
+      ecoCount: 4,
+      expenditureDays: 0,
+    },
+    {
+      date: 21,
+      incomeDays: "34,000",
+      ecoCount: 3,
+      expenditureDays: "128,990",
+    },
+    {
+      date: 22,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 23,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+    {
+      date: 24,
+      incomeDays: 0,
+      ecoCount: 0,
+      expenditureDays: 0,
+    },
+  ],
+];

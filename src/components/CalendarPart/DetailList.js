@@ -3,7 +3,6 @@ import { useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 import ko from "date-fns/locale/ko";
-import { isSameDay, setDate } from "date-fns";
 import { StyledDetailBlock } from "./StyledDetail";
 
 const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
@@ -12,18 +11,16 @@ const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
 export function DetailItem({ item, ecoCnt }) {
   return (
     <>
-      <div
-        className="details-memo"
-        onClick={(e) => console.log(e.target.value)}
-        key={item.id}
-      >
+      <div className="details-memo" key={item.id}>
         {item.memo !== null ? item.memo : item.type}
         {item.ecoList !== undefined &&
           item.ecoList !== null &&
           item.ecoList.map((data) => {
             return (
               <div className={`details-detail ${isEcoT(data.eco)}`}>
-                {data.ecoDetail == "기타" ? data.etcMemo : data.ecoDetail}
+                {data.ecoDetail === "사용자 추가"
+                  ? data.userAdd
+                  : data.ecoDetail}
               </div>
             );
           })}
@@ -74,9 +71,8 @@ function DetailList({ value }) {
   };
 
   const renderDetailList = (filterType) => {
-    let detailList = [];
+    let detailTemp = [];
     let ecoCnt = 0;
-    console.log(filterType);
     filterType !== undefined &&
       filterType !== null &&
       filterType.value.forEach((item) => {
@@ -92,7 +88,7 @@ function DetailList({ value }) {
             });
         }
 
-        detailList.push(
+        detailTemp.push(
           <div className="details" key={item.id}>
             <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
             <DetailItem item={item} ecoCnt={ecoCnt} />
@@ -101,7 +97,7 @@ function DetailList({ value }) {
         ecoCnt = 0;
       });
 
-    return detailList;
+    return detailTemp;
   };
 
   const renderList = () => {
