@@ -169,6 +169,7 @@ const EcoMission = () => {
           </Modal>
         )}
 
+      {/* To-do 달 바뀔 때마다 리스트 빈 화면으로 초기화 하기 */}
       {format(date, "M월")} <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button>
       </div>
       
