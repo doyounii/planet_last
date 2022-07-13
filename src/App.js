@@ -22,6 +22,7 @@ import UsePage from "./pages/Setting/UsePage";
 import InformationPage from "./pages/Setting/InformationPage";
 import Inquiry from "./pages/Setting/Inquiry";
 import InquiryForm from "./pages/Setting/InquiryForm";
+import InquiryList from "./pages/Setting/InquiryList";
 import Coupon from "./pages/Coupon/Coupon";
 import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
@@ -75,6 +76,7 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiryForm" element={<InquiryForm />} />
+        <Route path="/inquiryList" element={<InquiryList />} />
       </Routes>
     </QueryClientProvider>
   );
