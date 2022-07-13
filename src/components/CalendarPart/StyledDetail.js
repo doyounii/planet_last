@@ -46,13 +46,13 @@ const StyledDetail = styled.div`
     opacity: 0.5;
   }
   .type-name {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: white;
   }
 
   .type-cost {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: normal;
     color: white;
   }
@@ -61,12 +61,16 @@ const StyledDetail = styled.div`
   }
 
   .details {
-    font-size: 12px;
-    margin-top: 10px;
+    font-size: 14px;
+    margin-top: 20px;
   }
   .details-circle {
     margin-top: 1.5px;
     font-size: 10px;
+    color: transparent;
+  }
+  .details-circle.none {
+    color: transparent;
   }
   .details-memo {
     color: #b4b6b8;
@@ -86,6 +90,16 @@ const StyledDetail = styled.div`
   .details-cost {
     margin-left: auto;
   }
+
+  .details-cost.etc {
+    color: white;
+  }
+  .details-cost.eco {
+    color: rgb(var(--green));
+  }
+  .details-cost.neco {
+    color: rgb(var(--gray));
+  }
   .detail-link {
     text-decoration: none;
   }
@@ -96,9 +110,11 @@ export function StyledDetailBlock({ children }) {
 }
 
 const StyledDetailPage = styled.div`
+  background-color: rgb(var(--navy));
   .detail-page {
     font-family: Pretendard;
-    margin-bottom: 70px;
+    padding-bottom: 70px;
+    background-color: rgb(var(--navy));
   }
   .detail-info-block {
     width: 90%;
@@ -138,6 +154,17 @@ const StyledDetailPage = styled.div`
   }
   .detail-cost {
     top: 15px;
+    position: relative;
+  }
+
+  .detail-cost:after {
+    position: absolute;
+    content: "";
+    width: 100vw;
+    height: 0;
+    left: -5%;
+    border-bottom: 12px solid #000b21;
+    opacity: 0.7;
   }
 
   .detail-info .detail-cost-label {
@@ -155,6 +182,13 @@ const StyledDetailPage = styled.div`
     line-height: 16px;
     color: white;
     margin-left: auto;
+  }
+  .detail-info .detail-cost-value.none {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: rgb(var(--mid-gray));
+    opacity: 0.5;
   }
 
   .detail-div-list {
@@ -183,6 +217,17 @@ const StyledDetailPage = styled.div`
     margin-top: 3px;
     font-size: 8px;
   }
+  .details-circle.none {
+    color: transparent;
+  }
+
+  .details-circle.eco {
+    color: rgb(var(--green));
+  }
+
+  .details-circle.neco {
+    color: rgb(var(--mid-gray));
+  }
 
   .details-memo {
     font-size: 15px;
@@ -194,6 +239,18 @@ const StyledDetailPage = styled.div`
     line-height: 13px;
     margin-top: 7px;
     font-weight: 400;
+  }
+  .details-detail.eco {
+    color: rgb(var(--green));
+  }
+  .details-detail.neco {
+    color: rgb(var(--mid-gray));
+  }
+  .details-cost.eco {
+    color: rgb(var(--green));
+  }
+  .details-cost.neco {
+    color: rgb(var(--mid-gray));
   }
   .details .details-cost {
     font-size: 15px;

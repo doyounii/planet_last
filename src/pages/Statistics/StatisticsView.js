@@ -153,11 +153,11 @@ function StatisticsDetail() {
                   });
                 return (
                   <>
-                    <p className="statistic-detail-list date">
-                      {/* { format(parseISO(data.date), "d일 EEEE", { locale: ko }) */}
+                    {/* <p className="statistic-detail-list date">
+                      { format(parseISO(data.date), "d일 EEEE", { locale: ko })}
                       {selectOption === "all" ? format(parseISO(data.date), "d일 EEEE", { locale: ko }) : (selectOption === "income" ? (value.income === true && format(parseISO(data.date), "d일 EEEE", { locale: ko })) : (value.income === false && format(parseISO(data.date), "d일 EEEE", { locale: ko })))
                       }
-                    </p>
+                    </p> */}
 
                     <Link
                       className="detail-link"
@@ -172,37 +172,10 @@ function StatisticsDetail() {
 
                         (value.income === true ?
                           <StyledDetailPageBlock>
-                            <div key={value.id} className="statistic-detail-list">
-                              <span
-                                role="img"
-                                aria-label="something"
-                                className="stat-detail-icon"
-                              >
-                                {wayEmoji(value.way)}
-                              </span>
-                              <p className="stat-detail-type">
-                                {value.memo === null ? value.type : value.memo}
+                            <div>
+                              <p className="statistic-detail-list date">
+                                {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
                               </p>
-                              <p className="stat-detail-money">
-                                {value.income ? "+" : "-"}
-                                {value.cost.toLocaleString()}원
-                              </p>
-                            </div>
-                          </StyledDetailPageBlock>
-                          :
-                          <StyledDetailPageBlock>
-                            <div className="statistic-detail-list" key={value.id}>
-                              <div className="stat-detail-icon">
-                                {wayEmoji(value.way)}
-                              </div>
-                              <DetailMemo item={value} ecoCnt={ecoCnt} />
-                            </div>
-                          </StyledDetailPageBlock>
-                        )
-                        :
-                        (selectOption === "income" ?
-                          <StyledDetailPageBlock>
-                            {value.income === true &&
                               <div key={value.id} className="statistic-detail-list">
                                 <span
                                   role="img"
@@ -218,15 +191,63 @@ function StatisticsDetail() {
                                   {value.income ? "+" : "-"}
                                   {value.cost.toLocaleString()}원
                                 </p>
+                              </div>
+                            </div>
+                          </StyledDetailPageBlock>
+                          :
+                          <StyledDetailPageBlock>
+                            <div>
+                              <p className="statistic-detail-list date">
+                                {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
+                              </p>
+                              <div className="statistic-detail-list" key={value.id}>
+                                <div className="stat-detail-icon">
+                                  {wayEmoji(value.way)}
+                                </div>
+                                <DetailMemo item={value} ecoCnt={ecoCnt} />
+                              </div>
+                            </div>
+                          </StyledDetailPageBlock>
+                        )
+                        :
+                        (selectOption === "income" ?
+                          <StyledDetailPageBlock>
+                            {value.income === true &&
+                              <div>
+                                <p className="statistic-detail-list date">
+                                  {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
+                                </p>
+                                <div key={value.id} className="statistic-detail-list">
+                                  <span
+                                    role="img"
+                                    aria-label="something"
+                                    className="stat-detail-icon"
+                                  >
+                                    {wayEmoji(value.way)}
+                                  </span>
+                                  <p className="stat-detail-type">
+                                    {value.memo === null ? value.type : value.memo}
+                                  </p>
+                                  <p className="stat-detail-money">
+                                    {value.income ? "+" : "-"}
+                                    {value.cost.toLocaleString()}원
+                                  </p>
+                                </div>
                               </div>}
                           </StyledDetailPageBlock> :
                           <StyledDetailPageBlock>
-                            {value.income === false && <div className="statistic-detail-list" key={value.id}>
-                              <div className="stat-detail-icon">
-                                {wayEmoji(value.way)}
-                              </div>
-                              <DetailMemo item={value} ecoCnt={ecoCnt} />
-                            </div>}
+                            {value.income === false &&
+                              <div>
+                                <p className="statistic-detail-list date">
+                                  {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
+                                </p>
+                                <div className="statistic-detail-list" key={value.id}>
+                                  <div className="stat-detail-icon">
+                                    {wayEmoji(value.way)}
+                                  </div>
+                                  <DetailMemo item={value} ecoCnt={ecoCnt} />
+                                </div>
+                              </div>}
                           </StyledDetailPageBlock>
                         )
                       }

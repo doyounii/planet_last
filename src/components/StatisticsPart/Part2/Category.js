@@ -308,7 +308,8 @@ function Category() {
             //   }}
             // >
             <div className='category-box'>
-              <p className='emoji'>{emojiList(message[i][0])} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
+              <p className='emoji'>{emojiList(message[i][0])} {" "}</p>
+              <h2>{message[i][0]}{" | "}{message[i][1]}%</h2>
               <IoIosArrowForward className="detail-icon" />
               <h1 className='count'>{message[i][2]}개</h1>
             </div>
@@ -330,7 +331,8 @@ function Category() {
             // >
 
             <div className='category-box'>
-              <p className='emoji'>{emojiList(message2[i][0])} {" "}{message[i][0]}{" | "}{message[i][1]}%</p>
+              <p className='emoji'>{emojiList(message2[i][0])} {" "}</p>
+              <h2>{message[i][0]}{" | "}{message[i][1]}%</h2>
               <IoIosArrowForward className="detail-icon" />
               <h1 className='count'>{message[i][2]}개</h1>
             </div>

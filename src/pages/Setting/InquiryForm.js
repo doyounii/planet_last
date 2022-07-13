@@ -113,6 +113,7 @@ const InquiryForm = () => {
               <h4>문의글은 등록 이후 수정이 불가합니다</h4>
           </div>
         </div>
+        
         <div className={ InquiryStyle.inquiry_submit_btn }>
           <button onClick={openModal}>등록하기</button>
           <Popup open={modalOpen} close={closeModal} submit={handleSubmit}>

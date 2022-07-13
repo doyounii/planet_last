@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, useQueries, queryClient, useQueryClient } from "react-query";
+import { useQuery, useQueries, useQueryClient } from "react-query";
+import axios from "axios";
 import { format, isSameMonth, subMonths, addMonths, parseISO } from "date-fns";
 import Footer from "../../components/Footer/Footer";
 import DateHeader from "../../components/DateHeader";
@@ -13,38 +14,33 @@ import "../../components/CalendarPart/Calendar.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
+const userId = window.localStorage.getItem("userId");
+
 const fetchData = async (date) => {
-  const response = await fetch(
-    `/calendar/${format(date, "yyyy")}/${format(date, "M")}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }
+  const response = await axios.get(
+    `https://플랜잇.웹.한국:8080/api/calendar/${format(date, "yyyy")}/${format(
+      date,
+      "M"
+    )}`,
+    { headers: { userId: userId } }
   );
-  const data = await response.json();
+  const data = await response.data;
+
   return data;
 };
 
 const fetchDetailData = async (day) => {
-  console.log("fetch");
   const date = parseISO(day);
-  const response = await fetch(
-    `calendar/${format(date, "yyyy")}/${format(date, "M")}/${format(
+
+  const response = await axios.get(
+    `https://플랜잇.웹.한국:8080/api/calendar/${format(date, "yyyy")}/${format(
       date,
-      "d"
-    )}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }
+      "M"
+    )}/${format(date, "d")}`,
+    { headers: { userId: userId } }
   );
-  const data = await response.json();
+  const data = await response.data;
+
   return data;
 };
 
@@ -52,6 +48,7 @@ function CalendarPage() {
   const dateFormat = "yyyy-MM-dd";
   const queryClient = useQueryClient();
 
+  const [loading, setLoading] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -74,6 +71,8 @@ function CalendarPage() {
       return {
         queryKey: ["calnedarData", format(m, "yyyy-M")],
         queryFn: () => fetchData(m),
+        staleTime: 1000 * 5 * 60, // 5분
+        cacheTime: Infinity, // 제한 없음
       };
     })
   );
@@ -83,6 +82,8 @@ function CalendarPage() {
       return {
         queryKey: ["detailData", data.date],
         queryFn: () => fetchDetailData(data.date),
+        staleTime: 1000 * 5 * 60, // 5분
+        cacheTime: Infinity, // 제한 없음
       };
     })
   );
@@ -93,7 +94,7 @@ function CalendarPage() {
         "calnedarData",
         format(currentDate, "yyyy-M"),
       ]);
-
+      setLoading(false);
       setMessage(getData.calendarDto);
       setquote(getData.content);
       setDaysData(getData.calendarDto.calendarDayDtos);
@@ -107,6 +108,7 @@ function CalendarPage() {
       setCurrentDate(date);
     }
   };
+
   const openModal = (e) => {
     setposition(e.clientY);
     setIsModalOpen(true);
@@ -123,8 +125,8 @@ function CalendarPage() {
     let eco = message.sumOfEcoCount;
     return (
       <div className="calendar-info">
-        <span className="neco-cal-circle">● {nEco}</span>
-        <span className="eco-cal-circle">● {eco}</span>
+        <span className="neco-cal-circle">● {!loading ? nEco : 0}</span>
+        <span className="eco-cal-circle">● {!loading ? eco : 0}</span>
         <span className="eco-day-circle">●</span>
         <span className="eco-day">환경 기념일</span>
         <AiOutlineQuestionCircle
@@ -142,8 +144,6 @@ function CalendarPage() {
     );
   };
 
-  if (results[1].status === "loading")
-    return <div style={{ color: "white" }}>로딩중..</div>;
   if (results[1].status === "error")
     return <div style={{ color: "white" }}>에러가 발생했습니다.</div>;
 
@@ -158,18 +158,16 @@ function CalendarPage() {
         <div className={`month-info`}>
           <div className="month-cost">
             <div className="month-type">수입</div>
-            <div className="month-total">{message.totalMonthIncome}원</div>
+            <div className="month-total">
+              {!loading ? message.totalMonthIncome.toLocaleString() : 0}원
+            </div>
           </div>
           <div className="month-cost">
             <div className="month-type">지출</div>
-            <div className="month-total">{message.totalMonthExpenditure}원</div>
+            <div className="month-total">
+              {!loading ? message.totalMonthExpenditure.toLocaleString() : 0}원
+            </div>
           </div>
-        </div>
-
-        <div style={{ color: "white" }}>
-          <a href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao">
-            Naver
-          </a>
         </div>
 
         {isModalOpen && (
@@ -204,7 +202,16 @@ function CalendarPage() {
         ) ? (
           <DetailList value={selectedDate} />
         ) : (
-          <div style={{ color: "white" }}>내역 없음</div>
+          <div
+            style={{
+              fontSize: "12px",
+              color: "#8B8B8B",
+              textAlign: "center",
+              padding: "30px 0",
+            }}
+          >
+            내역 없음
+          </div>
         )}
       </div>
       <Footer activeMenu="calendar">
@@ -215,3 +222,13 @@ function CalendarPage() {
 }
 
 export default CalendarPage;
+
+CalendarPage.defaultProps = {
+  message: {
+    calendarDayDtos: [],
+    sumOfEcoCount: 0,
+    sumOfNoneEcoCount: 0,
+    totalMonthExpenditure: 0,
+    totalMonthIncome: 0,
+  },
+};

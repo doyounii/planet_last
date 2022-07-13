@@ -8,9 +8,28 @@ import { StyledDetailPageBlock } from "./StyledDetail";
 import { IoIosArrowForward } from "react-icons/io";
 import Footer from "../Footer/Footer";
 
+const emoji = [
+  { type: "급여", emoji: "💰" },
+  { type: "용돈", emoji: "👛" },
+  { type: "기타", emoji: "💬" },
+  { type: "식비", emoji: "🌭" },
+  { type: "교통", emoji: "🚗" },
+  { type: "문화생활", emoji: "🎬" },
+  { type: "생필품", emoji: "✏️" },
+  { type: "마트", emoji: "🛒" },
+  { type: "교육", emoji: "📚" },
+  { type: "통신", emoji: "📱" },
+  { type: "의료/건강", emoji: "🏥" },
+  { type: "경조사/회비", emoji: "💵" },
+  { type: "가전", emoji: "🛏" },
+  { type: "공과금", emoji: "🧾" },
+  { type: "기타", emoji: "💬" },
+];
+
 function DetailCategory() {
   const history = useNavigate();
   const data = useLocation().state;
+  const [detailMoney, setDetailMoney] = useState({ income: 0, expend: 0 });
   const [detailList, setDetailList] = useState([]);
 
   const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
@@ -20,16 +39,26 @@ function DetailCategory() {
       setDetailList(detailList.filter((item) => item.id !== parseInt(index)));
       detailList.find((x) => {
         if (x.id === parseInt(index)) {
-          console.log("match", x.id);
           fetchData(x.id, x.income);
         }
       });
     }, 2000);
   };
-
+  console.log(detailMoney);
   useEffect(() => {
     if (data.typeDetail !== undefined || data.typeDetail !== null) {
       setDetailList(data.typeDetail);
+      if (detailMoney.income === 0 && detailMoney.expend === 0) {
+        let incomeTmp = 0;
+        let expendTmp = 0;
+        data.typeDetail.value.map((data) => {
+          console.log(detailMoney);
+          if (data.income) incomeTmp += data.cost;
+          else expendTmp += data.cost;
+          console.log(incomeTmp);
+        });
+        setDetailMoney({ income: incomeTmp, expend: expendTmp });
+      }
     }
   }, [data]);
 
@@ -42,6 +71,7 @@ function DetailCategory() {
       },
     });
   };
+  console.log(data);
 
   return (
     <>
@@ -58,17 +88,37 @@ function DetailCategory() {
                   history(-1);
                 }}
               />
-              <div className="detail-type">{data.typeName}</div>
+              <div className="detail-type">
+                {emoji[data.typeName]}
+                &nbsp;
+                {data.typeName}
+              </div>
             </div>
             <div className="detail-cost">
               <div className="detail-info">
                 <div className="detail-cost-label">수입</div>
-                <div className="detail-cost-value">내역 없음</div>
+                <div
+                  className={`detail-cost-value ${
+                    detailMoney.income === 0 ? "none" : ""
+                  }`}
+                >
+                  {detailMoney.income !== 0
+                    ? detailMoney.income.toLocaleString()
+                    : "내역 없음"}
+                  원
+                </div>
               </div>
               <div className="detail-info">
                 <div className="detail-cost-label">지출</div>
-                <div className="detail-cost-value">
-                  {data.typeCost.toLocaleString()}원
+                <div
+                  className={`detail-cost-value ${
+                    detailMoney.expend === 0 ? "none" : ""
+                  }`}
+                >
+                  {detailMoney.expend !== 0
+                    ? detailMoney.expend.toLocaleString()
+                    : "내역 없음"}
+                  원
                 </div>
               </div>
             </div>
@@ -77,7 +127,7 @@ function DetailCategory() {
           <div className="detail-div-list">
             <div className="detail-history">내역</div>
             {detailList.length !== 0 &&
-              detailList.map((item) => {
+              detailList.value.map((item) => {
                 let ecoCnt = 0;
                 item.ecoList !== undefined &&
                   item.ecoList.forEach((item) => {
@@ -100,7 +150,11 @@ function DetailCategory() {
                   >
                     <SwipeableList key={item.id} onSwipe={onSwipe}>
                       <div className="details" key={item.id}>
-                        <div className={`details-circle ${isEco(ecoCnt)}`}>
+                        <div
+                          className={`details-circle ${isEco(ecoCnt)} ${
+                            item.income ? "none" : ""
+                          }`}
+                        >
                           ● &nbsp;
                         </div>
                         <DetailItem item={item} ecoCnt={ecoCnt} />

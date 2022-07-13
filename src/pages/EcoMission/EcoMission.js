@@ -11,7 +11,6 @@ import DateList from "../../components/DateList";
 import EcoList from "../../components/EcoMissionPart/EcoList";
 
 const EcoMission = () => {
-  const [list, setList] = useState({});
   const [loading, setloading] = useState(true);
   const [todayMission, setTodayMission] = useState({});
 
@@ -25,30 +24,47 @@ const EcoMission = () => {
     setIsModalOpen(false);
   };
 
-  // useEffect(() => {
-  //   let isSubscribed = true;
-  //   fetch(`/mission`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //   })
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       if (isSubscribed) {
-  //         setTodayMission(data.todayMission);
-  //         setloading(false);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log("error!");
-  //       console.log(error);
-  //     });
-  //   return () => (isSubscribed = false);
-  // }, []);
+  const [missions, setMissions] = useState([
+    {
+      id: 1,
+      emoji: "",
+      text: "",
+    },
+  ]);
+
+  useEffect(() => {
+    let isSubscribed = true;
+    fetch(`/brenna9981@gmail.com/mission/2022/5`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (isSubscribed) {
+          setMissions([{
+            emoji: data.todayMission.emoji,
+            text: data.todayMission.name,
+          }])
+
+          if (data && data.length > 0) {
+            console.log(data[0]);
+          }
+
+          setloading(false);
+        }
+      })
+      .catch((error) => {
+        console.log("error!");
+        console.log(error);
+      });
+
+    return () => (isSubscribed = false);
+  }, []);
 
   // const fetchFunc = () => {
   //   //백엔드로 데이터 보내기
@@ -72,11 +88,16 @@ const EcoMission = () => {
   //       }
   //     });
   // };
+
+  console.log('----');
+  console.log(missions);
+  console.log('----');
+
+  const testStr = missions[0].emoji.slice(2, 8);
+  console.log(testStr);
+  console.log(String.fromCodePoint(testStr));
   
-  const [inputs, setInputs] = useState({
-    emoji: "🧾",
-    text: "일회용품 지양하기",
-  });
+  const [inputs, setInputs] = useState([]);
 
   const { emoji, text } = inputs;
 
@@ -91,15 +112,7 @@ const EcoMission = () => {
     [inputs]
   );
 
-  const [missions, setMissions] = useState([
-    {
-      id: 1,
-      emoji: "🍽",
-      text: "잔반 남기지 않기",
-    },
-  ]);
-
-  const nextId = useRef(2);
+  const nextId = useRef(1);
 
   const onCreate = useCallback(
     (e) => {
@@ -110,11 +123,12 @@ const EcoMission = () => {
         text,
       };
       setMissions(missions.concat(mission));
-
-      setInputs({
-        emoji: "🧾",
-        text: "일회용품 지양하기",
-      });
+      
+      //다음날 데이터로 초기화
+      setInputs([...inputs, {
+        emoji: String.fromCodePoint(testStr),
+        text: missions[0].text,
+      }]);
       nextId.current += 1;
     },
     [missions, emoji, text]
@@ -128,8 +142,9 @@ const EcoMission = () => {
   //   []
   // );
 
-  const [date, setDate] = useState(new Date());
+  console.log(missions[0].text);
 
+  const [date, setDate] = useState(new Date());
   return (
     <div className={EcoStyle.container}>
       <div className={EcoStyle.backBtn}>
@@ -160,22 +175,24 @@ const EcoMission = () => {
       <div className={EcoStyle.title_icon}>
         <FiShare />
       </div>
+      
 
       <form className={EcoStyle.mission_box}>
         <p>새로운 미션이 도착했어요!</p>
         <h1>오늘의 데일리 에코 미션</h1>
+        
         <div className={EcoStyle.mission_box_input}>
           <input
-            value={text}
+            value={missions[0].text || 'test'}
             emoji={emoji}
             text={text}
             onChange={onChange}
             onCreate={onCreate}
           />
         </div>
-        {/* <h2>{todayMission.name}</h2> */}
-        {/*<p>{String.fromCodePoint(todayMission.emoji)}</p>*/}
-        <img src="img/recipt.png" alt="recipt"></img>
+
+        <p>{String.fromCodePoint(testStr)}</p>
+
         <button
           type="submit"
           onClick={onCreate}
@@ -190,7 +207,7 @@ const EcoMission = () => {
         <p>내가 한 미션이 어떤 변화를 만들었을까요?</p>
       </div>
 
-      <EcoList missions={missions} />
+      <EcoList missions={inputs} />
 
       <Footer activeMenu="home">
         <div>홈</div>

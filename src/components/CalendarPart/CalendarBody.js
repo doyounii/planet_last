@@ -40,13 +40,8 @@ function CalendarBody({
   const [selectedDate, setSelectedDate] = useState(selectedValue);
   const [isMonthView, setIsMonthView] = useState(monthView);
 
-  const [loading, setloading] = useState(true);
-  const [message, setMessage] = useState([]);
   const [daysData, setDaysData] = useState([]);
   const [anniversary, setAnniversary] = useState([]);
-  const [quote, setquote] = useState("");
-
-  let errors = null;
 
   const ecoColor = (item) =>
     item > 7
