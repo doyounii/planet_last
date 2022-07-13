@@ -1,9 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { PieChart } from "react-minimal-pie-chart";
 import { useState } from "react";
-import { useLocation } from 'react-router-dom';
-
-
+import { useLocation } from "react-router-dom";
 
 //퍼센테이지 라벨
 const defaultLabelStyle = {
@@ -16,7 +14,6 @@ const defaultLabelStyle = {
 const segmentsStyle = { cursor: "pointer" };
 
 const DonutChart = ({ percentage }) => {
-
   console.log(percentage);
   const data = [
     {
@@ -77,30 +74,30 @@ const DonutChart = ({ percentage }) => {
             </linearGradient>
           </defs>
           <text
-            dominant-baseline="central"
+            dominantBaseline="central"
             x="100"
             y="55"
-            text-anchor="middle"
+            textAnchor="middle"
             style={{ fontSize: "8px", fill: "white" }} //친/반환경 지출 label
           >
             {data[selected].value != 0 ? data[selected].title : ""}
           </text>
           <text
-            dominant-baseline="central"
+            dominantBaseline="central"
             x="100"
             y="60"
-            text-anchor="middle"
+            textAnchor="middle"
             style={{ fontSize: "6px", fill: "#939393" }} //친/반환경 지출 label
           >
             {data[selected].value == 0 ? data[selected].zero : ""}
           </text>
           <text
-            dominant-baseline="central"
+            dominantBaseline="central"
             x="100"
             y="65"
             dx="0"
             dy="0"
-            text-anchor="middle"
+            textAnchor="middle"
             style={defaultLabelStyle}
           >
             {data[selected].value != 0 ? data[selected].value + "%" : ""}

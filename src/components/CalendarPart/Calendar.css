@@ -148,7 +148,7 @@
   margin-left: 7%;
   margin-right: 7%;
   margin-bottom: 15px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .calendar-info > * {
@@ -166,7 +166,7 @@
 .calendar-info > .eco-day-circle {
   font-size: 10px;
   color: rgba(var(--blue));
-  margin-top: 2.5px;
+  margin-top: 0.5px;
   margin-right: 6px;
 }
 

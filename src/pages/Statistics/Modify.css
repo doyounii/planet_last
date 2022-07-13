@@ -114,6 +114,10 @@
   border-top: solid 1.5px transparent;
 }
 
+.modify-detail-value.modify-eco {
+  margin-top: -7px;
+}
+
 .modify-eco .modify-eco-tag {
   border-radius: 43px;
   padding: 6px 16px;

@@ -19,30 +19,11 @@ export function EditName({ className, onClose, visible, state }) {
     onClose();
     //백엔드로 데이터 보내기
     const response = await axios.post(
-      `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/main/update?userName=${text}`,
+      `https://플랜잇.웹.한국:8080/api/main/update?userName=${text}`,
       { headers: { userId: userId } }
     );
     console.log(response);
     onClose();
-    // fetch(`/main/update/${text}`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     useName: text,
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     if (response.token) {
-    //       localStorage.setItem("wtw-token", response.token);
-    //     }
-    //   })
-    //   .then((e) => {
-    //     Navigate("/");
-    //   });
   };
 
   const handleChange = (e) => {
@@ -67,15 +48,7 @@ export function EditName({ className, onClose, visible, state }) {
       text = text.slice(0, text.maxLength);
     }
   };
-  /*
-   function numberMaxLength(e){
-        if(e.value.length > e.maxLength){
-            e.value = e.value.slice(0, e.maxLength);
 
-        }
-
-    }
-  */
   const close = (e) => {
     if (onClose) {
       onClose(e);

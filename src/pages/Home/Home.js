@@ -22,10 +22,7 @@ import { QuestionModal } from "../../components/Home/QuestionModal";
 
 const fetchData = async (userId) => {
   const response = await axios.get(
-    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/main/2022/${format(
-      new Date(),
-      "M"
-    )}`,
+    `https://플랜잇.웹.한국:8080/api/main/2022/${format(new Date(), "M")}`,
     { headers: { userId: userId } }
   );
   const data = await response.data;

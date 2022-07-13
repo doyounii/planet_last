@@ -2,12 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./EcoExpend.css";
 
-const EcoExpendColor = [
-  "#00C982", "#1466FE", "#083FA5", "#728EC6"
-]
-const NEcoExpendColor = [
-  "#8593B1", "#667492", "#475572", "#303B51"
-]
+const EcoExpendColor = ["#00C982", "#1466FE", "#083FA5", "#728EC6"];
+const NEcoExpendColor = ["#8593B1", "#667492", "#475572", "#303B51"];
+
+const emoji = {
+  급여: "💰",
+  용돈: "👛",
+  식비: "🌭",
+  교통: "🚗",
+  문화생활: "🎬",
+  생필품: "✏️",
+  마트: "🛒",
+  교육: "📚",
+  통신: "📱",
+  "의료/건강": "🏥",
+  "경조사/회비": "💵",
+  가전: "🛏",
+  공과금: "🧾",
+  기타: "💬",
+};
 
 function EcoExpend(props) {
   const [message, setMessage] = useState([]);
@@ -20,37 +33,8 @@ function EcoExpend(props) {
     setEcoTagCounts(data.ecoTagCounts);
     setNoEcoTagCounts(data.noEcoTagCounts);
     setloading(false);
-
   }, []);
 
-  const emojiList = (ecoTagCounts, noEcoTagCounts) => {
-    switch (ecoTagCounts || noEcoTagCounts) {
-      case "식비":
-        return <h1>🌭</h1>;
-      case "교통":
-        return <h1>🚗</h1>;
-      case "문화생활":
-        return <h1>🎬</h1>;
-      case "생필품":
-        return <h1>✏️</h1>;
-      case "마트":
-        return <h1>🛒</h1>;
-      case "교육":
-        return <h1>📚</h1>;
-      case "통신":
-        return <h1>📱</h1>;
-      case "의료/건강":
-        return <h1>🏥</h1>;
-      case "경조사/회비":
-        return <h1>💵</h1>;
-      case "가전":
-        return <h1>🛏</h1>;
-      case "공과금":
-        return <h1>🧾</h1>;
-      default:
-        return <h1>💬</h1>;
-    }
-  };
   console.log(ecoTagCounts);
   const renderExpendList = (props, message) => {
     let renderExpendList = [];
@@ -64,7 +48,8 @@ function EcoExpend(props) {
                 className="day-breakdown-box-icon"
                 style={{ color: EcoExpendColor[i] }}
               >
-                ●{emojiList(ecoTagCounts[i][0])}
+                ● {"  "}
+                {emoji[ecoTagCounts[i][0]]}
               </div>
               <h1>{ecoTagCounts[i][0]}</h1>
               <h2>{ecoTagCounts[i][1]}개</h2>
@@ -80,7 +65,7 @@ function EcoExpend(props) {
                 className="day-breakdown-box-icon"
                 style={{ color: NEcoExpendColor[i] }}
               >
-                ●{emojiList(noEcoTagCounts[i][0])}
+                ● {emoji[noEcoTagCounts[i][0]]}
               </div>
               <h1>{noEcoTagCounts[i][0]}</h1>
               <h2>{noEcoTagCounts[i][1]}개</h2>

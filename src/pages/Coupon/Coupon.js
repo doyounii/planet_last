@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import CouponStyle from "./Coupon.module.css";
 import Footer from "../../components/Footer/Footer";
@@ -14,7 +15,6 @@ import CouponUseInfo from "../../components/CouponPart/CouponUseInfo";
 import CouponDetailInfo from "../../components/CouponPart/CouponDetailInfo";
 
 function Coupon() {
-
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
@@ -39,6 +39,7 @@ function Coupon() {
   const [couponCnt, setCouponCnt] = useState("");
 
   const [loading, setloading] = useState(true);
+  const userId = window.localStorage.getItem("userId");
 
   const [current, setCurrent] = useState({
     couponData: {
@@ -48,24 +49,11 @@ function Coupon() {
 
   const fetchData = async () => {
     console.log("in function");
-    const response = await fetch(
-      `brenna9981@gmail.com/coupon`, //user1@naver.com
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    )
-      .then((data) => {
-        return data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
 
-    const data = await response.json();
+    const response = await axios.get(`https://플랜잇.웹.한국:8080/api/coupon`, {
+      headers: { userId: userId },
+    });
+    const data = await response.data;
     console.log(data);
     setCouponArr(data.couponDtos);
     setCouponCnt(data.couponCount);

@@ -25,8 +25,6 @@ function StatisticsMain() {
 
   const nowMFormat = "M";
 
-
-
   const containerStyle = {
     backgroundImage: "url(img/main_bg.png)",
     width: "100vw",
@@ -163,19 +161,24 @@ function StatisticsMain() {
         <div className="chart">
           <EcoBarChart barData={message.ecoTagCounts} name="eco"></EcoBarChart>
         </div>
-        {message.ecoTagCounts.length < 2 ?
-          <div className="statistics-box"
-          >
-            <p style={{
-              'margin-bottom': '60px',
-              'margin-top': '0px',
-              'font-family': 'Pretendard',
-              'height': '52px',
-              'text-align': 'center',
-              'color': '#939393'
-            }}>이번달 지출이 없습니다</p>
+        {message.ecoTagCounts.length < 2 ? (
+          <div className="statistics-box">
+            <p
+              style={{
+                marginBottom: "60px",
+                marginTop: "0px",
+                fontFamily: "Pretendard",
+                height: "52px",
+                textAlign: "center",
+                color: "#939393",
+              }}
+            >
+              이번달 지출이 없습니다
+            </p>
           </div>
-          : <Eco name="eco"></Eco>}
+        ) : (
+          <Eco name="eco"></Eco>
+        )}
 
         <div className="line-box"></div>
 
@@ -191,27 +194,34 @@ function StatisticsMain() {
           </div>
         </Link>
         <div className="chart">
-          <EcoBarChart barData={message.noEcoTagCounts} name="neco"></EcoBarChart>
+          <EcoBarChart
+            barData={message.noEcoTagCounts}
+            name="neco"
+          ></EcoBarChart>
         </div>
-        {message.noEcoTagCounts.length < 2 ?
-          <div className="statistics-box"
-          >
-            <p style={{
-              'margin-bottom': '60px',
-              'margin-top': '0px',
-              'font-family': 'Pretendard',
-              'height': '52px',
-              'text-align': 'center',
-              'color': '#939393'
-            }}>이번달 지출이 없습니다</p>
+        {message.noEcoTagCounts.length < 2 ? (
+          <div className="statistics-box">
+            <p
+              style={{
+                "margin-bottom": "60px",
+                "margin-top": "0px",
+                "font-family": "Pretendard",
+                height: "52px",
+                "text-align": "center",
+                color: "#939393",
+              }}
+            >
+              이번달 지출이 없습니다
+            </p>
           </div>
-          : <Eco name="neco"></Eco>}
-
+        ) : (
+          <Eco name="neco"></Eco>
+        )}
       </div>
       <Footer activeMenu="statistics">
         <div>통계</div>
       </Footer>
-    </div >
+    </div>
   );
 }
 
@@ -224,12 +234,12 @@ const data = {
   ecoDifference: -6,
   noEcoDifference: 3,
   ecoCount: {
-    "3": 5,
-    "4": 12,
-    "5": 22,
-    "6": 34,
-    "7": 46,
-    "8": 55,
+    3: 5,
+    4: 12,
+    5: 22,
+    6: 34,
+    7: 46,
+    8: 55,
   },
   nowEcoCount: 12,
   nowNoneEcoCount: 4,
