@@ -41,12 +41,6 @@ const CouponModal = ({
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
-
-   //쿠폰 누르면 나오는 모달
-   const [isModalOpen, setIsModalOpen] = useState(false);
-
-   const openModal = () => setIsModalOpen(true);
-   const closeModal = () => setIsModalOpen(false);
  
    //popup modal
    const [modalOpen, setModalOpen] = useState(false);
@@ -84,7 +78,7 @@ const CouponModal = ({
       >
         {closable && <CgClose className="modal-close" onClick={close} />}
         <div className={CouponStyle.coupon_modal}>
-            <p>cno 불러오기 test : {current.cno}</p>
+            {/* <p>cno 불러오기 test : {current.cno}</p> */}
             <h1>친환경 상점 {current.coupon}</h1>
             <p>{current.discount}% 할인쿠폰</p>
             <img src="img/coupon.png" alt="planet-coupon"></img>
