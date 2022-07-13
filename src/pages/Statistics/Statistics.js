@@ -47,6 +47,15 @@ function StatisticsMain() {
   const [loading, setloading] = useState(true);
 
   const nowMFormat = "M";
+  const userId = window.localStorage.getItem("userId");
+  const queryClient = useQueryClient();
+  const results = useQuery({
+    queryKey: "statisticsData",
+    queryFn: () => fetchData(userId),
+    enabled: !!userId,
+    staleTime: 1000 * 5 * 60, // 5분
+    cacheTime: Infinity, // 제한 없음
+  });
 
   const containerStyle = {
     backgroundImage: "url(img/main_bg.png)",

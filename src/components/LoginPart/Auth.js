@@ -4,7 +4,7 @@ import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
 function Auth(SpecificComponent, option) {
-  const REST_API_KEY = "30e5410f7f73eeb781a471522f30d2a6";
+  const REST_API_KEY = process.env.REACT_APP_API_URL;
   const REDIRECT_URI = "http://localhost:3000/oauth";
 
   const code = new URL(window.location.href).searchParams.get("code");
@@ -25,7 +25,7 @@ function Auth(SpecificComponent, option) {
         "https://kauth.kakao.com/oauth/token",
         payload
       );
-      
+
       // Kakao Javascript SDK 초기화
       window.Kakao.init(REST_API_KEY);
       // access token 설정
