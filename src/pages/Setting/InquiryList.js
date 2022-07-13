@@ -1,12 +1,11 @@
 import React from 'react';
-import InquiryItem from './InquiryItem.js';
-//import './Popup.css';
+import InquiryItem from './InquiryItem';
 
 const InquiryList = ({inquiryList}) => {
     return(
       <>
         {inquiryList.map((it)=>(
-        	<><div>제목: {it.title}</div><div>문의내용: {it.content}</div></>
+        	<InquiryItem key={it.id} {...it} />
         ))}
       </>
     );

@@ -14,6 +14,8 @@ const Inquiry = () => {
 
   const onCreate = (title, content) => {
     const created_date = new Date().getTime();
+    
+    console.log(created_date);
 
     const newItem = {
       title,
@@ -27,8 +29,6 @@ const Inquiry = () => {
     setData([newItem, ...data]);
     setForm(false);
   };
-
-  console.log(data.current);
 
   return (
     // <>
