@@ -21,7 +21,7 @@
 //     `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
 //       new Date(),
 //       "M"
-//     )}`,
+//     )}/${format(new Date(), "d")}`,
 //     { headers: { userId: userId } }
 //   );
 //   const data = await response.data;
@@ -83,22 +83,37 @@
 //     //   setnoEcoTagCounts(data.noEcoTagCounts);
 //     //   setloading(false);
 //     // }, []);
-//     if (results.status === "success") {
-//       const messages = queryClient.getQueryData("statisticsData");
+//     // if (results.status === "success") {
+//     //   const messages = queryClient.getQueryData("statisticsData");
 
-//       setMessage(messages);
-//       setUserName(messages.userName === null ? "" : messages.userName);
-//       setEcoDifference(Math.abs(message.ecoDifference));
-//       setNoEcoDifference(Math.abs(message.noEcoDifference));
-//       setIncomeTotal(messages.incomeTotal);
-//       setExpenditureTotal(messages.expenditureTotal);
-//       setEcoTagCounts(messages.ecoTagCounts);
-//       setnoEcoTagCounts(messages.noEcoTagCounts);
-//       setEcoCount(messages.ecoCount);
-//       setNowEcoCount(messages.nowEcoCount);
-//       setNowNowEcoCount(messages.nowNoneEcoCount);
-//       setPrcentage(messages.percentage);
-//     }
+//     //   setMessage(messages);
+//     //   setUserName(messages.userName === null ? "" : messages.userName);
+//     //   setEcoDifference(Math.abs(message.ecoDifference));
+//     //   setNoEcoDifference(Math.abs(message.noEcoDifference));
+//     //   setIncomeTotal(messages.incomeTotal);
+//     //   setExpenditureTotal(messages.expenditureTotal);
+//     //   setEcoTagCounts(messages.ecoTagCounts);
+//     //   setnoEcoTagCounts(messages.noEcoTagCounts);
+//     //   setEcoCount(messages.ecoCount);
+//     //   setNowEcoCount(messages.nowEcoCount);
+//     //   setNowNowEcoCount(messages.nowNoneEcoCount);
+//     //   setPrcentage(messages.percentage);
+//     // }
+
+//     //더미 데이터
+//     setMessage(data);
+//     setUserName(data.userName === null ? "" : data.userName);
+//     setEcoDifference(Math.abs(data.ecoDifference));
+//     setNoEcoDifference(Math.abs(data.noEcoDifference));
+//     setIncomeTotal(data.incomeTotal);
+//     setExpenditureTotal(data.expenditureTotal);
+//     setEcoTagCounts(data.ecoTagCounts);
+//     setnoEcoTagCounts(data.noEcoTagCounts);
+//     setEcoCount(data.ecoCount);
+//     setNowEcoCount(data.nowEcoCount);
+//     setNowNowEcoCount(data.nowNoneEcoCount);
+//     setPrcentage(data.percentage);
+
 //   }, [queryClient, results]);
 
 //   useEffect(() => {
@@ -302,7 +317,7 @@ import DateHeader from "../../components/DateHeader";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import { EcoBarChart } from "../../components/StatisticsPart/Part2/EcoBarChart";
-import { InfoModal } from "../../components/CalendarPart/Modal";
+import { InfoModal } from "../../components/StatisticsPart/Part2/Modal2";
 import Footer from "../../components/Footer/Footer";
 
 function StatisticsMain() {

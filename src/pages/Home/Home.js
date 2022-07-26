@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Spline from "@splinetool/react-spline";
 import { useQueryClient, useQuery } from "react-query";
 import Footer from "../../components/Footer/Footer";
 import { Link } from "react-router-dom";
@@ -22,7 +23,10 @@ import { QuestionModal } from "../../components/Home/QuestionModal";
 
 const fetchData = async (userId) => {
   const response = await axios.get(
-    `https://플랜잇.웹.한국:8080/api/main/2022/${format(new Date(), "M")}`,
+    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/main/2022/${format(
+      new Date(),
+      "M"
+    )}`,
     { headers: { userId: userId } }
   );
   const data = await response.data;
@@ -91,11 +95,13 @@ function Home({ activeHome }) {
     setposition2(e.clientY);
     setIsModalOpen2(true);
   };
-  const closeModal2 = () => {
+  const closeModal2 = (text) => {
+    console.log(text);
+
     setIsModalOpen2(false);
+    setUserName(text);
   };
-
-
+  console.log(userName);
   if (ecoPercentage !== 0) {
     if (ecoPercentage > 0 && ecoPercentage < 25) {
       lottieOptions.animationData = low;
@@ -142,6 +148,7 @@ function Home({ activeHome }) {
                 ></EditName>
               )}
             </div>
+
             <div>
               <AiOutlineQuestionCircle
                 className={homeStyle.question}
