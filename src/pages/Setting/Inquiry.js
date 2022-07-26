@@ -55,7 +55,7 @@ const Inquiry = () => {
 
           <div className={InquiryStyle.line_box}></div>
 
-          <div className={InquiryStyle.inquiry_list}>
+          <div className={InquiryStyle.inquiry_list_box}>
             {data.length === 0 ? <h1>내역없음</h1> : <InquiryList inquiryList={data} />}
           </div>
 
