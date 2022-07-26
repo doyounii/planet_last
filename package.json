@@ -21,7 +21,7 @@
     "react-chartjs-2": "^4.0.1",
     "react-datepicker": "^4.7.0",
     "react-datetime-picker": "^3.5.0",
-    "react-dom": "16.0.0",
+    "react-dom": "18.2.0",
     "react-horizontal-stacked-bar-chart": "^8.15.2",
     "react-icons": "^4.3.1",
     "react-lottie": "^1.2.3",
@@ -44,6 +44,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://플랜잇.웹.한국:8080",
   "eslintConfig": {
     "extends": [
       "react-app",
