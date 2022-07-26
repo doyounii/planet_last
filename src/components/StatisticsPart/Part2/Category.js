@@ -5,292 +5,28 @@ import { FaChevronLeft } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { message } from "antd";
 
-const expendData = [
-  {
-    emoji: "🛒",
-    exType: "마트",
-    count: "120개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🚗",
-    exType: "교통",
-    count: "80개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🎬",
-    exType: "문화생활",
-    count: "50개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "💬",
-    exType: "기타",
-    count: "30개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "📚",
-    exType: "교육",
-    count: "10개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "💵",
-    exType: "경조사/회비",
-    count: "4개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🏥",
-    exType: "의료/건강",
-    count: "3개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🛏",
-    exType: "가전",
-    count: "2개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "📱",
-    exType: "통신",
-    count: "1개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "✏️",
-    exType: "생필품",
-    count: "0개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🌭",
-    exType: "식비",
-    count: "0개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🧾",
-    exType: "공과금",
-    count: "0개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-];
-
-
+const emoji = {
+  급여: "💰",
+  용돈: "👛",
+  식비: "🌭",
+  교통: "🚗",
+  문화생활: "🎬",
+  생필품: "✏️",
+  마트: "🛒",
+  교육: "📚",
+  통신: "📱",
+  "의료/건강": "🏥",
+  "경조사/회비": "💵",
+  가전: "🛏",
+  공과금: "🧾",
+  기타: "💬",
+};
 
 function Category() {
   const history = useNavigate();
   const [message, setMessage] = useState([]);
   const [message2, setMessage2] = useState([]);
   const [loading, setloading] = useState(true);
-
-  const emojiList = (ecoTagCounts) => {
-
-    switch (ecoTagCounts) {
-      case "식비":
-        return <h1>🌭</h1>
-      case "교통":
-        return <h1>🚗</h1>
-      case "문화생활":
-        return <h1>🎬</h1>
-      case "생필품":
-        return <h1>✏️</h1>
-      case "마트":
-        return <h1>🛒</h1>
-      case "교육":
-        return <h1>📚</h1>
-      case "통신":
-        return <h1>📱</h1>
-      case "의료/건강":
-        return <h1>🏥</h1>
-      case "경조사/회비":
-        return <h1>💵</h1>
-      case "가전":
-        return <h1>🛏</h1>
-      case "공과금":
-        return <h1>🧾</h1>
-      default:
-        return <h1>💬</h1>
-
-    }
-  }
-
-  const emojiList2 = (noEcoTagCounts) => {
-    switch (noEcoTagCounts) {
-      case "식비":
-        return <h1>🌭왜 안됨</h1>
-      case "교통":
-        return <h1>🚗</h1>
-      case "문화생활":
-        return <h1>🎬</h1>
-      case "생필품":
-        return <h1>✏️</h1>
-      case "마트":
-        return <h1>🛒</h1>
-      case "교육":
-        return <h1>📚</h1>
-      case "통신":
-        return <h1>📱</h1>
-      case "의료/건강":
-        return <h1>🏥</h1>
-      case "경조사/회비":
-        return <h1>💵</h1>
-      case "가전":
-        return <h1>🛏</h1>
-      case "공과금":
-        return <h1>🧾</h1>
-      default:
-        return <h1>💬</h1>
-    }
-  }
 
   const renderexTypeList = (ecodata, message) => {
     let renderexTypeList = [];
@@ -307,15 +43,19 @@ function Category() {
             //     ecodata: ecodata.name,
             //   }}
             // >
-            <div className='category-box'>
-              <p className='emoji'>{emojiList(message[i][0])} {" "}</p>
-              <h2>{message[i][0]}{" | "}{message[i][1]}%</h2>
+            <div className="category-box">
+              <p className="emoji">{emoji[message[i][0]]} </p>
+              <h2>
+                {message[i][0]}
+                {" | "}
+                {message[i][1]}%
+              </h2>
               <IoIosArrowForward className="detail-icon" />
-              <h1 className='count'>{message[i][2]}개</h1>
+              <h1 className="count">{message[i][2]}개</h1>
             </div>
 
             // </Link>
-          )
+          );
         }
       } else {
         for (let i = 0; i < message.length; i++) {
@@ -330,23 +70,25 @@ function Category() {
             //   }}
             // >
 
-            <div className='category-box'>
-              <p className='emoji'>{emojiList(message2[i][0])} {" "}</p>
-              <h2>{message[i][0]}{" | "}{message[i][1]}%</h2>
+            <div className="category-box">
+              <p className="emoji">{emoji[message2[i][0]]} </p>
+              <h2>
+                {message[i][0]}
+                {" | "}
+                {message[i][1]}%
+              </h2>
               <IoIosArrowForward className="detail-icon" />
-              <h1 className='count'>{message[i][2]}개</h1>
+              <h1 className="count">{message[i][2]}개</h1>
             </div>
 
-
             // </Link>
-          )
+          );
         }
       }
     }
 
-
     return <div>{renderexTypeList}</div>;
-  }
+  };
 
   const fetchData = async () => {
     const response = await fetch(

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Portal from "../CalendarPart/Portal";
 import styled from "styled-components";
 import { Navigate } from "react-router-dom";
@@ -11,29 +12,18 @@ export function EditName({ className, onClose, visible, state }) {
   const [text, setText] = useState(state);
   const [count, setCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
+  const userId = window.localStorage.getItem("userId");
 
-  const fetchFunc = (e) => {
+  const fetchFunc = async (e) => {
     e.preventDefault();
+    onClose(text);
     //백엔드로 데이터 보내기
-    fetch(`/main/update/${text}`, {
+    const response = await axios({
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        useName: text,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.token) {
-          localStorage.setItem("wtw-token", response.token);
-        }
-      })
-      .then((e) => {
-        Navigate("/");
-      });
+      url: `https://플랜잇.웹.한국:8080/api/main/update/${text}`,
+      headers: { userId: userId },
+    });
+    console.log(response);
   };
 
   const handleChange = (e) => {
@@ -58,15 +48,7 @@ export function EditName({ className, onClose, visible, state }) {
       text = text.slice(0, text.maxLength);
     }
   };
-  /*
-   function numberMaxLength(e){
-        if(e.value.length > e.maxLength){
-            e.value = e.value.slice(0, e.maxLength);
 
-        }
-
-    }
-  */
   const close = (e) => {
     if (onClose) {
       onClose(e);

@@ -34,19 +34,26 @@ export default function FloatingPage() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const userId = window.localStorage.getItem("userId");
 
   const fetchData = () => {
+    console.log(date, price, type, cate, memo);
     if (total === 4) {
-      axios
-        .post("http://3.39.87.115:8080/income/new", {
-          userId: null,
+      axios({
+        method: "POST",
+        url: "https://플랜잇.웹.한국:8080/api/income/new",
+        headers: { userId: userId },
+        data: {
+          userId: userId,
           in_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
-          inType: cate.type,
-          inWay: type.type,
+          in_type: cate.type,
+          in_way: type.type,
           memo: memo,
-        })
-        .then(() => {
+        },
+      })
+        .then((res) => {
+          console.log(res);
           closeModal();
           setComplete(true);
           setTimeout(() => {
@@ -54,12 +61,17 @@ export default function FloatingPage() {
           }, 2000);
         })
         .catch((error) => {
+          console.log(error);
           window.alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+          throw new Error(error);
         });
     } else {
-      axios
-        .post("http://3.39.87.115:8080/expenditure/new", {
-          userId: null,
+      axios({
+        method: "POST",
+        url: "https://플랜잇.웹.한국:8080/api/expenditure/new",
+        headers: { userId: userId },
+        data: {
+          userId: userId,
           ex_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
           exType: cate.type,
@@ -68,8 +80,10 @@ export default function FloatingPage() {
           ecoDetail: ecoTag,
           userAdd: userTag,
           eco: userEcoTag,
-        })
-        .then(() => {
+        },
+      })
+        .then((res) => {
+          console.log(res);
           closeModal();
           setComplete(true);
           setTimeout(() => {
@@ -77,7 +91,9 @@ export default function FloatingPage() {
           }, 2000);
         })
         .catch((error) => {
+          console.log(error);
           window.alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+          throw new Error(error);
         });
     }
   };

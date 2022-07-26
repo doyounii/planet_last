@@ -8,6 +8,23 @@ import { StyledDetailPageBlock } from "./StyledDetail";
 import { IoIosArrowForward } from "react-icons/io";
 import Footer from "../Footer/Footer";
 
+const emoji = {
+  급여: "💰",
+  용돈: "👛",
+  식비: "🌭",
+  교통: "🚗",
+  문화생활: "🎬",
+  생필품: "✏️",
+  마트: "🛒",
+  교육: "📚",
+  통신: "📱",
+  "의료/건강": "🏥",
+  "경조사/회비": "💵",
+  가전: "🛏",
+  공과금: "🧾",
+  기타: "💬",
+};
+
 function DetailCategory() {
   const history = useNavigate();
   const data = useLocation().state;
@@ -70,7 +87,11 @@ function DetailCategory() {
                   history(-1);
                 }}
               />
-              <div className="detail-type">{data.typeName}</div>
+              <div className="detail-type">
+                {emoji[data.typeName]}
+                &nbsp;
+                {data.typeName}
+              </div>
             </div>
             <div className="detail-cost">
               <div className="detail-info">

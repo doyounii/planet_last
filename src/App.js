@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Auth from "./components/LoginPart/Auth";
 import Home from "./pages/Home/Home";
 import Oauth from "./components/LoginPart/Oauth";
+import Profile from "./components/LoginPart/Profile";
 import CalendarPage from "./pages/Calendar/CalendarPage";
 
 import Statistics from "./pages/Statistics/Statistics";
@@ -21,6 +22,7 @@ import UsePage from "./pages/Setting/UsePage";
 import InformationPage from "./pages/Setting/InformationPage";
 import Inquiry from "./pages/Setting/Inquiry";
 import InquiryForm from "./pages/Setting/InquiryForm";
+import InquiryList from "./pages/Setting/InquiryList";
 import Coupon from "./pages/Coupon/Coupon";
 import CouponJoin from "./pages/Coupon/CouponJoin";
 import EcoMission from "./pages/EcoMission/EcoMission";
@@ -45,9 +47,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={Auth(Home, true)} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/oauth" element={<Oauth />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/calendar/:month/:day" element={<DetailCategory />} />
         <Route path="/statistics" element={<Statistics />} />
@@ -73,6 +76,7 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiryForm" element={<InquiryForm />} />
+        <Route path="/inquiryList" element={<InquiryList />} />
       </Routes>
     </QueryClientProvider>
   );

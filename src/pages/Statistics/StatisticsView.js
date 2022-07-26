@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import "./Statistics.css";
 import { IoIosArrowForward } from "react-icons/io";
-import HistorySample from "../../components/History/HistoryBack";
-import DropBox from "../../components/StatisticsPart/DropBox";
 import ko from "date-fns/locale/ko";
 import DateHeader from "../../components/DateHeader";
 import { DetailMemo, StatisticsWays } from "./StatisticsWays";
@@ -18,17 +16,26 @@ const OPTIONS = [
 
 function StatisticsDetail() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [message, setMessage] = useState(0);
+  const [message, setMessage] = useState({
+    totalMonthIncome: 0,
+    totalMonthExpenditure: 0,
+    inMore: true,
+    exMore: true,
+    inDif: 0,
+    exDif: 0,
+    detailDtoList: [],
+  });
   const [detailDtoList, setDetailDtoList] = useState([]);
   const [selectOption, setSelectOptions] = useState("all");
 
-  const wayEmoji = (way) => (way === "은행" ? "🏦" : (way === "카드" ? "💳" : "💵"));
+  const wayEmoji = (way) =>
+    way === "은행" ? "🏦" : way === "카드" ? "💳" : "💵";
   const DropBox2 = (props) => {
     const handleChange = (e) => {
       // event handler
       console.log(e.target.value);
       setSelectOptions(e.target.value);
-      console.log(selectOption)
+      console.log(selectOption);
       console.dir(e);
     };
     return (
@@ -92,7 +99,7 @@ function StatisticsDetail() {
           <div className="income-box">
             <p>수입</p>
             <IoIosArrowForward className="detail-icon" />
-            <h1>{message.totalMonthIncome}원</h1>
+            <h1>{message.totalMonthIncome.toLocaleString()}원</h1>
           </div>
         </Link>
         <Link
@@ -106,7 +113,7 @@ function StatisticsDetail() {
           <div className="income-box">
             <p>지출</p>
             <IoIosArrowForward className="detail-icon" />
-            <h1>{message.totalMonthExpenditure}원</h1>
+            <h1>{message.totalMonthExpenditure.toLocaleString()}원</h1>
           </div>
         </Link>
         <div className="balloon">
@@ -114,16 +121,14 @@ function StatisticsDetail() {
           <h1>
             약{" "}
             <b style={{ color: "#00C982" }}>
-              {message.inDif}원{" "}
-              {message.inMore ? "더" : "덜"}
+              {message.inDif.toLocaleString()}원 {message.inMore ? "더" : "덜"}
             </b>{" "}
             들어오고
           </h1>
           <h1>
             약{" "}
             <b style={{ color: "#00C982" }}>
-              {message.exDif}원{" "}
-              {message.exMore ? "더" : "덜"}
+              {message.exDif.toLocaleString()}원 {message.exMore ? "더" : "덜"}
             </b>{" "}
             썼어요
           </h1>
@@ -140,7 +145,6 @@ function StatisticsDetail() {
         {detailDtoList.map((data) => {
           return (
             <>
-
               {data.detailDtoList.map((value) => {
                 let ecoCnt = 0;
                 value.ecoList !== null &&
@@ -168,15 +172,19 @@ function StatisticsDetail() {
                         date: parseISO(data.date),
                       }}
                     >
-                      {selectOption === "all" ?
-
-                        (value.income === true ?
+                      {selectOption === "all" ? (
+                        value.income === true ? (
                           <StyledDetailPageBlock>
                             <div>
                               <p className="statistic-detail-list date">
-                                {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
+                                {format(parseISO(data.date), "d일 EEEE", {
+                                  locale: ko,
+                                })}
                               </p>
-                              <div key={value.id} className="statistic-detail-list">
+                              <div
+                                key={value.id}
+                                className="statistic-detail-list"
+                              >
                                 <span
                                   role="img"
                                   aria-label="something"
@@ -185,7 +193,9 @@ function StatisticsDetail() {
                                   {wayEmoji(value.way)}
                                 </span>
                                 <p className="stat-detail-type">
-                                  {value.memo === null ? value.type : value.memo}
+                                  {value.memo === null
+                                    ? value.type
+                                    : value.memo}
                                 </p>
                                 <p className="stat-detail-money">
                                   {value.income ? "+" : "-"}
@@ -194,13 +204,18 @@ function StatisticsDetail() {
                               </div>
                             </div>
                           </StyledDetailPageBlock>
-                          :
+                        ) : (
                           <StyledDetailPageBlock>
                             <div>
                               <p className="statistic-detail-list date">
-                                {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
+                                {format(parseISO(data.date), "d일 EEEE", {
+                                  locale: ko,
+                                })}
                               </p>
-                              <div className="statistic-detail-list" key={value.id}>
+                              <div
+                                className="statistic-detail-list"
+                                key={value.id}
+                              >
                                 <div className="stat-detail-icon">
                                   {wayEmoji(value.way)}
                                 </div>
@@ -209,57 +224,61 @@ function StatisticsDetail() {
                             </div>
                           </StyledDetailPageBlock>
                         )
-                        :
-                        (selectOption === "income" ?
-                          <StyledDetailPageBlock>
-                            {value.income === true &&
-                              <div>
-                                <p className="statistic-detail-list date">
-                                  {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
+                      ) : selectOption === "income" ? (
+                        <StyledDetailPageBlock>
+                          {value.income === true && (
+                            <div>
+                              <p className="statistic-detail-list date">
+                                {format(parseISO(data.date), "d일 EEEE", {
+                                  locale: ko,
+                                })}
+                              </p>
+                              <div
+                                key={value.id}
+                                className="statistic-detail-list"
+                              >
+                                <span
+                                  role="img"
+                                  aria-label="something"
+                                  className="stat-detail-icon"
+                                >
+                                  {wayEmoji(value.way)}
+                                </span>
+                                <p className="stat-detail-type">
+                                  {value.memo === null
+                                    ? value.type
+                                    : value.memo}
                                 </p>
-                                <div key={value.id} className="statistic-detail-list">
-                                  <span
-                                    role="img"
-                                    aria-label="something"
-                                    className="stat-detail-icon"
-                                  >
-                                    {wayEmoji(value.way)}
-                                  </span>
-                                  <p className="stat-detail-type">
-                                    {value.memo === null ? value.type : value.memo}
-                                  </p>
-                                  <p className="stat-detail-money">
-                                    {value.income ? "+" : "-"}
-                                    {value.cost.toLocaleString()}원
-                                  </p>
-                                </div>
-                              </div>}
-                          </StyledDetailPageBlock> :
-                          <StyledDetailPageBlock>
-                            {value.income === false &&
-                              <div>
-                                <p className="statistic-detail-list date">
-                                  {format(parseISO(data.date), "d일 EEEE", { locale: ko })}
+                                <p className="stat-detail-money">
+                                  {value.income ? "+" : "-"}
+                                  {value.cost.toLocaleString()}원
                                 </p>
-                                <div className="statistic-detail-list" key={value.id}>
-                                  <div className="stat-detail-icon">
-                                    {wayEmoji(value.way)}
-                                  </div>
-                                  <DetailMemo item={value} ecoCnt={ecoCnt} />
+                              </div>
+                            </div>
+                          )}
+                        </StyledDetailPageBlock>
+                      ) : (
+                        <StyledDetailPageBlock>
+                          {value.income === false && (
+                            <div>
+                              <p className="statistic-detail-list date">
+                                {format(parseISO(data.date), "d일 EEEE", {
+                                  locale: ko,
+                                })}
+                              </p>
+                              <div
+                                className="statistic-detail-list"
+                                key={value.id}
+                              >
+                                <div className="stat-detail-icon">
+                                  {wayEmoji(value.way)}
                                 </div>
-                              </div>}
-                          </StyledDetailPageBlock>
-                        )
-                      }
-
-                      {/* <StyledDetailPageBlock>
-                        <div className="statistic-detail-list" key={value.id}>
-                          <div className="stat-detail-icon">
-                            {wayEmoji(value.way)}
-                          </div>
-                          <DetailMemo item={value} ecoCnt={ecoCnt} />
-                        </div>
-                      </StyledDetailPageBlock> */}
+                                <DetailMemo item={value} ecoCnt={ecoCnt} />
+                              </div>
+                            </div>
+                          )}
+                        </StyledDetailPageBlock>
+                      )}
                     </Link>
                   </>
                 );
@@ -274,23 +293,34 @@ function StatisticsDetail() {
 
 export default StatisticsDetail;
 
+StatisticsDetail.defaultProps = {
+  message: {
+    totalMonthIncome: 0,
+    totalMonthExpenditure: 0,
+    inMore: true,
+    exMore: true,
+    inDif: 0,
+    exDif: 0,
+    detailDtoList: [],
+  },
+};
 const data = {
-  "totalMonthIncome": 880,
-  "totalMonthExpenditure": 92000,
-  "inMore": true,
-  "exMore": true,
-  "inDif": 880,
-  "exDif": 92000,
-  "detailDtoList": [
+  totalMonthIncome: 880,
+  totalMonthExpenditure: 92000,
+  inMore: true,
+  exMore: true,
+  inDif: 880,
+  exDif: 92000,
+  detailDtoList: [
     {
-      "date": "2022-03-04",
-      "detailDtoList": [
+      date: "2022-03-04",
+      detailDtoList: [
         {
-          "type": "생필품",
-          "way": "은행",
-          "cost": 32000,
-          "memo": "츄파츕스 사먹음",
-          "ecoList": [
+          type: "생필품",
+          way: "은행",
+          cost: 32000,
+          memo: "츄파츕스 사먹음",
+          ecoList: [
             {
               eco: "G",
               ecoDetail: "중고거래/나눔/기부",
@@ -312,14 +342,14 @@ const data = {
       ],
     },
     {
-      "date": "2022-03-20",
-      "detailDtoList": [
+      date: "2022-03-20",
+      detailDtoList: [
         {
-          "type": "마트",
-          "way": "현금",
-          "cost": 53000,
-          "memo": "츄파츕스 사먹음",
-          "ecoList": [
+          type: "마트",
+          way: "현금",
+          cost: 53000,
+          memo: "츄파츕스 사먹음",
+          ecoList: [
             {
               eco: "G",
               ecoDetail: "중고거래/나눔/기부",
@@ -341,14 +371,14 @@ const data = {
       ],
     },
     {
-      "date": "2022-03-23",
-      "detailDtoList": [
+      date: "2022-03-23",
+      detailDtoList: [
         {
-          "type": "경조사/회비",
-          "way": "은행",
-          "cost": 7000,
-          "memo": "츄파츕스 사먹음",
-          "ecoList": [
+          type: "경조사/회비",
+          way: "은행",
+          cost: 7000,
+          memo: "츄파츕스 사먹음",
+          ecoList: [
             {
               eco: "G",
               ecoDetail: "중고거래/나눔/기부",
@@ -369,5 +399,5 @@ const data = {
         },
       ],
     },
-  ]
-}
+  ],
+};

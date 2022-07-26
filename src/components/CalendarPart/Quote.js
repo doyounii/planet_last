@@ -44,7 +44,7 @@ function Quote({ value }) {
   let text = beforeStr[0];
   let author = beforeStr[1];
 
-  const [limit, setLimit] = useState(50);
+  const [limit, setLimit] = useState(53);
   const toggleEllipsis = (str, limit) => {
     return {
       string: str.slice(0, limit),
