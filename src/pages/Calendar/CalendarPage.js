@@ -60,11 +60,7 @@ function CalendarPage() {
   const [quote, setquote] = useState("");
   const [isMonthView, setIsMonthView] = useState(true);
 
-  const months = [
-    subMonths(currentDate, 1),
-    currentDate,
-    addMonths(currentDate, 1),
-  ];
+  const months = [subMonths(currentDate, 1), currentDate];
 
   const results = useQueries(
     months.map((m) => {
@@ -87,6 +83,9 @@ function CalendarPage() {
       };
     })
   );
+  console.log(details);
+
+  console.log(queryClient.getQueryData(["detailData", "2022-07-26"]));
 
   useEffect(() => {
     if (results[1].status === "success") {

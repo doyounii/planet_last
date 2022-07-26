@@ -21,7 +21,7 @@ const fetchData = async (userId) => {
     `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
       new Date(),
       "M"
-    )}`,
+    )}/${format(new Date(), "d")}`,
     { headers: { userId: userId } }
   );
   const data = await response.data;
@@ -98,7 +98,7 @@ function StatisticsMain() {
       setPrcentage(messages.percentage);
     }
   }, [queryClient, results]);
-
+  console.log();
   useEffect(() => {
     if (results.status === "success") {
       setloading(false);
