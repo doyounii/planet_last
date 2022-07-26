@@ -9,6 +9,8 @@ import Modal from "../../components/CouponPart/CouponModal";
 
 import AvailableCoupon from "./AvailableCoupon";
 import UsedCoupon from "./UsedCoupon";
+import ExpireCoupon from "./ExpireCoupon";
+
 import { Button } from "antd";
 
 function Coupon() {
@@ -75,20 +77,27 @@ function Coupon() {
 
   const selectComponent = {
     first: <AvailableCoupon />,
-    second: <UsedCoupon />
+    second: <UsedCoupon />,
+    third: <ExpireCoupon />
   }
 
   const MAIN_DATA = [
     {
-    id: 1,
-    text: '보유',
-    name: 'first',
+      id: 1,
+      text: '보유',
+      name: 'first',
     },
     {
-    id: 2,
-    text: '사용가능',
-    name: 'second',
-    },];
+      id: 2,
+      text: '사용가능',
+      name: 'second',
+    },
+    {
+      id: 3,
+      text: '기간만료',
+      name: 'third',
+    },
+  ];
 
   return (
     <div className={CouponStyle.container}>
@@ -131,23 +140,13 @@ function Coupon() {
             </Button>
           );
         })}
-          
         </div>
-
-        {content && <div>{selectComponent[content]}</div>}
       </div>
 
-      {/* <div className={CouponStyle.coupon_use_box}>
-        {couponArr.filter((it) => it.availability === true).map((famous) => (
-          <Coupon
-            data={famous}
-            coupon={famous.coupon}
-            remainingDays={famous.remainingDays}
-            discount={famous.discount}
-            availability={famous.availability}
-          />
-        ))}
-      </div> */}
+      {content && 
+          <div>
+            {selectComponent[content]}
+          </div>}
 
       <Footer activeMenu="home">
         <div>홈</div>

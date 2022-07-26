@@ -4,7 +4,7 @@ import CouponStyle from "./Coupon.module.css";
 import Footer from "../../components/Footer/Footer";
 import Modal from "../../components/CouponPart/CouponModal";
 
-function UsedCoupon() {
+function ExpireCoupon() {
   //쿠폰 누르면 나오는 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -73,8 +73,8 @@ function UsedCoupon() {
       )}
 
       <div className={CouponStyle.coupon_use_box}>
-        {/* 사용 완료 쿠폰 */}
-        {couponArr.filter((it) => it.availability === false).map((famous) => (
+        {/* 기간 만료 쿠폰 */}
+        {couponArr.filter((it) => it.expiration === true).map((famous) => (
           <Coupon
             data={famous}
             coupon={famous.coupon}
@@ -84,8 +84,12 @@ function UsedCoupon() {
           />
         ))}
       </div>
+
+      <Footer activeMenu="home">
+        <div>홈</div>
+      </Footer>
     </div>
   );
 }
 
-export default UsedCoupon;
+export default ExpireCoupon;

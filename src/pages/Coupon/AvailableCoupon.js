@@ -4,7 +4,7 @@ import CouponStyle from "./Coupon.module.css";
 import Footer from "../../components/Footer/Footer";
 import Modal from "../../components/CouponPart/CouponModal";
 
-function Coupon() {
+function AvailableCoupon() {
   //쿠폰 누르면 나오는 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -88,12 +88,8 @@ function Coupon() {
           />
         ))}
       </div>
-
-      <Footer activeMenu="home">
-        <div>홈</div>
-      </Footer>
     </div>
   );
 }
 
-export default Coupon;
+export default AvailableCoupon;
