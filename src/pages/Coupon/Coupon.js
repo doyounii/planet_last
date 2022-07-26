@@ -5,8 +5,13 @@ import CouponStyle from "./Coupon.module.css";
 import Footer from "../../components/Footer/Footer";
 import HistorySample from "../../components/History/HistoryBack";
 import { FaChevronRight } from "react-icons/fa";
-import DropBox from "../../components/CouponPart/DropBox";
 import Modal from "../../components/CouponPart/CouponModal";
+
+import AvailableCoupon from "./AvailableCoupon";
+import UsedCoupon from "./UsedCoupon";
+import ExpireCoupon from "./ExpireCoupon";
+
+import { Button } from "antd";
 
 function Coupon() {
   //쿠폰 누르면 나오는 모달
@@ -47,24 +52,52 @@ function Coupon() {
 
   function Coupon({ data, remainingDays, coupon, discount, availability }) {
     return (
-      <div
+      <div className={({availability} ? CouponStyle.coupon_available : CouponStyle.coupon_expiration)}
         onClick={() => {
           setCurrent(data);
           openModal();
         }}
-        className={
-          { availability }
-            ? CouponStyle.coupon_available
-            : CouponStyle.coupon_expiration
-        }
       >
         <div className={CouponStyle.coupon_dday}>D-{remainingDays}</div>
+        <div>{availability.toString()}는 false야 true야</div>
         <img src="img/coupon.png" alt="planet-coupon"></img>
         <h1>{coupon}</h1>
         <p>{discount}% 할인쿠폰</p>
       </div>
     );
   }
+
+  /*버튼마다 컴포넌트 변경하기*/
+  const [content, setContent] = useState();
+
+  const btnValueSetting = e => {
+    const {name} = e.target;
+    setContent(name);
+  }
+
+  const selectComponent = {
+    first: <AvailableCoupon />,
+    second: <UsedCoupon />,
+    third: <ExpireCoupon />
+  }
+
+  const MAIN_DATA = [
+    {
+      id: 1,
+      text: '보유',
+      name: 'first',
+    },
+    {
+      id: 2,
+      text: '사용가능',
+      name: 'second',
+    },
+    {
+      id: 3,
+      text: '기간만료',
+      name: 'third',
+    },
+  ];
 
   return (
     <div className={CouponStyle.container}>
@@ -98,24 +131,22 @@ function Coupon() {
           현재 사용가능한 쿠폰 <b style={{ color: "#00C982" }}>{couponCnt}</b>
           장이 남았어요
         </h1>
+
         <div className={CouponStyle.drop_box}>
-          <p>총 {couponCnt}개</p>
-          <div className={CouponStyle.dropbox}>
-            <DropBox />
-          </div>
+        {MAIN_DATA.map(data => {
+          return (
+            <Button onClick={btnValueSetting} name={data.name} key={data.id}>
+              {data.text}
+            </Button>
+          );
+        })}
         </div>
       </div>
 
-      <div className={CouponStyle.coupon_use_box}>
-        {couponArr.map((famous) => (
-          <Coupon
-            data={famous}
-            coupon={famous.coupon}
-            remainingDays={famous.remainingDays}
-            discount={famous.discount}
-          />
-        ))}
-      </div>
+      {content && 
+          <div>
+            {selectComponent[content]}
+          </div>}
 
       <Footer activeMenu="home">
         <div>홈</div>
