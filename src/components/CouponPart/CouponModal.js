@@ -6,6 +6,7 @@ import CouponStyle from "../../pages/Coupon/Coupon.module.css";
 import { CgClose } from "react-icons/cg";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import Popup from "../../components/InquiryPart/Popup";
+import { useNavigate } from "react-router-dom";
 
 import "../../components/CalendarPart/Calendar.css";
 
@@ -35,8 +36,7 @@ const CouponModal = ({
     }
   };
 
-  console.log(current);
-  console.log("테스트");
+  console.log("테스트", current);
 
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
@@ -62,6 +62,43 @@ const CouponModal = ({
   //   };
   // }, []);
 
+  const [unavailable, setUnavailable] = useState(false);
+
+  const userId = window.localStorage.getItem("userId");
+
+  const fetchFunc = () => {
+    //백엔드로 데이터 보내기
+    fetch(
+      `https://플랜잇.웹.한국:8080/api/coupon/use/${current.cno}`,
+      {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+           Accept: "application/json",
+           userId: userId },
+        body: JSON.stringify({
+          cno: current.cno,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    //쿠폰번호에 맞는 쿠폰 정보값 넘겨줘야함
+    fetchFunc();
+    iscloseModal();
+    setUnavailable(!unavailable);
+  };
+  
+
   return (
     <Portal elementId="modal-root">
     <ModalOverlay visible={visible} />
@@ -77,7 +114,7 @@ const CouponModal = ({
         className="modal-inner"
       >
         {closable && <CgClose className="modal-close" onClick={close} />}
-        <div className={CouponStyle.coupon_modal}>
+        <div className={unavailable ? CouponStyle.coupon_modal_unavail : CouponStyle.coupon_modal}>
             {/* <p>cno 불러오기 test : {current.cno}</p> */}
             <h1>친환경 상점 {current.coupon}</h1>
             <p>{current.discount}% 할인쿠폰</p>
@@ -131,7 +168,7 @@ const CouponModal = ({
 
             <div className={CouponStyle.coupon_use_btn}>
               <button onClick={isopenModal}>사용하기</button>
-              <Popup open={modalOpen} close={iscloseModal}>
+              <Popup open={modalOpen} close={iscloseModal} submit={handleSubmit}>
                 직원이신가요?
               </Popup>
             </div>
