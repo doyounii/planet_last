@@ -14,19 +14,16 @@ export function EditName({ className, onClose, visible, state }) {
   const [disabled, setDisabled] = useState(true);
   const userId = window.localStorage.getItem("userId");
 
-  console.log(text);
-
   const fetchFunc = async (e) => {
     e.preventDefault();
-    onClose();
+    onClose(text);
     //백엔드로 데이터 보내기
-    const response = await axios.post(
-      `https://플랜잇.웹.한국:8080/api/main/update?userName=${text}`,
-      { headers: { userId: userId } }
-    );
+    const response = await axios({
+      method: "POST",
+      url: `https://플랜잇.웹.한국:8080/api/main/update/${text}`,
+      headers: { userId: userId },
+    });
     console.log(response);
-    console.log(text);
-    onClose();
   };
 
   const handleChange = (e) => {

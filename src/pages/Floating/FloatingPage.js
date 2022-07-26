@@ -47,8 +47,8 @@ export default function FloatingPage() {
           userId: userId,
           in_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
-          inType: cate.type,
-          inWay: type.type,
+          in_type: cate.type,
+          in_way: type.type,
           memo: memo,
         },
       })
