@@ -65,7 +65,8 @@ function SelectTag({ submitFunc, btn }) {
       case "취소":
         submitFunc("취소", "취소");
         break;
-      case "다음":
+      case "추가":
+        console.log(selectedTag);
         if (text.length !== 0 && selectedTag !== 0) {
           submitFunc(text, selectedTag);
         }
@@ -122,7 +123,7 @@ function SelectTag({ submitFunc, btn }) {
           onClick={onClickHandler}
           disabled={disabled}
           prev={"취소"}
-          next={"다음"}
+          next={"추가"}
         />
       )}
       {request && (
