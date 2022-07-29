@@ -72,7 +72,13 @@ const StyledDetail = styled.div`
   .details-circle.none {
     color: transparent;
   }
+  .details-detail-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
   .details-memo {
+    font-size: 14px;
     color: #b4b6b8;
   }
   .details-detail {
@@ -89,6 +95,9 @@ const StyledDetail = styled.div`
   .type-cost,
   .details-cost {
     margin-left: auto;
+  }
+  .details-circle.etc {
+    color: white;
   }
 
   .details-cost.etc {
@@ -207,7 +216,7 @@ const StyledDetailPage = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     padding-left: 5%;
     padding-right: 5%;
     margin-top: 13px;
@@ -229,6 +238,11 @@ const StyledDetailPage = styled.div`
     color: rgb(var(--mid-gray));
   }
 
+  .details-detail-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
   .details-memo {
     font-size: 15px;
     line-height: 16px;
@@ -252,7 +266,7 @@ const StyledDetailPage = styled.div`
   .details-cost.neco {
     color: rgb(var(--mid-gray));
   }
-  .details .details-cost {
+  .details-cost {
     font-size: 15px;
     font-weight: 400;
     margin-left: auto;

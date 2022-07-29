@@ -9,32 +9,6 @@ import { StyledDetailBlock } from "./StyledDetail";
 const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
 const isEcoT = (eco) => (eco === "G" ? "eco" : eco === "R" ? "neco" : "etc");
 
-export function DetailItem({ item, ecoCnt }) {
-  return (
-    <>
-      <div className="details-memo" key={item.id}>
-        {item.memo !== null ? item.memo : item.type}
-        {item.ecoList !== undefined &&
-          item.ecoList !== null &&
-          item.ecoList.map((data) => {
-            return (
-              <div className={`details-detail ${isEcoT(data.eco)}`}>
-                {data.ecoDetail === "사용자 추가"
-                  ? data.userAdd
-                  : data.ecoDetail}
-              </div>
-            );
-          })}
-      </div>
-
-      <div className={`details-cost ${isEco(ecoCnt)}`}>
-        {item.income ? "+" : "-"}
-        {item.cost.toLocaleString("ko-KR")}원
-      </div>
-    </>
-  );
-}
-
 function DetailList({ value }) {
   let date = value;
   const queryClient = useQueryClient();
@@ -50,106 +24,125 @@ function DetailList({ value }) {
         format(date, "yyyy-MM-dd"),
       ]);
       console.log(getData);
-      // setData(getData);
+      setData(getData);
     }
   }, [date]);
-  console.log(value);
 
-  // const setData = (data) => {
-  //   let moneySum = 0;
-  //   console.log(data);
+  const setData = (data) => {
+    let moneySum = 0;
 
-  //   let totalTemp = [data.totalMoney];
+    let totalTemp = Object.keys(data.totalMoney).map((key) => {
+      moneySum += data.totalMoney[key];
+      return { name: key, value: data.totalMoney[key] };
+    });
 
-  //   let detailTemp = Object.keys(data.totalDetails).map((key) => {
-  //     return { name: key, value: data.totalDetails[key] };
-  //   });
+    let detailTemp = Object.keys(data.totalDetails).map((key) => {
+      return { name: key, value: data.totalDetails[key] };
+    });
 
-  //   totalTemp.map((data) => (moneySum += data.value));
-  //   // let totalTemp = [{ name: "test", value: "testvalue" }];
-  //   // let detailTemp = [{ name: "test", value: "testvalue" }];
-  //   // moneySum = 90;
+    setTotalList(totalTemp);
+    setDetailList(detailTemp);
+    setTotalMoney(moneySum);
+  };
 
-  //   setTotalList(totalTemp);
-  //   setDetailList(detailTemp);
-  //   setTotalMoney(moneySum);
-  // };
+  const renderDetailList = (detail) => {
+    let detailTemp = [];
+    let ecoCnt = 0;
+    detailTemp = detail.value.map((data) => {
+      ecoCnt = 0;
+      data.ecoList !== undefined &&
+        data.ecoList !== null &&
+        data.ecoList.forEach((data) => {
+          if (data.eco === "G") {
+            ecoCnt += 1;
+          } else if (data.eco === "R") {
+            ecoCnt -= 1;
+          }
+        });
+      return (
+        <div className="details" key={data.id}>
+          <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
+          <DetailItem item={data} ecoCnt={ecoCnt} />
+        </div>
+      );
+    });
 
-  // const renderDetailList = (filterType) => {
-  //   let detailTemp = [];
-  //   let ecoCnt = 0;
-  //   filterType !== undefined &&
-  //     filterType !== null &&
-  //     filterType.value.forEach((item) => {
-  //       {
-  //         item.ecoList !== undefined &&
-  //           item.ecoList !== null &&
-  //           item.ecoList.forEach((item) => {
-  //             if (item.eco === "G") {
-  //               ecoCnt += 1;
-  //             } else if (item.eco === "R") {
-  //               ecoCnt -= 1;
-  //             }
-  //           });
-  //       }
+    return detailTemp;
+  };
 
-  //       detailTemp.push(
-  //         <div className="details" key={item.id}>
-  //           <div className={`details-circle ${isEco(ecoCnt)}`}>● &nbsp;</div>
-  //           <DetailItem item={item} ecoCnt={ecoCnt} />
-  //         </div>
-  //       );
-  //       ecoCnt = 0;
-  //     });
+  const renderList = () => {
+    let renderList = [];
 
-  //   return detailTemp;
-  // };
+    renderList = totalList.map((data, i) => {
+      return (
+        <Link
+          key={data.name + i}
+          className="detail-link"
+          to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
+          state={{
+            date: value,
+            type: data,
+            // typeName: data.name,
+            // typeCost: data.value,
+            typeDetail: detailList[i],
+          }}
+        >
+          <div className="detail-box" key={data.name + i}>
+            <div className="type">
+              <div className="type-name">{data.name}</div>
+              <div className="type-cost">{data.value.toLocaleString()}원</div>
+            </div>
+            {renderDetailList(detailList[i])}
+          </div>
+        </Link>
+      );
+    });
 
-  // const renderList = () => {
-  //   let renderList = [];
+    return <div className="item-list">{renderList}</div>;
+  };
 
-  //   for (let i = 0; i < totalList.length; i++) {
-  //     renderList.push(
-  //       <Link
-  //         className="detail-link"
-  //         to={`/calendar/${format(date, "M")}/${format(date, "d")}`}
-  //         state={{
-  //           date: value.date,
-  //           typeName: totalList[i].name,
-  //           typeCost: totalList[i].value,
-  //           typeDetail: detailList[i],
-  //         }}
-  //       >
-  //         <div className="detail-box" key={totalList[i].name + i}>
-  //           <div className="type">
-  //             <div className="type-name">{totalList[i].name}</div>
-  //             <div className="type-cost">
-  //               {totalList[i].value.toLocaleString()}원
-  //             </div>
-  //           </div>
-  //           {renderDetailList(detailList[i])}
-  //         </div>
-  //       </Link>
-  //     );
-  //   }
-
-  //   return <div className="item-list">{renderList}</div>;
-  // };
-
-  // if (loading) return <div style={{ color: "white" }}>로딩중..</div>;
   return (
     <StyledDetailBlock>
       <div className="detail-list">
-        {/* <div className="selected-detail">
+        <div className="selected-detail">
           <div className="selected-date">
             {format(value, "M. d EEEEE", { locale: ko })}
           </div>
           <div className="selected-total">{totalMoney.toLocaleString()}원</div>
         </div>
-        {renderList()} */}
+        {renderList()}
       </div>
     </StyledDetailBlock>
   );
 }
 
 export default DetailList;
+
+export function DetailItem({ item, ecoCnt }) {
+  return (
+    <div className="details-detail-container" key={item.id}>
+      <div className="details-memo">
+        {item.memo !== "" ? item.memo : item.type}
+        {item.ecoList !== undefined &&
+          item.ecoList !== null &&
+          item.ecoList.map((data, i) => {
+            return (
+              <div
+                key={data + i}
+                className={`details-detail ${isEcoT(data.eco)}`}
+              >
+                {data.ecoDetail === "사용자 추가"
+                  ? data.userAdd
+                  : data.ecoDetail}
+              </div>
+            );
+          })}
+      </div>
+
+      <div className={`details-cost ${isEco(ecoCnt)}`}>
+        {item.income ? "+" : "-"}
+        {item.cost.toLocaleString("ko-KR")}원
+      </div>
+    </div>
+  );
+}

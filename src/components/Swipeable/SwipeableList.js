@@ -78,8 +78,8 @@ function SwipeableList(props) {
       const threshold = props.threshold || 0.5;
 
       if (
-        leftRef.current <
-        listElementRef.current.offsetWidth * threshold * -1
+        leftRef.current < listElementRef.current.offsetWidth * threshold * -1 &&
+        window.confirm("내역을 삭제하시겠습니까?")
       ) {
         leftRef.current = -listElementRef.current.offsetWidth * 2;
 
