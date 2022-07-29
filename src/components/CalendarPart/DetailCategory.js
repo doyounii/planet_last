@@ -28,11 +28,14 @@ const emoji = {
 
 const isEco = (ecoCnt) => (ecoCnt > 0 ? "eco" : ecoCnt < 0 ? "neco" : "etc");
 
-const fetchData = async (index, income, userId) => {
+const fetchData = async (index, income, userId, date) => {
   const api = income ? "income" : "expenditure";
   const response = await axios({
     method: "DELETE",
-    url: `https://플랜잇.웹.한국:8080/api/${api}/${index}`,
+    url: `https://플랜잇.웹.한국:8080/api/calendar/${format(
+      date,
+      "M"
+    )}/${api}/${index}`,
     headers: { userId: userId },
   });
 };
@@ -77,7 +80,7 @@ function DetailCategory() {
               expend: detailMoney.expend - x.cost,
             });
           }
-          fetchData(x.id, x.income, userId);
+          fetchData(x.id, x.income, userId, data.date);
         }
       });
     }, 2000);

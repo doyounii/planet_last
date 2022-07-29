@@ -7,23 +7,43 @@ import Style from "./EditName.module.css";
 import { CgClose } from "react-icons/cg";
 import "../CalendarPart/Calendar.css";
 import editscss from "./EditName.css";
+import { useQueryClient, useMutation } from "react-query";
 
 export function EditName({ className, onClose, visible, state }) {
   const [text, setText] = useState(state);
   const [count, setCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
+  const queryClient = useQueryClient();
   const userId = window.localStorage.getItem("userId");
 
-  const fetchFunc = async (e) => {
-    e.preventDefault();
-    onClose(text);
-    //백엔드로 데이터 보내기
+  useEffect(() => {
+    document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = `position: ""; top: "";`;
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    };
+  }, []);
+
+  const editName = useMutation({
+    mutationFn: () => fetchFunc(),
+    onSuccess: () => {
+      // 요청이 성공한 경우
+      queryClient.invalidateQueries("homeData");
+      console.log("onSuccess");
+    },
+    onError: (error) => {
+      // 요청에 에러가 발생된 경우
+      console.log(error);
+    },
+  });
+
+  const fetchFunc = async () => {
     const response = await axios({
       method: "POST",
       url: `https://플랜잇.웹.한국:8080/api/main/update/${text}`,
       headers: { userId: userId },
     });
-    console.log(response);
   };
 
   const handleChange = (e) => {
@@ -55,21 +75,18 @@ export function EditName({ className, onClose, visible, state }) {
     }
   };
 
-  useEffect(() => {
-    document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
-    return () => {
-      const scrollY = document.body.style.top;
-      document.body.style.cssText = `position: ""; top: "";`;
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
-    };
-  }, []);
+  const onSubmitFn = (e) => {
+    e.preventDefault();
+    editName.mutate();
+    onClose();
+  };
 
   return (
     <Portal elementId="modal-root">
       <InfoModalOverlay visible={visible} className={className} />
       <ModalWrapper className={className} tabIndex={-1} visible={visible}>
         <div className={Style.contents}>
-          <form onSubmit={fetchFunc} className={Style.form}>
+          <form onSubmit={onSubmitFn} className={Style.form}>
             <input
               id="inputMemo"
               type="text"
