@@ -1,8 +1,6 @@
 .bottomBtn {
-  position: absolute;
   display: flex;
   flex-direction: row;
-  bottom: 40px;
 }
 
 .bottomBtnActive {

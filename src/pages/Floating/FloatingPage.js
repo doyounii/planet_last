@@ -18,7 +18,7 @@ import { Modal } from "../../components/Modal/Modal";
 export default function FloatingPage() {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(1);
-  const [total, setTotal] = useState(4);
+  const [total, setTotal] = useState(5);
 
   const [date, setDate] = useState(new Date());
   const [price, setprice] = useState("");
@@ -263,7 +263,7 @@ export default function FloatingPage() {
         <CustomSwitch
           width={145}
           height={42}
-          selectionMode={1}
+          selectionMode={2}
           roundCorner={true}
           option1={"수입"}
           option2={"지출"}

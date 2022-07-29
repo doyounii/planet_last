@@ -1,12 +1,12 @@
 import React from "react";
 import IncomeStyle from "./FloatingButton.module.css";
 
-function FloatingButton({ prev, next, onClick, disabled }) {
+function FloatingButton({ prev, next, onClick, disabled, className }) {
   const onClickHandler = (btnType) => {
     onClick(btnType);
   };
   return (
-    <div className={IncomeStyle.bottomBtn}>
+    <div className={`${IncomeStyle.bottomBtn} ${className}`}>
       <button
         className={`${IncomeStyle.bottomBtnActive} ${IncomeStyle.bottomBtndisabled}`}
         onClick={() => onClickHandler(prev)}
