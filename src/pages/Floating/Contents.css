@@ -29,7 +29,8 @@
   bottom: 10px;
 }
 
-.float-btn.memo-btn {
+.float-btn.memo-btn,
+.float-btn.select-eco-btn {
   bottom: 120px;
 }
 
@@ -230,6 +231,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.floating-confirm .modal-inner {
+  width: 320px;
 }
 
 .floating-confirm-message {
