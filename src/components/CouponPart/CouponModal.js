@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Portal from "../../components/CalendarPart/Portal";
+import Portal from "../../components/Modal/Portal";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import CouponStyle from "../../pages/Coupon/Coupon.module.css";
@@ -21,9 +21,8 @@ const CouponModal = ({
   closable,
   visible,
   background,
-  current
+  current,
 }) => {
-
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose(e);
@@ -41,17 +40,17 @@ const CouponModal = ({
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
- 
-   //popup modal
-   const [modalOpen, setModalOpen] = useState(false);
- 
-   const isopenModal = () => {
-     setModalOpen(true);
-   };
- 
-   const iscloseModal = () => {
-     setModalOpen(false);
-   };
+
+  //popup modal
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const isopenModal = () => {
+    setModalOpen(true);
+  };
+
+  const iscloseModal = () => {
+    setModalOpen(false);
+  };
 
   // useEffect(() => {
   //   document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
@@ -68,19 +67,17 @@ const CouponModal = ({
 
   const fetchFunc = () => {
     //백엔드로 데이터 보내기
-    fetch(
-      `https://플랜잇.웹.한국:8080/api/coupon/use/${current.cno}`,
-      {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-           Accept: "application/json",
-           userId: userId },
-        body: JSON.stringify({
-          cno: current.cno,
-        }),
-      }
-    )
+    fetch(`https://플랜잇.웹.한국:8080/api/coupon/use/${current.cno}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        userId: userId,
+      },
+      body: JSON.stringify({
+        cno: current.cno,
+      }),
+    })
       .then((response) => response.json())
       .then((response) => {
         if (response.token) {
@@ -97,24 +94,29 @@ const CouponModal = ({
     iscloseModal();
     setUnavailable(!unavailable);
   };
-  
 
   return (
     <Portal elementId="modal-root">
-    <ModalOverlay visible={visible} />
-    <ModalWrapper
-      className={className}
-      onClick={maskClosable ? onMaskClick : null}
-      tabIndex={-1}
-    >
-      <ModalInner
-        visible={visible}
-        background={background}
-        tabIndex={0}
-        className="modal-inner"
+      <ModalOverlay visible={visible} />
+      <ModalWrapper
+        className={className}
+        onClick={maskClosable ? onMaskClick : null}
+        tabIndex={-1}
       >
-        {closable && <CgClose className="modal-close" onClick={close} />}
-        <div className={unavailable ? CouponStyle.coupon_modal_unavail : CouponStyle.coupon_modal}>
+        <ModalInner
+          visible={visible}
+          background={background}
+          tabIndex={0}
+          className="modal-inner"
+        >
+          {closable && <CgClose className="modal-close" onClick={close} />}
+          <div
+            className={
+              unavailable
+                ? CouponStyle.coupon_modal_unavail
+                : CouponStyle.coupon_modal
+            }
+          >
             {/* <p>cno 불러오기 test : {current.cno}</p> */}
             <h1>친환경 상점 {current.coupon}</h1>
             <p>{current.discount}% 할인쿠폰</p>
@@ -133,9 +135,7 @@ const CouponModal = ({
                 {visible1 ? <BsChevronUp /> : <BsChevronDown />}
               </button>
               <br />
-              {visible1 && (
-                <CouponUseInfo>{current.usageInfo}</CouponUseInfo>
-              )}
+              {visible1 && <CouponUseInfo>{current.usageInfo}</CouponUseInfo>}
             </div>
 
             <div className={CouponStyle.coupon_info}>
@@ -168,16 +168,20 @@ const CouponModal = ({
 
             <div className={CouponStyle.coupon_use_btn}>
               <button onClick={isopenModal}>사용하기</button>
-              <Popup open={modalOpen} close={iscloseModal} submit={handleSubmit}>
+              <Popup
+                open={modalOpen}
+                close={iscloseModal}
+                submit={handleSubmit}
+              >
                 직원이신가요?
               </Popup>
             </div>
           </div>
-      </ModalInner>
-    </ModalWrapper>
-  </Portal>
+        </ModalInner>
+      </ModalWrapper>
+    </Portal>
   );
-}
+};
 
 export default CouponModal;
 
@@ -276,5 +280,3 @@ const ModalInner = styled.div`
   padding: 20px 20px;
   color: white;
 `;
-
-

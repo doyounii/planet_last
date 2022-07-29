@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Portal from "../CalendarPart/Portal";
+import Portal from "../Modal/Portal";
 import styled from "styled-components";
 import { Navigate } from "react-router-dom";
 import Style from "./EditName.module.css";

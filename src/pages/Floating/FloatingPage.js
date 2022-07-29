@@ -13,7 +13,7 @@ import SelectEco from "../../components/FloatingPart/SelectEco";
 import Lottie from "react-lottie";
 import Complete from "./complete.json";
 import "./Contents.css";
-import { Modal } from "../../components/CalendarPart/Modal";
+import { Modal } from "../../components/Modal/Modal";
 
 export default function FloatingPage() {
   const navigate = useNavigate();

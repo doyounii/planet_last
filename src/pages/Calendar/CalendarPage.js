@@ -8,7 +8,7 @@ import Calendar from "../../components/CalendarPart/CalendarBody";
 import DetailList from "../../components/CalendarPart/DetailList";
 import Quote from "../../components/CalendarPart/Quote";
 import EcoDay from "../../components/CalendarPart/EcoDay";
-import { InfoModal } from "../../components/CalendarPart/Modal";
+import { InfoModal } from "../../components/Modal/Modal";
 import "../../components/CalendarPart/Calendar.css";
 
 import { IoIosArrowForward } from "react-icons/io";
@@ -67,8 +67,6 @@ function CalendarPage() {
       return {
         queryKey: ["calnedarData", format(m, "yyyy-M")],
         queryFn: () => fetchData(m),
-        staleTime: 1000 * 5 * 60, // 5분
-        cacheTime: Infinity, // 제한 없음
       };
     })
   );
@@ -78,14 +76,9 @@ function CalendarPage() {
       return {
         queryKey: ["detailData", data.date],
         queryFn: () => fetchDetailData(data.date),
-        staleTime: 1000 * 5 * 60, // 5분
-        cacheTime: Infinity, // 제한 없음
       };
     })
   );
-  console.log(details);
-
-  console.log(queryClient.getQueryData(["detailData", "2022-07-26"]));
 
   useEffect(() => {
     if (results[1].status === "success") {

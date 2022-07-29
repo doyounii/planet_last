@@ -5,7 +5,7 @@ import { useOutSideRef } from "../OutsideRef";
 import { isValid, format, parseISO } from "date-fns";
 import DateHeader from "../DateHeader";
 import Calendar from "../CalendarPart/CalendarBody";
-import { Modal } from "../CalendarPart/Modal";
+import { Modal } from "../Modal/Modal";
 
 function DatePrice({ income, propDate, propPrice, sendData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -11,7 +11,7 @@ import DateHeader from "../../components/DateHeader";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import { EcoBarChart } from "../../components/StatisticsPart/Part2/EcoBarChart";
-import { InfoModal } from "../../components/CalendarPart/Modal";
+import { InfoModal } from "../../components/Modal/Modal";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import { useQueryClient, useQuery } from "react-query";

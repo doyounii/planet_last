@@ -18,7 +18,7 @@ import { format } from "date-fns";
 import { EditName } from "../../components/Home/EditName";
 import logo from "./img/PLANet.png";
 import zero from "./img/Mask.png";
-import { Modal } from "../../components/CalendarPart/Modal";
+import { Modal } from "../../components/Modal/Modal";
 import { QuestionModal } from "../../components/Home/QuestionModal";
 
 const fetchData = async (userId) => {
@@ -63,8 +63,6 @@ function Home({ activeHome }) {
     queryKey: "homeData",
     queryFn: () => fetchData(userId),
     enabled: !!userId,
-    staleTime: 1000 * 5 * 60, // 5분
-    cacheTime: Infinity, // 제한 없음
   });
 
   useEffect(() => {
