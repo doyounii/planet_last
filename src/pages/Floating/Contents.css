@@ -9,17 +9,29 @@
 }
 
 .date-price-container {
-  margin-top: 5vh;
+  padding-top: 5vh;
   transition: 0.5s;
 }
 
-.date-price-container.move:not(:last-child) {
+.date-price-container.move {
   transform: translatey(-20px);
 }
 
 /* .date-price-container.move * {
   margin-top: 0px;
 } */
+.float-btn {
+  position: absolute;
+  bottom: 100px;
+}
+
+.float-btn.moveBtn {
+  bottom: 10px;
+}
+
+.float-btn.memo-btn {
+  bottom: 120px;
+}
 
 .date-price-container .date-text {
   transition: 0.5s;
@@ -71,7 +83,7 @@
 }
 
 .input-date input:focus {
-  font-size: 40px;
+  /* font-size: 40px; */
   margin-top: 60px;
 }
 .input-data.input-memo input {
@@ -172,7 +184,7 @@
 
 .memo-skip-btn {
   position: absolute;
-  bottom: 15px;
+  bottom: 100px;
   color: #566479;
   font-family: "Pretendard";
   font-style: normal;

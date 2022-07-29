@@ -1,6 +1,8 @@
 .statistic-main {
   position: relative;
   width: 100vw;
+  height: calc(100vh - 30px);
+  overflow: scroll;
   color: white;
   font-family: Pretendard;
 }

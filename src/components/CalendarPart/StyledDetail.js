@@ -120,6 +120,8 @@ export function StyledDetailBlock({ children }) {
 
 const StyledDetailPage = styled.div`
   background-color: rgb(var(--navy));
+  width: 100vw;
+  height: 100vh;
   .detail-page {
     font-family: Pretendard;
     padding-bottom: 70px;
