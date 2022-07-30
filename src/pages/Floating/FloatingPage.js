@@ -13,12 +13,12 @@ import SelectEco from "../../components/FloatingPart/SelectEco";
 import Lottie from "react-lottie";
 import Complete from "./complete.json";
 import "./Contents.css";
-import { Modal } from "../../components/CalendarPart/Modal";
+import { Modal } from "../../components/Modal/Modal";
 
 export default function FloatingPage() {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(1);
-  const [total, setTotal] = useState(4);
+  const [total, setTotal] = useState(5);
 
   const [date, setDate] = useState(new Date());
   const [price, setprice] = useState("");
@@ -37,17 +37,23 @@ export default function FloatingPage() {
   const userId = window.localStorage.getItem("userId");
 
   const fetchData = () => {
+    console.log(date, price, type, cate, memo);
     if (total === 4) {
-      axios
-        .post("https://플랜잇.웹.한국:8080/income/new", {
+      axios({
+        method: "POST",
+        url: "https://플랜잇.웹.한국:8080/api/income/new",
+        headers: { userId: userId },
+        data: {
           userId: userId,
           in_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
-          inType: cate.type,
-          inWay: type.type,
+          in_type: cate.type,
+          in_way: type.type,
           memo: memo,
-        })
-        .then(() => {
+        },
+      })
+        .then((res) => {
+          console.log(res);
           closeModal();
           setComplete(true);
           setTimeout(() => {
@@ -55,11 +61,16 @@ export default function FloatingPage() {
           }, 2000);
         })
         .catch((error) => {
+          console.log(error);
           window.alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+          throw new Error(error);
         });
     } else {
-      axios
-        .post("https://플랜잇.웹.한국:8080/expenditure/new", {
+      axios({
+        method: "POST",
+        url: "https://플랜잇.웹.한국:8080/api/expenditure/new",
+        headers: { userId: userId },
+        data: {
           userId: userId,
           ex_cost: parseInt(price),
           date: format(date, "yyyy-MM-dd"),
@@ -69,8 +80,10 @@ export default function FloatingPage() {
           ecoDetail: ecoTag,
           userAdd: userTag,
           eco: userEcoTag,
-        })
-        .then(() => {
+        },
+      })
+        .then((res) => {
+          console.log(res);
           closeModal();
           setComplete(true);
           setTimeout(() => {
@@ -78,7 +91,9 @@ export default function FloatingPage() {
           }, 2000);
         })
         .catch((error) => {
+          console.log(error);
           window.alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+          throw new Error(error);
         });
     }
   };
@@ -248,7 +263,7 @@ export default function FloatingPage() {
         <CustomSwitch
           width={145}
           height={42}
-          selectionMode={1}
+          selectionMode={2}
           roundCorner={true}
           option1={"수입"}
           option2={"지출"}

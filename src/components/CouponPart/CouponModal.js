@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
-import Portal from "../../components/CalendarPart/Portal";
+import React, { useEffect, useState } from "react";
+import Portal from "../../components/Modal/Portal";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import CouponStyle from "../../pages/Coupon/Coupon.module.css";
 import { CgClose } from "react-icons/cg";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import Popup from "../../components/InquiryPart/Popup";
+import { useNavigate } from "react-router-dom";
 
 import "../../components/CalendarPart/Calendar.css";
+
+import CouponInfo from "../../components/CouponPart/CouponInfo";
+import CouponUseInfo from "../../components/CouponPart/CouponUseInfo";
+import CouponDetailInfo from "../../components/CouponPart/CouponDetailInfo";
 
 const CouponModal = ({
   className,
@@ -13,10 +21,8 @@ const CouponModal = ({
   closable,
   visible,
   background,
-  children,
-  current
+  current,
 }) => {
-
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose(e);
@@ -29,20 +35,65 @@ const CouponModal = ({
     }
   };
 
-  const {
-    couponData,
-  } = current;
+  console.log("테스트", current);
 
-  console.log(current);
+  const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
 
-  useEffect(() => {
-    document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
-    return () => {
-      const scrollY = document.body.style.top;
-      document.body.style.cssText = `position: ""; top: "";`;
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
-    };
-  }, []);
+  //popup modal
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const isopenModal = () => {
+    setModalOpen(true);
+  };
+
+  const iscloseModal = () => {
+    setModalOpen(false);
+  };
+
+  // useEffect(() => {
+  //   document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
+  //   return () => {
+  //     const scrollY = document.body.style.top;
+  //     document.body.style.cssText = `position: ""; top: "";`;
+  //     window.scrollTo(0, parseInt(scrollY || "0") * -1);
+  //   };
+  // }, []);
+
+  const [unavailable, setUnavailable] = useState(false);
+
+  const userId = window.localStorage.getItem("userId");
+
+  const fetchFunc = () => {
+    //백엔드로 데이터 보내기
+    fetch(`https://플랜잇.웹.한국:8080/api/coupon/use/${current.cno}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        userId: userId,
+      },
+      body: JSON.stringify({
+        cno: current.cno,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    //쿠폰번호에 맞는 쿠폰 정보값 넘겨줘야함
+    fetchFunc();
+    iscloseModal();
+    setUnavailable(!unavailable);
+  };
 
   return (
     <Portal elementId="modal-root">
@@ -58,14 +109,79 @@ const CouponModal = ({
           tabIndex={0}
           className="modal-inner"
         >
-          {couponData.coupon}
           {closable && <CgClose className="modal-close" onClick={close} />}
-          {children}
+          <div
+            className={
+              unavailable
+                ? CouponStyle.coupon_modal_unavail
+                : CouponStyle.coupon_modal
+            }
+          >
+            {/* <p>cno 불러오기 test : {current.cno}</p> */}
+            <h1>친환경 상점 {current.coupon}</h1>
+            <p>{current.discount}% 할인쿠폰</p>
+            <img src="img/coupon.png" alt="planet-coupon"></img>
+            <h2>
+              {current.startDate} - {current.endDate}
+            </h2>
+
+            <div className={CouponStyle.coupon_info}>
+              사용정보
+              <button
+                onClick={() => {
+                  setVisible1(!visible1);
+                }}
+              >
+                {visible1 ? <BsChevronUp /> : <BsChevronDown />}
+              </button>
+              <br />
+              {visible1 && <CouponUseInfo>{current.usageInfo}</CouponUseInfo>}
+            </div>
+
+            <div className={CouponStyle.coupon_info}>
+              쿠폰설명
+              <button
+                onClick={() => {
+                  setVisible2(!visible2);
+                }}
+              >
+                {visible2 ? <BsChevronUp /> : <BsChevronDown />}
+              </button>
+              <br />
+              {visible2 && <CouponInfo>{current.couponInfo}</CouponInfo>}
+            </div>
+
+            <div className={CouponStyle.coupon_info}>
+              상세정보
+              <button
+                onClick={() => {
+                  setVisible3(!visible3);
+                }}
+              >
+                {visible3 ? <BsChevronUp /> : <BsChevronDown />}
+              </button>
+              <br />
+              {visible3 && (
+                <CouponDetailInfo>{current.detailInfo}</CouponDetailInfo>
+              )}
+            </div>
+
+            <div className={CouponStyle.coupon_use_btn}>
+              <button onClick={isopenModal}>사용하기</button>
+              <Popup
+                open={modalOpen}
+                close={iscloseModal}
+                submit={handleSubmit}
+              >
+                직원이신가요?
+              </Popup>
+            </div>
+          </div>
         </ModalInner>
       </ModalWrapper>
     </Portal>
   );
-}
+};
 
 export default CouponModal;
 
@@ -164,5 +280,3 @@ const ModalInner = styled.div`
   padding: 20px 20px;
   color: white;
 `;
-
-

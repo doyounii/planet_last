@@ -34,9 +34,9 @@
   position: relative;
   display: inline;
   font-size: 15px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-top: 15px;
-  margin-left: 12.6px;
+  margin-left: 5px;
 }
 
 .statistics-box .day-box .day-breakdown-box h2 {
@@ -44,7 +44,7 @@
   position: relative;
   display: inline;
   font-size: 15px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-top: 15px;
   margin-right: 30px;
   float: right;
@@ -85,21 +85,24 @@
   color: #434952;
   margin-left: 30px;
   line-height: 52px;
+  word-spacing: 5px;
 }
 
 /*Part 2*/
 
 .more {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.1);
   height: 52px;
-  border-radius: 13px;
-  padding-top: 15px;
+  padding-top: 7px;
   font-family: Pretendard;
   margin-bottom: 12px;
   cursor: pointer;
   margin: 0px 20px;
   font-size: 20px;
   margin-bottom: 60px;
-  color: #FFFFFF;
+
+  color: #ffffff;
+}
+.more h1 {
+  padding-left: 5px;
 }

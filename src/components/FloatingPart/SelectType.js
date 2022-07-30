@@ -89,7 +89,11 @@ function SelectType({ propType, type, sendData, buttons }) {
         </div>
       </section>
       {buttons && (
-        <FloatingButton onClick={onClickHandler} disabled={disabled} />
+        <FloatingButton
+          className={`float-btn`}
+          onClick={onClickHandler}
+          disabled={disabled}
+        />
       )}
     </>
   );

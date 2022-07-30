@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 
 import { ReactComponent as RoundArrow } from "./roundArrow.svg";
-import "./Calendar.css";
+import "../CalendarPart/Calendar.css";
 
 export function Modal({
   className,

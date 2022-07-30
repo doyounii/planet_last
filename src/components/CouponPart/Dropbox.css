@@ -1,23 +1,22 @@
 .SelectBoxWrapper {
-	display: flex;
+  display: flex;
 }
 
 select {
-    margin: 0;
-	width: 94px;
-    height: 22px;
-	display: block;
-	font-size: 13px;
-    border: 0;
-	color: #ffffff;
-	background-color: transparent;
+  margin: 0;
+  width: 50px;
+  height: 22px;
+  display: block;
+  font-size: 13px;
+  border: 0;
+  color: #ffffff;
+  background-color: transparent;
 }
 
 select option {
-    background: #141b27;
-    font-family: Pretendard;
-    color: #ffffff;
-    border: 0;
-    list-style-type: none;
+  background: #141b27;
+  font-family: Pretendard;
+  color: #ffffff;
+  border: 0;
+  list-style-type: none;
 }
-

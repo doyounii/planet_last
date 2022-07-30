@@ -45,7 +45,7 @@ function Memo({ income, propType, sendData }) {
         </div>
       </div>
       <FloatingButton
-        className="memo-btn"
+        className="float-btn memo-btn"
         next={income ? "완료" : "다음"}
         onClick={onClickHandler}
         disabled={disabled}

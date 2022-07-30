@@ -5,7 +5,7 @@ import { useOutSideRef } from "../OutsideRef";
 import { isValid, format, parseISO } from "date-fns";
 import DateHeader from "../DateHeader";
 import Calendar from "../CalendarPart/CalendarBody";
-import { Modal } from "../CalendarPart/Modal";
+import { Modal } from "../Modal/Modal";
 
 function DatePrice({ income, propDate, propPrice, sendData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +21,9 @@ function DatePrice({ income, propDate, propPrice, sendData }) {
   }, []);
 
   const onChange = (e) => {
+    // const value = e.target.value;
+    // const removedCommaValue = Number(value.replaceAll(",", ""));
+    // setPrice(removedCommaValue.toLocaleString());
     setPrice(e.target.value);
     if (e.target.value.length !== 0) {
       setDisabled(false);
@@ -90,7 +93,7 @@ function DatePrice({ income, propDate, propPrice, sendData }) {
       </div>
 
       <FloatingButton
-        className={`date-btn-container ${up ? "move" : ""}`}
+        className={`float-btn ${up ? "moveBtn" : ""}`}
         onClick={onClickHandler}
         disabled={disabled}
       />

@@ -8,7 +8,7 @@ import { FiEdit3 } from "react-icons/fi";
 
 import DateHeader from "../../components/DateHeader";
 import Calendar from "../../components/CalendarPart/CalendarBody";
-import { Modal } from "../../components/CalendarPart/Modal";
+import { Modal } from "../../components/Modal/Modal";
 import SelectType from "../../components/FloatingPart/SelectType";
 import SelectEco from "../../components/FloatingPart/SelectEco";
 import { SelectButton } from "../../components/FloatingPart/SelectEco";
@@ -39,44 +39,36 @@ function StatisticsModify() {
     e.preventDefault();
     window.alert("submit!");
     if (data.item.income) {
-      axios.post(
-        `https://플랜잇.웹.한국:8080/income/${data.item.id}/update`,
-        { headers: { userId: userId } },
-        {
-          body: {
-            body: JSON.stringify({
-              userId: userId,
-              in_cost: parseInt(price),
-              date: format(date, "yyyy-MM-dd"),
-              inType: cate.type,
-              inWay: type.type,
-              memo: memo,
-            }),
-          },
-        }
-      );
-    } else {
-      axios.post(
-        `https://플랜잇.웹.한국:8080/expenditure/${data.item.id}/update`,
-        {
-          headers: {
-            userId: userId,
-          },
+      axios({
+        method: "POST",
+        url: `https://플랜잇.웹.한국:8080/api/income/${data.item.id}/update`,
+        headers: { userId: userId },
+        data: {
+          userId: userId,
+          in_cost: parseInt(price),
+          date: format(date, "yyyy-MM-dd"),
+          in_type: cate.type,
+          in_way: type.type,
+          memo: memo,
         },
-        {
-          body: JSON.stringify({
-            userId: userId,
-            ex_cost: parseInt(price),
-            date: format(date, "yyyy-MM-dd"),
-            exType: cate.type,
-            exWay: type.type,
-            memo: memo.length === 0 ? cate.type : memo,
-            ecoDetail: ecoTag,
-            userAdd: userTag,
-            eco: userEcoTag,
-          }),
-        }
-      );
+      });
+    } else {
+      axios({
+        method: "POST",
+        url: `https://플랜잇.웹.한국:8080/api/expenditure/${data.item.id}/update`,
+        headers: { userId: userId },
+        data: {
+          userId: userId,
+          ex_cost: parseInt(price),
+          date: format(date, "yyyy-MM-dd"),
+          exType: cate.type,
+          exWay: type.type,
+          memo: memo,
+          ecoDetail: ecoTag,
+          userAdd: userTag,
+          eco: userEcoTag,
+        },
+      });
     }
   };
 

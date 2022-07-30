@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Portal from "../../components/CalendarPart/Portal";
+import Portal from "../../components/Modal/Portal";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
@@ -57,7 +57,6 @@ export function Modal({
     </Portal>
   );
 }
-
 
 Modal.defaultProps = {
   background: "#141b27",
@@ -156,5 +155,3 @@ const ModalInner = styled.div`
   padding-bottom: 20px;
   color: white;
 `;
-
-

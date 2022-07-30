@@ -2,14 +2,60 @@ import React, { useState } from 'react';
 import CouponStyle from './Coupon.module.css';
 import Footer from '../../components/Footer/Footer';
 import HistorySample from '../../components/History/HistoryBack';
+import Popup from "../../components/InquiryPart/Popup";
+import { useNavigate } from "react-router-dom";
 
 function CouponJoin() {
   const [coupon, setCoupon] = useState("");
   const [disabled, setdisabled] = useState(true);
 
+     //popup modal
+     const [modalOpen, setModalOpen] = useState(false);
+ 
+     const isopenModal = () => {
+       setModalOpen(true);
+     };
+   
+     const iscloseModal = () => {
+       setModalOpen(false);
+     };
+
   const handleCouponValue = (e) => {
     setCoupon(e.target.value);
     setdisabled(coupon.length === 0 ? true : false);
+  };
+
+  const navigate = useNavigate();
+
+  const userId = window.localStorage.getItem("userId");
+
+  const fetchFunc = () => {
+    //백엔드로 데이터 보내기
+    fetch(
+      `https://플랜잇.웹.한국:8080/api/coupon/register/${coupon}`,
+      {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+           Accept: "application/json",
+           userId: userId },
+        body: JSON.stringify({
+          cno: coupon,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("wtw-token", response.token);
+        }
+      });
+  };
+
+  const handleSubmit = () => {
+    //쿠폰번호에 맞는 쿠폰 정보값 넘겨줘야함
+    fetchFunc();
+    navigate('/Coupon');
   };
 
   return (
@@ -31,8 +77,10 @@ function CouponJoin() {
         </div>
 
         <div className={ CouponStyle.coupon_btn }>
-          <button
-            disabled={coupon.length !== 0 ? false : true}>등록하기</button>
+          <button onClick={isopenModal} disabled={coupon.length !== 0 ? false : true}>등록하기</button>
+          <Popup open={modalOpen} close={iscloseModal} submit={handleSubmit}>
+                쿠폰을 등록합니다!
+          </Popup>
         </div>
 
         <Footer activeMenu="home">

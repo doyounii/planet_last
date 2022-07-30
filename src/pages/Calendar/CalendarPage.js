@@ -8,7 +8,7 @@ import Calendar from "../../components/CalendarPart/CalendarBody";
 import DetailList from "../../components/CalendarPart/DetailList";
 import Quote from "../../components/CalendarPart/Quote";
 import EcoDay from "../../components/CalendarPart/EcoDay";
-import { InfoModal } from "../../components/CalendarPart/Modal";
+import { InfoModal } from "../../components/Modal/Modal";
 import "../../components/CalendarPart/Calendar.css";
 
 import { IoIosArrowForward } from "react-icons/io";
@@ -60,19 +60,13 @@ function CalendarPage() {
   const [quote, setquote] = useState("");
   const [isMonthView, setIsMonthView] = useState(true);
 
-  const months = [
-    subMonths(currentDate, 1),
-    currentDate,
-    addMonths(currentDate, 1),
-  ];
+  const months = [subMonths(currentDate, 1), currentDate];
 
   const results = useQueries(
     months.map((m) => {
       return {
         queryKey: ["calnedarData", format(m, "yyyy-M")],
         queryFn: () => fetchData(m),
-        staleTime: 1000 * 5 * 60, // 5분
-        cacheTime: Infinity, // 제한 없음
       };
     })
   );
@@ -82,8 +76,6 @@ function CalendarPage() {
       return {
         queryKey: ["detailData", data.date],
         queryFn: () => fetchDetailData(data.date),
-        staleTime: 1000 * 5 * 60, // 5분
-        cacheTime: Infinity, // 제한 없음
       };
     })
   );
@@ -200,7 +192,7 @@ function CalendarPage() {
         {daysData.find(
           (data) => data.date === format(selectedDate, dateFormat)
         ) ? (
-          <DetailList value={selectedDate} />
+          details[1].status === "success" && <DetailList value={selectedDate} />
         ) : (
           <div
             style={{
