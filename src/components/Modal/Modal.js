@@ -219,7 +219,7 @@ const ModalOverlay = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(var(--navy), 0.9);
-  z-index: 3;
+  z-index: 10;
 `;
 
 const InfoModalOverlay = styled.div`
@@ -235,7 +235,7 @@ const InfoModalOverlay = styled.div`
   right: 0;
   border-color: blue;
 
-  z-index: 3;
+  z-index: 15;
   border-style: solid;
   border-color: rgba(var(--navy));
   opacity: 0.8;

@@ -37,7 +37,6 @@ export default function FloatingPage() {
   const userId = window.localStorage.getItem("userId");
 
   const fetchData = () => {
-    console.log(date, price, type, cate, memo);
     if (total === 4) {
       axios({
         method: "POST",
@@ -77,9 +76,9 @@ export default function FloatingPage() {
           exType: cate.type,
           exWay: type.type,
           memo: memo,
-          ecoDetail: ecoTag,
-          userAdd: userTag,
-          eco: userEcoTag,
+          ecoDetail: ecoTag, //전체 배열
+          userAdd: userTag, //사용자가 추가한 태그 이름 배열
+          eco: userEcoTag, //사용자가 추가한 태그 에코 배열
         },
       })
         .then((res) => {
@@ -123,8 +122,6 @@ export default function FloatingPage() {
         break;
       case "완료":
         openModal();
-        // setComplete(true);
-        // console.log("끝");
         break;
       default:
         break;
@@ -160,10 +157,9 @@ export default function FloatingPage() {
     let tempUserTag = [];
     let tempUserEcoTag = [];
     let tagData = tempData.map((arr) => {
-      let eco = arr.isEco === "etc" ? "N" : arr.isEco === true ? "G" : "R";
       if (arr.id > 9) {
         tempUserTag.push(arr.tag);
-        tempUserEcoTag.push(eco);
+        tempUserEcoTag.push(arr.eco);
         return "사용자 추가";
       } else {
         return arr.tag;

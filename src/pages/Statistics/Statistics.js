@@ -11,7 +11,7 @@ import DateHeader from "../../components/DateHeader";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import { EcoBarChart } from "../../components/StatisticsPart/Part2/EcoBarChart";
-import { InfoModal } from "../../components/Modal/Modal";
+import { InfoModal } from "../../components/StatisticsPart/Part2/Modal2";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import { useQueryClient, useQuery } from "react-query";
@@ -106,29 +106,30 @@ function StatisticsMain() {
   }, [results.status]);
 
   if (loading) return <div>loading...</div>;
+  console.log(message);
 
   return (
     <div className="statistic-main">
       <DateHeader getDate={currentMonth} sendDate={onchangeDate} />
       <div className="stat-main-contents">
-        <Link to="/StatisticsView">
-          <div className="month-box">
-            <div className="month-breakdown">
-              <p>{format(currentMonth, nowMFormat)}월 내역</p>
-              <IoIosArrowForward className="box-icon" />
-            </div>
-
-            <div className="month-breakdown">
-              <p>수입</p>
-              <h1>{incomeTotal.toLocaleString()}원</h1>
-            </div>
-
-            <div className="month-breakdown">
-              <p>지출</p>
-              <h1>{expenditureTotal.toLocaleString()}원</h1>
-            </div>
+        {/* <Link to="/StatisticsView"> */}
+        <div className="month-box">
+          <div className="month-breakdown">
+            <p>{format(currentMonth, nowMFormat)}월 내역</p>
+            <IoIosArrowForward className="box-icon" />
           </div>
-        </Link>
+
+          <div className="month-breakdown">
+            <p>수입</p>
+            <h1>{incomeTotal.toLocaleString()}원</h1>
+          </div>
+
+          <div className="month-breakdown">
+            <p>지출</p>
+            <h1>{expenditureTotal.toLocaleString()}원</h1>
+          </div>
+        </div>
+        {/* </Link> */}
 
         <div className="line-box"></div>
 
@@ -182,17 +183,17 @@ function StatisticsMain() {
         </div>
         <div className="line-box"></div>
 
-        <Link
+        {/* <Link
           to="/EcoCategory"
           state={{
             name: "eco",
           }}
-        >
-          <div className="expend-box">
-            <h1>어떤 친환경 지출을 했을까요? 👍</h1>
-            <IoIosArrowForward className="box-icon" />
-          </div>
-        </Link>
+        > */}
+        <div className="expend-box">
+          <h1>어떤 친환경 지출을 했을까요? 👍</h1>
+          <IoIosArrowForward className="box-icon" />
+        </div>
+        {/* </Link> */}
         <div className="chart">
           <EcoBarChart barData={ecoTagCounts} name="eco"></EcoBarChart>
         </div>
@@ -217,17 +218,17 @@ function StatisticsMain() {
 
         <div className="line-box"></div>
 
-        <Link
+        {/* <Link
           to="/EcoCategory"
           state={{
             name: "neco",
           }}
-        >
-          <div className="expend-box">
-            <h1>어떤 반환경 지출을 했을까요? 👎</h1>
-            <IoIosArrowForward className="box-icon" />
-          </div>
-        </Link>
+        > */}
+        <div className="expend-box">
+          <h1>어떤 반환경 지출을 했을까요? 👎</h1>
+          <IoIosArrowForward className="box-icon" />
+        </div>
+        {/* </Link> */}
         <div className="chart">
           <EcoBarChart barData={noEcoTagCounts} name="neco"></EcoBarChart>
         </div>

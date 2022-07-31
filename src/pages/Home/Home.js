@@ -73,9 +73,10 @@ function Home({ activeHome }) {
       setUserName(messages.userName === null ? "" : messages.userName);
       setIncome(messages.totalIncomeMonth);
       setExpenditure(messages.totalExpenditureMonth);
-      setEcoPercentage(message.ecoPercentage);
+      setEcoPercentage(message.percentage);
     }
   }, [queryClient, results]);
+  console.log(ecoPercentage);
 
   useEffect(() => {
     if (results.status === "success") {
@@ -198,11 +199,11 @@ function Home({ activeHome }) {
               </div>
             </div>
           </div>
-          <Link to="/#" className={activeHome}>
-            <IoIosArrowForward
-              className={homeStyle.history}
-            ></IoIosArrowForward>
-          </Link>
+          {/* <Link to="/StatisticsView" className={activeHome}> */}
+          <IoIosArrowForward
+            className={homeStyle.history}
+          ></IoIosArrowForward>
+          {/* </Link> */}
           <div className={homeStyle.income}>
             수입 <h1>{!loading ? income.toLocaleString() : 0}원</h1>
           </div>

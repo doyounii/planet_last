@@ -56,7 +56,7 @@ function Login() {
         <p>아이디와 비밀번호 없이 간편하게 로그인할 수 있어요!</p>
       </div>
       <div className={LoginStyle.loginButton}>
-        <a
+        {/* <a
           alt="구글로 로그인하기"
           href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google"
         >
@@ -67,7 +67,7 @@ function Login() {
           href="http://ec2-3-39-87-115.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/naver"
         >
           <img src={naver} />
-        </a>
+        </a> */}
         <a alt="카카오로 로그인하기" href={KAKAO_AUTH_URI}>
           <img src={kakao} />
         </a>
