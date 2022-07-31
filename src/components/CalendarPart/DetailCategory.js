@@ -62,7 +62,6 @@ function DetailCategory() {
       }
     }
   }, [data]);
-  console.log(detailList);
 
   const onSwipe = (index) => {
     setTimeout(() => {
@@ -85,8 +84,6 @@ function DetailCategory() {
       });
     }, 2000);
   };
-
-  console.log(data);
 
   return (
     <StyledDetailPageBlock>
@@ -144,6 +141,7 @@ function DetailCategory() {
             detailList.map((item) => {
               let ecoCnt = 0;
               item.ecoList !== undefined &&
+                item.ecoList !== null &&
                 item.ecoList.forEach((item) => {
                   if (item.eco === "G") {
                     ecoCnt += 1;

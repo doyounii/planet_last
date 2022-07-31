@@ -23,7 +23,6 @@ function DetailList({ value }) {
         "detailData",
         format(date, "yyyy-MM-dd"),
       ]);
-      console.log(getData);
       setData(getData);
     }
   }, [date]);

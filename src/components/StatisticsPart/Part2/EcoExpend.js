@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./EcoExpend.css";
+import { useQueryClient } from "react-query";
 
 const EcoExpendColor = ["#00C982", "#1466FE", "#083FA5", "#728EC6"];
 const NEcoExpendColor = ["#8593B1", "#667492", "#475572", "#303B51"];
@@ -23,19 +24,21 @@ const emoji = {
 };
 
 function EcoExpend(props) {
+  const queryClient = useQueryClient();
+
   const [message, setMessage] = useState([]);
   const [loading, setloading] = useState(true);
   const [ecoTagCounts, setEcoTagCounts] = useState([]);
   const [noEcoTagCounts, setNoEcoTagCounts] = useState([]);
   useEffect(() => {
-    // fetchData();
-    setMessage(data);
-    setEcoTagCounts(data.ecoTagCounts);
-    setNoEcoTagCounts(data.noEcoTagCounts);
+    const getData = queryClient.getQueryData("statisticsData");
+
+    setMessage(getData);
+    setEcoTagCounts(getData.ecoTagCounts);
+    setNoEcoTagCounts(getData.noEcoTagCounts);
     setloading(false);
   }, []);
 
-  console.log(ecoTagCounts);
   const renderExpendList = (props, message) => {
     let renderExpendList = [];
 
@@ -79,26 +82,6 @@ function EcoExpend(props) {
     return <div>{renderExpendList}</div>;
   };
 
-  const fetchData = async () => {
-    const response = await fetch(
-      `/statistics/2022/3`,
-      //${format(new Date(), "M")}
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    setMessage(data);
-    setEcoTagCounts(data.ecoTagCounts);
-    setNoEcoTagCounts(data.noEcoTagCounts);
-    setloading(false);
-  };
-
-  console.log(message);
   if (props.name === "eco") {
     return (
       <div className="statistics-box">

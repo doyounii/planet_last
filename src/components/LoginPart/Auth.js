@@ -40,7 +40,7 @@ function Auth(SpecificComponent, option) {
     // getToken();
 
     const userId = window.localStorage.getItem("userId");
-    console.log(userId);
+    // console.log(userId);
 
     if (option) {
       if (userId === null) {
