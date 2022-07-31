@@ -6,7 +6,6 @@ function Oauth() {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get("code");
   useEffect(() => {
-    window.localStorage.setItem("token", code);
     (async () => {
       try {
         console.log("try");
