@@ -150,6 +150,7 @@
     border: 0;
     color: rgba(20, 27, 39, 1);
     cursor: pointer;
+    z-index: 1;
 }
 
 .coupon_use_box {
