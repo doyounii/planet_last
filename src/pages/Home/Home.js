@@ -73,9 +73,10 @@ function Home({ activeHome }) {
       setUserName(messages.userName === null ? "" : messages.userName);
       setIncome(messages.totalIncomeMonth);
       setExpenditure(messages.totalExpenditureMonth);
-      setEcoPercentage(message.ecoPercentage);
+      setEcoPercentage(message.percentage);
     }
   }, [queryClient, results]);
+  console.log(ecoPercentage);
 
   useEffect(() => {
     if (results.status === "success") {

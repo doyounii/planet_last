@@ -47,7 +47,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={Auth(Home, true)} />
         <Route path="/login" element={<Login />} />
         <Route path="/oauth" element={<Oauth />} />
         <Route path="/profile" element={<Profile />} />

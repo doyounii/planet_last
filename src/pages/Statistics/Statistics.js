@@ -106,6 +106,7 @@ function StatisticsMain() {
   }, [results.status]);
 
   if (loading) return <div>loading...</div>;
+  console.log(message);
 
   return (
     <div className="statistic-main">

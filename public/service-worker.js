@@ -2,7 +2,12 @@
 const CACHE_NAME = "cache-v1";
 
 // 캐싱할 파일
-const FILES_TO_CACHE = ["/offline.html", "/favicon.png"];
+const FILES_TO_CACHE = [
+  "/offline.html",
+  "/favicon.png",
+  "/logo192.png",
+  "/logo512.png",
+];
 
 // 상술한 파일 캐싱
 self.addEventListener("install", (event) => {
