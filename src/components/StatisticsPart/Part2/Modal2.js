@@ -1,65 +1,67 @@
 import React, { useEffect } from "react";
-import Portal from "../../CalendarPart/Portal";
+import Portal from "../../Modal/Portal";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 import { ReactComponent as RoundArrow } from "../../../components/CalendarPart/roundArrow.svg";
-import "../../../components/CalendarPart/Calendar.css";
-
+import Chart from "chart.js/auto";
+import { LineGraph2 } from '../LineGraph';
 
 export function InfoModal({
-    className,
-    onClose,
-    maskClosable,
-    closable,
-    visible,
-    children,
+  className,
+  onClose,
+  maskClosable,
+  closable,
+  visible,
+  children,
 }) {
-    const onMaskClick = (e) => {
-        if (e.target === e.currentTarget) {
-            onClose(e);
-        }
+  const onMaskClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(e);
+    }
+  };
+
+  const close = (e) => {
+    if (onClose) {
+      onClose(e);
+    }
+  };
+
+  useEffect(() => {
+    document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = `position: ""; top: "";`;
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
     };
+  }, []);
 
-    const close = (e) => {
-        if (onClose) {
-            onClose(e);
-        }
-    };
-
-    useEffect(() => {
-        document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
-        return () => {
-            const scrollY = document.body.style.top;
-            document.body.style.cssText = `position: ""; top: "";`;
-            window.scrollTo(0, parseInt(scrollY || "0") * -1);
-        };
-    }, []);
-
-    return (
-        <Portal elementId="modal-root">
-            <InfoModalOverlay visible={visible} className={className} />
-            <ModalWrapper
-                className={className}
-                onClick={maskClosable ? onMaskClick : null}
-                tabIndex={-1}
-                visible={visible}
-            >
-                <div className="infoModal">
-                    <CgClose className="modal-close" onClick={close} />
-                    {calendarInfoData(children)}
-                </div>
-            </ModalWrapper>
-        </Portal>
-    );
+  return (
+    <Portal elementId="modal-root">
+      <InfoModalOverlay visible={visible} className={className} />
+      <ModalWrapper
+        className={className}
+        onClick={maskClosable ? onMaskClick : null}
+        tabIndex={-1}
+        visible={visible}
+      >
+        <div className="infoModal">
+          <CgClose className="modal-close" onClick={close} />
+          <div className="line">
+            {calendarInfoData(children)}
+          </div>
+        </div>
+      </ModalWrapper>
+    </Portal>
+  );
 }
 
 
 
 InfoModal.defaultProps = {
-    visible: false,
-    closable: true,
-    maskClosable: true,
+  visible: false,
+  closable: true,
+  maskClosable: true,
 };
 
 const ModalWrapper = styled.div`
@@ -91,61 +93,36 @@ const ModalWrapper = styled.div`
     margin-top: 25px;
   }
 
-  .eco-day-circle,
-  .eco-day {
-    position: fixed;
-    top: ${(props) => props.className - 55}px;
-    left: 35%;
-  }
-  .eco-day-circle {
-    font-size: 10px;
-    color: rgba(var(--blue));
-    left: 31%;
-  }
-  .non-eco-cnt {
-    position: fixed;
-    top: ${(props) => props.className + 45}px;
-    left: 7%;
-  }
-  .eco-cnt {
-    position: fixed;
-    top: ${(props) => props.className + 65}px;
-    left: 7%;
-  }
-  .top-arrow {
+  .arrow {
     position: fixed;
     color: rgba(var(--light-gray));
+    transform: scaleY(-1);
     width: 20px;
     height: 20px;
-    top: ${(props) => props.className - 33}px;
-    left: 35%;
+    top: 430px;
+    left: 56%;
   }
 
-  .bottom-arrow {
-    position: fixed;
-    color: rgba(var(--light-gray));
-    transform: rotate(180deg);
-    width: 20px;
-    height: 20px;
-    top: ${(props) => props.className + 10}px;
-    left: 13%;
+  .line {
+    width: 90%;
+    margin-left: 5%;
+    margin-rightL 5%;
+    padding-top: 390px;
   }
-
-  .calendar-desc {
-    position: fixed;
-    top: ${(props) => props.className + 150}px;
-    left: 45%;
-  }
-  .calendar-arrow {
-    position: fixed;
-    top: ${(props) => props.className + 170}px;
-    left: 50%;
-  }
-
-  .calendar-example {
+  .ment{
     position: absolute;
-    width: 100%;
-    top: ${(props) => props.className + 190}px;
+    width: 119px;
+    height: 38px;
+    left: 62%;
+    top: 440px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
+
+    color: #FFFFFF;
   }
 `;
 
@@ -172,18 +149,21 @@ const InfoModalOverlay = styled.div`
 `;
 
 const calendarInfoData = (monthView) => {
-    return (
-        <>
+  return (
+    <>
 
-            {/* <span className="calendar-desc">
+      {/* <span className="calendar-desc">
                         친환경 태그가 많을수록 초록ssfa빛을 띠어요
                     </span>
                     <RoundArrow className="calendar-arrow" /> */}
 
-            <div >
-                <img src="img/line.png"
-                    style={{ 'width': '85%', 'paddingTop': '330px', 'marginLeft': '10%' }} />
-            </div>
-        </>
-    );
+      <div >
+        <LineGraph2
+        ></LineGraph2>
+        <RoundArrow className="arrow" />
+        <p className='ment'>친환경 태그가 많을수록 <br />
+          초록빛을 띠어요</p>
+      </div>
+    </>
+  );
 };
