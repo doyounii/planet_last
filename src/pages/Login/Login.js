@@ -8,7 +8,10 @@ import naver from "../../components/LoginPart/img/login_naver.png";
 import kakao from "../../components/LoginPart/img/login_kakao.png";
 
 const API_KEY = process.env.REACT_APP_API_URL;
+<<<<<<< HEAD
 //const REDIRECT_URI = "http://localhost:3000/oauth";
+=======
+>>>>>>> 700a6b9bdc9d60116290db65597788cbcf9aeac2
 const REDIRECT_URI = "https://main.d2f9fwhj50mv28.amplifyapp.com/oauth";
 
 function Login() {
