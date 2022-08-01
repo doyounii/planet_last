@@ -157,7 +157,7 @@ function StatisticsMain() {
             {ecoDifference >= 0 ? "늘고" : "줄고"}
           </h2>
           <h2>
-            친환경 태그가{" "}
+            반환경 태그가{" "}
             <b style={{ color: "#00C982" }}>{noEcoDifference}개</b>{" "}
             {noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
           </h2>
