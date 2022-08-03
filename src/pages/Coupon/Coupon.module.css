@@ -136,7 +136,25 @@
     font-family: Pretendard;
 }
 
-.drop_box button {
+.drop_box clicked_button {
+    font-family: Pretendard;
+    background-color: #00C982;
+    font-size: 13px;
+    width: 20%;
+    height: 8%;
+    border-radius: 40.94px;
+    margin-right: 2.2%;
+    padding: 9px;
+    position: relative;
+    text-align: center;
+    border: 0;
+    color: rgba(20, 27, 39, 1);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.drop_box nonclicked_button {
+    opacity: 20%;
     font-family: Pretendard;
     background-color: #00C982;
     font-size: 13px;

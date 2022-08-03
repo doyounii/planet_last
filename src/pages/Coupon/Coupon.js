@@ -11,6 +11,8 @@ import AvailableCoupon from "./AvailableCoupon";
 import UsedCoupon from "./UsedCoupon";
 import ExpireCoupon from "./ExpireCoupon";
 
+import { useIsFocused } from '@react-navigation/native';
+
 import { Button } from "antd";
 
 function Coupon() {
@@ -28,6 +30,8 @@ function Coupon() {
 
   const [current, setCurrent] = useState({});
 
+  const isFocused = useIsFocused();
+
   const fetchData = async () => {
     console.log("in function");
 
@@ -42,30 +46,15 @@ function Coupon() {
     if (data && data.length > 0) {
       console.log(data[0]);
     }
-
     setloading(false);
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isFocused]);
 
-  function Coupon({ data, remainingDays, coupon, discount, availability }) {
-    return (
-      <div className={({availability} ? CouponStyle.coupon_available : CouponStyle.coupon_expiration)}
-        onClick={() => {
-          setCurrent(data);
-          openModal();
-        }}
-      >
-        <div className={CouponStyle.coupon_dday}>D-{remainingDays}</div>
-        <div>{availability.toString()}는 false야 true야</div>
-        <img src="img/coupon.png" alt="planet-coupon"></img>
-        <h1>{coupon}</h1>
-        <p>{discount}% 할인쿠폰</p>
-      </div>
-    );
-  }
+  /*버튼 클릭시 색상 변경*/
+  const [click, setClick] = useState(false);
 
   /*버튼마다 컴포넌트 변경하기*/
   const [content, setContent] = useState();
@@ -73,6 +62,7 @@ function Coupon() {
   const btnValueSetting = e => {
     const {name} = e.target;
     setContent(name);
+    setClick(!click);
   }
 
   const selectComponent = {
@@ -89,7 +79,7 @@ function Coupon() {
     },
     {
       id: 2,
-      text: '사용가능',
+      text: '사용완료',
       name: 'second',
     },
     {
@@ -135,7 +125,10 @@ function Coupon() {
         <div className={CouponStyle.drop_box}>
         {MAIN_DATA.map(data => {
           return (
-            <Button onClick={btnValueSetting} name={data.name} key={data.id}>
+            <Button className={ click === true ? CouponStyle.clicked_button
+                : CouponStyle.nonclicked_button
+            }
+              onClick={btnValueSetting} name={data.name} key={data.id}>
               {data.text}
             </Button>
           );
