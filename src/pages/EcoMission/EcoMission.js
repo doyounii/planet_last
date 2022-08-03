@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { FiShare } from "react-icons/fi";
 import { BsChevronDown } from "react-icons/bs";
 import { Modal } from "../../components/EcoMissionPart/EcoModal";
+import axios from "axios";
 
 import DateList from "../../components/DateList";
 import EcoList from "../../components/EcoMissionPart/EcoList";
@@ -32,52 +33,58 @@ const EcoMission = () => {
     },
   ]);
 
+  const [missionArr, setMissionArr] = useState([]);
+
+  const userId = window.localStorage.getItem("userId");
+
+  const fetchData = async () => {
+    console.log("in function");
+
+    const response = await axios.get(`https://플랜잇.웹.한국:8080/api/mission/2022/7`, {
+      headers: { userId: userId },
+    });
+    const data = await response.data;
+    console.log(data);
+
+    setMissionArr(data.missions);
+
+    setMissions([{
+      emoji: data.todayMission.emoji,
+      text: data.todayMission.name,
+    }])
+
+    if (data && data.length > 0) {
+      console.log(data[0]);
+    }
+
+    setloading(false);
+  };
+
   useEffect(() => {
-    let isSubscribed = true;
-    fetch(`/brenna9981@gmail.com/mission/2022/5`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (isSubscribed) {
-          setMissions([{
-            emoji: data.todayMission.emoji,
-            text: data.todayMission.name,
-          }])
-
-          if (data && data.length > 0) {
-            console.log(data[0]);
-          }
-
-          setloading(false);
-        }
-      })
-      .catch((error) => {
-        console.log("error!");
-        console.log(error);
-      });
-
-    return () => (isSubscribed = false);
+    fetchData();
   }, []);
+
+  //const testStr = missions[0].emoji.slice(2, 8);
+  const testStr = missions[0].emoji;
+  console.log(testStr);
+  console.log(String.fromCodePoint(testStr));
+
+  console.log("백에서 오는 데이터 확인", missionArr);
 
   const fetchFunc = () => {
     //백엔드로 데이터 보내기
     fetch(
-      `/mission/${todayMission.emoji}/${todayMission.name}`,
+      //`https://플랜잇.웹.한국:8080/api/mission/${todayMission.emoji}/${todayMission.name}`,
+      `https://플랜잇.웹.한국:8080/api/mission/${missions[0].emoji}/${missions[0].text}`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          userId: userId,
         },
         body: JSON.stringify({
-          mission: todayMission.emoji,
+          mission: missions[0].emoji,
         }),
       }
     )
@@ -91,11 +98,9 @@ const EcoMission = () => {
 
   console.log('----');
   console.log(missions);
+  console.log(todayMission.emoji);
   console.log('----');
 
-  const testStr = missions[0].emoji.slice(2, 8);
-  console.log(testStr);
-  console.log(String.fromCodePoint(testStr));
   
   const [inputs, setInputs] = useState([]);
 
@@ -130,19 +135,31 @@ const EcoMission = () => {
         text: missions[0].text,
       }]);
       nextId.current += 1;
+
+      //백으로 데이터 보내기
+      //fetchFunc();
     },
     [missions, emoji, text]
   );
 
-  // const onSubmit = useCallback(
-  //   e => {
-  //     onInsert();
-  //     e.preventDefault();
-  //   },
-  //   []
-  // );
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //달성 버튼 누르면 백엔드로 정보 넘겨주기
+    fetchFunc();
+  };
 
   console.log(missions[0].text);
+
+  //달성한 미션 가져오기
+  function EcoMission({ data, name, emoji }) {
+    return (
+      <div className={EcoStyle.mission_box2}>
+      <div className={EcoStyle.mission_icon}>{String.fromCodePoint(emoji)}</div> 
+      <p>{name}</p>
+      <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+    </div>
+    );
+  }
 
   const [date, setDate] = useState(new Date());
   return (
@@ -184,7 +201,7 @@ const EcoMission = () => {
         
         <div className={EcoStyle.mission_box_input}>
           <input
-            value={missions[0].text || 'test'}
+            value={missions[0].text || 'NONE'}
             emoji={emoji}
             text={text}
             onChange={onChange}
@@ -196,7 +213,8 @@ const EcoMission = () => {
 
         <button
           type="submit"
-          onClick={onCreate}
+          //onClick={onCreate}
+          onClick={onSubmit}
           className={EcoStyle.mission_btn}
         >
           달성
@@ -209,6 +227,15 @@ const EcoMission = () => {
       </div>
 
       <EcoList missions={inputs} />
+
+      {/* 달성한 미션 가져오기 */}
+        {missionArr.map((famous) => (
+          <EcoMission
+            data={famous}
+            name={famous.name}
+            emoji={famous.emoji}
+          />
+        ))}
 
       <Footer activeMenu="home">
         <div>홈</div>

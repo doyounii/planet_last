@@ -199,11 +199,11 @@ function Home({ activeHome }) {
               </div>
             </div>
           </div>
-          <Link to="/#" className={activeHome}>
-            <IoIosArrowForward
-              className={homeStyle.history}
-            ></IoIosArrowForward>
-          </Link>
+          {/* <Link to="/StatisticsView" className={activeHome}> */}
+          <IoIosArrowForward
+            className={homeStyle.history}
+          ></IoIosArrowForward>
+          {/* </Link> */}
           <div className={homeStyle.income}>
             수입 <h1>{!loading ? income.toLocaleString() : 0}원</h1>
           </div>
