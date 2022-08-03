@@ -192,7 +192,8 @@ function CalendarPage() {
         {daysData.find(
           (data) => data.date === format(selectedDate, dateFormat)
         ) ? (
-          details[1].status === "success" && <DetailList value={selectedDate} />
+          details.length !== 0 &&
+          details[0].status === "success" && <DetailList value={selectedDate} />
         ) : (
           <div
             style={{
