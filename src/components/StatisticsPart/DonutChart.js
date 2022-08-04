@@ -82,7 +82,7 @@ const DonutChart = ({ percentage, nowNoneEcoCount, nowEcoCount }) => {
             style={{ fontSize: "8px", fill: "white" }} //친/반환경 지출 label
           >
             {/* {data[selected].value != 0 ? data[selected].title : ""} */}
-            {data[selected].value != 0 && (nowNoneEcoCount >= 1 || nowEcoCount >= 1) ? data[selected].title : (nowNoneEcoCount >= 1 ? data[selected].title : "")}
+            {data[selected].value !== 0 && (nowNoneEcoCount >= 1 || nowEcoCount >= 1) ? data[selected].title : (nowNoneEcoCount >= 1 ? data[selected].title : "")}
           </text>
           <text
             dominantBaseline="central"
@@ -92,7 +92,7 @@ const DonutChart = ({ percentage, nowNoneEcoCount, nowEcoCount }) => {
             style={{ fontSize: "6px", fill: "#939393" }}
           >
             {/* {data[selected].value == 0 ? data[selected].zero : ""} */}
-            {data[selected].value == 0 && nowNoneEcoCount == 0 ? data[selected].zero : ""}
+            {data[selected].value === 0 && nowNoneEcoCount === 0 ? data[selected].zero : ""}
           </text>
           <text
             dominantBaseline="central"
@@ -103,9 +103,8 @@ const DonutChart = ({ percentage, nowNoneEcoCount, nowEcoCount }) => {
             textAnchor="middle"
             style={defaultLabelStyle}
           >
-            {data[selected].value == 0 && nowNoneEcoCount == 0 ? data[selected].zero : data[selected].value + "%"}
             {/* {data[selected].value != 0 ? data[selected].value + "%" : ""} */}
-            {data[selected].value != 0 ? data[selected].value + "%" : ""}
+            {data[selected].value !== 0 ? data[selected].value + "%" : ""}
           </text>
         </PieChart>
       </View>
