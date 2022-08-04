@@ -13,7 +13,7 @@ const defaultLabelStyle = {
 
 const segmentsStyle = { cursor: "pointer" };
 
-const DonutChart = ({ percentage, barData }) => {
+const DonutChart = ({ percentage, nowNoneEcoCount }) => {
   console.log(percentage);
   const data = [
     {
@@ -33,8 +33,7 @@ const DonutChart = ({ percentage, barData }) => {
     },
   ];
   const [selected, setSelected] = useState(0);
-  console.log(barData);
-  console.log(barData.length);
+  console.log(nowNoneEcoCount);
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -81,7 +80,7 @@ const DonutChart = ({ percentage, barData }) => {
             textAnchor="middle"
             style={{ fontSize: "8px", fill: "white" }} //친/반환경 지출 label
           >
-            {data[selected].value == 0 && barData.length >= 2 ? data[selected].title : ""}
+            {data[selected].value == 0 && nowNoneEcoCount >= 1 ? data[selected].title : ""}
           </text>
           <text
             dominantBaseline="central"
@@ -90,7 +89,7 @@ const DonutChart = ({ percentage, barData }) => {
             textAnchor="middle"
             style={{ fontSize: "6px", fill: "#939393" }} //친/반환경 지출 label
           >
-            {data[selected].value == 0 && barData.length < 2 ? data[selected].zero : ""}
+            {data[selected].value == 0 && nowNoneEcoCount == 0 ? data[selected].zero : ""}
           </text>
           <text
             dominantBaseline="central"

@@ -56,6 +56,7 @@ function Home({ activeHome }) {
 
   const [position2, setposition2] = useState(0);
 
+
   const currentDate = new Date();
   const userId = window.localStorage.getItem("userId");
   const queryClient = useQueryClient();
@@ -76,7 +77,12 @@ function Home({ activeHome }) {
       setEcoPercentage(message.percentage);
     }
   }, [queryClient, results]);
+  console.log(message);
   console.log(ecoPercentage);
+  console.log(userName);
+  console.log(income);
+  console.log(expenditure);
+
 
   useEffect(() => {
     if (results.status === "success") {
