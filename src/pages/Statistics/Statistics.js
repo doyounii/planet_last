@@ -99,8 +99,32 @@ function StatisticsMain() {
     }
   }, [results.status]);
 
-  if (loading) return <div>loading...</div>;
-  console.log(message);
+  if (results.status === "loading")
+    return (
+      <div
+        style={{
+          width: "100vw",
+          color: "#636E75",
+          textAlign: "center",
+          marginTop: "40vh",
+        }}
+      >
+        로딩중...
+      </div>
+    );
+  if (results.status === "error")
+    return (
+      <div
+        style={{
+          width: "100vw",
+          color: "#636E75",
+          textAlign: "center",
+          marginTop: "40vh",
+        }}
+      >
+        문제가 발생했습니다. 잠시 후에 다시 시도해주세요.
+      </div>
+    );
 
   return (
     <div className="statistic-main">
@@ -147,7 +171,8 @@ function StatisticsMain() {
           )}
           <p>지난달 이맘때보다</p>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>{Math.abs(ecoDifference)}개</b>{" "}
+            친환경 태그가{" "}
+            <b style={{ color: "#00C982" }}>{Math.abs(ecoDifference)}개</b>{" "}
             {ecoDifference >= 0 ? "늘고" : "줄고"}
           </h2>
           <h2>
@@ -172,7 +197,11 @@ function StatisticsMain() {
             </p>
           </div>
           <div className="donut-chart">
-            <DonutChart percentage={percentage} nowNoneEcoCount={nowNoneEcoCount} nowEcoCount={nowEcoCount} />
+            <DonutChart
+              percentage={percentage}
+              nowNoneEcoCount={nowNoneEcoCount}
+              nowEcoCount={nowEcoCount}
+            />
           </div>
         </div>
         <div className="line-box"></div>
