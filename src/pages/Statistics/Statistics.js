@@ -16,10 +16,10 @@ import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import { useQueryClient, useQuery } from "react-query";
 
-const fetchData = async (userId) => {
+const fetchData = async (userId, currentMonth) => {
   const response = await axios.get(
     `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
-      new Date(),
+      currentMonth,
       "M"
     )}/${format(new Date(), "d")}`,
     { headers: { userId: userId } }
@@ -51,7 +51,7 @@ function StatisticsMain() {
   const queryClient = useQueryClient();
   const results = useQuery({
     queryKey: "statisticsData",
-    queryFn: () => fetchData(userId),
+    queryFn: () => fetchData(userId, currentMonth),
     enabled: !!userId,
     staleTime: 1000 * 5 * 60, // 5분
     cacheTime: Infinity, // 제한 없음
