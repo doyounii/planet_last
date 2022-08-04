@@ -104,7 +104,7 @@ const DonutChart = ({ percentage, nowNoneEcoCount, nowEcoCount }) => {
             style={defaultLabelStyle}
           >
             {/* {data[selected].value != 0 ? data[selected].value + "%" : ""} */}
-            {data[selected].value !== 0 ? data[selected].value + "%" : ""}
+            {data[selected].value !== 0 ? data[selected].value + "%" : (nowNoneEcoCount >= 1) ? data[selected].value + "%" : ""}
           </text>
         </PieChart>
       </View>
