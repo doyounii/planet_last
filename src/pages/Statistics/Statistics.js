@@ -178,7 +178,7 @@ function StatisticsMain() {
             </p>
           </div>
           <div className="donut-chart">
-            <DonutChart percentage={percentage} barData={noEcoTagCounts} />
+            <DonutChart percentage={percentage} nowNoneEcoCount={nowNoneEcoCount} />
           </div>
         </div>
         <div className="line-box"></div>
