@@ -178,7 +178,7 @@ function StatisticsMain() {
             </p>
           </div>
           <div className="donut-chart">
-            <DonutChart percentage={percentage} nowNoneEcoCount={nowNoneEcoCount} />
+            <DonutChart percentage={percentage} nowNoneEcoCount={nowNoneEcoCount} nowEcoCount={nowEcoCount} />
           </div>
         </div>
         <div className="line-box"></div>
