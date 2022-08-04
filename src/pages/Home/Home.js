@@ -99,18 +99,16 @@ function Home({ activeHome }) {
     setUserName(text);
   };
 
-  if (ecoPercentage !== 0) {
-    if (ecoPercentage > 0 && ecoPercentage < 25) {
-      lottieOptions.animationData = low;
-    } else if (ecoPercentage >= 25 && ecoPercentage < 50) {
-      lottieOptions.animationData = mid;
-    } else if (ecoPercentage >= 50 && ecoPercentage < 75) {
-      lottieOptions.animationData = highmid;
-    } else {
-      lottieOptions.animationData = high;
-    }
-  }
 
+  if (ecoPercentage >= 0 && ecoPercentage < 25) {
+    lottieOptions.animationData = low;
+  } else if (ecoPercentage >= 25 && ecoPercentage < 50) {
+    lottieOptions.animationData = mid;
+  } else if (ecoPercentage >= 50 && ecoPercentage < 75) {
+    lottieOptions.animationData = highmid;
+  } else {
+    lottieOptions.animationData = high;
+  }
   // if (results.status === "loading") return <div>loading...</div>;
   return (
     <>
@@ -152,7 +150,7 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <div className={homeStyle.planet}>
-                {ecoPercentage === 0 ? (
+                {income.toLocaleString() === 0 && expenditure.toLocaleString() === 0 ? (
                   <div>
                     {" "}
                     <img alt="만들어지지 않은 행성" src={zero} />

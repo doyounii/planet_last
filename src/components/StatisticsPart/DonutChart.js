@@ -33,7 +33,8 @@ const DonutChart = ({ percentage, barData }) => {
     },
   ];
   const [selected, setSelected] = useState(0);
-  console.log(data.value);
+  console.log(barData);
+  console.log(barData.length);
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -80,7 +81,7 @@ const DonutChart = ({ percentage, barData }) => {
             textAnchor="middle"
             style={{ fontSize: "8px", fill: "white" }} //친/반환경 지출 label
           >
-            {data[selected].value != 0 ? data[selected].title : ""}
+            {data[selected].value == 0 && barData.length >= 2 ? data[selected].title : ""}
           </text>
           <text
             dominantBaseline="central"
@@ -89,7 +90,7 @@ const DonutChart = ({ percentage, barData }) => {
             textAnchor="middle"
             style={{ fontSize: "6px", fill: "#939393" }} //친/반환경 지출 label
           >
-            {data[selected].value == 0 ? data[selected].zero : ""}
+            {data[selected].value == 0 && barData.length < 2 ? data[selected].zero : ""}
           </text>
           <text
             dominantBaseline="central"
@@ -100,7 +101,7 @@ const DonutChart = ({ percentage, barData }) => {
             textAnchor="middle"
             style={defaultLabelStyle}
           >
-            {data[selected].value != 0 && barData.length >= 2 ? data[selected].value + "%" : ""}
+            {data[selected].value != 0 ? data[selected].value + "%" : ""}
           </text>
 
         </PieChart>
