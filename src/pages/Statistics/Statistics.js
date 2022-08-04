@@ -18,8 +18,8 @@ import { useQueryClient, useQuery } from "react-query";
 
 const fetchData = async (userId, currentMonth) => {
   const response = await axios.get(
-    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
-      currentMonth,
+    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/${format(date, "yyyy")}/${format(
+      new Date(),
       "M"
     )}/${format(new Date(), "d")}`,
     { headers: { userId: userId } }
@@ -178,7 +178,7 @@ function StatisticsMain() {
             </p>
           </div>
           <div className="donut-chart">
-            <DonutChart percentage={percentage} />
+            <DonutChart percentage={percentage} barData={noEcoTagCounts} />
           </div>
         </div>
         <div className="line-box"></div>
