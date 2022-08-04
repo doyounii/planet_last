@@ -13,7 +13,7 @@ const defaultLabelStyle = {
 
 const segmentsStyle = { cursor: "pointer" };
 
-const DonutChart = ({ percentage }) => {
+const DonutChart = ({ percentage, barData }) => {
   console.log(percentage);
   const data = [
     {
@@ -100,8 +100,9 @@ const DonutChart = ({ percentage }) => {
             textAnchor="middle"
             style={defaultLabelStyle}
           >
-            {data[selected].value != 0 ? data[selected].value + "%" : ""}
+            {data[selected].value != 0 && barData.length >= 2 ? data[selected].value + "%" : ""}
           </text>
+
         </PieChart>
       </View>
     </View>
