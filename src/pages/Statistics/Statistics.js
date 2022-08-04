@@ -75,19 +75,13 @@ function StatisticsMain() {
   };
 
   useEffect(() => {
-    // fetchData();
-    //   setMessage(data);
-    //   setEcoTagCounts(data.ecoTagCounts);
-    //   setnoEcoTagCounts(data.noEcoTagCounts);
-    //   setloading(false);
-    // }, []);
     if (results.status === "success") {
       const messages = queryClient.getQueryData("statisticsData");
 
       setMessage(messages);
       setUserName(messages.userName === null ? "" : messages.userName);
-      setEcoDifference(Math.abs(message.ecoDifference));
-      setNoEcoDifference(Math.abs(message.noEcoDifference));
+      setEcoDifference(message.ecoDifference);
+      setNoEcoDifference(message.noEcoDifference);
       setIncomeTotal(messages.incomeTotal);
       setExpenditureTotal(messages.expenditureTotal);
       setEcoTagCounts(messages.ecoTagCounts);
@@ -153,12 +147,12 @@ function StatisticsMain() {
           )}
           <p>지난달 이맘때보다</p>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>{ecoDifference}개</b>{" "}
+            친환경 태그가 <b style={{ color: "#00C982" }}>{Math.abs(ecoDifference)}개</b>{" "}
             {ecoDifference >= 0 ? "늘고" : "줄고"}
           </h2>
           <h2>
             반환경 태그가{" "}
-            <b style={{ color: "#00C982" }}>{noEcoDifference}개</b>{" "}
+            <b style={{ color: "#00C982" }}>{Math.abs(noEcoDifference)}개</b>{" "}
             {noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
           </h2>
 
@@ -278,17 +272,14 @@ const data = {
   nowNoneEcoCount: 4,
   percentage: 0.0,
   ecoTagCounts: [
-    // ["식비", 6],
-    // ["급여", 2],
-    // ["기타", 2],
-    // ["생필품", 2],
-    ["더보기", 0],
+    ["식비", 6],
+    ["급여", 2],
+    ["기타", 2],
+    ["생필품", 2],
+    ["더보기", 3],
   ],
   noEcoTagCounts: [
     ["식비", 3],
-    ["기타", 1],
-    ["생필품", 1],
-    ["급여", 1],
     ["더보기", 0],
   ],
 };
