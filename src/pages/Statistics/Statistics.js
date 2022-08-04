@@ -18,7 +18,7 @@ import { useQueryClient, useQuery } from "react-query";
 
 const fetchData = async (userId, currentMonth) => {
   const response = await axios.get(
-    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/${format(date, "yyyy")}/${format(
+    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
       new Date(),
       "M"
     )}/${format(new Date(), "d")}`,
