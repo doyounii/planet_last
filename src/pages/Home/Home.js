@@ -56,6 +56,7 @@ function Home({ activeHome }) {
 
   const [position2, setposition2] = useState(0);
 
+
   const currentDate = new Date();
   const userId = window.localStorage.getItem("userId");
   const queryClient = useQueryClient();
@@ -73,10 +74,15 @@ function Home({ activeHome }) {
       setUserName(messages.userName === null ? "" : messages.userName);
       setIncome(messages.totalIncomeMonth);
       setExpenditure(messages.totalExpenditureMonth);
-      setEcoPercentage(message.percentage);
+      setEcoPercentage(message.ecoPercentage);
     }
   }, [queryClient, results]);
+  console.log(message);
   console.log(ecoPercentage);
+  console.log(userName);
+  console.log(income);
+  console.log(expenditure);
+
 
   useEffect(() => {
     if (results.status === "success") {
@@ -99,18 +105,16 @@ function Home({ activeHome }) {
     setUserName(text);
   };
 
-  if (ecoPercentage !== 0) {
-    if (ecoPercentage > 0 && ecoPercentage < 25) {
-      lottieOptions.animationData = low;
-    } else if (ecoPercentage >= 25 && ecoPercentage < 50) {
-      lottieOptions.animationData = mid;
-    } else if (ecoPercentage >= 50 && ecoPercentage < 75) {
-      lottieOptions.animationData = highmid;
-    } else {
-      lottieOptions.animationData = high;
-    }
-  }
 
+  if (ecoPercentage >= 0 && ecoPercentage < 25) {
+    lottieOptions.animationData = low;
+  } else if (ecoPercentage >= 25 && ecoPercentage < 50) {
+    lottieOptions.animationData = mid;
+  } else if (ecoPercentage >= 50 && ecoPercentage < 75) {
+    lottieOptions.animationData = highmid;
+  } else {
+    lottieOptions.animationData = high;
+  }
   // if (results.status === "loading") return <div>loading...</div>;
   return (
     <>
@@ -152,7 +156,7 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <div className={homeStyle.planet}>
-                {ecoPercentage === 0 ? (
+                {income === 0 && expenditure === 0 ? (
                   <div>
                     {" "}
                     <img alt="만들어지지 않은 행성" src={zero} />
@@ -254,3 +258,11 @@ Home.defaultProps = {
   userName: "",
   ecoPercentage: 0,
 };
+
+const message = {
+  "userName": "2000호",
+  "totalIncomeMonth": 0,
+  "totalExpenditureMonth": 0,
+  "ecoPercentage": 0.0,
+  "noEcoPercentage": 100.0
+}

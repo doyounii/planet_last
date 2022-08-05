@@ -44,7 +44,7 @@ function Auth(SpecificComponent, option) {
 
     if (option) {
       if (userId === null) {
-        navigate("/login");
+        navigate("/login", { replace: true });
       }
     }
   }, []);

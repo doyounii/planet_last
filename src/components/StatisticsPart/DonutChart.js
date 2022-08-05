@@ -13,7 +13,7 @@ const defaultLabelStyle = {
 
 const segmentsStyle = { cursor: "pointer" };
 
-const DonutChart = ({ percentage }) => {
+const DonutChart = ({ percentage, nowNoneEcoCount, nowEcoCount }) => {
   console.log(percentage);
   const data = [
     {
@@ -33,7 +33,8 @@ const DonutChart = ({ percentage }) => {
     },
   ];
   const [selected, setSelected] = useState(0);
-  console.log(data.value);
+  console.log(nowNoneEcoCount);
+  console.log(nowEcoCount);
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -80,16 +81,18 @@ const DonutChart = ({ percentage }) => {
             textAnchor="middle"
             style={{ fontSize: "8px", fill: "white" }} //친/반환경 지출 label
           >
-            {data[selected].value != 0 ? data[selected].title : ""}
+            {/* {data[selected].value != 0 ? data[selected].title : ""} */}
+            {data[selected].value !== 0 && (nowNoneEcoCount >= 1 || nowEcoCount >= 1) ? data[selected].title : (nowNoneEcoCount >= 1 ? data[selected].title : "")}
           </text>
           <text
             dominantBaseline="central"
             x="100"
             y="60"
             textAnchor="middle"
-            style={{ fontSize: "6px", fill: "#939393" }} //친/반환경 지출 label
+            style={{ fontSize: "6px", fill: "#939393" }}
           >
-            {data[selected].value == 0 ? data[selected].zero : ""}
+            {/* {data[selected].value == 0 ? data[selected].zero : ""} */}
+            {data[selected].value === 0 && nowNoneEcoCount === 0 ? data[selected].zero : ""}
           </text>
           <text
             dominantBaseline="central"
@@ -100,7 +103,8 @@ const DonutChart = ({ percentage }) => {
             textAnchor="middle"
             style={defaultLabelStyle}
           >
-            {data[selected].value != 0 ? data[selected].value + "%" : ""}
+            {/* {data[selected].value != 0 ? data[selected].value + "%" : ""} */}
+            {data[selected].value !== 0 ? data[selected].value + "%" : (nowNoneEcoCount >= 1) ? data[selected].value + "%" : ""}
           </text>
         </PieChart>
       </View>

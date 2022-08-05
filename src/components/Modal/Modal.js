@@ -289,11 +289,10 @@ const calendarInfoData = (monthView) => {
                     return (
                       <div className="days">
                         <div
-                          className={`number eco${day.ecoCount} ${
-                            day.incomeDays !== 0 || day.expenditureDays !== 0
+                          className={`number eco${day.ecoCount} ${day.incomeDays !== 0 || day.expenditureDays !== 0
                               ? "highlight"
                               : ""
-                          } ${day.date === 21 ? "today" : ""}`}
+                            } ${day.date === 21 ? "today" : ""}`}
                         >
                           {day.date}
                         </div>

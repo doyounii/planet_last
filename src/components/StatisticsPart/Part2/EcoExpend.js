@@ -100,7 +100,7 @@ function EcoExpend(props) {
             <div className="more">
               <h1 style={{ color: "#C7D2E8" }}>●</h1>
               <h1>더보기</h1>
-              {/* <h2>{ecoTagCounts[2][1]}개</h2> */}
+              <h2>{message.ecoTagCounts !== undefined && message.ecoTagCounts[message.ecoTagCounts.length - 1][1]}개</h2>
             </div>
             {/* </Link> */}
           </div>
@@ -125,7 +125,7 @@ function EcoExpend(props) {
             <div className="more">
               <h1 style={{ color: "#C7D2E8" }}>●</h1>
               <h1>더보기</h1>
-              {/* <h2>{noEcoTagCounts[2][1]}개</h2> */}
+              <h2>{message.noEcoTagCounts !== undefined && message.noEcoTagCounts[message.noEcoTagCounts.length - 1][1]}개</h2>
             </div>
             {/* </Link> */}
           </div>
@@ -136,30 +136,3 @@ function EcoExpend(props) {
 }
 
 export default EcoExpend;
-
-const data = {
-  userName: "사용자1",
-  incomeTotal: 102000,
-  expenditureTotal: 549000,
-  ecoDifference: 6,
-  noEcoDifference: 3,
-  ecoCount: { 3: 6, 4: 12 },
-  nowEcoCount: 12,
-  nowNoneEcoCount: 4,
-  percentage: 67.0,
-  ecoTagCounts: [
-    ["마트", 6],
-    ["급여", 2],
-    ["기타", 2],
-    ["생필품", 2],
-    ["더보기", 0],
-    ["더보기", 0],
-  ],
-  noEcoTagCounts: [
-    ["식비", 3],
-    ["기타", 1],
-    ["생필품", 1],
-    ["급여", 1],
-    ["더보기", 0],
-  ],
-};
