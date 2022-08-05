@@ -30,7 +30,7 @@ function Coupon() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [couponArr, setCouponArr] = useState([]);
-  const [couponCnt, setCouponCnt] = useState("");
+  const [couponCnt, setCouponCnt] = useState(0);
 
   const [loading, setloading] = useState(true);
   const userId = window.localStorage.getItem("userId");
