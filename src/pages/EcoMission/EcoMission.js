@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import axios from "axios";
 import Footer from "../../components/Footer/Footer";
 import EcoStyle from "./Eco.module.css";
 import HistorySample from "../../components/History/HistoryBackHome";
@@ -6,10 +7,8 @@ import { format } from "date-fns";
 import { FiShare } from "react-icons/fi";
 import { BsChevronDown } from "react-icons/bs";
 import { Modal } from "../../components/EcoMissionPart/EcoModal";
-import axios from "axios";
 
 import DateList from "../../components/DateList";
-import EcoList from "../../components/EcoMissionPart/EcoList";
 
 const EcoMission = () => {
   const [loading, setloading] = useState(true);
@@ -36,28 +35,22 @@ const EcoMission = () => {
   const fetchData = async (date) => {
     console.log("in function");
 
-    // const response = await axios.get(
-    //   `https://플랜잇.웹.한국:8080/api/mission/2022/${format(date, "M")}`,
-    //   {
-    //     headers: { userId: userId },
-    //   }
-    // );
-    // const data = await response.data;
-    const data = data2;
-    console.log(data);
+    const response = await axios.get(
+      `https://플랜잇.웹.한국:8080/api/mission/2022/${format(date, "M")}`,
+      {
+        headers: { userId: userId },
+      }
+    );
+    const data = await response.data;
 
     setMissionArr(data.missions);
-
     setTodayMission({
       emoji: data.todayMission.emoji,
       name: data.todayMission.name,
     });
+
     let isClear = data.missions.find((m) => m.name === data.todayMission.name);
     setClear(isClear);
-    if (data && data.length > 0) {
-      console.log(data[0]);
-    }
-
     setloading(false);
   };
 
@@ -86,7 +79,6 @@ const EcoMission = () => {
   };
 
   const clearMission = (mission) => {
-    //fetchPostFunc();
     let tempArr = missionArr;
     tempArr.unshift(mission);
     setMissionArr(tempArr);
@@ -95,10 +87,9 @@ const EcoMission = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("click");
+
     clearMission(todayMission);
-    //달성 버튼 누르면 백엔드로 정보 넘겨주기
-    //fetchPostFunc();
+    fetchPostFunc();
   };
 
   return (
@@ -187,24 +178,3 @@ function Mission({ data }) {
     </div>
   );
 }
-
-const data2 = {
-  todayMission: {
-    name: "샤워시간 단축하기",
-    emoji: "128703",
-  },
-  missions: [
-    // {
-    //   name: "샤워시간 단축하기",
-    //   emoji: "128703",
-    // },
-    {
-      name: "이것거적 단축하기",
-      emoji: "128703",
-    },
-    {
-      name: "호롤롤롤",
-      emoji: "128703",
-    },
-  ],
-};
