@@ -74,7 +74,7 @@ function Home({ activeHome }) {
       setUserName(messages.userName === null ? "" : messages.userName);
       setIncome(messages.totalIncomeMonth);
       setExpenditure(messages.totalExpenditureMonth);
-      setEcoPercentage(message.percentage);
+      setEcoPercentage(message.ecoPercentage);
     }
   }, [queryClient, results]);
   console.log(message);
@@ -156,7 +156,7 @@ function Home({ activeHome }) {
                 onClick={(e) => openModal(e)}
               />
               <div className={homeStyle.planet}>
-                {income.toLocaleString() === 0 && expenditure.toLocaleString() === 0 ? (
+                {income === 0 && expenditure === 0 ? (
                   <div>
                     {" "}
                     <img alt="만들어지지 않은 행성" src={zero} />
@@ -258,3 +258,11 @@ Home.defaultProps = {
   userName: "",
   ecoPercentage: 0,
 };
+
+const message = {
+  "userName": "2000호",
+  "totalIncomeMonth": 0,
+  "totalExpenditureMonth": 0,
+  "ecoPercentage": 0.0,
+  "noEcoPercentage": 100.0
+}

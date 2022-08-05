@@ -40,7 +40,7 @@ const EcoMission = () => {
   const fetchData = async () => {
     console.log("in function");
 
-    const response = await axios.get(`https://플랜잇.웹.한국:8080/api/mission/2022/7`, {
+    const response = await axios.get(`https://플랜잇.웹.한국:8080/api/mission/2022/8`, {
       headers: { userId: userId },
     });
     const data = await response.data;
@@ -143,7 +143,7 @@ const EcoMission = () => {
   );
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     //달성 버튼 누르면 백엔드로 정보 넘겨주기
     fetchFunc();
   };
