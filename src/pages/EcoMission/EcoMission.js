@@ -40,18 +40,23 @@ const EcoMission = () => {
   const fetchData = async () => {
     console.log("in function");
 
-    const response = await axios.get(`https://플랜잇.웹.한국:8080/api/mission/2022/8`, {
-      headers: { userId: userId },
-    });
+    const response = await axios.get(
+      `https://플랜잇.웹.한국:8080/api/mission/2022/8`,
+      {
+        headers: { userId: userId },
+      }
+    );
     const data = await response.data;
     console.log(data);
 
     setMissionArr(data.missions);
 
-    setMissions([{
-      emoji: data.todayMission.emoji,
-      text: data.todayMission.name,
-    }])
+    setMissions([
+      {
+        emoji: data.todayMission.emoji,
+        text: data.todayMission.name,
+      },
+    ]);
 
     if (data && data.length > 0) {
       console.log(data[0]);
@@ -96,12 +101,11 @@ const EcoMission = () => {
       });
   };
 
-  console.log('----');
+  console.log("----");
   console.log(missions);
   console.log(todayMission.emoji);
-  console.log('----');
+  console.log("----");
 
-  
   const [inputs, setInputs] = useState([]);
 
   const { emoji, text } = inputs;
@@ -128,12 +132,15 @@ const EcoMission = () => {
         text,
       };
       setMissions(missions.concat(mission));
-      
+
       //다음날 데이터로 초기화
-      setInputs([...inputs, {
-        emoji: String.fromCodePoint(testStr),
-        text: missions[0].text,
-      }]);
+      setInputs([
+        ...inputs,
+        {
+          emoji: String.fromCodePoint(testStr),
+          text: missions[0].text,
+        },
+      ]);
       nextId.current += 1;
 
       //백으로 데이터 보내기
@@ -143,7 +150,7 @@ const EcoMission = () => {
   );
 
   const onSubmit = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     //달성 버튼 누르면 백엔드로 정보 넘겨주기
     fetchFunc();
   };
@@ -154,10 +161,12 @@ const EcoMission = () => {
   function EcoMission({ data, name, emoji }) {
     return (
       <div className={EcoStyle.mission_box2}>
-      <div className={EcoStyle.mission_icon}>{String.fromCodePoint(emoji)}</div> 
-      <p>{name}</p>
-      <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
-    </div>
+        <div className={EcoStyle.mission_icon}>
+          {String.fromCodePoint(emoji)}
+        </div>
+        <p>{name}</p>
+        <button className={EcoStyle.mission_complete_btn}>달성 완료</button>
+      </div>
     );
   }
 
@@ -185,23 +194,24 @@ const EcoMission = () => {
             />
           </Modal>
         )}
-
-      {/* To-do 달 바뀔 때마다 리스트 빈 화면으로 초기화 하기 */}
-      {format(date, "M월")} <button onClick={isopenModal} className={EcoStyle.select_month_button}><BsChevronDown /></button>
+        {/* To-do 달 바뀔 때마다 리스트 빈 화면으로 초기화 하기 */}
+        {format(date, "M월")}{" "}
+        <button onClick={isopenModal} className={EcoStyle.select_month_button}>
+          <BsChevronDown />
+        </button>
       </div>
-      
+
       <div className={EcoStyle.title_icon}>
         <FiShare />
       </div>
-      
 
       <form className={EcoStyle.mission_box}>
         <p>새로운 미션이 도착했어요!</p>
         <h1>오늘의 데일리 에코 미션</h1>
-        
+
         <div className={EcoStyle.mission_box_input}>
           <input
-            value={missions[0].text || 'NONE'}
+            value={missions[0].text || "NONE"}
             emoji={emoji}
             text={text}
             onChange={onChange}
@@ -229,13 +239,9 @@ const EcoMission = () => {
       <EcoList missions={inputs} />
 
       {/* 달성한 미션 가져오기 */}
-        {missionArr.map((famous) => (
-          <EcoMission
-            data={famous}
-            name={famous.name}
-            emoji={famous.emoji}
-          />
-        ))}
+      {missionArr.map((famous) => (
+        <EcoMission data={famous} name={famous.name} emoji={famous.emoji} />
+      ))}
 
       <Footer activeMenu="home">
         <div>홈</div>

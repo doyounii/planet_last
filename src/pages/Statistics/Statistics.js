@@ -68,7 +68,7 @@ function StatisticsMain() {
   });
 
   const fetchStat = useMutation({
-    mutationFn: (month) => fetchData(userId, month),
+    mutationFn: () => {},
     onSuccess: () => queryClient.invalidateQueries("statisticsData"),
     onError: (error) => console.error(),
   });
@@ -103,7 +103,7 @@ function StatisticsMain() {
       setPrcentage(messages.percentage);
     }
   }, [queryClient, results]);
-  console.log();
+
   useEffect(() => {
     if (results.status === "success") {
       setloading(false);
