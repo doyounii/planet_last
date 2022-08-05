@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
+import { format, isSameMonth, endOfMonth } from "date-fns";
 import "./Statistics.css";
 import { IoIosArrowForward } from "react-icons/io";
 import DonutChart from "../../components/StatisticsPart/DonutChart";
@@ -14,14 +14,23 @@ import { EcoBarChart } from "../../components/StatisticsPart/Part2/EcoBarChart";
 import { InfoModal } from "../../components/StatisticsPart/Part2/Modal2";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
-import { useQueryClient, useQuery } from "react-query";
+import { useQueryClient, useQuery, useMutation } from "react-query";
+
+const containerStyle = {
+  backgroundImage: "url(img/main_bg.png)",
+  width: "100vw",
+  height: "30%",
+};
 
 const fetchData = async (userId, currentMonth) => {
+  let date = isSameMonth(currentMonth, new Date())
+    ? currentMonth
+    : endOfMonth(currentMonth);
   const response = await axios.get(
     `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
-      new Date(),
+      date,
       "M"
-    )}/${format(new Date(), "d")}`,
+    )}/${format(date, "d")}`,
     { headers: { userId: userId } }
   );
   const data = await response.data;
@@ -49,6 +58,7 @@ function StatisticsMain() {
   const nowMFormat = "M";
   const userId = window.localStorage.getItem("userId");
   const queryClient = useQueryClient();
+
   const results = useQuery({
     queryKey: "statisticsData",
     queryFn: () => fetchData(userId, currentMonth),
@@ -57,14 +67,15 @@ function StatisticsMain() {
     cacheTime: Infinity, // 제한 없음
   });
 
-  const containerStyle = {
-    backgroundImage: "url(img/main_bg.png)",
-    width: "100vw",
-    height: "30%",
-  };
+  const fetchStat = useMutation({
+    mutationFn: (month) => fetchData(userId, month),
+    onSuccess: () => queryClient.invalidateQueries("statisticsData"),
+    onError: (error) => console.error(),
+  });
 
   const onchangeDate = (date) => {
     setCurrentMonth(date);
+    fetchStat.mutate(date);
   };
   const openModal = (e) => {
     setposition(e.clientY);
@@ -181,7 +192,9 @@ function StatisticsMain() {
             {noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
           </h2>
 
-          <LineGraph dataset={message.ecoCount}></LineGraph>
+          {message.ecoCount !== undefined && (
+            <LineGraph dataset={message.ecoCount}></LineGraph>
+          )}
         </div>
 
         <div className="line-box"></div>
