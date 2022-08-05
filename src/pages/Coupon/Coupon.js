@@ -30,7 +30,7 @@ function Coupon() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [couponArr, setCouponArr] = useState([]);
-  const [couponCnt, setCouponCnt] = useState("");
+  const [couponCnt, setCouponCnt] = useState(0);
 
   const [loading, setloading] = useState(true);
   const userId = window.localStorage.getItem("userId");
@@ -45,7 +45,7 @@ function Coupon() {
 
   const fetchData = async () => {
     const response = await axios.get(`https://플랜잇.웹.한국:8080/api/coupon`, {
-      //headers: { userId: userId },
+      headers: { userId: userId },
     });
     const data = await response.data;
 
