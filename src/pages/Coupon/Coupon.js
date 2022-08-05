@@ -44,12 +44,12 @@ function Coupon() {
   }, []);
 
   const fetchData = async () => {
-    // const response = await axios.get(`https://플랜잇.웹.한국:8080/api/coupon`, {
-    //   headers: { userId: userId },
-    // });
-    // const data = await response.data;
+    const response = await axios.get(`https://플랜잇.웹.한국:8080/api/coupon`, {
+      headers: { userId: userId },
+    });
+    const data = await response.data;
 
-    const data = data2;
+    // const data = data2;
     setCouponArr(data.couponDtos);
     setCouponCnt(data.couponCount);
 
@@ -181,38 +181,6 @@ function Coupon() {
 }
 
 export default Coupon;
-
-const data2 = {
-  couponCount: 2,
-  couponDtos: [
-    {
-      cno: "PLANETCOUPON8724",
-      coupon: "일상공감4",
-      remainingDays: 1,
-      discount: 25,
-      availability: true,
-      expiration: false,
-      startDate: "2022-08-04",
-      endDate: "2022-08-15",
-      usageInfo: null,
-      couponInfo: null,
-      detailInfo: null,
-    },
-    {
-      cno: "PLANETCOUPON87224",
-      coupon: "일상공감211111",
-      remainingDays: 1,
-      discount: 25,
-      availability: true,
-      expiration: false,
-      startDate: "2022-08-04",
-      endDate: "2022-08-15",
-      usageInfo: null,
-      couponInfo: null,
-      detailInfo: null,
-    },
-  ],
-};
 
 export function CouponItem({ data, availability, setContent, openModal }) {
   const onClickHandler = () => {

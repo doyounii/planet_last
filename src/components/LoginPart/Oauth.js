@@ -14,16 +14,27 @@ function Oauth() {
         );
         const userId = res.data;
         window.localStorage.setItem("userId", userId);
-        navigate("/");
+        navigate("/", { replace: true });
       } catch (e) {
         console.error(e);
         window.alert("문제가 발생했습니다. 잠시 후에 다시 시도해주세요.");
-        navigate("/login");
+        navigate("/login", { replace: true });
       }
     })();
   }, []);
 
-  return <div style={{ color: "white" }}>로그인 중...</div>;
+  return (
+    <div
+      style={{
+        width: "100vw",
+        color: "#636E75",
+        textAlign: "center",
+        marginTop: "40vh",
+      }}
+    >
+      로그인 중...
+    </div>
+  );
 }
 
 export default Oauth;

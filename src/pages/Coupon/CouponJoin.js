@@ -53,7 +53,7 @@ function CouponJoin() {
   const handleSubmit = () => {
     //쿠폰번호에 맞는 쿠폰 정보값 넘겨줘야함
     fetchFunc();
-    navigate("/Coupon");
+    navigate("/Coupon", { replace: true });
   };
 
   return (
