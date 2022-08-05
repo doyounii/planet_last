@@ -37,7 +37,6 @@ function Coupon() {
 
     const response = await axios.get(`https://플랜잇.웹.한국:8080/api/coupon`, {
       //headers: { userId: userId },
-      headers: { userId: 'brenna1128@naver.com' },
     });
     const data = await response.data;
     console.log(data);

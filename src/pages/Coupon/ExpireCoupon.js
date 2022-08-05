@@ -23,8 +23,7 @@ function ExpireCoupon() {
     console.log("in function");
 
     const response = await axios.get(`https://플랜잇.웹.한국:8080/api/coupon`, {
-      //headers: { userId: userId },
-      headers: { userId: 'brenna1128@naver.com' },
+      headers: { userId: userId },
     });
     const data = await response.data;
     console.log(data);
