@@ -122,6 +122,7 @@
     padding: 10px;
     right: 13%;
     top: 13%;
+    z-index: 10;
 }
 
 .question {
