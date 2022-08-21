@@ -92,7 +92,6 @@ function StatisticsMain() {
       setPrcentage(messages.percentage);
     }
   }, [queryClient, results]);
-  console.log();
   useEffect(() => {
     if (results.status === "success") {
       setloading(false);
@@ -254,7 +253,7 @@ function StatisticsMain() {
 
 export default StatisticsMain;
 
-const data = {
+const testData = {
   userName: "사용자1",
   incomeTotal: 102000,
   expenditureTotal: 549000,
@@ -282,4 +281,6 @@ const data = {
     ["식비", 3],
     ["더보기", 0],
   ],
+  more_G_category: 5,
+  more_R_category: 10
 };
