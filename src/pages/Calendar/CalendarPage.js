@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, useQueries, useQueryClient } from "react-query";
 import axios from "axios";
+import { useQueries, useQueryClient } from "react-query";
 import { format, isSameMonth, subMonths, addMonths, parseISO } from "date-fns";
 import Footer from "../../components/Footer/Footer";
 import DateHeader from "../../components/DateHeader";
@@ -136,9 +136,6 @@ function CalendarPage() {
     );
   };
 
-  if (results[1].status === "error")
-    return <div style={{ color: "white" }}>에러가 발생했습니다.</div>;
-
   return (
     <div className="calendarPage" style={{ marginBottom: "100px" }}>
       <DateHeader
@@ -146,7 +143,13 @@ function CalendarPage() {
         sendDate={(date) => setCurrentDate(date)}
       />
       <div className={`cald ${!isMonthView ? "move" : ""}`}>
-        <Quote value={quote} />
+        <Quote
+          value={
+            results[1].status === "error"
+              ? "문제가 발생했습니다\n 네트워크 상태를 확인해주세요."
+              : quote
+          }
+        />
         <div className={`month-info`}>
           <div className="month-cost">
             <div className="month-type">수입</div>
@@ -192,7 +195,9 @@ function CalendarPage() {
         {daysData.find(
           (data) => data.date === format(selectedDate, dateFormat)
         ) ? (
-          details[1].status === "success" && <DetailList value={selectedDate} />
+          details !== undefined &&
+          details.length !== 0 &&
+          details[0].status === "success" && <DetailList value={selectedDate} />
         ) : (
           <div
             style={{

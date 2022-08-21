@@ -19,356 +19,368 @@
 
 /*이전 버튼*/
 .backBtn {
-    position: absolute;
-    margin-top: 10%;
-    margin-left: 7%;
-    margin-bottom: 0;
-    z-index: 1;
+  position: absolute;
+  margin-top: 10%;
+  margin-left: 7%;
+  margin-bottom: 0;
+  z-index: 1;
 }
 
 .title {
-    position: absolute;
-    font-size: 18px;
-    font-family: Pretendard;
-    width: 100%;
-    text-align: center;
-    margin-top: 10%;
-    margin-bottom: 0;
+  position: absolute;
+  font-size: 18px;
+  font-family: Pretendard;
+  width: 100%;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 0;
 }
 
 /*쿠폰등록*/
 .coupon_box {
-    position: relative;
-    width: 90%;
-    height: 62px;
-    top: 120px;
-    margin: 0 auto;
-    margin-bottom: 8px;
-    padding-left: 18px;
-    padding-top: 24px;
-    border-radius: 13px;
-    font-size: 16px;
-    font-family: Pretendard;
-    background-color: rgba(255, 255, 255, 0.05);
+  position: relative;
+  width: 90%;
+  height: 62px;
+  top: 120px;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  padding-left: 18px;
+  padding-top: 24px;
+  border-radius: 13px;
+  font-size: 16px;
+  font-family: Pretendard;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .info_icon {
-    position: relative;
-    width: 24px;
-    color: #676B73;
-    cursor: pointer;
-    float: right;
-    margin-right: 5%;
+  position: relative;
+  width: 24px;
+  color: #676b73;
+  cursor: pointer;
+  float: right;
+  margin-right: 5%;
 }
 
 .coupon_detail_box {
-    position: relative;
-    width: 90%;
-    margin: 0 auto;
-    top: 150px;
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  top: 150px;
 }
 
 .coupon_input_box {
-    position: relative;
-    top: 120px;
+  position: relative;
+  top: 120px;
 }
 
 .coupon_input_box h1 {
-    font-family: Pretendard;
-    font-size: 16px;
-    color: #ffffff;
-    margin-left: 6%;
-    margin-bottom: 14px;
+  font-family: Pretendard;
+  font-size: 16px;
+  color: #ffffff;
+  margin-left: 6%;
+  margin-bottom: 14px;
 }
 
 .coupon_input_box input {
-    position: relative;
-    display: block;
-    width: 90%;
-    height: 62px;
-    margin: 0 auto;
-    margin-bottom: 8px;
-    border-radius: 13px;
-    font-size: 16px;
-    font-family: Pretendard;
-    background-color: #2a313c;
-    border: 0;
-    outline: 0;
-    padding-left: 14px;
-    color: white;
+  position: relative;
+  display: block;
+  width: 90%;
+  height: 62px;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  border-radius: 13px;
+  font-size: 16px;
+  font-family: Pretendard;
+  background-color: #2a313c;
+  border: 0;
+  outline: 0;
+  padding-left: 14px;
+  color: white;
 }
 
 .coupon_input_box ::-ms-input-placeholder {
-    /*글자색 안바뀜*/
-    fill: #ffffff;
-    color: #ffffff;
-    font-family: Pretendard;
-    font-size: 14px;
+  /*글자색 안바뀜*/
+  fill: #ffffff;
+  color: #ffffff;
+  font-family: Pretendard;
+  font-size: 14px;
 }
 
 .coupon_btn {
-    width: 100%;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    left: 0;
-    bottom: 12% !important;
+  width: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  left: 0;
+  bottom: 12% !important;
 }
 
 .coupon_btn button {
-    font-family: Pretendard;
-    font-size: 16px;
-    width: 90%;
-    height: 52px;
-    border-radius: 30px;
-    margin: 0 auto;
-    position: relative;
-    text-align: center;
-    border: 0;
-    color: #141B27;
-    cursor: pointer;
+  font-family: Pretendard;
+  font-size: 16px;
+  width: 90%;
+  height: 52px;
+  border-radius: 30px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  border: 0;
+  color: #141b27;
+  cursor: pointer;
 }
-
+.drop_box_dimm {
+  color: #90949b;
+  background: rgba(86, 100, 121, 0.2);
+}
+.drop_box_selected {
+  color: rgb(var(--navy));
+  background-color: #00c982;
+}
 .drop_box {
-    position: relative;
-    margin: 3.3% 0% 3.3% 0%;
-    font-family: Pretendard;
+  position: relative;
+  margin: 3.3% 0% 3.3% 0%;
+  font-family: Pretendard;
 }
 
 .drop_box button {
-    font-family: Pretendard;
-    background-color: #00C982;
-    font-size: 13px;
-    width: 20%;
-    height: 8%;
-    border-radius: 40.94px;
-    margin-right: 2.2%;
-    padding: 9px;
-    position: relative;
-    text-align: center;
-    border: 0;
-    color: rgba(20, 27, 39, 1);
-    cursor: pointer;
+  font-family: Pretendard;
+
+  font-size: 13px;
+  font-weight: 600;
+  /* width: 20%; */
+  height: 8%;
+  border-radius: 40.94px;
+  margin-right: 2.2%;
+  padding: 9px 20px;
+  position: relative;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .coupon_use_box {
-    position: relative;
-    width: 100%;
-    top: 150px;
-    margin: 0 auto;
-    text-align: center;
+  position: relative;
+  width: 100%;
+  top: 150px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .coupon_available {
-    display: inline-block;
-    width: 44%;
-    height: 190px;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 13px;
-    font-family: Pretendard;
-    text-align: center;
-    margin: 1.5%;
-    padding: 8px 0 8px 0;
+  display: inline-block;
+  width: 44%;
+  height: 190px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 13px;
+  font-family: Pretendard;
+  text-align: center;
+  margin: 1.5%;
+  padding: 8px 0 8px 0;
 }
 
 .coupon_available .coupon_dday {
-    font-family: Pretendard;
-    font-size: 10px;
-    width: 48px;
-    height: 21px;
-    border: 1px solid #ffffff;
-    border-radius: 13px;
-    text-align: center;
-    padding: 4.5px;
-    position: relative;
-    left: 80%;
-    transform: translate(-50%, 0%);
+  font-family: Pretendard;
+  font-size: 10px;
+  width: 48px;
+  height: 21px;
+  border: 1px solid #ffffff;
+  border-radius: 13px;
+  text-align: center;
+  padding: 4.5px;
+  position: relative;
+  left: 80%;
+  transform: translate(-50%, 0%);
 }
 
 .coupon_available img {
-    width: 64%;
-    height: 42%;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    clear: none;
+  /* width: 64%; */
+  height: 42%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  clear: none;
 }
 
 .coupon_available h1 {
-    font-family: Pretendard;
-    font-size: 12px;
-    margin-bottom: 6px;
+  font-family: Pretendard;
+  font-size: 12px;
+  margin-bottom: 6px;
 }
 
 .coupon_available p {
-    font-family: Pretendard;
-    font-size: 12px;
-    color: #00C982;
+  font-family: Pretendard;
+  font-size: 12px;
+  color: #00c982;
 }
 
 .coupon_expiration {
-    display: inline-block;
-    width: 44%;
-    height: 190px;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 13px;
-    font-family: Pretendard;
-    text-align: center;
-    margin: 1.5%;
-    opacity : 0.6;
-    filter: alpha(opacity=60);
-    -moz-opacity: 0.6;
-    -khtml-opacity: 0.6;
-    padding: 8px 0 8px 0;
+  display: inline-block;
+  width: 44%;
+  height: 190px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 13px;
+  font-family: Pretendard;
+  text-align: center;
+  margin: 1.5%;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  -khtml-opacity: 0.6;
+  padding: 8px 0 8px 0;
 }
 
 .coupon_expiration .coupon_dday {
-    font-family: Pretendard;
-    font-size: 10px;
-    width: 48px;
-    height: 21px;
-    border: 1px solid #ffffff;
-    border-radius: 13px;
-    text-align: center;
-    padding: 4.5px;
-    position: relative;
-    left: 80%;
-    transform: translate(-50%, 0%);
+  font-family: Pretendard;
+  font-size: 10px;
+  width: 48px;
+  height: 21px;
+  border: 1px solid #ffffff;
+  border-radius: 13px;
+  text-align: center;
+  padding: 4.5px;
+  position: relative;
+  left: 80%;
+  transform: translate(-50%, 0%);
 }
 
 .coupon_expiration img {
-    width: 125px;
-    height: 75px;
-    margin-top: 16px;
-    margin-bottom: 16px;
+  width: 125px;
+  height: 75px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .coupon_expiration h1 {
-    font-family: Pretendard;
-    font-size: 12px;
-    margin-bottom: 6px;
+  font-family: Pretendard;
+  font-size: 12px;
+  margin-bottom: 6px;
 }
 
 .coupon_expiration p {
-    font-family: Pretendard;
-    font-size: 12px;
-    color: #00C982;
+  font-family: Pretendard;
+  font-size: 12px;
+  color: #00c982;
 }
 
 .coupon_modal {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .coupon_modal h1 {
-    font-family: Pretendard;
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 15px;
+  font-family: Pretendard;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .coupon_modal h2 {
-    font-family: Pretendard;
-    font-size: 18px;
-    color: #B4B6B8;
-    margin-bottom: 41px;
+  font-family: Pretendard;
+  font-size: 18px;
+  color: #b4b6b8;
+  margin-bottom: 41px;
 }
 
 .coupon_modal p {
-    font-family: Pretendard;
-    font-size: 18px;
-    color: #00C982;
+  font-family: Pretendard;
+  font-size: 18px;
+  color: #00c982;
 }
 
 .coupon_modal img {
-    width: 271px;
-    height: 163px;
-    margin-top: 28px;
-    margin-bottom: 28px;
+  width: 271px;
+  height: 163px;
+  margin-top: 28px;
+  margin-bottom: 28px;
 }
 
 /*사용 불가능 coupon modal*/
 .coupon_modal_unavail {
-    width: 100%;
-    text-align: center;
-    opacity: 50%;
+  width: 100%;
+  text-align: center;
+  opacity: 50%;
 }
 
 .coupon_modal_unavail h1 {
-    font-family: Pretendard;
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 15px;
+  font-family: Pretendard;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .coupon_modal_unavail h2 {
-    font-family: Pretendard;
-    font-size: 18px;
-    color: #B4B6B8;
-    margin-bottom: 41px;
+  font-family: Pretendard;
+  font-size: 18px;
+  color: #b4b6b8;
+  margin-bottom: 41px;
 }
 
 .coupon_modal_unavail p {
-    font-family: Pretendard;
-    font-size: 18px;
-    color: #00C982;
+  font-family: Pretendard;
+  font-size: 18px;
+  color: #00c982;
 }
 
 .coupon_modal_unavail img {
-    width: 271px;
-    height: 163px;
-    margin-top: 28px;
-    margin-bottom: 28px;
+  width: 271px;
+  height: 163px;
+  margin-top: 28px;
+  margin-bottom: 28px;
 }
 
 .coupon_use_btn {
-    width: 100%;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    left: 0;
-    bottom: 3%;
-    z-index: 5;
+  width: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  left: 0;
+  bottom: 3%;
+  z-index: 5;
 }
 
 .coupon_use_btn button {
-    font-family: Pretendard;
-    background-color: #00C982;
-    font-size: 16px;
-    width: 90%;
-    height: 52px;
-    border-radius: 30px;
-    margin: 0 auto;
-    position: relative;
-    text-align: center;
-    border: 0;
-    color: #ffffff;
-    cursor: pointer;
+  font-family: Pretendard;
+  font-size: 16px;
+  width: 90%;
+  height: 52px;
+  border-radius: 30px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  border: 0;
+  color: #ffffff;
+  cursor: pointer;
+}
+.coupon_available_btn button {
+  background-color: #00c982;
+}
+
+.coupon_unavailable_btn button {
+  background-color: rgb(var(--gray2));
 }
 
 .coupon_info {
-    font-family: Pretendard;
-    color: #B4B6B8;
-    font-size: 12px;
-    margin-bottom: 23px;
-    text-align: start;
-    margin-left: 5px;
+  font-family: Pretendard;
+  color: #b4b6b8;
+  font-size: 12px;
+  margin-bottom: 23px;
+  text-align: start;
+  margin-left: 5px;
 }
 
-.coupon_info button{
-    color: #9a9a9a;
-    background-color: transparent;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-    width: 12px;
-    height: 18px;
-    margin-left: 4px;
+.coupon_info button {
+  color: #9a9a9a;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  width: 12px;
+  height: 18px;
+  margin-left: 4px;
 }
 
 .coupon_info svg {
-   padding-top: 4px;
+  padding-top: 4px;
 }
-
-

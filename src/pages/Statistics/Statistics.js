@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
+import { format, isSameMonth, endOfMonth } from "date-fns";
 import "./Statistics.css";
 import { IoIosArrowForward } from "react-icons/io";
 import DonutChart from "../../components/StatisticsPart/DonutChart";
@@ -14,14 +14,23 @@ import { EcoBarChart } from "../../components/StatisticsPart/Part2/EcoBarChart";
 import { InfoModal } from "../../components/StatisticsPart/Part2/Modal2";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
-import { useQueryClient, useQuery } from "react-query";
+import { useQueryClient, useQuery, useMutation } from "react-query";
 
-const fetchData = async (userId) => {
+const containerStyle = {
+  backgroundImage: "url(img/main_bg.png)",
+  width: "100vw",
+  height: "30%",
+};
+
+const fetchData = async (userId, currentMonth) => {
+  let date = isSameMonth(currentMonth, new Date())
+    ? currentMonth
+    : endOfMonth(currentMonth);
   const response = await axios.get(
     `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
-      new Date(),
+      date,
       "M"
-    )}/${format(new Date(), "d")}`,
+    )}/${format(date, "d")}`,
     { headers: { userId: userId } }
   );
   const data = await response.data;
@@ -49,22 +58,24 @@ function StatisticsMain() {
   const nowMFormat = "M";
   const userId = window.localStorage.getItem("userId");
   const queryClient = useQueryClient();
+
   const results = useQuery({
     queryKey: "statisticsData",
-    queryFn: () => fetchData(userId),
+    queryFn: () => fetchData(userId, currentMonth),
     enabled: !!userId,
     staleTime: 1000 * 5 * 60, // 5분
     cacheTime: Infinity, // 제한 없음
   });
 
-  const containerStyle = {
-    backgroundImage: "url(img/main_bg.png)",
-    width: "100vw",
-    height: "30%",
-  };
+  const fetchStat = useMutation({
+    mutationFn: () => {},
+    onSuccess: () => queryClient.invalidateQueries("statisticsData"),
+    onError: (error) => console.error(),
+  });
 
   const onchangeDate = (date) => {
     setCurrentMonth(date);
+    fetchStat.mutate(date);
   };
   const openModal = (e) => {
     setposition(e.clientY);
@@ -75,19 +86,13 @@ function StatisticsMain() {
   };
 
   useEffect(() => {
-    // fetchData();
-    //   setMessage(data);
-    //   setEcoTagCounts(data.ecoTagCounts);
-    //   setnoEcoTagCounts(data.noEcoTagCounts);
-    //   setloading(false);
-    // }, []);
     if (results.status === "success") {
       const messages = queryClient.getQueryData("statisticsData");
 
       setMessage(messages);
       setUserName(messages.userName === null ? "" : messages.userName);
-      setEcoDifference(Math.abs(message.ecoDifference));
-      setNoEcoDifference(Math.abs(message.noEcoDifference));
+      setEcoDifference(message.ecoDifference);
+      setNoEcoDifference(message.noEcoDifference);
       setIncomeTotal(messages.incomeTotal);
       setExpenditureTotal(messages.expenditureTotal);
       setEcoTagCounts(messages.ecoTagCounts);
@@ -98,15 +103,39 @@ function StatisticsMain() {
       setPrcentage(messages.percentage);
     }
   }, [queryClient, results]);
-  console.log();
+
   useEffect(() => {
     if (results.status === "success") {
       setloading(false);
     }
   }, [results.status]);
 
-  if (loading) return <div>loading...</div>;
-  console.log(message);
+  if (results.status === "loading")
+    return (
+      <div
+        style={{
+          width: "100vw",
+          color: "#636E75",
+          textAlign: "center",
+          marginTop: "40vh",
+        }}
+      >
+        로딩중...
+      </div>
+    );
+  if (results.status === "error")
+    return (
+      <div
+        style={{
+          width: "100vw",
+          color: "#636E75",
+          textAlign: "center",
+          marginTop: "40vh",
+        }}
+      >
+        문제가 발생했습니다. 잠시 후에 다시 시도해주세요.
+      </div>
+    );
 
   return (
     <div className="statistic-main">
@@ -153,16 +182,19 @@ function StatisticsMain() {
           )}
           <p>지난달 이맘때보다</p>
           <h2>
-            친환경 태그가 <b style={{ color: "#00C982" }}>{ecoDifference}개</b>{" "}
+            친환경 태그가{" "}
+            <b style={{ color: "#00C982" }}>{Math.abs(ecoDifference)}개</b>{" "}
             {ecoDifference >= 0 ? "늘고" : "줄고"}
           </h2>
           <h2>
-            친환경 태그가{" "}
-            <b style={{ color: "#00C982" }}>{noEcoDifference}개</b>{" "}
+            반환경 태그가{" "}
+            <b style={{ color: "#00C982" }}>{Math.abs(noEcoDifference)}개</b>{" "}
             {noEcoDifference >= 0 ? "늘었어요" : "줄었어요"}
           </h2>
 
-          <LineGraph dataset={message.ecoCount}></LineGraph>
+          {message.ecoCount !== undefined && (
+            <LineGraph dataset={message.ecoCount}></LineGraph>
+          )}
         </div>
 
         <div className="line-box"></div>
@@ -178,7 +210,11 @@ function StatisticsMain() {
             </p>
           </div>
           <div className="donut-chart">
-            <DonutChart percentage={percentage} />
+            <DonutChart
+              percentage={percentage}
+              nowNoneEcoCount={nowNoneEcoCount}
+              nowEcoCount={nowEcoCount}
+            />
           </div>
         </div>
         <div className="line-box"></div>
@@ -278,17 +314,14 @@ const data = {
   nowNoneEcoCount: 4,
   percentage: 0.0,
   ecoTagCounts: [
-    // ["식비", 6],
-    // ["급여", 2],
-    // ["기타", 2],
-    // ["생필품", 2],
-    ["더보기", 0],
+    ["식비", 6],
+    ["급여", 2],
+    ["기타", 2],
+    ["생필품", 2],
+    ["더보기", 3],
   ],
   noEcoTagCounts: [
     ["식비", 3],
-    ["기타", 1],
-    ["생필품", 1],
-    ["급여", 1],
     ["더보기", 0],
   ],
 };

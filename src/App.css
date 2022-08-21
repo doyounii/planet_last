@@ -152,7 +152,8 @@ section {
 body {
   line-height: 1;
   background-repeat: repeat;
-  background-image: url("./main_bg.png");
+  background-color: #141b27;
+  /* background-image: url("./main_bg.png"); */
 }
 ol,
 ul {
@@ -179,6 +180,7 @@ table {
   --blue: 20, 102, 254;
   --mid-gray: 86, 100, 121;
   --gray: 180, 182, 184;
+  --gray2: 147, 147, 147;
   --light-gray: 245, 245, 245;
   --red: 255, 95, 88;
   --navy: 20, 27, 39;

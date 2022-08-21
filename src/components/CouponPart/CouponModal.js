@@ -6,13 +6,6 @@ import CouponStyle from "../../pages/Coupon/Coupon.module.css";
 import { CgClose } from "react-icons/cg";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import Popup from "../../components/InquiryPart/Popup";
-import { useNavigate } from "react-router-dom";
-
-import "../../components/CalendarPart/Calendar.css";
-
-import CouponInfo from "../../components/CouponPart/CouponInfo";
-import CouponUseInfo from "../../components/CouponPart/CouponUseInfo";
-import CouponDetailInfo from "../../components/CouponPart/CouponDetailInfo";
 
 const CouponModal = ({
   className,
@@ -23,26 +16,27 @@ const CouponModal = ({
   background,
   current,
 }) => {
-  const onMaskClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose(e);
-    }
-  };
-
-  const close = (e) => {
-    if (onClose) {
-      onClose(e);
-    }
-  };
-
-  console.log("테스트", current);
-
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
 
   //popup modal
   const [modalOpen, setModalOpen] = useState(false);
+  const [available, setAvailable] = useState(current.availability);
+
+  const userId = window.localStorage.getItem("userId");
+
+  const onMaskClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(current, available);
+    }
+  };
+
+  const close = (e) => {
+    if (onClose) {
+      onClose(current, available);
+    }
+  };
 
   const isopenModal = () => {
     setModalOpen(true);
@@ -51,19 +45,6 @@ const CouponModal = ({
   const iscloseModal = () => {
     setModalOpen(false);
   };
-
-  // useEffect(() => {
-  //   document.body.style.cssText = `position: fixed; top: -${window.scrollY}px; left:0px; right:0px; bottom:0px;`;
-  //   return () => {
-  //     const scrollY = document.body.style.top;
-  //     document.body.style.cssText = `position: ""; top: "";`;
-  //     window.scrollTo(0, parseInt(scrollY || "0") * -1);
-  //   };
-  // }, []);
-
-  const [unavailable, setUnavailable] = useState(false);
-
-  const userId = window.localStorage.getItem("userId");
 
   const fetchFunc = () => {
     //백엔드로 데이터 보내기
@@ -86,13 +67,11 @@ const CouponModal = ({
       });
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = () => {
     //쿠폰번호에 맞는 쿠폰 정보값 넘겨줘야함
     fetchFunc();
     iscloseModal();
-    setUnavailable(!unavailable);
+    setAvailable(false);
   };
 
   return (
@@ -112,9 +91,9 @@ const CouponModal = ({
           {closable && <CgClose className="modal-close" onClick={close} />}
           <div
             className={
-              unavailable
-                ? CouponStyle.coupon_modal_unavail
-                : CouponStyle.coupon_modal
+              available
+                ? CouponStyle.coupon_modal
+                : CouponStyle.coupon_modal_unavail
             }
           >
             {/* <p>cno 불러오기 test : {current.cno}</p> */}
@@ -135,7 +114,11 @@ const CouponModal = ({
                 {visible1 ? <BsChevronUp /> : <BsChevronDown />}
               </button>
               <br />
-              {visible1 && <CouponUseInfo>{current.usageInfo}</CouponUseInfo>}
+              {visible1 && (
+                <div style={{ color: "rgba(180, 182, 184, 0.5)" }}>
+                  {current.usageInfo}
+                </div>
+              )}
             </div>
 
             <div className={CouponStyle.coupon_info}>
@@ -148,7 +131,11 @@ const CouponModal = ({
                 {visible2 ? <BsChevronUp /> : <BsChevronDown />}
               </button>
               <br />
-              {visible2 && <CouponInfo>{current.couponInfo}</CouponInfo>}
+              {visible2 && (
+                <div style={{ color: "rgba(180, 182, 184, 0.5)" }}>
+                  {current.couponInfo}
+                </div>
+              )}
             </div>
 
             <div className={CouponStyle.coupon_info}>
@@ -162,12 +149,24 @@ const CouponModal = ({
               </button>
               <br />
               {visible3 && (
-                <CouponDetailInfo>{current.detailInfo}</CouponDetailInfo>
+                <div style={{ color: "rgba(180, 182, 184, 0.5)" }}>
+                  {current.detailInfo}
+                </div>
               )}
             </div>
 
-            <div className={CouponStyle.coupon_use_btn}>
-              <button onClick={isopenModal}>사용하기</button>
+            <div
+              className={`
+                ${CouponStyle.coupon_use_btn} ${
+                available
+                  ? CouponStyle.coupon_available_btn
+                  : CouponStyle.coupon_unavailable_btn
+              }
+              `}
+            >
+              <button onClick={isopenModal} disabled={!available}>
+                {available ? "사용하기" : "사용 완료"}
+              </button>
               <Popup
                 open={modalOpen}
                 close={iscloseModal}
@@ -214,42 +213,6 @@ const ModalWrapper = styled.div`
     height: 20px;
     float: right;
     cursor: pointer;
-  }
-
-  .top-arrow {
-    position: fixed;
-    color: #f5f5f5;
-    width: 20px;
-    height: 20px;
-    top: ${(props) => props.className - 33}px;
-    left: 35%;
-  }
-
-  .bottom-arrow {
-    position: fixed;
-    color: #f5f5f5;
-    transform: rotate(180deg);
-    width: 20px;
-    height: 20px;
-    top: ${(props) => props.className + 10}px;
-    left: 13%;
-  }
-
-  .calendar-desc {
-    position: fixed;
-    top: ${(props) => props.className + 150}px;
-    left: 45%;
-  }
-  .calendar-arrow {
-    position: fixed;
-    top: ${(props) => props.className + 170}px;
-    left: 50%;
-  }
-
-  .calendars {
-    position: absolute;
-    width: 100%;
-    top: ${(props) => props.className + 190}px;
   }
 `;
 
