@@ -27,10 +27,10 @@ const fetchData = async (userId, currentMonth) => {
     ? currentMonth
     : endOfMonth(currentMonth);
   const response = await axios.get(
-    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/2022/${format(
+    `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/${format(
       date,
-      "M"
-    )}/${format(date, "d")}`,
+      "yyyy"
+    )}/${format(date, "M")}/${format(date, "d")}`,
     { headers: { userId: userId } }
   );
   const data = await response.data;
@@ -68,7 +68,7 @@ function StatisticsMain() {
   });
 
   const fetchStat = useMutation({
-    mutationFn: () => { },
+    mutationFn: () => {},
     onSuccess: () => queryClient.invalidateQueries("statisticsData"),
     onError: (error) => console.error(),
   });
@@ -91,8 +91,8 @@ function StatisticsMain() {
 
       setMessage(messages);
       setUserName(messages.userName === null ? "" : messages.userName);
-      setEcoDifference(message.ecoDifference);
-      setNoEcoDifference(message.noEcoDifference);
+      setEcoDifference(messages.ecoDifference);
+      setNoEcoDifference(messages.noEcoDifference);
       setIncomeTotal(messages.incomeTotal);
       setExpenditureTotal(messages.expenditureTotal);
       setEcoTagCounts(messages.ecoTagCounts);
@@ -103,7 +103,8 @@ function StatisticsMain() {
       setPrcentage(messages.percentage);
     }
   }, [queryClient, results]);
-  console.log();
+  console.log(incomeTotal);
+
   useEffect(() => {
     if (results.status === "success") {
       setloading(false);
@@ -141,24 +142,24 @@ function StatisticsMain() {
     <div className="statistic-main">
       <DateHeader getDate={currentMonth} sendDate={onchangeDate} />
       <div className="stat-main-contents">
-        {/* <Link to="/StatisticsView"> */}
-        <div className="month-box">
-          <div className="month-breakdown">
-            <p>{format(currentMonth, nowMFormat)}월 내역</p>
-            <IoIosArrowForward className="box-icon" />
-          </div>
+        <Link to="/StatisticsView">
+          <div className="month-box">
+            <div className="month-breakdown">
+              <p>{format(currentMonth, nowMFormat)}월 내역</p>
+              <IoIosArrowForward className="box-icon" />
+            </div>
 
-          <div className="month-breakdown">
-            <p>수입</p>
-            <h1>{incomeTotal.toLocaleString()}원</h1>
-          </div>
+            <div className="month-breakdown">
+              <p>수입</p>
+              <h1>{incomeTotal.toLocaleString()}원</h1>
+            </div>
 
-          <div className="month-breakdown">
-            <p>지출</p>
-            <h1>{expenditureTotal.toLocaleString()}원</h1>
+            <div className="month-breakdown">
+              <p>지출</p>
+              <h1>{expenditureTotal.toLocaleString()}원</h1>
+            </div>
           </div>
-        </div>
-        {/* </Link> */}
+        </Link>
 
         <div className="line-box"></div>
 
@@ -219,17 +220,17 @@ function StatisticsMain() {
         </div>
         <div className="line-box"></div>
 
-        {/* <Link
+        <Link
           to="/EcoCategory"
           state={{
             name: "eco",
           }}
-        > */}
-        <div className="expend-box">
-          <h1>어떤 친환경 지출을 했을까요? 👍</h1>
-          <IoIosArrowForward className="box-icon" />
-        </div>
-        {/* </Link> */}
+        >
+          <div className="expend-box">
+            <h1>어떤 친환경 지출을 했을까요? 👍</h1>
+            <IoIosArrowForward className="box-icon" />
+          </div>
+        </Link>
         <div className="chart">
           <EcoBarChart barData={ecoTagCounts} name="eco"></EcoBarChart>
         </div>
@@ -254,17 +255,17 @@ function StatisticsMain() {
 
         <div className="line-box"></div>
 
-        {/* <Link
+        <Link
           to="/EcoCategory"
           state={{
             name: "neco",
           }}
-        > */}
-        <div className="expend-box">
-          <h1>어떤 반환경 지출을 했을까요? 👎</h1>
-          <IoIosArrowForward className="box-icon" />
-        </div>
-        {/* </Link> */}
+        >
+          <div className="expend-box">
+            <h1>어떤 반환경 지출을 했을까요? 👎</h1>
+            <IoIosArrowForward className="box-icon" />
+          </div>
+        </Link>
         <div className="chart">
           <EcoBarChart barData={noEcoTagCounts} name="neco"></EcoBarChart>
         </div>
@@ -296,7 +297,7 @@ function StatisticsMain() {
 
 export default StatisticsMain;
 
-const testData = {
+const data = {
   userName: "사용자1",
   incomeTotal: 102000,
   expenditureTotal: 549000,
@@ -325,5 +326,5 @@ const testData = {
     ["더보기", 0],
   ],
   more_G_category: 5,
-  more_R_category: 10
+  more_R_category: 10,
 };

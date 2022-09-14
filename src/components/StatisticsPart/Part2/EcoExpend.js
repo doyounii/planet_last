@@ -96,18 +96,22 @@ function EcoExpend(props) {
               지출 카테고리 <span>태그개수</span>
             </p>
             {renderExpendList(props, message)}
-            {/* <Link
+            <Link
               to="/EcoCategory"
               state={{
                 name: "eco",
               }}
-            > */}
-            <div className="more">
-              <h1 style={{ color: "#C7D2E8" }}>●</h1>
-              <h1>더보기 {moreG}개</h1>
-              <h2>{message.ecoTagCounts !== undefined && message.ecoTagCounts[message.ecoTagCounts.length - 1][1]}개</h2>
-            </div>
-            {/* </Link> */}
+            >
+              <div className="more">
+                <h1 style={{ color: "#C7D2E8" }}>●</h1>
+                <h1>더보기 {moreG}개</h1>
+                <h2>
+                  {message.ecoTagCounts !== undefined &&
+                    message.ecoTagCounts[message.ecoTagCounts.length - 1][1]}
+                  개
+                </h2>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -121,18 +125,24 @@ function EcoExpend(props) {
               지출 카테고리 <span>태그개수</span>
             </p>
             {renderExpendList(props, message)}
-            {/* <Link
+            <Link
               to="/EcoCategory"
               state={{
                 name: "neco",
               }}
-            > */}
-            <div className="more">
-              <h1 style={{ color: "#C7D2E8" }}>●</h1>
-              <h1>더보기 {moreR}개</h1>
-              <h2>{message.noEcoTagCounts !== undefined && message.noEcoTagCounts[message.noEcoTagCounts.length - 1][1]}개</h2>
-            </div>
-            {/* </Link> */}
+            >
+              <div className="more">
+                <h1 style={{ color: "#C7D2E8" }}>●</h1>
+                <h1>더보기 {moreR}개</h1>
+                <h2>
+                  {message.noEcoTagCounts !== undefined &&
+                    message.noEcoTagCounts[
+                      message.noEcoTagCounts.length - 1
+                    ][1]}
+                  개
+                </h2>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

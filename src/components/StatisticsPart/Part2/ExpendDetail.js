@@ -1,231 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Category.css";
-
+import axios from "axios";
 import { FaChevronLeft } from "react-icons/fa";
+import { useQueryClient, useQuery, useMutation } from "react-query";
 
-const expendData = [
-  {
-    emoji: "🛒",
-    exType: "마트",
-    count: "120개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🚗",
-    exType: "교통",
-    count: "80개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🎬",
-    exType: "문화생활",
-    count: "50개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "💬",
-    exType: "기타",
-    count: "30개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "📚",
-    exType: "교육",
-    count: "10개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "💵",
-    exType: "경조사/회비",
-    count: "4개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🏥",
-    exType: "의료/건강",
-    count: "3개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🛏",
-    exType: "가전",
-    count: "2개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "📱",
-    exType: "통신",
-    count: "1개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "✏️",
-    exType: "생필품",
-    count: "0개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🌭",
-    exType: "식비",
-    count: "0개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-  {
-    emoji: "🧾",
-    exType: "공과금",
-    count: "0개",
-    memo: "엽떡 사먹음",
-    ecoList: [
-      {
-        eco: "G",
-        ecoDetail: "다회용기 사용",
-        etcMemo: null,
-      },
-      {
-        eco: "G",
-        ecoDetail: "중고거래/나눔/기부",
-        etcMemo: null,
-      },
-    ],
-  },
-];
+const userId = window.localStorage.getItem("userId");
+
+const fetchData = async (userId) => {
+  // const response = await axios.get(
+  //   `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/expenditure/2022/${format(
+  //     new Date(),
+  //     "M"
+  //   )}/{category}/ecoG,`,
+  //   { headers: { userId: userId } }
+  // );
+  // const data = await response.data;
+  return data;
+};
+
+const fetchData2 = async (userId) => {
+  // const response = await axios.get(
+  //   `https://xn--lj2bx51av9j.xn--yq5b.xn--3e0b707e:8080/api/statistics/expenditure/2022/${format(
+  //     new Date(),
+  //     "M"
+  //   )}/{category}/ecoR,`,
+  //   { headers: { userId: userId } }
+  // );
+  // const data = await response.data;
+  return data2;
+};
 
 function ExpendDetail() {
-  const data = useLocation().state;
+  const cateGoryData = useLocation().state;
+
+  console.log(data);
   const history = useNavigate();
+  const [message, setMessage] = useState([]);
+  const [message2, setMessage2] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -262,22 +74,22 @@ function ExpendDetail() {
     let renderEcoExpendList = [];
 
     if (data.ecodata === "eco") {
-      for (let i = 0; i < expendData[exType].ecoList.length; i++) {
+      for (let i = 0; i < data[exType].ecoList.length; i++) {
         renderEcoExpendList.push(
           <div className="dateDetail">
             <p style={{ color: "#00C982" }}>●</p>
-            <p>sfdf {expendData[exType].memo}</p>
-            <p>{expendData[exType].ecoList[i].ecoDetail}</p>
+            <p>sfdf {data[exType].memo}</p>
+            <p>{data[exType].ecoList[i].ecoDetail}</p>
           </div>
         );
       }
     } else {
-      for (let i = 0; i < expendData[exType].ecoList.length; i++) {
+      for (let i = 0; i < data[exType].ecoList.length; i++) {
         renderEcoExpendList.push(
           <div className="dateDetail">
             <p style={{ color: "#566479" }}>●</p>
-            <p>{expendData[exType].memo} </p>
-            {expendData[exType].ecoList[i].ecoDetail}
+            <p>{data[exType].memo} </p>
+            {data[exType].ecoList[i].ecoDetail}
           </div>
         );
       }
@@ -303,7 +115,7 @@ function ExpendDetail() {
         </div>
         <div className="line-box"></div>
 
-        {renderEcoExpendList(data.ecodata)}
+        {/* {renderEcoExpendList(data.ecodata)} */}
       </div>
     );
   } else {
@@ -324,10 +136,118 @@ function ExpendDetail() {
           <h1>총 지출 금액 원</h1>
         </div>
         <div className="line-box"></div>
-        {renderEcoExpendList(data.ecodata)}
+        {/* {renderEcoExpendList(data.ecodata)} */}
       </div>
     );
   }
 }
 
 export default ExpendDetail;
+
+const data2 = {
+  eco: "R",
+  exType: "식비",
+  totalExpenditure: 48200,
+  countEx: 5,
+  typeDetailList: [
+    {
+      date: "2022-09-02",
+      detailDtoList: [
+        {
+          type: "식비",
+          way: "카드",
+          id: 154,
+          cost: 2900,
+          memo: "Namoo에서 빵 사먹음",
+          ecoList: [
+            {
+              eco: "R",
+              ecoDetail: "일회용품 사용",
+              userAdd: null,
+            },
+          ],
+          income: false,
+        },
+      ],
+    },
+    {
+      date: "2022-09-04",
+      detailDtoList: [
+        {
+          type: "식비",
+          way: "카드",
+          id: 158,
+          cost: 22500,
+          memo: "혜림이랑 피자 먹음🍕",
+          ecoList: [
+            {
+              eco: "R",
+              ecoDetail: "일회용품 사용",
+              userAdd: null,
+            },
+            {
+              eco: "R",
+              ecoDetail: "비닐봉투 소비",
+              userAdd: null,
+            },
+          ],
+          income: false,
+        },
+      ],
+    },
+  ],
+};
+
+const data = {
+  eco: "G",
+  exType: "식비",
+  totalExpenditure: 48200,
+  countEx: 5,
+  typeDetailList: [
+    {
+      date: "2022-09-02",
+      detailDtoList: [
+        {
+          type: "식비",
+          way: "카드",
+          id: 154,
+          cost: 2900,
+          memo: "Namoo에서 빵 사먹음",
+          ecoList: [
+            {
+              eco: "G",
+              ecoDetail: "일회용품 사용",
+              userAdd: null,
+            },
+          ],
+          income: false,
+        },
+      ],
+    },
+    {
+      date: "2022-09-04",
+      detailDtoList: [
+        {
+          type: "식비",
+          way: "카드",
+          id: 158,
+          cost: 22500,
+          memo: "혜림이랑 피자 먹음🍕",
+          ecoList: [
+            {
+              eco: "G",
+              ecoDetail: "일회용품 사용",
+              userAdd: null,
+            },
+            {
+              eco: "G",
+              ecoDetail: "비닐봉투 소비",
+              userAdd: null,
+            },
+          ],
+          income: false,
+        },
+      ],
+    },
+  ],
+};
